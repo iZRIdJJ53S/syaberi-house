@@ -1,0 +1,571 @@
+/* 
+	SYABERI-HOUSE Layout Stylesheet
+	v0.4
+	Last Updated: 2012-2-28
+	Author: Kunshiro Murayama
+*/
+
+/*
+	reset css
+*/
+html{
+    color:#000;background:#FFF;
+}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,
+pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
+    margin:0;padding:0;
+}
+table{
+    border-collapse:collapse;border-spacing:0;
+}
+fieldset,img{ border:0; }
+address,caption,cite,code,den,em,strong,th,var{
+    font-style:normal;font-weight:normal;
+}
+li { list-style:none; } caption,th{ text-align:left; }
+h1,h2,h3,h4,h5,h6{
+    font-size:100%;font-weight:normal;
+}
+q:before,q:after{ content:''; }
+abbr,acronym{ border:0;font-variant:normal; }
+sup{ vertical-align:text-top; }
+sub{ vertical-align:text-bottom; }
+input,text area,select{ font-family:inherit;font-size:inherit;font-weight:inherit; }
+input,text area,select{ *font-size:100%; }
+legend{ color:#000; }
+a:link,visited,hover,active{
+	text-decoration: none;
+}
+a:link{color: #222;}
+a:visited{color: #222;}
+a:hover{color: #00a0c6;}
+a:active{color: #00a0c6;}
+
+/*
+	style
+*/
+.clear{clear:both}
+
+.header{
+	width: 100%;
+	border-bottom: 3px #222 solid;
+}
+	.header-content{
+		padding: 10px 10px 2px 10px;
+	}
+		.header .logo{
+			float: left;
+			background: url('../img/logo.png') left top no-repeat;
+			width: 185px;
+			height: 30px;
+		}
+		.header .menu{
+			float: left;
+		}
+			.header .menu ul{
+				margin: 3px 10px 0 10px;
+			}
+				.menu ul li{
+					float: left;
+					margin-left: 15px;
+					font-size: 22px;
+					font-weight: bold;
+				}
+		.header .menu-right{
+			float: right;
+		}
+			.header .menu-right ul{
+				margin: 3px 0 10px 10px;
+			}
+				.menu-right ul li{
+					float: left;
+					margin-right: 15px;
+					font-size: 22px;
+					font-weight: bold;
+				}
+				.menu-right ul li:last-child{
+					float: left;
+					margin-right: 0;
+					font-size: 22px;
+					font-weight: bold;
+				}
+				.menu-right ul li.icon img{
+					width: 24px;
+					margin: 3px;
+					border-radius: 4px;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					position: relative;
+					top: -5px;
+				}
+		.header .on{
+			color: #00a0c6
+		}
+		
+
+.main{
+	text-align: center;
+}
+	.main .main-content{
+		width: 950px;
+	    margin: 0 auto;
+	    padding-bottom: 10px;
+    	text-align: left;
+	}
+		.main-content .main-img{
+			padding-top: 15px;
+		    margin-bottom: 15px;
+		}
+		.main-content .details{
+			border: 1px #DEDEDE solid;
+			background: #FFFFFF;
+			margin-bottom: 16px;
+			padding: 20px;
+		}
+			/*.main-content .details .details-title{
+				font-size: 24px;
+				border-bottom: 1px #DFDFDF solid;
+				padding-bottom: 3px;
+				margin-bottom: 10px;
+			}*/
+			.main-content .details h3{
+				font-size: 24px;
+				border-bottom: 1px #DFDFDF solid;
+				padding-bottom: 3px;
+				margin-bottom: 10px;
+			}
+			.main-content .details .details-body{
+				margin-bottom: 25px;
+			}
+			.main-content .details .details-left{
+				float: left;
+				width: 620px;
+			}
+				.main-content .details .details-left img{
+					max-width: 620px;
+				}
+			.main-content .details .details-right{
+				float: right;
+				width: 270px;
+			}
+				.main-content .details .details-right .view-counter{
+					text-align: center;
+					font-size: 24px;
+					font-weight: bold;
+					border: 10px #DFDFDF solid;
+					padding: 10px;
+					margin-bottom: 10px;
+				}
+				.main-content .details .details-right .view-counter p{
+					color: #999999;
+					font-size: 20px;
+					padding: 4px;
+				}
+				.main-content .details .details-right .content{
+					font-size: 12px;
+					border-left: 1px #DFDFDF solid;
+					padding: 10px;
+					margin-bottom: 10px;
+				}
+		.main .main-content .left-content{
+			float: left;
+			width: 580px;
+			margin-bottom: 10px;
+			padding-right: 20px;
+		}
+		.main .main-content h2.title{
+			font-size: 24px;
+			margin-bottom: 10px;
+			color: #333;
+			text-shadow: 0 -1px 0 #FFF,1px 0 0 #FFF, 0 1px 0 #FFF, -1px 0 0 #FFF;
+			font-weight: bold;
+		}
+		.main .main-content h2.title-sub{
+			font-size: 22px;
+			margin-bottom: 10px;
+			color: #666;
+			text-align: right;
+			text-shadow: 0 -1px 0 #FFF,1px 0 0 #FFF, 0 1px 0 #FFF, -1px 0 0 #FFF;
+			font-weight: bold;
+		}
+		.main .main-content ul li{
+		}
+		.main .main-content .ticket-wrapper{
+			border: 1px #00A0C6 solid;
+			background: #FFFFFF;
+			margin-bottom: 16px;
+		}
+			.ticket-wrapper .left{
+				float: left;
+				width: 100%;
+				min-height: 50px;
+				padding: 10px;
+			}
+				.ticket-wrapper .left .icon{
+					float: left;
+					width: 48px;
+				}
+					.ticket-wrapper .left .icon img{
+						border-radius: 8px;
+						-webkit-border-radius: 8px;
+						-moz-border-radius: 8px;
+					}
+				.ticket-wrapper .left .username{
+					color: #666;
+					font-size: 20px;
+					padding: 2px;
+				}
+				.ticket-wrapper .left .tag{
+					color: #222;
+					font-size: 12px;
+					padding: 2px;
+					border: 1px #AAA solid;
+					border-radius: 4px;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					margin-right: 4px;
+				}
+				.ticket-wrapper .left .status-a{
+					background-color: red;
+					color: #fff;
+					font-size: 12px;
+					padding: 2px;
+					border-radius: 4px;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					margin-right: 4px;
+				}
+				.ticket-wrapper .left .status-b{
+					background-color: #00a0c6;
+					color: #fff;
+					font-size: 12px;
+					padding: 2px;
+					border-radius: 4px;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					margin-right: 4px;
+				}
+				.ticket-wrapper .left .title{
+					font-size: 26px;
+					padding-left: 55px;
+				}
+				.ticket-wrapper .left .title-noicon{
+					font-size: 26px;
+				}
+				.ticket-wrapper .left .time{
+					font-size: 18px;
+					padding-top: 20px;
+					padding-left: 5px;
+				}
+				.ticket-wrapper .left .view{
+					font-size: 18px;
+					padding-top: 20px;
+					padding-left: 5px;
+				}
+				.ticket-wrapper .left .member{
+					font-size: 18px;
+					padding-top: 10px;
+					padding-left: 5px;
+				}
+				.ticket-wrapper .left .counter{
+					/*background: #222222;*/
+					background: -moz-linear-gradient(top, #000, #999);
+					background: -webkit-gradient(linear, left top, left bottom, from(#000), to(#999));
+					color: #FFFFFF;
+					border: 1px #DFDFDF solid;
+					padding: 3px;
+					margin: 0 10px;
+				}
+			.ticket-wrapper .right{
+				float: right;
+				/*min-height: 100px;*/
+				/*padding: 10px 10px 0 10px;*/
+			}
+				.ticket-wrapper .right ul li{
+					float: left;
+					width: 50px;
+				}
+				.ticket-wrapper .right .member{
+					text-align: center;
+					font-size: 12px;
+				}
+					.ticket-wrapper .right .member .bold{
+						text-align: left;
+						font-size: 24px;
+						margin-bottom: 5px;
+					}
+			.ticket-wrapper .participant{
+				clear: both;
+				text-align: left;
+				padding: 4px;
+				/*padding: 4px 0px 2px 6px;*/
+				background-color: #00A0C6;
+				/*border-top: 2px #DFDFDF dashed;*/
+			}
+				.ticket-wrapper .participant .member-count{
+					font-size: 28px;
+					font-weight: bold;
+					color: #FFF;
+					margin-right: 4px;
+				}
+				.ticket-wrapper .participant img{
+					width: 24px;
+					margin: 1px;
+					vertical-align:top;
+					/*border-radius: 6px;
+					-webkit-border-radius: 6px;
+					-moz-border-radius: 6px;*/
+				}
+		.main .main-content .right-content{
+			float: right;
+			width: 350px;
+			/*padding-top: 15px;*/
+			margin-bottom: 10px;
+		}
+			.right-content .AD{
+				width: 350px;
+				margin-bottom: 10px;
+			}
+			.right-content ul{
+				margin-bottom: 10px;
+			}
+		.main-content .full-form{
+			border: 1px #DEDEDE solid;
+			background: #FFFFFF;
+			margin-bottom: 16px;
+			padding: 20px;
+		}
+			.full-form h3{
+				color: #DFDFDF;
+				border-left: 3px #DFDFDF solid;
+				padding: 10px 0 10px 10px;
+				margin: 10px 0;
+			}
+			.full-form .form-container{
+				width: 100%;
+				clear: both;
+				background: #FFFFFF;
+				display: table;
+			}
+				.full-form .form-container .title{
+					width: 150px;
+					padding: 10px;
+					display: table-cell;
+					vertical-align: top;
+				}
+				.full-form .form-container .content{
+					padding: 10px;
+					display: table-cell;
+					vertical-align: top;
+				}
+				.full-form .form-container .side{
+					width: 250px;
+					font-size: 12px;
+					color: #666666;
+					border-left: 1px #DFDFDF solid;
+					padding: 10px;
+					display: table-cell;
+					vertical-align: top;
+				}
+				.full-form .form-container .uploadimage{
+					width: 250px;
+					padding: 10px;
+				}
+					.full-form .form-container .uploadimage img{
+						width: 250px;
+					}
+				.full-form .form-container .button{
+					text-align: left;
+					background: #EEEEEE;
+					border-top: 1px #DFDFDF solid;
+					padding: 40px;
+					margin-top: 30px;
+				}
+		
+		.btn{
+			padding: 20px;
+			background-color: #99CC00;
+			text-align: center;
+			font-size: 22px;
+			font-weight: bold;
+			color: #fff;
+			margin-bottom: 10px;
+		}
+		.btn:hover{
+			padding: 20px;
+			background-color: #FF6600;
+			text-align: center;
+			font-size: 22px;
+			font-weight: bold;
+			color: #fff;
+			margin-bottom: 10px;
+		}
+		.btn2{
+			padding: 20px;
+			background-color: #00a0c6;
+			text-align: center;
+			font-size: 22px;
+			font-weight: bold;
+			color: #fff;
+			margin-bottom: 10px;
+		}
+		.btn2:hover{
+			padding: 20px;
+			background-color: #FF6600;
+			text-align: center;
+			font-size: 22px;
+			font-weight: bold;
+			color: #fff;
+			margin-bottom: 10px;
+		}
+		.btn3{
+			padding: 24px 0;
+			text-align: center;
+			font-size: 16px;
+			color: #666;
+			margin-bottom: 10px;
+			min-width: 100px;
+		}
+		.btn3:hover{
+			padding: 24px 0;
+			text-align: center;
+			font-size: 16px;
+			color: #FF6600;
+			margin-bottom: 10px;
+			min-width: 100px;
+		}
+		.btn-sub{
+			padding: 10px;
+			background-color: #DFDFDF;
+			text-align: left;
+			font-size: 22px;
+			color: #999999;
+			margin-bottom: 10px;
+		}
+		.btn-sub:hover{
+			padding: 10px;
+			background-color: #FF6600;
+			text-align: left;
+			font-size: 22px;
+			font-weight: bold;
+			color: #fff;
+			margin-bottom: 10px;
+		}
+		.btned{
+			padding: 20px 10px;
+			background-color: #FF6600;
+			text-align: center;
+			font-size: 16px;
+			font-weight: bold;
+			color: #fff;
+			margin-bottom: 10px;
+		}
+
+
+.footer{
+	text-align: center;
+	margin-bottom: 10px;
+	border-top: 3px #222 solid;
+}
+	.footer .footer-content{
+		width: 950px;
+	    margin: 0 auto;
+	    padding-top: 10px;
+    	text-align: left;
+	}
+		.footer-content ul li{
+			float: left;
+		}
+		.footer-content .ticket-wrapper{
+				width: 290px;
+				padding: 10px;
+				margin: 0 4px 4px 0;
+				border: 1px #DFDFDF solid;
+			}
+				.footer-content .ticket-wrapper .bgimage{
+					width: 285px;
+					height: 100px;
+					margin-bottom: 5px;
+					overflow: hidden;
+				}
+					.footer-content .ticket-wrapper .bgimage img{
+						width: 285px;
+					}
+				.footer-content .ticket-wrapper .icon{
+					float: left;
+					width: 24px;
+				}
+					.footer-content .ticket-wrapper .icon img{
+						border-radius: 8px;
+						-webkit-border-radius: 8px;
+						-moz-border-radius: 8px;
+					}
+				.ticket-wrapper .username{
+					color: #666;
+					font-size: 16px;
+					padding: 2px;
+				}
+				.footer-content .ticket-wrapper .tag{
+					color: #222;
+					font-size: 12px;
+					padding: 2px;
+					border: 1px #AAA solid;
+					border-radius: 4px;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					margin-right: 4px;
+				}
+				.footer-content .ticket-wrapper .status-a{
+					background-color: red;
+					color: #fff;
+					font-size: 12px;
+					padding: 2px;
+					border-radius: 4px;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					margin-right: 4px;
+				}
+				.footer-content .ticket-wrapper .status-b{
+					background-color: #00a0c6;
+					color: #fff;
+					font-size: 12px;
+					padding: 2px;
+					border-radius: 4px;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					margin-right: 4px;
+				}
+				.footer-content .ticket-wrapper .title{
+					font-size: 18px;
+					padding-left: 55px;
+				}
+				.footer-content .ticket-wrapper .time{
+					font-size: 12px;
+					padding-top: 20px;
+					padding-left: 5px;
+				}
+				.footer-content .ticket-wrapper .counter{
+					background: #222222;
+					color: #FFFFFF;
+					padding: 2px;
+					margin: 0 10px;
+					/*box-shadow: 1px 1px 10px 1px #DFDFDF;*/
+				}
+				.footer-content .ticket-wrapper .member{
+					font-size: 12px;
+					padding-top: 10px;
+					padding-left: 5px;
+				}
+				.footer-content .ticket-wrapper .btn-area{
+					clear: both;
+					margin-top: 10px;
+				}
+.footerbottom{
+	clear: both;
+	width: 100%;
+	height: auto;
+	text-align: center;
+	color: #00a0c6;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}

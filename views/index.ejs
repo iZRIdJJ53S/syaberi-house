@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<title><%= meta_title %>シャベリハウス</title>
+<meta charset="UTF-8">
+<meta name="description" content="友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！">
+<meta name="keywords" content="シャベリハウス,チャット,趣味,興味,twitter,facebook,mixi">
+<script src="/js/globalcommon.js" charset="UTF-8"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" charset="UTF-8"></script>
+<script src="/js/common.js" type="text/javascript" charset="UTF-8"></script>
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
+<link rel="shortcut icon" href="http://syaberi-house.com/images/favicon.ico" />
+<!-- analytics -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-29477382-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+<link rel="stylesheet" href="/css/html5reset-1.6.1.css" />
+<script type="text/javascript">
+var uaiph = 0;
+var uaand = 0;
+var uaetc = 0;
+  if(navigator.userAgent.indexOf('iPhone') != -1){
+    document.write('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />');
+    document.write('<link rel="stylesheet" href="/css/common_smapho.css" />');
+    document.write('<link rel="stylesheet" type="text/css" href="/css/style_smapho.css">');
+    uaiph = 1;
+  }else if(navigator.userAgent.indexOf('Android') != -1){
+    document.write('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />');
+    document.write('<link rel="stylesheet" href="/css/common_smapho.css" />');
+    document.write('<link rel="stylesheet" type="text/css" href="/css/style_smapho.css">');
+    uaand = 1;
+  }else{
+    document.write('<link rel="stylesheet" type="text/css" href="/css/style.css">');
+    document.write('<link rel="stylesheet" href="/css/common.css" />');
+    uaetc = 1;
+  }
+</script>
+</head>
+<body>
+<div id="wrapper">
+
+<% include header %>
+
+
+<div id="contents_wrapp">
+  <div id="contents_wrapp_inside">
+    <section id="section_searchcommu">
+
+
+
+      <script type="text/javascript">
+      <!--
+      //入力ワード
+      var search_str ="<%if(dec_list[0]){ %><%=dec_list[0].search_str%><% } %>";
+
+      var next_num;
+      var dec_list_length ="<%if(dec_list){ %><%=dec_list.length%><% } %>";
+
+      -->
+      </script>
+
+
+      <%for (var i in dec_list) {%>
+        <%if (i < 10) {%>
+          <div style="" class="searchartile">
+            <dl class="search_dl">
+                <dd class="search_dd_title"><a href="/ch/<%= dec_list[i].id %>"><%= dec_list[i].title %></a></dd>
+                <dd class="search_dd_tag" id="search_dd_tag_<%= dec_list[i].id %>"></dd>
+                <dd class="search_dd_txt"><%= dec_list[i].detail %></dd>
+            </dl>
+            <div class="joinedthumbs_wrapp clearfix">
+              <ul id="dec-supporters-<%= dec_list[i].id %>">
+              </ul>
+
+              <div class="joined_details" class="txtc"><span id="joined_detail_<%= dec_list[i].id %>"></span><span>人参加</span></div>
+              <%/*コメント for (var jj = 0; jj < dec_list[i].supporter_num; jj++) { %>
+              <div class="joined_thumbs"><img src="<%= dec_list[i].user_image %>" width="40" height="40"></div>
+              <% } コメント*/ %>
+            </div><!--/joinedthumbs_wrapp-->
+          </div>
+
+
+          <script type="text/javascript"><!--
+
+            //タグ表示
+//            var targetStr = "<%= dec_list[i].word_tag %>";
+//            if( targetStr != "null" && targetStr != "" ){
+//              //カンマで分割し配列に格納
+//              var resArray = targetStr.split(",");
+//              for( var n=0 ; n<resArray.length ; n++ ) {
+//                if( resArray[n]!="" ){
+//                  $('#search_dd_tag_<%= dec_list[i].id %>').append('<a  href="/search?search_str='+resArray[n]+'"><div class="search_dd_tag_div"><span>'+resArray[n]+'</span></div></a>');
+//                }
+//              }
+//            }
+
+
+            //参加者表示
+            $().ready(function(){
+              $.ajax({
+                type: "GET",
+                url: "/get-ch-members",
+                data: {id: <%= dec_list[i].id %>, limit: 17},
+                success: function(data){
+
+                  var img_tag = '';
+                  for (var j = 0; j < data.ch_member_data.length; j++){
+
+              // imgタグを作成
+                    img_tag += '<li class="joined_thumbs"><a herf="/"><img src="'+data.ch_member_data[j].image+'" width="40" height="40"></a></li>';
+
+            }
+                  $('#joined_detail_<%= dec_list[i].id %>').text(data.ch_member_data.length);
+                  $('#dec-supporters-<%= dec_list[i].id %>').append(img_tag);
+                },
+                error: function(data){
+                  // error
+                }
+              });
+            });
+
+
+
+            //個数代入
+            next_num= <%=i%> +1;
+          //--></script>
+        <% } %>
+      <% } %>
+
+
+    </section>
+
+
+
+
+    <section id="roadmore">
+      <div id="view-more-loader-search" style="text-align:center;display:none; height:51px;"><img src="/img/loader.gif" /></div>
+
+      <script>
+      if(uaiph == 1 || uaand == 1){
+        document.write('<div id="view-more-events-search" class="magb15 txtc" ><a href="javascript:void(0);"><img src="/images/common/show_morecontents_s.gif"></a></div>');
+      }else{
+        document.write('<div id="view-more-events-search" class="magb15" ><a href="javascript:void(0);"><img src="/images/common/show_morecontents_b2.gif"></a></div>');
+      }
+      </script>
+
+      <div id="view-more-no-entry" style="text-align:center;display:none;">入力した用語を含むコミュニティーは見つかりませんでした。<br></div>
+    </section>
+
+
+
+    <script type="text/javascript"><!--
+      //10個なかったら「SHOW MORE CONTENTS」を消す
+      if( dec_list_length < 11 ){ $('#view-more-events-search').hide(); }
+      if( search_str=="" ){ $('#view-more-no-entry').show(); }
+    --></script>
+
+
+
+
+  </div><!--/#contents_wrapp_inside-->
+</div><!--/#contents_wrapp-->
+
+
+
+<script type="text/javascript"><!--
+
+
+$('#view-more-events-search').click(function() {
+  insert_contentsSearch(search_str);
+});
+
+
+
+function insert_contentsSearch(search_str){
+
+  //alert("search_str="+search_str);
+
+  $('#view-more-events-search').hide();
+  $('#view-more-loader-search').show();
+
+
+  $.ajax({
+    type: "GET",
+    url: "/",
+    data: {search_str:search_str , next_num:next_num, ajax_flag:true},
+    success: function(data){
+      //console.log(data);
+
+      if(data.text=="no result"){
+        alert("no result");
+        $('#roadmore').hide();
+      }else{
+        $('#section_searchcommu').append( makeEventListPartsSearch(data) );
+      }
+    },
+    error: function(data){
+      // error
+    }
+  });
+}
+
+
+
+
+function makeEventListPartsSearch(data) {
+
+  var write_data = '';
+
+  var next_num2 = 0;
+  var dec_list_length2 = data.event_data.length;
+
+  for (var i in data.event_data) {
+    if (i < 10) {
+
+
+
+      //タグ表示
+      var myTags='';
+      var targetStr = data.event_data[i].word_tag;
+      if(targetStr != null && targetStr != "" ){
+        //カンマで分割し配列に格納
+        var resArray = targetStr.split(",");
+        for( var n=0 ; n<resArray.length ; n++ ) {
+          if( resArray[n]!="" ){
+            //alert('#search_dd_tag_'+data.event_data[i].id+'='+resArray[n]);
+            myTags+='<a  href="/search?search_str='+resArray[n]+'"><div class="search_dd_tag_div"><span>'+resArray[n]+'</span></div></a>';
+          }
+        }
+      }
+
+
+
+
+      write_data += '<div style="" class="searchartile">';
+        write_data += '<dl class="search_dl">';
+//          write_data += '<dt><a href="/dec/'+data.event_data[i].id+'"><img onerror=\'this.src="/images/common/nowprinting_s.jpg"\' src="/data/'+data.event_data[i].id+'/images/thumb_s.jpg" class="dec_thumb_s"></a></dt>';
+          write_data += '<dd class="search_dd_title"><a href="/ch/'+data.event_data[i].id+'">'+data.event_data[i].title+'</a></dd>';
+          write_data += '<dd class="search_dd_tag" id="search_dd_tag_'+data.event_data[i].id+'">'+myTags+'</dd>';
+          write_data += '<dd class="search_dd_txt">'+data.event_data[i].detail+'</dd>';
+        write_data += '</dl>';
+        write_data += '<div class="joinedthumbs_wrapp clearfix">';
+        write_data += '<ul id="dec-supporters-'+data.event_data[i].id+'">';
+        write_data += '</ul>';
+
+        write_data += '<div class="joined_details" class="txtc"><span id="joined_detail_'+data.event_data[i].id+'">0</span><span>人参加</span></div>';
+
+        write_data += '</div><!--/joinedthumbs_wrapp-->';
+      write_data += '</div>';
+
+
+
+
+
+
+
+      //参加者表示
+      $().ready(function(){
+        $.ajax({
+          type: "GET",
+          url: "/get-ch-members",
+          data: { id:data.event_data[i].id , limit: 17},
+          success: function(data){
+
+            var img_tag = '';
+            for (var j = 0; j < data.ch_member_data.length; j++){
+
+            // imgタグを作成
+            img_tag += '<li class="joined_thumbs"><a herf="/"><img src="'+data.ch_member_data[j].image+'" width="40" height="40"></a></li>';
+
+            }
+            if (data.ch_member_data.length) {
+              $('#joined_detail_'+data.ch_member_data[0].c_id).text(data.ch_member_data.length);
+
+            } else {
+              $('#joined_detail_'+data.ch_member_data[0].c_id).text('0');
+
+            }
+            $('#dec-supporters-'+data.ch_member_data[0].c_id).append(img_tag);
+          },
+          error: function(data){
+            // error
+          }
+        });
+      });
+
+
+
+      next_num2 = parseInt(i)+1;
+    }
+  }
+
+  //10個なかったら「SHOW MORE CONTENTS」を消す
+  if( dec_list_length2 < 11 ){
+    $('#view-more-loader-search').hide();
+    $('#view-more-events-search').hide();
+  }else{
+    $('#view-more-loader-search').hide();
+    $('#view-more-events-search').show();
+  }
+
+
+  //個数代入
+  next_num += next_num2;
+  //alert("next_num="+next_num);
+
+
+  /**
+  * イベントリスト
+  * @return {String}
+  */
+  return write_data;
+}
+
+
+//--></script>
+
+
+<% include footer %>
+<% include footer-script %>
+
+
+
+</div><!--/#wrapper-->
+</body>
+</html>

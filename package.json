@@ -1,0 +1,13 @@
+{
+  "name": "syaberi-house",
+  "description": "syaberi-house chat system",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.0.0rc4",
+    "ejs": "0.8.3"
+  }
+}

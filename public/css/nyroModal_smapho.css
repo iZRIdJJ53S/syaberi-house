@@ -1,0 +1,151 @@
+.nyroModalBg {
+	position: fixed;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: #000000;
+	opacity: 0.7;
+}
+.nmReposition {
+	position: absolute;
+}
+.nyroModalCloseButton {
+	top: 0px;
+	right: 1px;
+	width: 26px;
+	height: 26px;
+	background: url('/images/makecommunity_detail_close.png');
+	text-indent: -9999;
+	z-index:999999999;
+	display:block;
+	color:rgba(0,0,0,0);
+	font-size:0px;
+}
+.nyroModalCloseButton a{
+	color:rgba(0,0,0,0);
+}
+.nyroModalCloseButton:hover{
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+	color:rgba(0,0,0,0);
+}
+.nyroModalTitle {
+	top: -26px;
+	left: 0;
+	margin: 0;
+    font-size: 1.1em;
+	color: #ddd;
+	display:none;
+}
+.nyroModalCont {
+	position: absolute;
+/*	border: 4px solid #777; */
+	margin-top: 70px;
+/*	background: #fff;
+	height: 1000px;
+	width: 730px;*/
+	overflow:hidden;
+	color:#FFFFFF;
+	text-align:left;
+	overflow:none;
+}
+
+	.nyroModalCont .detail_title{
+		width:125px;
+		padding-left:50px;
+		color:#FFFFFF;
+		font-size:14px;
+		font-weight:bold;
+	}
+	.nyroModalCont .detail_txt{
+		width:345px;
+		color:#FFFFFF;
+		font-size:14px;
+		padding-left:10px;
+	}
+
+.nyroModalCont iframe {
+	width: 600px;
+	height: 400px;
+}
+.nyroModalError {
+	border: 4px solid red;
+	color: red;
+	width: 250px;
+	height: 250px;
+}
+.nyroModalError div {
+	min-width: 0;
+	min-height: 0;
+	padding: 10px;
+}
+.nyroModalLink, .nyroModalDom, .nyroModalForm, .nyroModalFormFile {
+	position: relative;
+	padding: 10px;
+	min-height: 250px;
+	min-width: 250px;
+	max-width: 300px;
+	overflow:hidden;
+}
+.nyroModalImage, .nyroModalSwf, .nyroModalIframe, .nyroModalIframeForm {
+	position: relative;
+	overflow: hidden;
+}
+.nyroModalImage img {
+    vertical-align: top;
+}
+.nyroModalHidden {
+	left: -9999em;
+	top: -9999em;
+}
+.nyroModalLoad {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	background: url('/images/loading.gif') no-repeat center;
+	padding: 0;
+}
+.nyroModalPrev, .nyroModalNext {
+	outline: none;
+	position: absolute;
+	top: 0;
+	height: 60%;
+	width: 150px;
+	min-height: 50px;
+	max-height: 300px;
+	cursor: pointer;
+	text-indent: -9999em;
+	background: transparent url('data:image/gif;base64,AAAA') left 20% no-repeat;
+}
+.nyroModalImage {
+	height: 100%;
+	width: 40%;
+	max-height: none;
+}
+.nyroModalPrev {
+	top: -7px;
+	*top: 0px;
+	left: 10px;
+	height: 15px;
+	width:60px;
+	background-image: url(../../images/common/prev.gif);
+}
+.nyroModalPrev:hover {
+	background-image: url(../../images/common/prev.gif);
+}
+.nyroModalNext {
+	top: -7px;
+	*top: 0px;
+	left: 80px;
+	height: 15px;
+	width:60px;
+	background-image: url(../../images/common/next.gif);
+}
+.nyroModalNext:hover {
+	background-image: url(../../images/common/next.gif);
+}
+
+
+

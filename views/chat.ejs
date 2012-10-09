@@ -1,0 +1,1448 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<title><%= house_name %>｜シャベリハウス</title>
+<meta charset="UTF-8">
+<meta name="description" content="友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！">
+<meta name="keywords" content="シャベリハウス,チャット,趣味,興味,twitter,facebook,mixi">
+<script src="/js/globalcommon.js" charset="UTF-8"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" charset="UTF-8"></script>
+<script src="/js/common.js" type="text/javascript" charset="UTF-8"></script>
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
+<link rel="shortcut icon" href="http://syaberi-house.com/img/favicon.ico" />
+<!-- analytics -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-29477382-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+<link rel="stylesheet" href="/css/html5reset-1.6.1.css" />
+<script type="text/javascript">
+var uaiph = 0;
+var uaand = 0;
+var uaetc = 0;
+  if(navigator.userAgent.indexOf('iPhone') != -1){
+    document.write('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />');
+    document.write('<link rel="stylesheet" href="/css/common_smapho.css" />');
+    document.write('<link rel="stylesheet" type="text/css" href="/css/style_smapho.css">');
+    document.write('<link rel="stylesheet" href="/css/nyroModal_smapho.css">');
+    document.write('<scr'+'ipt src="/js/jquery.nyroModal.customspaho.js" charset="UTF-8"></scr'+'ipt>');
+    uaiph = 1;
+  }else if(navigator.userAgent.indexOf('Android') != -1){
+    document.write('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />');
+    document.write('<link rel="stylesheet" href="/css/common_smapho.css" />');
+    document.write('<link rel="stylesheet" type="text/css" href="/css/style_smapho.css">');
+    document.write('<link rel="stylesheet" href="/css/nyroModal_smapho.css">');
+    document.write('<scr'+'ipt src="/js/jquery.nyroModal.customspaho.js" charset="UTF-8"></scr'+'ipt>');
+    uaand = 1;
+  }else{
+    document.write('<link rel="stylesheet" type="text/css" href="/css/style.css">');
+    document.write('<link rel="stylesheet" href="/css/common.css" />');
+    document.write('<link rel="stylesheet" href="/css/nyroModal.css">');
+    document.write('<scr'+'ipt src="/js/jquery.nyroModal.custom.js" charset="UTF-8"></scr'+'ipt>');
+    uaetc = 1;
+  }
+var StampHideFlag = 0;
+</script>
+<script src="/js/jquery.tinyscrollbar.min.js" charset="UTF-8"></script>
+<script type="text/javascript">
+//write function jquery.tinyscrollbar.min.js line:498
+function forscrol(){
+  setTimeout(function(){
+    $('#scrollbar1').tinyscrollbar();
+  },1500);
+}
+</script>
+<script>
+<!--
+//短縮URL取得
+(function(){
+  setShortURL();
+})();
+
+// snsトークン取得
+var sns_token = "";
+var sns_refresh = "";
+var sns_code = "";
+var sns_user_name = "";
+var sns_service = "";
+var sns_service_id = "";
+var TW_FRIEND_FLAG = ReadCookie("TW_FRIEND_FLAG");
+var MIXI_FRIEND_FLAG = ReadCookie("MIXI_FRIEND_FLAG");
+(function() {
+  var tim = new Date();
+  var parameters = "tim=" + tim.getSeconds()+tim.getMilliseconds();
+  var request = "/get-session?"+parameters;
+//  alert(request);
+  var httpoj = createHttpRequest()
+  httpoj.open( "GET" , request , true )
+  httpoj.onreadystatechange = function(){
+    if ((httpoj.readyState==4) && (httpoj.status == 200)){
+      var args = {};
+      var arr = httpoj.responseText;
+      var getSessionJson = eval("(" + arr + ")");
+
+      sns_token = getSessionJson["accessToken"];
+      sns_refresh = getSessionJson["refreshToken"];
+      sns_code = getSessionJson["code"];
+      sns_user_name = getSessionJson["user_name"];
+      sns_service = getSessionJson["service"];
+      sns_service_id = getSessionJson["oauth_service_id"];
+
+      if(sns_service == "facebook"){
+        getfbFriend();
+
+        if(window.addEventListener) {
+          window.addEventListener("load", fbDisplay, false);
+        }
+        else if(window.attachEvent) {
+          window.attachEvent("onload", fbDisplay);
+        }
+
+      }else if(sns_service == "twitter"){
+        gettwFriend(sns_service_id);
+        //tw_friends_json();
+        if(window.addEventListener) {
+          window.addEventListener("load", twDisplay, false);
+        }
+        else if(window.attachEvent) {
+          window.attachEvent("onload", twDisplay);
+        }
+      }else if(sns_service == "mixi"){
+        getmixiFriend(sns_service_id);
+        //tw_friends_json();
+        if(window.addEventListener) {
+          window.addEventListener("load", mixiDisplay, false);
+        }
+        else if(window.attachEvent) {
+          window.attachEvent("onload", mixiDisplay);
+        }
+      }
+    }
+  }
+  httpoj.send();
+}());
+// snsトークン取得
+function fbDisplay(){
+  document.getElementById("tab_1").style.display = "block";
+  document.getElementById("tab_1_area").style.display = "block";
+  document.getElementById("comment_flag_fb").style.display = "block";
+}
+function twDisplay(){
+  document.getElementById("tab_2").style.display = "block";
+  document.getElementById("tab_2_area").style.display = "block";
+  document.getElementById("comment_flag_tw").style.display = "block";
+}
+function mixiDisplay(){
+  document.getElementById("tab_3").style.display = "block";
+  document.getElementById("tab_3_area").style.display = "block";
+  document.getElementById("comment_flag_mx").style.display = "block";
+}
+
+/*****************  mixi ****************************************************/
+
+var startIndex = -1;
+var mixi_friendsJson = '{"data":[';
+var mixi_req_count = 0;
+var mixi_req_num = 1;
+var mixi_num = 0;
+function mixi_friends_json(){
+
+  var tim = new Date();
+  var parameters = "startIndex=" + startIndex + "&flag=" + MIXI_FRIEND_FLAG + "&tim=" + tim.getSeconds()+tim.getMilliseconds();
+  var request = "/get-mixi-friends?"+ parameters;
+  var httpoj = createHttpRequest()
+  httpoj.open( "GET" , request , true );
+  httpoj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  httpoj.onreadystatechange = function(){
+    if ((httpoj.readyState==4) && (httpoj.status == 200)){
+      var args = {};
+      var arr = httpoj.responseText;
+      var json = arr.replace(/\&quot\;/g, '"');
+      var obj = eval("(" + json + ")");
+
+        if(MIXI_FRIEND_FLAG != "1"){
+
+        //トータル数が0でなければ
+        if(obj["totalResults"] != "0"){
+
+          //初回時にリクエスト回数定義
+          if(startIndex == -1){
+            var res_count = 0;
+            var get_count = parseInt(obj["totalResults"], 10) / parseInt(obj["itemsPerPage"], 10);
+            get_count = ""+get_count;
+
+            //端数かどうか
+            if(get_count.indexOf(".") == -1 ){
+              mixi_req_num = get_count;
+            }else{
+              var get_count_arr = get_count.split(".");
+              mixi_req_num = parseInt(get_count_arr[0], 10) + 1;
+            }
+            startIndex = 0;
+          }
+
+          for(var i=0;i<obj["entry"].length;i++){
+            //tw_friends.push(obj["users"][i]["name"]);
+            mixi_friendsJson += '{"id":"'+ obj["entry"][i]["id"] +'",';
+            mixi_friendsJson += '"name":"'+ encodeURIComponent(obj["entry"][i]["displayName"].replace( /\"/g , '&quot;' )) +'",';
+            mixi_friendsJson += '"profile_image_url":"'+ obj["entry"][i]["thumbnailUrl"] +'"},';
+          }
+
+          startIndex = (startIndex + 50);
+          mixi_req_count++;
+
+        }else{
+          mixi_friendsJson += ']}';
+          print_mixi();
+        }
+
+
+        if(mixi_req_num == mixi_req_count){
+          mixi_friendsJson = mixi_friendsJson.slice(0, -1);
+          mixi_friendsJson += ']}';
+          print_mixi();
+        }else{
+          mixi_friends_json();
+        }
+
+
+        }else{
+        mixi_friendsJson = obj;　//DBの戻りをそのまま挿入
+        print_mixi();
+
+        }
+
+    }
+  }
+  httpoj.send();
+
+}
+
+
+function getmixiFriend(sns_id){
+
+  mixi_friends_json();
+
+/*
+  timerID = setInterval(function(){
+//          tw_make_json(sns_id);
+          mixi_friends_json();
+  },1000);
+*/
+}
+
+function print_mixi(){
+  var mixi_friendsArr = eval('('+mixi_friendsJson+')');
+  var str = "";
+  for( var i = 0 ; i < mixi_friendsArr["data"].length ; i++ ){
+    str += '<li>';
+    str += '  <div class="invite_li_input">';
+    str += '  <input type="checkbox" name="mixi_'+mixi_friendsArr["data"][i]["id"]+'" id="mixi_'+mixi_friendsArr["data"][i]["id"]+'" value="'+mixi_friendsArr["data"][i]["id"]+'" class="invite_table_td_tumnb_checkbox">';
+    str += '  </div>';
+    str += '  <div class="invite_li_tumnb"><img src="'+mixi_friendsArr["data"][i]["profile_image_url"]+'" width="40" height="40"></div>';
+    str += '  <div class="invite_li_name">'+decodeURIComponent(mixi_friendsArr["data"][i]["name"])+'</div>';
+    str += '</li>';
+  }
+  document.getElementById("tab_3_area").innerHTML = str;
+
+  if(MIXI_FRIEND_FLAG != "1"){
+    setmixiFriend();
+  }
+
+  $('#scrollbar1').tinyscrollbar();
+
+}
+
+function setmixiFriend(){
+
+  var tim = new Date();
+  //alert(mixi_friendsJson);
+  var parameters = "friend_list=" + mixi_friendsJson + "&tim=" + tim.getSeconds()+tim.getMilliseconds();
+  var request = "/set-mixi-friends";
+  var httpoj = createHttpRequest()
+  httpoj.open( "POST" , request , true )
+  httpoj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  httpoj.onreadystatechange = function(){
+    if ((httpoj.readyState==4) && (httpoj.status == 200)){
+      var args = {};
+      var arr = httpoj.responseText;
+      var res = eval("(" + arr + ")");
+      if(res["return"]){
+        set_cookie("MIXI_FRIEND_FLAG","1");
+        //alert("TW_FRIEND_FLAG");
+      }
+    }
+  }
+  httpoj.send(parameters);
+
+}
+
+
+function mixi_sendMessage(){
+//  alert("mixi_sendMessage");
+  var message_text = sns_user_name + 'さんがチャットに誘ってます！';
+  var check_count = document.getElementById("tab_3_area").getElementsByTagName("input").length;
+  var check_obj = document.getElementById("tab_3_area").getElementsByTagName("input");
+  var check_num = 0;
+  var get_mixi_id = new Array();
+
+  for(var i = 0;i < check_count ; i++ ){
+    if(check_obj[i].checked){
+      get_mixi_id.push(check_obj[i].value);
+      check_num++;
+    }
+  }
+  //alert(get_mixi_id);
+  if(check_num == 0){
+    alert("招待する友達を選択してください。");
+    return false;
+  }else{
+    var tim = new Date();
+    var parameters = "tim=" + tim.getSeconds()+tim.getMilliseconds();
+    var request = "/get-session?"+parameters;
+  //  alert(request);
+    var httpoj = createHttpRequest()
+    httpoj.open( "GET" , request , true )
+    httpoj.onreadystatechange = function(){
+      if ((httpoj.readyState==4) && (httpoj.status == 200)){
+        var args = {};
+        var arr = httpoj.responseText;
+        var getSessionJson = eval("(" + arr + ")");
+
+        sns_token = getSessionJson["accessToken"];
+        sns_refresh = getSessionJson["refreshToken"];
+        sns_code = getSessionJson["code"];
+
+        document.getElementById("mixi-send-title").value = message_text;
+        document.getElementById("mixi-send-body").value = "シャベリハウス\n友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！\n"+location.href;
+        document.getElementById("mixi-send-recipients").value = get_mixi_id;
+        document.getElementById("mixi-access_token").value = sns_token;
+        document.getElementById("mixi-refresh_token").value = sns_refresh;
+        document.getElementById("mixi-user_id").value = sns_service_id;
+        document.getElementById("mixi-code").value = sns_code;
+        document.getElementById("mixi-send-form").action = mixi_friend_url_api;
+        document.getElementById("mixi-send-form").submit();
+        chg_inv_disp();
+      }
+    }
+    httpoj.send();
+  }
+}
+
+//投稿内容をツイート
+function mixi_sendComment(){
+  //send-twitter
+  var val = document.getElementById("message1").value;
+
+  //添付画像
+  var img_val = document.getElementById("realUpfile").value;
+
+  if(document.getElementById("comment_radio_mx").checked){
+
+    if((val != "") && (img_val == "")){
+      var tim = new Date();
+      var parameters = "tim=" + tim.getSeconds()+tim.getMilliseconds();
+      var request = "/get-session?"+parameters;
+    //  alert(request);
+      var httpoj = createHttpRequest()
+      httpoj.open( "GET" , request , true )
+      httpoj.onreadystatechange = function(){
+        if ((httpoj.readyState==4) && (httpoj.status == 200)){
+          var args = {};
+          var arr = httpoj.responseText;
+          var getSessionJson = eval("(" + arr + ")");
+
+          sns_token = getSessionJson["accessToken"];
+          sns_refresh = getSessionJson["refreshToken"];
+          sns_code = getSessionJson["code"];
+
+
+          document.getElementById("mixi-voice-val").value = val;
+
+          document.getElementById("mixi-voice-access_token").value = sns_token;
+          document.getElementById("mixi-voice-refresh_token").value = sns_refresh;
+          document.getElementById("mixi-voice-user_id").value = sns_service_id;
+          document.getElementById("mixi-voice-code").value = sns_code;
+
+          document.getElementById("mixi-voice-form").action = mixi_voice_url_api;
+          document.getElementById("mixi-voice-form").submit();
+        }
+      }
+      httpoj.send();
+    }
+  }
+
+}
+
+/*****************  /mixi ****************************************************/
+
+/*****************  twitter ****************************************************/
+
+var cursor = "-1";
+var tw_friends = new Array();
+var tw_flag = true;
+var timerID = "";
+var tw_friendsJson = '{"data":[';
+
+function tw_friends_json(){
+  var tim = new Date();
+  var parameters = "cursor=" + cursor + "&flag=" + TW_FRIEND_FLAG + "&tim=" + tim.getSeconds()+tim.getMilliseconds();
+  var request = "/get-twitter-friends?"+ parameters;
+//  alert(request);
+  var httpoj = createHttpRequest()
+  httpoj.open( "GET" , request , true );
+  httpoj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  httpoj.onreadystatechange = function(){
+    if ((httpoj.readyState==4) && (httpoj.status == 200)){
+      var args = {};
+      var arr = httpoj.responseText;
+      var json = arr.replace(/\&quot\;/g, '"');
+      var obj = eval("(" + json + ")");
+
+      if(TW_FRIEND_FLAG != "1"){
+        if(cursor != obj["next_cursor"]){
+           cursor = obj["next_cursor"];
+
+        if(obj["users"].length != 0){
+            for(var i=0;i<obj["users"].length;i++){
+                    //tw_friends.push(obj["users"][i]["name"]);
+          tw_friendsJson += '{"id":"'+ obj["users"][i]["id"] +'",';
+          tw_friendsJson += '"name":"'+ encodeURIComponent(obj["users"][i]["name"]) +'",';
+          tw_friendsJson += '"screen_name":"'+ encodeURIComponent(obj["users"][i]["screen_name"]) +'",';
+          tw_friendsJson += '"profile_image_url":"'+ obj["users"][i]["profile_image_url"] +'"}';
+          //alert(tw_friends[i]);
+          if((cursor == "0") && (obj["users"].length == ( i + 1 ))){
+                tw_friendsJson += ']}';
+              }else{
+                tw_friendsJson += ',';
+          }
+            }
+            if(cursor == "0"){
+          clearInterval(timerID);
+          print_tw();
+            }
+        }else{
+          clearInterval(timerID);
+          tw_friendsJson += ']}';
+          print_tw();
+        }
+         }
+      }else{
+
+      clearInterval(timerID);
+      tw_friendsJson = obj;
+      print_tw();
+
+      }
+
+    }
+  }
+  httpoj.send();
+
+}
+
+
+function gettwFriend(sns_id){
+  timerID = setInterval(function(){
+//          tw_make_json(sns_id);
+          tw_friends_json();
+  },1000);
+}
+
+function print_tw(){
+  var tw_friendsArr = eval('('+tw_friendsJson+')');
+  var str = ""
+  for( var i = 0 ; i < tw_friendsArr["data"].length ; i++ ){
+    str += '<li>';
+    str += '  <div class="invite_li_input">';
+    str += '  <input type="checkbox" name="tw_'+tw_friendsArr["data"][i]["id"]+'" id="tw_'+tw_friendsArr["data"][i]["id"]+'" value="'+decodeURIComponent(tw_friendsArr["data"][i]["screen_name"])+'" class="invite_table_td_tumnb_checkbox">';
+    str += '  </div>';
+    str += '  <div class="invite_li_tumnb"><img src="'+tw_friendsArr["data"][i]["profile_image_url"]+'" width="40" height="40"></div>';
+    str += '  <div class="invite_li_name">'+decodeURIComponent(tw_friendsArr["data"][i]["name"])+'</div>';
+    str += '</li>';
+  }
+  document.getElementById("tab_2_area").innerHTML = str;
+
+  //alert(ReadCookie("TW_FRIEND_FLAG"));
+  if(TW_FRIEND_FLAG != "1"){
+    //alert(friend_up_flag);
+    settwFriend();
+  }
+
+  $('#scrollbar1').tinyscrollbar();
+
+}
+
+function settwFriend(){
+  var tim = new Date();
+  var parameters = "friend_list=" + tw_friendsJson + "&tim=" + tim.getSeconds()+tim.getMilliseconds();
+  var request = "/set-twitter-friends";
+  var httpoj = createHttpRequest()
+  httpoj.open( "POST" , request , true )
+  httpoj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  httpoj.onreadystatechange = function(){
+    if ((httpoj.readyState==4) && (httpoj.status == 200)){
+      var args = {};
+      var arr = httpoj.responseText;
+      var res = eval("(" + arr + ")");
+      if(res["return"]){
+        set_cookie("TW_FRIEND_FLAG","1");
+        //alert("TW_FRIEND_FLAG");
+      }
+    }
+  }
+  httpoj.send(parameters);
+}
+
+
+function tw_sendMessage(){
+  var message_text = sns_user_name + 'さんがチャットに誘ってます！';
+  var check_count = document.getElementById("tab_2_area").getElementsByTagName("input").length;
+  var check_obj = document.getElementById("tab_2_area").getElementsByTagName("input");
+  var check_num = 0;
+
+//  alert(message_text);
+//  alert(check_count);
+  var check_num = 0;
+
+  for(var i = 0;i < check_count ; i++ ){
+    if(check_obj[i].checked){
+      var for_account = "@"+check_obj[i].value;
+      var tim = new Date();
+      var parameters = "message="+ for_account + " " + message_text + " " + location.href +"&tim=" + tim.getSeconds()+tim.getMilliseconds();
+      var request = "/send-twitter";
+    //  alert(request);
+      var httpoj = createHttpRequest()
+      httpoj.open( "POST" , request , true )
+      httpoj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+      httpoj.onreadystatechange = function(){
+        if ((httpoj.readyState==4) && (httpoj.status == 200)){
+          var args = {};
+          var arr = httpoj.responseText;
+          var send_return = eval("(" + arr + ")");
+          //alert(send_return["return"]);
+        }
+      }
+      httpoj.send(parameters);
+
+      check_num++;
+    }
+  }
+//  alert(check_num);
+  if(check_num == 0){
+    alert("招待する友達を選択してください。");
+    return false;
+  }
+  chg_inv_disp();
+}
+
+//投稿内容をツイート
+function tw_sendComment(){
+  //send-twitter
+  var val = document.getElementById("message1").value;
+
+  //添付画像
+  var img_val = document.getElementById("realUpfile").value;
+
+  if(document.getElementById("comment_check_tw").checked){
+
+    if((val != "") && (img_val == "")){
+
+      var count = val.length;
+      var str = "";
+      if(count > 120){
+        //alert(count);
+        for(var i=0 ; i < 120 ; i++ ){
+          str += val.charAt(i);
+        }
+        val = str;
+      }
+
+      var tim = new Date();
+      var parameters = "message="+ val + " " + getShortUrl + "&tim=" + tim.getSeconds()+tim.getMilliseconds();
+      var request = "/send-twitter";
+      var httpoj = createHttpRequest()
+      httpoj.open( "POST" , request , true )
+      httpoj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+      httpoj.onreadystatechange = function(){
+        if ((httpoj.readyState==4) && (httpoj.status == 200)){
+          var args = {};
+          var arr = httpoj.responseText;
+          var send_return = eval("(" + arr + ")");
+        }
+      }
+      httpoj.send(parameters);
+
+    }
+  }
+
+}
+/*****************  /twitter ****************************************************/
+
+//投稿内容をつぶやく
+function sendComment(){
+  if(sns_service == "facebook"){
+
+//    alert("facebook");
+    fb_sendComment()
+
+  }else if(sns_service == "twitter"){
+
+    tw_sendComment();
+    //alert("twitter");
+  }else if(sns_service == "mixi"){
+
+    mixi_sendComment();
+
+  }
+
+}
+
+//友達招待
+function sendMessage(){
+  if(sns_service == "facebook"){
+
+    fb_sendMessage();
+
+  }else if(sns_service == "twitter"){
+
+    tw_sendMessage();
+
+  }else if(sns_service == "mixi"){
+
+    mixi_sendMessage();
+
+  }
+}
+/*****************  facebook ****************************************************/
+
+function fb_sendComment(){
+  //send-facebook
+  var val = document.getElementById("message1").value;
+  //添付画像
+  var img_val = document.getElementById("realUpfile").value;
+
+  if(document.getElementById("comment_check_fb").checked){
+
+    if((val != "") && (img_val == "")){
+
+      FB.api('/me/feed','post', { access_token: sns_token , message: val , picture: location.protocol+'//'+ location.host +'/img/common/logo.gif', link: location.href},
+        function(response) {
+          // コールバック
+          //alert('ID: ' + response.id);
+        }
+      );
+
+    }
+  }
+}
+
+
+//function getFacebookFriends(){
+function getfbFriend(){
+  if(sns_service == "facebook"){
+    var tim = new Date();
+    var parameters = "tim=" + tim.getSeconds()+tim.getMilliseconds();
+    var request = "/facebook-get-friends?"+parameters;
+  //  alert(request);
+    var httpoj = createHttpRequest()
+    httpoj.open( "GET" , request , true )
+    httpoj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    httpoj.onreadystatechange = function(){
+      if ((httpoj.readyState==4) && (httpoj.status == 200)){
+        var args = {};
+        var arr = httpoj.responseText;
+        var json_text = eval("(" + arr + ")");
+        if(json_text["login_flg"] != false){
+          var getFriendJson = eval("(" + json_text + ")");
+
+          fbFriendList(getFriendJson["data"]);
+        }
+      }
+    }
+    httpoj.send();
+  }
+}
+
+function fb_sendMessage(){
+  var message_text = sns_user_name + 'さんがチャットに誘ってます！';
+
+//  alert(document.getElementById("tab_1_area").getElementsByTagName("input").length);
+  var check_count = document.getElementById("tab_1_area").getElementsByTagName("input").length;
+  var check_obj = document.getElementById("tab_1_area").getElementsByTagName("input");
+  var check_num = 0;
+
+  for(var i = 0;i < check_count ; i++ ){
+    if(check_obj[i].checked){
+      check_num++;
+//      alert(check_obj[i].value);
+
+      FB.api('/'+check_obj[i].value+'/feed',
+        'post',
+        {
+         access_token: sns_token ,
+         message: message_text ,
+         picture: 'http://syaberi-house.com/img/common/logo.gif',
+         link: location.href,
+         name: document.getElementsByTagName("title")[0].innerText,
+         caption: 'シャベリハウス',
+         description: '友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！'
+        },
+        function(response) {
+          // コールバック
+          //alert('ID: ' + response.id);
+        }
+      );
+
+    }
+  }
+
+  if(check_num == 0){
+    alert("招待する友達を選択してください。");
+    return false;
+  }
+  chg_inv_disp();
+}
+
+
+
+function fbFriendList(arr){
+  var str = ""
+  for( var i = 0 ; i < arr.length ; i++ ){
+    str += '<li>';
+    str += '  <div class="invite_li_input"><input type="checkbox" name="fb_'+arr[i]["id"]+'" id="fb_'+arr[i]["id"]+'" value="'+arr[i]["id"]+'" class="invite_table_td_tumnb_checkbox"></div>';
+    str += '  <div class="invite_li_tumnb"><img src="https://graph.facebook.com/'+arr[i]["id"]+'/picture" width="40" height="40"></div>';
+    str += '  <div class="invite_li_name">'+arr[i]["name"]+'</div>';
+    str += '</li>';
+
+  }
+  document.getElementById("tab_1_area").innerHTML = str;
+  $('#scrollbar1').tinyscrollbar();
+
+}
+/*****************  /facebook ****************************************************/
+
+
+//:::::切り替え:::::
+function chg_inv_disp(){
+  $('.viewport').css('display','none');
+  $('#inv_submit').css('display','none');
+  $('#tab_ul').css('display','none');
+  $('#end_disp').fadeIn();
+}
+$(document).ready(function(){
+  $('#inv_friendsbtn').click(function(){
+    $('#tab_ul').css('display','block');
+    $('#inv_submit').css('display','block');
+    $('#end_disp').css('display','none');
+    $('.tab_wrapp input').attr('checked',false);
+    $('.viewport').css('display','block');
+  });
+});
+//:::::切り替え:::::
+
+// -->
+</script>
+</head>
+<body>
+<!-- facebook -->
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/ja_JP/all.js"></script>
+<script>
+FB.init({ appId: fb_appId,
+  status: true,
+  cookie: true,
+  xfbml: true,
+  oauth: true
+});
+</script>
+<!-- /facebook -->
+
+
+<div id="wrapper">
+
+<% include header %>
+
+
+<div id="contents_wrapp" <% if ( dec_image ) { %>style="background-image:url('<%= dec_image %>');"<% } %>>
+  <div id="contents_wrapp_inside">
+<script type="text/javascript">
+  if(uaiph == 1 || uaand == 1){
+    document.write('<section id="thread">');
+    document.write('<h3 id="thread_h3"><%= house_name %></h3>');
+    document.write('<div class="thread_txt"><%= house_desc %></div>');
+    document.write('<p class="fontb fltl padl10 padb10">今チャットルームにいる人：<span id="peaple"></span>人</p>');
+    document.write('<div class="participant bg_w magb5 thread_friends clearfix" id="audienceview"></div></section>');
+  }else{
+    document.write('<section id="thread">');
+    document.write('<div id="thread_wrapp">');
+    document.write('<h3 id="thread_h3"><%= house_name %></h3>');
+    document.write('<div class="thread_txt"><%= house_desc %></div>');
+    document.write('<div class="txtc magb13" id="inv_friendsbtn"><a href="#lightboxinvite_wrapp" class="nyroModal" rel="lightboxinvite"><img src="/img/common/invitefriends_b.png" id="invite_banner" alt="このチャットルームに友達を招待する"></a></div>');
+    document.write('<!--div class="participant" id="audienceview"></div-->');
+    document.write('<div class="txtc magb13">');
+
+    document.write('<!--div id="owner_proc_area" class="right" style="display:none;">');
+    document.write('<a id="event_all_mail" class="btn" style="display:none; width:230px;"><img src="/img/tread_btn.gif" width="230" height="39" alt=""></a>');
+    document.write('<a id="event_end_proc" class="btn" style="width:230px;"><img src="/img/tread_btn.gif" width="230" height="39" alt=""></a>');
+    document.write('</div-->');
+
+    document.write('</div>');
+    document.write('</div-->');
+    document.write('<div id="pullarea" style="display:none;">');
+    document.write('<div class="txtl bg_g padt10 clearfix">');
+    document.write('<p class="fontb fltl padl10">今チャットルームにいる人</p><p class="fltr padr10 text16 fontb"><span id="peaple"></span>人</p>');
+    document.write('</div>');
+    document.write('<div class="participant thread_friends clearfix bg_g" id="audienceview">');
+    document.write('</div>');
+    document.write('</div>');
+    document.write('<a href="#" id="pullpullpull"></a>');
+    document.write('</div><!--/thread_wrapp-->');
+    document.write('</section>');
+  }
+</script>
+    <section id="section_thread_left">
+      <article>
+        <div class="thread_article_box_left fltl">
+          <div class="thread_article_box_wrapp_left">
+            <div class="thread_article_txt">
+
+
+              <div class="main-view"><!-- main-view -->
+                <div id="disparea">
+                  <div id="view_frame" class="view"><!-- HINT --></div>
+<!-----------デバッグ用(；´∀｀)--
+<div id="aaaaaa"></div>
+<div id="bbbbbb"></div>
+<div id="cccccc"></div>
+---------------------(；´∀｀)-->
+                </div>
+              </div><!-- /main-view -->
+
+
+            </div>
+          </div>
+        </div>
+      </article>
+    </section><!--/section_thread_left-->
+    <section id="section_thread_right">
+
+      <div id="lines1" class="chat"><!-- chat --></div><!-- /chat -->
+
+
+<!--投稿コメントエリア-->
+
+
+
+    </section><!--/section_thread_right-->
+    <section id="section_thread_bottom">
+      <div id="thread_comment_box">
+        <h3 id="comment_h3">コメント</h3>
+        <table id="comment_wrapp">
+
+          <form id="send-message1">
+<script>
+if(uaiph == 1 || uaand == 1){
+  document.write('<tr>');
+  document.write('<td>');
+  document.write('<div id="comment_wrapp_inputarea"><textarea type="text" value="" id="message1" style="overflow:hidden; resize:none; max-height:20px; min-height:20px; height:20px; word-wrap:normal;" cols="15" wrap="off"></textarea></div>');
+  document.write('</td>');
+  document.write('<td><a href="javascript:void(0)" id="emoji_butt" style="margin:0px 5px 0px 5px;"><img src="/img/room_pull.gif" width="67" height="30"></a></td>');
+  document.write('<td style="vertical-align:top;">');
+  //document.write('<div id="uploadings" style="margin-right:1px;">');
+  document.write('<input type="hidden" id="uploadings_input" name="dec_image2" value="" style="">');
+  document.write('<input type="hidden" id="realUpfile" value="">');
+  //document.write('</div>');
+  document.write('</td>');
+  document.write('<td width="50" id="comment_flag_fb" style="display:none;"><input type="checkbox" name="comment_check_fb" class="comment_radio" id="comment_check_fb" value=""><label for="comment_check_fb"><img src="/img/room_radio_fb.gif" width="19" height="19"></label></td>');
+  document.write('<td width="50" id="comment_flag_tw" style="display:none;"><input type="checkbox" name="comment_check_tw" class="comment_radio" id="comment_check_tw" value=""><label for="comment_check_tw"><img src="/img/room_radio_tw.gif" width="19" height="19"></label></td>');
+  document.write('<td width="50" id="comment_flag_mx" style="display:none;"><input type="checkbox" name="comment_check_mx" class="comment_radio" id="comment_radio_mx" value=""><label for="comment_check_mx"><img src="/img/room_radio_mx.gif" width="19" height="19"></label></td>');
+  document.write('<td>');
+  document.write('<div class="buttonContainer">');
+  document.write('<label for="submit_1">');
+  document.write('<input type="image" src="/img/room_toukou.gif" class="" id="submit_1">');
+  document.write('</label>');
+  document.write('</div>');
+  document.write('</td>');
+  document.write('</tr>');
+}else{
+  document.write('<tr>');
+  document.write('<td colspan="6">');
+  document.write('<div id="comment_wrapp_inputarea"><textarea type="text" value="" id="message1" style="overflow:hidden; resize:none; word-wrap:normal;" cols="60" wrap="off"></textarea></div>');
+  document.write('</td>');
+  document.write('</tr>');
+  document.write('<tr>');
+  document.write('<td width="77"><a href="javascript:void(0)" id="emoji_butt"><img src="/img/room_pull.gif" width="67" height="30"></a></td>');
+  document.write('<!--td width="90"><a href="#"><img src="/img/room_attach.gif" width="67" height="30"></a></td-->');
+  document.write('<td width="90" style="vertical-align:top;">');
+  document.write('<div id="uploadings">');
+  document.write('<input type="file" id="uploadings_input" name="dec_image2" value="">');
+  document.write('<input type="hidden" id="realUpfile" value="">');
+  document.write('</div>');
+  document.write('</td>');
+  document.write('<td width="50" id="comment_flag_fb" style="display:none;" style="vertical-align:middle;"><input type="checkbox" name="comment_check_fb" class="comment_radio" id="comment_check_fb" value=""><label for="comment_check_fb"><img src="/img/room_radio_fb.gif" width="19" height="19"></label></td>');
+  document.write('<td width="50" id="comment_flag_tw" style="display:none;" style="vertical-align:middle;"><input type="checkbox" name="comment_check_tw" class="comment_radio" id="comment_check_tw" value=""><label for="comment_check_tw"><img src="/img/room_radio_tw.gif" width="19" height="19"></label></td>');
+  document.write('<td width="50" id="comment_flag_mx" style="display:none;" style="vertical-align:middle;"><input type="checkbox" name="comment_radio_mx" class="comment_radio" id="comment_radio_mx" value=""><label for="comment_radio_mx"><img src="/img/room_radio_mx.gif" width="19" height="19"></label></td>');
+  document.write('<td>');
+//  document.write('<div class="buttonContainer">');
+//  document.write('<!--div id="dropbox" style="float:left;">');
+//  document.write('<span id="drop_message" class="message"><このエリアに画像をドラック＆ドロップ></span>');
+//  document.write('</div-->');
+  document.write('<label for="submit_1">');
+  document.write('<!--input class="submitBtn" id="submit_1" type="submit" value="投稿"-->');
+  document.write('<input type="image" src="/img/room_toukou.gif" class="fltr" id="submit_1">');
+  document.write('</label>');
+  document.write('</div>');
+  document.write('</td>');
+  document.write('</tr>');
+}
+</script>
+          </form>
+<!-- mixi voice -->
+<form action="" target="mixi-send-voice" method="post" id="mixi-voice-form" name="mixi-voice-form" style="display:none">
+  <input type="hidden" name="voice" id="mixi-voice-val" value="">
+  <input type="hidden" name="access_token" id="mixi-voice-access_token" value="">
+  <input type="hidden" name="refresh_token" id="mixi-voice-refresh_token" value="">
+  <input type="hidden" name="user_id" id="mixi-voice-user_id" value="">
+  <input type="hidden" name="mixi_code" id="mixi-voice-code" value="">
+</form>
+<iframe src="" id="mixi-send-voice" name="mixi-send-voice" style="display:none;"></iframe>
+
+
+          <div id="emoji_wrapp">
+            <div id="emoji_wrapp_in" class="clearfix">
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/01.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/02.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/03.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/04.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/05.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/06.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/07.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/08.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/09.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/10.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/11.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/12.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/13.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/14.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/15.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/16.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/17.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/18.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/19.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/20.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/21.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/22.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/23.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/24.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/25.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/26.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/27.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/28.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/29.png" ></a>
+              <a href="javascript:void(0)"><img src="/img/stamp/ebisawa/30.png" ></a>
+            </div>
+          </div><!--/emoji_wrapp-->
+        </table><div id="scrl_top"><a href="javascript:void(0);" title="ページTOP">▲</a></div>
+<script>
+if(uaiph == 1 || uaand == 1){
+  <% if ( is_owner) { %>
+  document.write('<div id="forblog"><a href="#alert_box" class="nyroModal" rel="sidealert">チャットルームをブログ化する</a></div>');
+  <% } %>
+}
+</script>
+<!--//////////////////////////////////////-->
+<script src="/js/upload.js" charset="UTF-8"></script>
+<script>
+var Upload_Cancel;
+$(function() {
+  $('input#uploadings_input').change(function() {
+    $(this).upload('/upload', function(res) {
+      //$(res).insertAfter(this);
+
+    //ファイル名成型 hidden用
+      //alert(res);
+      var seikei_one = res;
+      var seikei_two = seikei_one.split('\":\"');
+      var seikei_thr = seikei_two[1].split('\"}</pre>');
+
+    //ファイル名 textarea用
+      var lcl_img_one = $('input#uploadings_input').val().split('\\');
+
+      for(var y = 0; y < lcl_img_one.length; y++){
+        if(lcl_img_one[y].indexOf('.jpg') != -1 || lcl_img_one[y].indexOf('.jpeg') != -1 || lcl_img_one[y].indexOf('.JPG') != -1 || lcl_img_one[y].indexOf('.png') != -1 || lcl_img_one[y].indexOf('.PNG') != -1 || lcl_img_one[y].indexOf('.gif') != -1 || lcl_img_one[y].indexOf('.GIF') != -1){
+          var lcl_img_two = lcl_img_one[y];
+        }
+      }
+
+      //$('#realUpfile').val(seikei_thr[0]);
+
+    //textareaにユーザが添付したファイル名を表示
+      $('#message1').val(lcl_img_two);
+      Upload_Cancel = 1;
+      //添付とコメントを同時に投稿できぬようテキストエリアをdisable化
+      $('#message1').attr("disabled", "disabled")
+
+    //hiddenにapp.jsから戻ってきたファイルパスを格納
+      $('#realUpfile').val(seikei_thr[0]);
+
+    }, 'html');
+  });
+
+
+  $('#message1').change(function() {
+    //添付とコメントを同時に投稿できぬようテキストエリアをdisable化を解除
+    $('#message1').removeAttr('disabled');
+    if(Upload_Cancel == 1){
+      $('input#uploadings_input').val('');
+      Upload_Cancel = 0;
+    }
+  });
+
+});
+</script>
+<!--//////////////////////////////////////-->
+      </div>
+    </section><!--/section_thread_bottom-->
+  </div><!--/#contents_wrapp_inside-->
+</div><!--/#contents_wrapp-->
+
+
+
+<script type="text/javascript">
+<!--
+$().ready(function(){
+  //HINT
+  var maxHint = 3;
+  var rnd = Math.floor(Math.random()* maxHint);
+  //$('#view_frame').html('<img src="/img/hint'+rnd+'.png" style="margin-left:50px; width:400px;">');
+  $('#view_frame').html('<img src="/img/hint'+rnd+'.png" style="width:400px;">');
+});
+-->
+</script>
+
+<style type="text/css">
+.house_bg { background: url('<%= house_image %>'); }
+</style>
+
+<div class="main-img">
+
+<script type="text/javascript">
+  if(uaiph == 1 || uaand == 1){
+    document.write('<div class="ticket-wrapper" style="width:device-width;">');
+    $('#emoji_wrapp_in a img').click(function(){
+      $('#emoji_wrapp').css('display','none');
+      return false;
+    });
+  }else{
+    document.write('<div class="ticket-wrapper" style="width:969px;">');
+  }
+</script>
+    <div class="left" style="display:none;">
+      <h1 style="font-size:26px;padding:20px;"></h1>
+    </div>
+    <!--div class="right" style="min-height:60px;">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-related="syaberihouse">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div-->
+
+      <div class="header-icon" id="users_view"></div>
+  </div>
+
+<!-- OLD STYLE -->
+
+<div id="content-wrapper">
+
+<div class="container"><!-- container -->
+<div class="content"><!-- content -->
+
+<div class="content-header"><!-- content-header -->
+  </div><!-- /content-header -->
+  <div style="clear:both;"></div>
+
+  <div class="content-body"><!-- content-body -->
+    <div class="main-chat"><!-- main-chat -->
+      <div class="title"></div>
+      <div class="input"><!-- input -->
+      </div><!-- /input -->
+
+    </div><!-- /main-chat -->
+  </div><!-- /content-body -->
+  <div style="clear:both;"></div>
+
+</div>
+</div>
+
+</div>
+
+<!-- /OLD STYLE -->
+<input type="hidden" id="onetime_token" name="onetime_token" value="<%= onetime_token %>">
+
+
+<script src='/js/jquery-simple-pubsub-0.2.1.js'></script>
+<script src='/js/jquery.filedrop.js?v=1.0'></script>
+<script src='/js/jquery.autosize.min.js?v=1.0'></script>
+<script src='/js/function.js?v=1.0'></script>
+<script src='/js/house.js?v=1.0'></script>
+<script src='/js/audience.js?v=1.0'></script>
+<script src='/js/chat.js?v=1.0'></script>
+<script src='/js/timer.js?v=1.0'></script>
+<script src='/js/player.js?v=1.0'></script>
+<script src='/js/user.js?v=1.0'></script>
+<script src='/js/users.js?v=1.0'></script>
+<script src='/js/filedrop-script.js?v=1.0'></script>
+<script src='/js/jquery.timeago.js?v=1.0'></script>
+<script src='//www.google.com/jsapi'></script>
+<script type="text/javascript">
+<!--
+
+  google.load("swfobject", "2.1");
+
+  $(document).ready(function() {
+  $('#main').addClass('house_bg');
+    $('#message1').autosize();
+
+  // participant script
+  //var write_data ='';
+  //write_data += makeParticipantParts(<%= house_id %>);
+  //$('#dec-supporters-<%= house_id %>').append(write_data);
+
+    // オーナーだったらsendmail 有効
+    if (<%= is_owner %>) {
+      $('#owner_proc_area').show();
+      if (<%= is_mailsend %>) {
+        $('#event_all_mail').show();
+      } else {
+        $('#event_all_mail').hide();
+      }
+    } else {
+      $('#owner_proc_area').empty();
+    }
+
+    if (<%= house_status %> === 1) {
+      $('#owner_proc_area').empty();
+      //$('#owner_proc_area').html('<a href="/suc/<%= house_id %>">このイベントは終了しています</a>');
+      //$('#message1').attr("disabled", "disabled").attr('value','このイベントは終了しています');
+      //$('#submit_1').attr("disabled", "disabled");
+  $('#thread_comment_box').fadeOut('slow');
+    }
+
+
+/*
+    // サポーターだったらチャット有効
+    if (<%= is_supporter %> || <%= is_owner %>) {
+      // 特に何も無し
+    } else {
+      // chat 関連のエリアを無効
+    $('#dropbox').empty().text('サポーターだけが投稿出来ます');
+      $('#message1').attr("disabled", "disabled");
+      $('#submit_1').attr("disabled", "disabled");
+    }
+*/
+
+  });
+
+
+  function onHouseReady() {
+    // Ensure the DOM has been fully loaded.
+    $( function () {
+
+      console.log('user joining house.');
+
+    // ログインしてなかったらチャット非表示
+    if (<%= is_auth_login %>) {
+    } else {
+      $('#thread_comment_box').hide();
+    }
+
+      audience.init({});
+      //timer.init();
+
+      users.init({
+
+      });
+      chat.init({
+        user_id: '<%= user_id %>',
+        userName: '<%= user_name %>',
+        user_image: '<%= user_image %>'
+      });
+      house.init({
+        // server 側のres.render() から値が渡されてくる
+        // server 側でチェック済み
+        url_id: '<%= url_id %>',
+        house_id: '<%= house_id %>',
+        house_image: '<%= house_image %>',
+        user_id: '<%= user_id %>',
+        user_image: '<%= user_image %>'
+      });
+
+      console.log( 'house ready: true' );
+    });
+  }
+
+
+  // chat
+  onHouseReady();
+  // youtube
+  function onYouTubePlayerReady(playerId) {
+    player.init({
+    });
+  }
+
+
+  // 終了対応
+  $('#event_end_proc').click(function () {
+    if (window.confirm('本当にこのチャット部屋を終了させて、まとめログを作りますか？')) {
+
+    } else {
+      return false;
+    }
+
+    var onetime_token = $('#onetime_token').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '/end-proc',
+      data: {dec_id: <%= house_id %>, owner_id: <%= user_id %>
+        , onetime_token: onetime_token
+      },
+      success: function(data){
+        if (data.flg_update) {
+          alert('成功しました。まとめログが作られました。');
+          location.href = "/suc/<%= house_id %>";
+          return;
+        }
+      },
+      error: function(data){
+        // error
+        alert('エラーが発生しました');
+        return;
+      }
+    });
+
+
+    return false;
+  });
+
+  // メール一斉送信
+  $('#event_all_mail').click(function () {
+    if (window.confirm('本当にメール送信しますか？')) {
+
+    } else {
+      return false;
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/sendmail',
+      data: {dec_id: <%= house_id %>, owner_id: <%= user_id %>},
+      success: function(data){
+        $('#event_all_mail').hide();
+        if (data.flg_sendmail) {
+          alert('送信成功しました');
+          return;
+        }
+      },
+      error: function(data){
+        $('#event_all_mail').hide();
+        // error
+        alert('エラーが発生しました');
+        return;
+      }
+    });
+
+    return false;
+  });
+
+var ashina;
+  // コメント削除
+  $('img[name="delete_cmt"]').live('click', function() {
+    if (window.confirm('本当に削除しますか？')) {
+  <!---------------------(；´∀｀)-->
+  height_from_contentbox = contentbox_elm.offset().top - $(window).height() + 120;
+  <!---------------------(；´∀｀)-->
+    } else {
+      return false;
+    }
+
+    var onetime_token = $('#onetime_token').val();
+
+    var obj = $(this);
+    var comment_id  = obj.attr('id');
+    comment_id = parseInt(comment_id.match(/[0-9]+/));
+
+    var loader_img = $('<img src="/img/loader-mini.gif">');
+    obj.html(loader_img);
+
+    $.ajax({
+      type: 'POST',
+      url: '/delete-comment',
+      data: {comment_id: comment_id, onetime_token: onetime_token},
+      success: function(data){
+        if (data.flg_delete_comment === 'ok') {
+          // 削除した
+          $('#chat-content-'+comment_id).animate({height:'hide', opacity:'hide'}, "slow",
+            function() {$('#chat-content-'+comment_id).remove(); CommentBox_func($('#lines1 article:last-child').attr('id')); }
+          );
+        }
+      },
+      error: function(data){
+        // error
+        obj.hide();
+        alert('エラーが発生しました');
+        return;
+      }
+    });
+
+    return false;
+  });
+//-->
+</script>
+
+
+
+
+
+
+
+
+<% include footer %>
+</div><!--/#wrapper-->
+
+
+
+
+
+
+<!--alert_box-->
+<div id="alert_box" style="display:none;">
+  <div class="alert_top"></div>
+  <div class="alert_mid">
+    <p class="text20">チャットルームを閉じてブログ化しますか？<br>この操作は戻せません。</p>
+    <a href="#" id="event_end_proc2"><img src="/img/common/yes.jpg"></a><a href="#" class="nyroModalClose"><img src="/img/common/no.jpg"></a>
+  </div>
+  <div class="alert_bott"></div>
+</div>
+
+
+<% if ( is_owner) { %>
+<a href="#alert_box" class="nyroModal" id="sidebutt" rel="sidealert"></a>
+<% } %>
+
+<!--/alert_box-->
+<!--lightbox invite-->
+  <div id="lightboxinvite_wrapp" style="width:698px; background:#ffffff; margin:0px auto; display:none;">
+  <h3 id="makecommunity_invite_h3" class="padt10"><img src="/img/makecommunity_invite_h3.gif" width="98" height="15" alt="友達を招待する"></h3>
+  <div id="makecommunity_invite_tab">
+      <ul id="tab_ul">
+        <li id="tab_1" class="bg_ov top1px" style="display:none;"><img src="/img/makecommunity_invite_fb.png" width="97" height="25" alt=""></li>
+        <li id="tab_2" class="bg_ov top1px" style="display:none;"><img src="/img/makecommunity_invite_tw.png" width="98" height="25" alt=""></li>
+        <li id="tab_3" class="bg_ov top1px" style="display:none;"><img src="/img/makecommunity_invite_mx.png" width="79" height="25" alt=""></li>
+        <li id="tab_4" class="bg_ov top1px" style="display:none;"><img src="/img/makecommunity_invite_ml.png" width="41" height="25" alt=""></li>
+      </ul>
+        <div id="scrollbar1">
+          <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+          <div class="viewport">
+             <div class="overview">
+
+            <ul id="tab_1_area" class="tab_wrapp none"></ul>
+
+            <ul id="tab_2_area" class="tab_wrapp none"></ul>
+
+            <ul id="tab_3_area" class="tab_wrapp none"></ul>
+            <form action="" target="mixi-send-friend" method="post" id="mixi-send-form" name="mixi-send-form" style="display:none">
+              <input type="hidden" name="title" id="mixi-send-title" value="">
+              <input type="hidden" name="body" id="mixi-send-body" value="">
+              <input type="hidden" name="recipients" id="mixi-send-recipients" value="">
+              <input type="hidden" name="access_token" id="mixi-access_token" value="">
+              <input type="hidden" name="refresh_token" id="mixi-refresh_token" value="">
+              <input type="hidden" name="user_id" id="mixi-user_id" value="">
+              <input type="hidden" name="mixi_code" id="mixi-code" value="">
+            </form>
+            <iframe src="" id="mixi-send-friend" name="mixi-send-friend" style="display:none;"></iframe>
+
+            <ul id="tab_4_area" class="tab_wrapp none">
+              <li>
+                <div class="invite_li_input"><input type="checkbox" name="" id="" value="" class="invite_table_td_tumnb_checkbox"></div>
+                <div class="invite_li_tumnb"><img src="/img/top_thumb_s.jpg" width="40" height="40"></div>
+                <div class="invite_li_name">4飯島　おさむ</div>
+              </li>
+            </ul>
+            </div><!--/overview-->
+          </div><!--/viewport-->
+          <div id="end_disp" style="display:none; overflow:hidden; color:#333333; height:347px; "class="txtc text20">
+            <p style="font-weight:bold; padding-top:200px;">招待完了</p>
+          </div><!--end_disp-->
+        </div><!--/scrollbar1-->
+  </div><!--/makecommunity_invite_tab-->
+  <!--div class="txtc padt20 padb20 bg_w bdlf bdbt bdrt" style="width:698px;"><input type="image" onclick="sendMessage()" src="/img/makecommunity_invite_submit.png" width="396" height="73" alt="送信"></div-->
+  <div class="padt20 bg_w bdlf bdbt bdrt txtc" style="width:698px; height:114px;"><input type="image" id="inv_submit" class="mag0a" onclick="sendMessage()" src="/img/makecommunity_invite_submit.png" width="396" height="73" alt="送信"></div>
+</div>
+<!--/lightbox invite-->
+<script type="text/javascript">
+$(function() {
+  $('.nyroModal').nyroModal();
+});
+</script>
+<script>
+if(uaiph == 1 || uaand == 1){
+  document.write('<scr'+'ipt src="/js/scrol_fixed_d.js" charset="UTF-8"></scr'+'ipt>');
+}else{
+  document.write('<sc'+'ript src="/js/scrol_fixed.js" charset="UTF-8"></sc'+'ript>');
+}
+</script>
+
+<script type="text/javascript">
+$(function(){
+  if(navigator.userAgent.indexOf('Firefox')>-1){    // if Firefox
+    $("#uploadings_input").attr('size','3');
+  }
+});
+
+
+// 終了対応
+  $('#event_end_proc2').click(function () {
+
+    var onetime_token = $('#onetime_token').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '/end-proc',
+      data: {dec_id: <%= house_id %>, owner_id: <%= user_id %>
+        , onetime_token: onetime_token
+      },
+      success: function(data){
+        if (data.flg_update) {
+          //alert('成功しました。まとめログが作られました。');
+      var socket = io.connect('/houses');
+      socket.emit( 'blog info', <%= house_id %>);
+          location.href = "/suc/<%= house_id %>";
+          return;
+        }
+      },
+      error: function(data){
+        // error
+        alert('エラーが発生しました');
+        return;
+      }
+    });
+
+    return false;
+  });
+
+</script>
+
+
+
+
+
+<% include footer-script %>
+
+</body>
+</html>

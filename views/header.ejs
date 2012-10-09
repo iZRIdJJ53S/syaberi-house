@@ -61,16 +61,6 @@
         </div><!--/mypage_notification_wrapp-->
 
       </div>
-<script>
-if((ReadCookie("name") != "") && (ReadCookie("thumb") != "")){
-  //  alert("ok");
-  document.getElementById("header_mypage_thumb_img").src = ReadCookie("thumb");
-  document.getElementById("header_mypage_name_h2").innerHTML = ReadCookie("name");
-}
-
-$('#fukidashi').css('display', 'block');
-
-</script>
     <% }else{ %>
 
       <div id="header_register">
@@ -83,104 +73,8 @@ $('#fukidashi').css('display', 'block');
 
       </div>
 
-<script>
-$('#fukidashi').css('display', 'none');
-if (typeof WebSocket == 'undefined' && typeof MozWebSocket == 'undefined') {
-  $('#header_register').html('');
-}
-</script>
-
     <% } %>
 
     <div id="fb-root"></div>
   </div>
-
-
-
-
-<!-- facebook oauth -->
-<script>
-
-  $().ready(function(){
-
-  // お知らせの中身を作成する
-  $.ajax({
-    type: 'GET',
-    url: '/get-informations',
-    data:{limit:10},
-    success: function(data)
-    {
-    console.log( data.info_coount );
-      $("#fukidashi").text(data.info_coount);
-      var a_tag = '<div id="oshirase_top"></div><div id="oshirase_midl">';
-      for (var ii = 0; ii < data.info_coount; ii++)
-      {
-        a_tag += '<div class="fukidashi_nortification_txt"><a href="' + data.info_list[ii].url + '">' + data.info_list[ii].comment + '</a></div>';
-      }
-      a_tag += '</div>';
-      $("#fukidashi_notification_wrapp").text("");
-      $("#fukidashi_notification_wrapp").append(a_tag);
-    },
-    error: function(data)
-    {
-    console.log( "bbbbb" );
-      $("#fukidashi").text("0");
-    }
-  });
-  });
-
-window.fbAsyncInit = function() {
-
-FB.init({ appId: fb_appId,
-  status: true,
-  cookie: true,
-  xfbml: true,
-  oauth: true
-});
-
-  function updateButton(response) {
-
-    var loginButton_facebook = document.getElementById('login_button_facebook');
-    var loginButton_facebook2 = document.getElementById('login_button_facebook2');
-    //しゃべりハウスのfacebookログイン
-    if ((response.authResponse) && (syaberi_login_flag == true)){
-      //alert("ログイン済/"+syaberi_login_flag);
-    }else{
-      //alert("ログイン前/"+syaberi_login_flag);
-      loginButton_facebook.onclick = function() { onClickInner(); };
-      loginButton_facebook2.onclick = function() { onClickInner(); };
-    }
-  }
-
-  function onClickInner(){
-    FB.login(function(response) {
-      if (response.authResponse) {
-        FB.api('/me', function(response) {
-        userInfo.innerHTML =
-          '<img src="https://graph.facebook.com/'
-          + response.id + '/picture" style="margin-right:5px" />'
-          + response.name;
-      });
-      } else {
-        //user cancelled login or did not grant authorization
-      }
-    }, {scope:'email,publish_stream,manage_pages,read_friendlists,friends_activities',redirect_uri: location.protocol+"//"+ location.host +"/oauth/facebook"});
-  }
-
-  FB.getLoginStatus(updateButton);
-  FB.Event.subscribe('auth.statusChange', updateButton);
-};
-
-(function() {
-  var e = document.createElement('script'); e.async = true;
-  e.src = document.location.protocol + '//connect.facebook.net/ja_JP/all.js';
-  document.getElementById('fb-root').appendChild(e);
-}());
-
-</script>
-<!-- /facebook oauth -->
-
-
-
-
 </header>

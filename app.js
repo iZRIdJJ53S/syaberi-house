@@ -1,13 +1,15 @@
 var express = require('express');
-var http = require('http');
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 var path = require('path');
 
 var config = require('config');
 var topController = require('./lib/controllers/top');
 var chatRoomController = require('./lib/controllers/chatRoom');
 var chatController = require('./lib/controllers/chat');
+var socketIoController = require('./lib/controllers/socketIo');
 
-var app = express();
 
 app.configure(function() {
   app.set('port', config.server.port);
@@ -40,14 +42,15 @@ app.put ('/chatrooms/:id',      chatRoomController.update);
 app.del ('/chatrooms/:id',      chatRoomController.destroy);
 
 app.post('/chats',          chatController.create);
-app.get ('/chats/:id',      chatController.show);
+//app.get ('/chats/:id',      chatController.show);
 app.del ('/chats/:id',      chatController.destroy);
 
-/************ Routing ************/
+/************ /Routing ************/
 
-http.createServer(app).listen(app.get('port'), function() {
-  console.log("listening on port " + app.get('port'));
+server.listen(app.get('port'), function() {
+  console.log('listening on port ' + app.get('port'));
 });
+io.sockets.on('connection', socketIoController.onConnection);
 
 
 process.on('uncaughtException', function(err) {

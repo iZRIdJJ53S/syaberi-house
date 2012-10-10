@@ -6,8 +6,6 @@
 <meta name="description" content="友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！">
 <meta name="keywords" content="シャベリハウス,チャット,趣味,興味,twitter,facebook,mixi">
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" charset="UTF-8"></script>
-<script src="/js/common.js" type="text/javascript" charset="UTF-8"></script>
 <link rel="shortcut icon" href="http://syaberi-house.com/images/favicon.ico" />
 <!-- analytics -->
     <script type="text/javascript">
@@ -33,7 +31,7 @@ if (typeof WebSocket == 'undefined' && typeof MozWebSocket == 'undefined') {
 
 <div id="wrapper">
 
-<%- partial('header') %>
+<% include 'header' %>
 
 <section>
  <div class="main" id="main">
@@ -43,7 +41,6 @@ if (typeof WebSocket == 'undefined' && typeof MozWebSocket == 'undefined') {
  </div>
 </section>
 
-<%- partial('footer') %>
-<%- partial('footer-script') %>
+<% include 'footer' %>
 </body>
 </html>

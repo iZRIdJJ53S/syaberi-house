@@ -13,31 +13,7 @@
 <link rel="stylesheet" href="/css/nyroModal.css">
 <script src="/js/lib/jquery-1.8.2.js" charset="UTF-8"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io.connect('http://127.0.0.1:3000');
-
-  socket.on('connect', function() {
-      console.log('client: connect');
-  });
-
-  socket.on('message', function(msg) {
-      appendMessage(msg.value);
-  });
-
-  socket.on('disconnect', function(client) {
-      console.log(client.sessionId + ' disconnected.');
-  });
-
-  function sendMessage() {
-    socket.emit('message', {value: 'hoge'});
-  }
-  function appendMessage(str) {
-    alert(str);
-  }
-  $(function() {
-      sendMessage();
-  });
-</script>
+<script src="/js/chatroom.js" charset="UTF-8"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -83,7 +59,7 @@
     </section><!--/section_thread_left-->
 
     <section id="section_thread_right">
-      <div id="lines1" class="chat"><!-- chat --></div><!-- /chat -->
+      <div id="lines1" class="chat"></div>
     </section><!--/section_thread_right-->
 
 <!--投稿コメントエリア-->

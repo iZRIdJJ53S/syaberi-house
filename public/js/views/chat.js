@@ -48,7 +48,7 @@
         commendId: 1000,
         userImage: data.user_image,
         userName: data.userName,
-        time: syaberi.util.changeEasyTimeStamp(data.time),
+        time: data.time,
         message: data.message
       });
 

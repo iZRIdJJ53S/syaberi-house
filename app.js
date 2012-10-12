@@ -3,11 +3,14 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var path = require('path');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var config = require('config');
 var topController = require('./lib/controllers/top');
 var chatRoomController = require('./lib/controllers/chatRoom');
 var chatController = require('./lib/controllers/chat');
+var authController = require('./lib/controllers/auth');
 var socketIoController = require('./lib/controllers/socketIo');
 
 
@@ -21,6 +24,8 @@ app.configure(function() {
   app.use(express.methodOverride());
   app.use(express.cookieParser(config.server.cookieSecret));
   app.use(express.session());
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -29,6 +34,16 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
+passport.use(new LocalStrategy(authController.authenticate));
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  // User.findOne(id, function (err, user) {
+    // done(err, user);
+  // });
+});
 
 /************ Routing ************/
 
@@ -44,6 +59,16 @@ app.del ('/chatrooms/:id',      chatRoomController.destroy);
 app.post('/chats',          chatController.create);
 //app.get ('/chats/:id',      chatController.show);
 app.del ('/chats/:id',      chatController.destroy);
+
+app.get ('/register', authController.new);
+app.post('/register', authController.create);
+app.post('/login',    passport.authenticate('local', {
+                        successRedirect: '/',
+                        failureRedirect: '/login',
+                        failureFlash: true
+                      }));
+app.get ('/logout',   authController.logout);
+
 
 /************ /Routing ************/
 

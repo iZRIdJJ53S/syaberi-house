@@ -14,17 +14,14 @@
       var message = $.trim($('#message1').val());
 
       if (message && message !== '') {
-        var time = syaberi.util.getCurrentTime();
-
-        // this.chats.create({
-          // 'message': message
-        // });
+        var chatroomId = $('html').data('chatroom');
 
         syaberi.socket.emit('message', {
-          'userId': 10,
-          'userName': '太郎',
-          'userImage': 'dummy',
-          'message': message
+          chatroomId: chatroomId,
+          userId: 10,
+          userName: '太郎',
+          userImage: 'dummy',
+          message: message
         });
 
         this.clearInputUserMessage();
@@ -45,7 +42,7 @@
     },
     appendMessage: function(data) {
       var chatTemplate = syaberi.templates.chat.chatL({
-        commendId: 1000,
+        commendId: data.commentId,
         userImage: data.user_image,
         userName: data.userName,
         time: data.time,

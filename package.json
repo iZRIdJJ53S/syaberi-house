@@ -11,6 +11,8 @@
     "ejs": "0.8.3",
     "config": "0.4.17",
     "socket.io": "0.9.10",
-    "mysql": "0.9.6"
+    "mysql": "0.9.6",
+    "passport": "0.1.12",
+    "passport-local": "0.1.6"
   }
 }

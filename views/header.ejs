@@ -39,7 +39,7 @@
 
 
 
-    <%if( is_auth_login){ %>
+    <%if (isAuth) { %>
 
 
       <div id="header_right">
@@ -57,7 +57,7 @@
           <!--a href="/my-setting" class="mypage_nortification_txt"><div>制作した部屋の設定</div></a-->
           <a href="/create-dec" class="mypage_nortification_txt"><div>コミュニティを作る</div></a>
           <a href="/search" class="mypage_nortification_txt"><div>コミュニティを探す</div></a>
-          <a href="javascript:logout( '/logout' );" class="mypage_nortification_txt"><div>ログアウト</div></a>
+          <a href="/logout" class="mypage_nortification_txt"><div>ログアウト</div></a>
         </div><!--/mypage_notification_wrapp-->
 
       </div>
@@ -69,8 +69,10 @@
           <li><a href="/auth/twitter" id="login_button_twetter"><img src="/img/header_login_twetter.gif" width="80" height="26" alt="twetterログイン"></a></li>
           <li><a href="/auth/mixi" id="login_button_mixi"><img src="/img/header_login_mixi.gif" width="80" height="26" alt="mixiログイン"></a></li>
         </ul>
-
-
+        <ul>
+          <li><a href="/register">ユーザ登録</a></li>
+          <li><a href="/login">ログイン</a></li>
+        </ul>
       </div>
 
     <% } %>

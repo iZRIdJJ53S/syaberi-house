@@ -1,6 +1,7 @@
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
-  syaberi.socket = io.connect($('html').data('host'));
+  var host = $('html').data('host');
+  syaberi.socket = io.connect(host);
 
   $(function() {
     var chatView = new syaberi.ChatView;

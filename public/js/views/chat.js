@@ -16,14 +16,15 @@
       if (message && message !== '') {
         var time = syaberi.util.getCurrentTime();
 
+        // this.chats.create({
+          // 'message': message
+        // });
+
         syaberi.socket.emit('message', {
-          'user_id': 10,
+          'userId': 10,
           'userName': '太郎',
-          'user_image': 'dummy',
-          'message': message,
-          'iframeURL': '',
-          'image_src': '',
-          'time': time
+          'userImage': 'dummy',
+          'message': message
         });
 
         this.clearInputUserMessage();
@@ -38,22 +39,20 @@
       else {
         if (event.keyCode == 13) {
           this.submit(event);
+          return false;
         }
       }
     },
     appendMessage: function(data) {
-      var comment_id = 1000; //dummy
-      var JointOne = '<article class="chat-content" id="chat-content-';
-      var JointTwo_l = '<div class="thread_article_thumb fltl"><img src="';
-      var JointTwo_r = '<div class="thread_article_thumb fltr"><img src="';
-      var user_image = data.user_image;
-      var userName = data.userName;
-      var time = syaberi.util.changeEasyTimeStamp(data.time);
-      var message = data.message;
+      var chatTemplate = syaberi.templates.chat.chatL({
+        commendId: 1000,
+        userImage: data.user_image,
+        userName: data.userName,
+        time: syaberi.util.changeEasyTimeStamp(data.time),
+        message: data.message
+      });
 
-      var chatContent = $(JointOne + comment_id+'">').prepend(JointTwo_l + user_image+'" width="40" height="40"></div><div class="thread_article_box_arrowl"></div><div class="thread_article_box magl22 fltl"><div class="thread_article_box_wrapp"><h4>'+userName+'</h4><div class="thread_article_date">'+time+'</div><div class="thread_article_txt">'+message+'</div></div></div>');
-
-      $('#lines1').append(chatContent);
+      $('#lines1').append(chatTemplate);
     },
     render: function() {
     },

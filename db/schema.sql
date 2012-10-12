@@ -73,7 +73,7 @@ CREATE TABLE `chats` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `chatroom_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `body` text NOT NULL,
+  `message` text NOT NULL,
   `image` varchar(128),
   `ext_image_path` varchar(255) COMMENT '外部イメージパス',
   `ext_image_domain` varchar(255) COMMENT '外部イメージドメイン',

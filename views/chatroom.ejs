@@ -19,6 +19,7 @@
 <script src="/js/lib/handlebars-1.0.rc.1.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/util.js"></script>
+<script src="/js/templates/chat.js"></script>
 <script src="/js/models/chat.js"></script>
 <script src="/js/views/chat.js"></script>
 <script src="/js/chatroomApp.js"></script>
@@ -69,7 +70,12 @@
     </section><!--/section_thread_left-->
 
     <section id="section_thread_right">
-      <div id="lines1" class="chat"></div>
+      <div id="lines1" class="chat">
+        <% chats.forEach(function(chat) { %>
+          <article class="chat-content" id="chat-content-{{commendId%>"><div class="thread_article_thumb fltl"><img src="<%= chat.userImage %>" width="40" height="40"></div><div class="thread_article_box_arrowl"></div><div class="thread_article_box magl22 fltl"><div class="thread_article_box_wrapp"><h4><%= chat.userName %></h4><div class="thread_article_date"><%= chat.time %></div><div class="thread_article_txt"><%= chat.message %></div></div></div></article>
+        <% }) %>
+
+      </div>
     </section><!--/section_thread_right-->
 
 <!--投稿コメントエリア-->

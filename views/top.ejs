@@ -5,43 +5,12 @@
 <meta charset="UTF-8">
 <meta name="description" content="友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！">
 <meta name="keywords" content="シャベリハウス,チャット,趣味,興味,twitter,facebook,mixi">
-<script src="/js/globalcommon.js" charset="UTF-8"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" charset="UTF-8"></script>
-<script src="/js/common.js" type="text/javascript" charset="UTF-8"></script>
-<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
-<link rel="shortcut icon" href="http://syaberi-house.com/images/favicon.ico" />
-<!-- analytics -->
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-29477382-1']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
 <link rel="stylesheet" href="/css/html5reset-1.6.1.css" />
-<script type="text/javascript">
-var uaiph = 0;
-var uaand = 0;
-var uaetc = 0;
-  if(navigator.userAgent.indexOf('iPhone') != -1){
-    document.write('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />');
-    document.write('<link rel="stylesheet" href="/css/common_smapho.css" />');
-    document.write('<link rel="stylesheet" type="text/css" href="/css/style_smapho.css">');
-    uaiph = 1;
-  }else if(navigator.userAgent.indexOf('Android') != -1){
-    document.write('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />');
-    document.write('<link rel="stylesheet" href="/css/common_smapho.css" />');
-    document.write('<link rel="stylesheet" type="text/css" href="/css/style_smapho.css">');
-    uaand = 1;
-  }else{
-    document.write('<link rel="stylesheet" type="text/css" href="/css/style.css">');
-    document.write('<link rel="stylesheet" href="/css/common.css" />');
-    uaetc = 1;
-  }
-</script>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" href="/css/common.css" />
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
+<script src="/js/lib/jquery-1.8.2.js"></script>
+<script src="/js/menu.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -142,14 +111,7 @@ var uaetc = 0;
 
     <section id="roadmore">
       <div id="view-more-loader-search" style="text-align:center;display:none; height:51px;"><img src="/img/loader.gif" /></div>
-
-      <script>
-      if(uaiph == 1 || uaand == 1){
-        document.write('<div id="view-more-events-search" class="magb15 txtc" ><a href="javascript:void(0);"><img src="/images/common/show_morecontents_s.gif"></a></div>');
-      }else{
-        document.write('<div id="view-more-events-search" class="magb15" ><a href="javascript:void(0);"><img src="/images/common/show_morecontents_b2.gif"></a></div>');
-      }
-      </script>
+        <div id="view-more-events-search" class="magb15" ><a href="javascript:void(0);"><img src="/img/common/show_morecontents_b2.gif"></a></div>
 
       <div id="view-more-no-entry" style="text-align:center;display:none;">入力した用語を含むコミュニティーは見つかりませんでした。<br></div>
     </section>

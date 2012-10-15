@@ -16,48 +16,31 @@
 <script src="/js/lib/backbone-validation.js"></script>
 <script src="/js/menu.js"></script>
 <script src="/js/util.js"></script>
-<script src="/js/models/user.js"></script>
-<script src="/js/views/register.js"></script>
-<script src="/js/registerApp.js"></script>
+<script src="/js/models/login.js"></script>
+<script src="/js/views/login.js"></script>
+<script src="/js/loginApp.js"></script>
 </head>
 <body>
 <div id="wrapper">
 
 <% include header %>
 
-<form id="full-form-tag" name="full-form-tag" method="post" enctype="multipart/form-data">
+<form id="full-form-tag" name="full-form-tag" method="post" action="/login">
 <div id="contents_wrapp">
   <div id="contents_wrapp_inside">
     <section id="make_community">
-      <h3 id="makecommunity_h3">ユーザ登録</h3>
-      <form action="" method="">
+      <h3 id="makecommunity_h3">ログイン</h3>
       <table id="makecommunity_table">
+        <tr><td colspan="2"><span class="error"><%= error %></span></td></tr>
         <tr>
-          <th>ニックネーム<br><span style="color:#FF1881">※必須</span></th>
-          <td><div class="input_makecommunity_name_area"><input type="text" name="userName" id="userName" value=""></div><span id="error_userName" class="error"></span></td>
-        </tr>
-        <tr>
-          <th>メールアドレス<br><span style="color:#FF1881">※必須</span></th>
+          <th>メールアドレス</th>
           <td><div class="input_makecommunity_name_area"><input type="text" name="email" id="email" value=""></div><span id="error_email" class="error"></span></td>
         </tr>
         <tr>
-          <th>パスワード<br><span style="color:#FF1881">※必須</span></th>
+          <th>パスワード</span></th>
           <td><div class="input_makecommunity_name_area"><input type="password" name="password" id="password" value=""></div><span id="error_password" class="error"></span></td>
         </tr>
       </table>
-      <div id="makecommunity_detail">
-
-      <div id="terms" style="margin:30px;">
-
-      <div style="overflow:auto;height:150px;border:1px #ccc solid; padding:10px; background-color:#fff; text-align:left;">
-      <% include terms %>
-      </div>
-      <div style="text-align:center;padding-top:20px;">
-            <input type="checkbox" name="terms_check" id="terms_check" style="line-height:18px;height:24px;font-size:18px;"><span style="margin-left:10px;"><label for="terms_check">本サービスの利用規約に同意します(必須)</label></span>
-            <br/><span class="error_terms_check_requ"></span>
-      </div>
-      </div>
-      </div>
     </section>
       <div class="txtc magt20 magb200">
         <input type="image" src="/img/makecommunity_submit.png" width="396" height="73" alt="送信" id="submit_1">

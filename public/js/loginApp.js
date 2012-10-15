@@ -2,8 +2,8 @@
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
   $(function() {
-    var registerView = new syaberi.RegisterView;
-    registerView.render();
+    var loginView = new syaberi.LoginView;
+    loginView.render();
     Backbone.emulateHTTP = true;
   });
 

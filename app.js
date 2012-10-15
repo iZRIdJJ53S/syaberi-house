@@ -5,12 +5,13 @@ var io = require('socket.io').listen(server);
 var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 
 var config = require('config');
 var topController = require('./lib/controllers/top');
 var chatRoomController = require('./lib/controllers/chatRoom');
 var chatController = require('./lib/controllers/chat');
-var authController = require('./lib/controllers/auth');
+var userController = require('./lib/controllers/user');
 var socketIoController = require('./lib/controllers/socketIo');
 
 
@@ -24,6 +25,7 @@ app.configure(function() {
   app.use(express.methodOverride());
   app.use(express.cookieParser(config.server.cookieSecret));
   app.use(express.session());
+  app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);
@@ -34,16 +36,15 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
-passport.use(new LocalStrategy(authController.authenticate));
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
 
-passport.deserializeUser(function(id, done) {
-  // User.findOne(id, function (err, user) {
-    // done(err, user);
-  // });
-});
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password'
+}, userController.authenticate));
+
+passport.serializeUser(userController.serializeUser);
+passport.deserializeUser(userController.deserializeUser);
+
 
 /************ Routing ************/
 
@@ -60,17 +61,20 @@ app.post('/chats',          chatController.create);
 //app.get ('/chats/:id',      chatController.show);
 app.del ('/chats/:id',      chatController.destroy);
 
-app.get ('/register', authController.new);
-app.post('/register', authController.create);
-app.post('/login',    passport.authenticate('local', {
-                        successRedirect: '/',
-                        failureRedirect: '/login',
-                        failureFlash: true
-                      }));
-app.get ('/logout',   authController.logout);
-
+app.get ('/users/new', userController.new);
+app.post('/users',     userController.create);
+app.put ('/users/:id', userController.update);
+app.del ('/users/:id', userController.destroy);
+app.get ('/login',     userController.login);
+app.post('/login',     passport.authenticate('local', {
+                         successRedirect: '/',
+                         failureRedirect: '/login',
+                         failureFlash: true
+                       }));
+app.get ('/logout',    userController.logout);
 
 /************ /Routing ************/
+
 
 server.listen(app.get('port'), function() {
   console.log('listening on port ' + app.get('port'));

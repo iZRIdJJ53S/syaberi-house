@@ -489,3 +489,5 @@ a:hover img{ filter: alpha(opacity=80); opacity: 0.8;}
 /*BACKGROUND*/
 .bg33{ background:#333333; }
 
+/* error message */
+span.error { color: red; }

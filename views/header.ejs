@@ -38,7 +38,6 @@
     </div><!--/header_center-->
 
 
-
     <%if (isAuth) { %>
 
 
@@ -47,7 +46,7 @@
         <table id="header_right_table">
           <tr>
             <td id="header_mypage_thumb"><div><img id="header_mypage_thumb_img" src="" width="40" height="40"></div></td>
-            <td id="header_mypage_name"><h2 id="header_mypage_name_h2"></h2></td>
+            <td id="header_mypage_name"><h2 id="header_mypage_name_h2"><%= userName %></h2></td>
             <td id="header_mypage_pull"><a href="#"><img src="/img/common/pull.png" width="26" height="26" id="mypage_pull"></a></td>
           </tr>
         </table>
@@ -70,7 +69,7 @@
           <li><a href="/auth/mixi" id="login_button_mixi"><img src="/img/header_login_mixi.gif" width="80" height="26" alt="mixiログイン"></a></li>
         </ul>
         <ul>
-          <li><a href="/register">ユーザ登録</a></li>
+          <li><a href="/users/new">ユーザ登録</a></li>
           <li><a href="/login">ログイン</a></li>
         </ul>
       </div>

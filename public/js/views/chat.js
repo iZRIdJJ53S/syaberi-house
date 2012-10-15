@@ -8,18 +8,20 @@
       'keydown #message1': 'keydown'
     },
     initialize: function() {
-      this.chats = new syaberi.Chats;
+      this.collection = new syaberi.Chats;
     },
     submit: function(event) {
       var message = $.trim($('#message1').val());
 
       if (message && message !== '') {
         var chatroomId = $('html').data('chatroom');
+        var userId = $('html').data('userid');
+        var userName = $('html').data('username');
 
         syaberi.socket.emit('message', {
           chatroomId: chatroomId,
-          userId: 10,
-          userName: '太郎',
+          userId: userId,
+          userName: userName,
           userImage: 'dummy',
           message: message
         });

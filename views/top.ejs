@@ -10,7 +10,14 @@
 <link rel="stylesheet" href="/css/common.css" />
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
 <script src="/js/lib/jquery-1.8.2.js"></script>
+<script src="/js/lib/underscore.js"></script>
+<script src="/js/lib/backbone.js"></script>
+<script src="/js/lib/backbone-validation.js"></script>
 <script src="/js/menu.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/models/chat.js"></script>
+<script src="/js/views/top.js"></script>
+<script src="/js/topApp.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -54,68 +61,17 @@
               <% } コメント*/ %>
             </div><!--/joinedthumbs_wrapp-->
           </div>
-
-
-          <script type="text/javascript"><!--
-
-            //タグ表示
-//            var targetStr = "<%= dec_list[i].word_tag %>";
-//            if( targetStr != "null" && targetStr != "" ){
-//              //カンマで分割し配列に格納
-//              var resArray = targetStr.split(",");
-//              for( var n=0 ; n<resArray.length ; n++ ) {
-//                if( resArray[n]!="" ){
-//                  $('#search_dd_tag_<%= dec_list[i].id %>').append('<a  href="/search?search_str='+resArray[n]+'"><div class="search_dd_tag_div"><span>'+resArray[n]+'</span></div></a>');
-//                }
-//              }
-//            }
-
-
-            //参加者表示
-            $().ready(function(){
-              $.ajax({
-                type: "GET",
-                url: "/get-ch-members",
-                data: {id: <%= dec_list[i].id %>, limit: 17},
-                success: function(data){
-
-                  var img_tag = '';
-                  for (var j = 0; j < data.ch_member_data.length; j++){
-
-              // imgタグを作成
-                    img_tag += '<li class="joined_thumbs"><a herf="/"><img src="'+data.ch_member_data[j].image+'" width="40" height="40"></a></li>';
-
-            }
-                  $('#joined_detail_<%= dec_list[i].id %>').text(data.ch_member_data.length);
-                  $('#dec-supporters-<%= dec_list[i].id %>').append(img_tag);
-                },
-                error: function(data){
-                  // error
-                }
-              });
-            });
-
-
-
-            //個数代入
-            next_num= <%=i%> +1;
-          //--></script>
         <% } %>
       <% } %>
-
-
     </section>
-
-
-
 
     <section id="roadmore">
       <div id="view-more-loader-search" style="text-align:center;display:none; height:51px;"><img src="/img/loader.gif" /></div>
         <div id="view-more-events-search" class="magb15" ><a href="javascript:void(0);"><img src="/img/common/show_morecontents_b2.gif"></a></div>
 
       <div id="view-more-no-entry" style="text-align:center;display:none;">入力した用語を含むコミュニティーは見つかりませんでした。<br></div>
+      <a href="/chatrooms/new" id="new_chatroom"><img src="/img/section_makeroome_makechatroom.gif" width="942" height="39" alt="新しいチャットルームをつくる"></a>
     </section>
-
 
 
     <script type="text/javascript"><!--
@@ -124,12 +80,8 @@
       if( search_str=="" ){ $('#view-more-no-entry').show(); }
     --></script>
 
-
-
-
   </div><!--/#contents_wrapp_inside-->
 </div><!--/#contents_wrapp-->
-
 
 
 <script type="text/javascript"><!--
@@ -138,7 +90,6 @@
 $('#view-more-events-search').click(function() {
   insert_contentsSearch(search_str);
 });
-
 
 
 function insert_contentsSearch(search_str){
@@ -252,8 +203,6 @@ function makeEventListPartsSearch(data) {
           }
         });
       });
-
-
 
       next_num2 = parseInt(i)+1;
     }

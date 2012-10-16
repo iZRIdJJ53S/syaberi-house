@@ -9,7 +9,7 @@ var flash = require('connect-flash');
 
 var config = require('config');
 var topController = require('./lib/controllers/top');
-var chatRoomController = require('./lib/controllers/chatRoom');
+var chatroomController = require('./lib/controllers/chatroom');
 var chatController = require('./lib/controllers/chat');
 var userController = require('./lib/controllers/user');
 var socketIoController = require('./lib/controllers/socketIo');
@@ -50,12 +50,12 @@ passport.deserializeUser(userController.deserializeUser);
 
 app.get ('/', topController.index);
 
-app.get ('/chatrooms/new',      chatRoomController.new);
-app.post('/chatrooms',          chatRoomController.create);
-app.get ('/chatrooms/:id',      chatRoomController.show);
-app.get ('/chatrooms/:id/edit', chatRoomController.edit);
-app.put ('/chatrooms/:id',      chatRoomController.update);
-app.del ('/chatrooms/:id',      chatRoomController.destroy);
+app.get ('/chatrooms/new',      chatroomController.new);
+app.post('/chatrooms',          chatroomController.create);
+app.get ('/chatrooms/:id',      chatroomController.show);
+app.get ('/chatrooms/:id/edit', chatroomController.edit);
+app.put ('/chatrooms/:id',      chatroomController.update);
+app.del ('/chatrooms/:id',      chatroomController.destroy);
 
 app.post('/chats',          chatController.create);
 //app.get ('/chats/:id',      chatController.show);

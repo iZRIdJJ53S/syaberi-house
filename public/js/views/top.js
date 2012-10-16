@@ -7,10 +7,10 @@
       'click #new_chatroom':   'submit'
     },
     initialize: function() {
-      this.model = new syaberi.User;
+      this.model = new syaberi.Chat;
     },
     submit: function(event) {
-      event.preventDefault();
+      //event.preventDefault();
     },
     render: function() {
     }

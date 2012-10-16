@@ -11,7 +11,7 @@
     Backbone.emulateHTTP = true;
 
     syaberi.socket.on('connect', function() {
-        console.log('client: connect');
+        //console.log('client: connect');
     });
 
     syaberi.socket.on('message', function(data) {
@@ -19,7 +19,7 @@
     });
 
     syaberi.socket.on('disconnect', function(client) {
-        console.log(client.sessionId + ' disconnected.');
+        //console.log(client.sessionId + ' disconnected.');
     });
   });
 

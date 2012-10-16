@@ -12,16 +12,19 @@
     },
     submit: function(event) {
       event.preventDefault();
+      var categoryId = $.trim($('#categoryId').val());
       var title = $.trim($('#title').val());
       var description = $.trim($('#description').val());
 
       this.model.set({
+        categoryId: categoryId,
         title: title,
         description: description
       });
 
       if (this.model.isValid()) {
         this.model.save({
+          categoryId: categoryId,
           title: title,
           description: description
         }, {

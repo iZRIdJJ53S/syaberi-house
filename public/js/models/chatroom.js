@@ -5,8 +5,12 @@
     id:          null,
     title:       null,
     description: null,
+    categoryId:  null,
     userId:      null,
     validation: {
+      categoryId: [
+        { required: true, msg: 'カテゴリを選択してください' }
+      ],
       title: [
         { required: true, msg: 'チャットルーム名を入力してください' },
         { rangeLength: [3, 20], msg: 'チャットルーム名は3文字以上20文字以下で入力してください' }

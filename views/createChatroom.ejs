@@ -33,6 +33,17 @@
       <form action="" method="">
       <table id="makecommunity_table">
         <tr>
+          <th>カテゴリ<br><span style="color:#FF1881">※必須</span></th>
+          <td>
+          <select id="categoryId" name="categoryId">
+            <option value="">選択してください</option>
+            <% categories.forEach(function(category) { %>
+            <option value="<%= category.id %>"><%= category.title %></option>
+            <% }) %>
+          </select>
+          <br><span id="error_categoryId" class="error"></span></td>
+        </tr>
+        <tr>
           <th>チャットルーム名<br><span style="color:#FF1881">※必須</span></th>
           <td><div class="input_makecommunity_name_area"><input type="text" name="title" id="title" value=""></div><span id="error_title" class="error"></span></td>
         </tr>

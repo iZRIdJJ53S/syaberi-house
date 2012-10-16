@@ -2,8 +2,8 @@
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
   var host = $('html').data('host');
   var chatroomId = $('html').data('chatroom');
-  //syaberi.socket = io.connect(host+'/chatroom/'+chatroomId);
-  syaberi.socket = io.connect(host);
+  var url = host+'/chatrooms/'+chatroomId+'?id='+chatroomId;
+  syaberi.socket = io.connect(url);
 
   $(function() {
     var chatView = new syaberi.ChatView;

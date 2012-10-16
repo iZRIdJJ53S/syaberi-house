@@ -79,7 +79,18 @@ app.get ('/logout',    userController.logout);
 server.listen(app.get('port'), function() {
   console.log('listening on port ' + app.get('port'));
 });
-io.sockets.on('connection', socketIoController.onConnection);
+
+
+io.configure(function() {
+  io.set('authorization', function(handshake, callback) {
+    var chatroomId = handshake.query.id;
+    if (!io.namespaces.hasOwnProperty('/chatrooms/'+chatroomId)) {
+      var chatroom = io.of('/chatrooms/'+chatroomId);
+      chatroom.on('connection', socketIoController.onConnection);
+    }
+    callback(null, true);
+  });
+});
 
 
 process.on('uncaughtException', function(err) {

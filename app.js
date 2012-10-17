@@ -14,7 +14,6 @@ var chatController = require('./lib/controllers/chat');
 var userController = require('./lib/controllers/user');
 var socketIoController = require('./lib/controllers/socketIo');
 
-
 app.configure(function() {
   app.set('port', config.server.port);
   app.set('views', __dirname + '/views');
@@ -35,7 +34,6 @@ app.configure(function() {
 app.configure('development', function() {
   app.use(express.errorHandler());
 });
-
 
 passport.use(new LocalStrategy({
   usernameField: 'email',

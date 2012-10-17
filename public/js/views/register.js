@@ -34,7 +34,7 @@
             password: password
           }, {
             success: function() {
-              location.href = '/';
+              $('#full-form-tag').submit();
             },
             error: function(model, res) {
               alert(res.responseText);

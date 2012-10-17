@@ -9,7 +9,7 @@
     validation: {
       userName: [
         { required: true, msg: 'ニックネームを入力してください' },
-        { rangeLength: [3, 255], msg: 'ニックネームは3文字以上255文字以下で入力してください' }
+        { rangeLength: [1, 255], msg: 'ニックネームは255文字以下で入力してください' }
       ],
       email: [
         { required: true, msg: 'メールアドレスを入力してください' },

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
- <html lang="ja" data-host="http://<%= host %>" data-chatroom="<%= chatroomId %>" data-userid="<%= userId %>" data-username="<%= userName %>">
+ <html lang="ja" data-host="http://<%= host %>" data-chatroom="<%= chatroomId %>" data-userid="<%= locals.userId %>" data-username="<%= locals.userName %>">
 <head>
 <title><%= title %>｜シャベリハウス</title>
 <meta charset="UTF-8">
@@ -74,7 +74,7 @@
       <div id="lines1" class="chat">
         <% chats.forEach(function(chat) { %>
           <article class="chat-content" id="chat-content-<%= chat.id %>">
-          <% if (chat.user_id == userId) { %>
+          <% if (chat.user_id == locals.userId) { %>
               <div class="thread_article_thumb fltr"><img src="<%= chat.userImage %>" width="40" height="40"></div>
               <div class="thread_article_box_arrowr"></div>
               <div class="thread_article_box magr22 fltr">

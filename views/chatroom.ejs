@@ -103,39 +103,39 @@
     </section><!--/section_thread_right-->
 
 <!--投稿コメントエリア-->
-    <section id="section_thread_bottom">
-      <div id="thread_comment_box">
-        <h3 id="comment_h3">コメント</h3>
-        <table id="comment_wrapp">
+<% if (isAuth) { %>
+<section id="section_thread_bottom">
+  <div id="thread_comment_box">
+    <h3 id="comment_h3">コメント</h3>
+  <table id="comment_wrapp">
+  <tr>
+  <td colspan="6">
+  <div id="comment_wrapp_inputarea"><textarea type="text" value="" id="message1" style="overflow:hidden; resize:none; word-wrap:normal;" cols="60" wrap="off"></textarea></div>
+  </td>
+  </tr>
+  <tr>
+  <td width="77"><a href="javascript:void(0)" id="emoji_butt"><img src="/img/room_pull.gif" width="67" height="30"></a></td>
+  <!--td width="90"><a href="#"><img src="/img/room_attach.gif" width="67" height="30"></a></td-->
+  <td width="90" style="vertical-align:top;">
+  <div id="uploadings">
+  <input type="file" id="uploadings_input" name="dec_image2" value="">
+  <input type="hidden" id="realUpfile" value="">
+  </div>
+  </td>
+  <td>
+  <label for="submit_1">
+  <input type="image" src="/img/room_toukou.gif" class="fltr" id="submit_1">
+  </label>
+  </div>
+  </td>
+  </tr>
+  </table><div id="scrl_top"><a href="javascript:void(0);" title="ページTOP">▲</a></div>
+  </div>
+</section><!--/section_thread_bottom-->
+<% } %>
 
-          <form id="send-message1">
-<tr>
-<td colspan="6">
-<div id="comment_wrapp_inputarea"><textarea type="text" value="" id="message1" style="overflow:hidden; resize:none; word-wrap:normal;" cols="60" wrap="off"></textarea></div>
-</td>
-</tr>
-<tr>
-<td width="77"><a href="javascript:void(0)" id="emoji_butt"><img src="/img/room_pull.gif" width="67" height="30"></a></td>
-<!--td width="90"><a href="#"><img src="/img/room_attach.gif" width="67" height="30"></a></td-->
-<td width="90" style="vertical-align:top;">
-<div id="uploadings">
-<input type="file" id="uploadings_input" name="dec_image2" value="">
-<input type="hidden" id="realUpfile" value="">
-</div>
-</td>
-<td>
-<label for="submit_1">
-<input type="image" src="/img/room_toukou.gif" class="fltr" id="submit_1">
-</label>
-</div>
-</td>
-</tr>
-</table><div id="scrl_top"><a href="javascript:void(0);" title="ページTOP">▲</a></div>
-      </div>
-    </section><!--/section_thread_bottom-->
-  </div><!--/#contents_wrapp_inside-->
+</div><!--/#contents_wrapp_inside-->
 </div><!--/#contents_wrapp-->
-
 
 
 <div class="main-img">

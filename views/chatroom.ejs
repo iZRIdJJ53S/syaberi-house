@@ -73,7 +73,30 @@
     <section id="section_thread_right">
       <div id="lines1" class="chat">
         <% chats.forEach(function(chat) { %>
-          <article class="chat-content" id="chat-content-<%= chat.id%>"><div class="thread_article_thumb fltl"><img src="<%= chat.userImage %>" width="40" height="40"></div><div class="thread_article_box_arrowl"></div><div class="thread_article_box magl22 fltl"><div class="thread_article_box_wrapp"><h4><%= chat.username %></h4><div class="thread_article_date"><%= chat.time %></div><div class="thread_article_txt"><%= chat.message %></div></div></div></article>
+          <article class="chat-content" id="chat-content-<%= chat.id %>">
+          <% if (chat.user_id == userId) { %>
+              <div class="thread_article_thumb fltr"><img src="<%= chat.userImage %>" width="40" height="40"></div>
+              <div class="thread_article_box_arrowr"></div>
+              <div class="thread_article_box magr22 fltr">
+                <div class="thread_article_box_wrapp">
+                  <img src="/img/article_close.png" width="18" height="18" alt="閉じる" class="thread_article_date" name="delete_cmt" id="del_cmt_<%= chat.id %>">
+                  <h4><%= chat.username %></h4>
+                  <div class="thread_article_date"><%= chat.time %></div>
+                  <div class="thread_article_txt"><%= chat.message %></div>
+                </div>
+              </div>
+          <% } else { %>
+              <div class="thread_article_thumb fltl"><img src="<%= chat.userImage %>" width="40" height="40"></div>
+              <div class="thread_article_box_arrowl"></div>
+              <div class="thread_article_box magl22 fltl">
+                <div class="thread_article_box_wrapp">
+                  <h4><%= chat.username %></h4>
+                  <div class="thread_article_date"><%= chat.time %></div>
+                  <div class="thread_article_txt"><%= chat.message %></div>
+                </div>
+              </div>
+          <% } %>
+          </article>
         <% }) %>
 
       </div>
@@ -100,9 +123,6 @@
 <input type="hidden" id="realUpfile" value="">
 </div>
 </td>
-<td width="50" id="comment_flag_fb" style="display:none;" style="vertical-align:middle;"><input type="checkbox" name="comment_check_fb" class="comment_radio" id="comment_check_fb" value=""><label for="comment_check_fb"><img src="/img/room_radio_fb.gif" width="19" height="19"></label></td>
-<td width="50" id="comment_flag_tw" style="display:none;" style="vertical-align:middle;"><input type="checkbox" name="comment_check_tw" class="comment_radio" id="comment_check_tw" value=""><label for="comment_check_tw"><img src="/img/room_radio_tw.gif" width="19" height="19"></label></td>
-<td width="50" id="comment_flag_mx" style="display:none;" style="vertical-align:middle;"><input type="checkbox" name="comment_radio_mx" class="comment_radio" id="comment_radio_mx" value=""><label for="comment_radio_mx"><img src="/img/room_radio_mx.gif" width="19" height="19"></label></td>
 <td>
 <label for="submit_1">
 <input type="image" src="/img/room_toukou.gif" class="fltr" id="submit_1">
@@ -110,7 +130,6 @@
 </div>
 </td>
 </tr>
-
 </table><div id="scrl_top"><a href="javascript:void(0);" title="ページTOP">▲</a></div>
       </div>
     </section><!--/section_thread_bottom-->
@@ -160,56 +179,5 @@
 <% include footer %>
 </div><!--/#wrapper-->
 
-
-<!--lightbox invite-->
-  <div id="lightboxinvite_wrapp" style="width:698px; background:#ffffff; margin:0px auto; display:none;">
-  <h3 id="makecommunity_invite_h3" class="padt10"><img src="/img/makecommunity_invite_h3.gif" width="98" height="15" alt="友達を招待する"></h3>
-  <div id="makecommunity_invite_tab">
-      <ul id="tab_ul">
-        <li id="tab_1" class="bg_ov top1px" style="display:none;"><img src="/img/makecommunity_invite_fb.png" width="97" height="25" alt=""></li>
-        <li id="tab_2" class="bg_ov top1px" style="display:none;"><img src="/img/makecommunity_invite_tw.png" width="98" height="25" alt=""></li>
-        <li id="tab_3" class="bg_ov top1px" style="display:none;"><img src="/img/makecommunity_invite_mx.png" width="79" height="25" alt=""></li>
-        <li id="tab_4" class="bg_ov top1px" style="display:none;"><img src="/img/makecommunity_invite_ml.png" width="41" height="25" alt=""></li>
-      </ul>
-        <div id="scrollbar1">
-          <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
-          <div class="viewport">
-             <div class="overview">
-
-            <ul id="tab_1_area" class="tab_wrapp none"></ul>
-
-            <ul id="tab_2_area" class="tab_wrapp none"></ul>
-
-            <ul id="tab_3_area" class="tab_wrapp none"></ul>
-            <form action="" target="mixi-send-friend" method="post" id="mixi-send-form" name="mixi-send-form" style="display:none">
-              <input type="hidden" name="title" id="mixi-send-title" value="">
-              <input type="hidden" name="body" id="mixi-send-body" value="">
-              <input type="hidden" name="recipients" id="mixi-send-recipients" value="">
-              <input type="hidden" name="access_token" id="mixi-access_token" value="">
-              <input type="hidden" name="refresh_token" id="mixi-refresh_token" value="">
-              <input type="hidden" name="user_id" id="mixi-user_id" value="">
-              <input type="hidden" name="mixi_code" id="mixi-code" value="">
-            </form>
-
-            <ul id="tab_4_area" class="tab_wrapp none">
-              <li>
-                <div class="invite_li_input"><input type="checkbox" name="" id="" value="" class="invite_table_td_tumnb_checkbox"></div>
-                <div class="invite_li_tumnb"><img src="/img/top_thumb_s.jpg" width="40" height="40"></div>
-                <div class="invite_li_name"></div>
-              </li>
-            </ul>
-            </div><!--/overview-->
-          </div><!--/viewport-->
-          <div id="end_disp" style="display:none; overflow:hidden; color:#333333; height:347px; "class="txtc text20">
-            <p style="font-weight:bold; padding-top:200px;">招待完了</p>
-          </div><!--end_disp-->
-        </div><!--/scrollbar1-->
-  </div><!--/makecommunity_invite_tab-->
-  <!--div class="txtc padt20 padb20 bg_w bdlf bdbt bdrt" style="width:698px;"><input type="image" onclick="sendMessage()" src="/img/makecommunity_invite_submit.png" width="396" height="73" alt="送信"></div-->
-  <div class="padt20 bg_w bdlf bdbt bdrt txtc" style="width:698px; height:114px;"><input type="image" id="inv_submit" class="mag0a" onclick="sendMessage()" src="/img/makecommunity_invite_submit.png" width="396" height="73" alt="送信"></div>
-</div>
-<% if (typeof onetime_token !== 'undefined' && onetime_token) { %>
-<input type="hidden" id="onetime_token" name="onetime_token" value="<%= onetime_token %>">
-<% } %>
 </body>
 </html>

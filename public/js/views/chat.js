@@ -43,13 +43,21 @@
       }
     },
     appendMessage: function(data) {
-      var chatTemplate = syaberi.templates.chat.chatL({
-        commendId: data.commentId,
+      var chatTemplate;
+      var userId = $('html').data('userid');
+      var params = {
+        chatId: data.chatId,
         userImage: data.user_image,
         userName: data.userName,
         time: data.time,
         message: data.message
-      });
+      };
+      if (userId == data.userId) {
+        chatTemplate = syaberi.templates.chat.chatR(params);
+      }
+      else {
+        chatTemplate = syaberi.templates.chat.chatL(params);
+      }
 
       $('#lines1').append(chatTemplate);
     },

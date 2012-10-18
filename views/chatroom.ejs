@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
- <html lang="ja" data-host="http://<%= host %>" data-chatroom="<%= chatroomId %>" data-userid="<%= locals.userId %>" data-username="<%= locals.userName %>">
+ <html lang="ja" data-host="http://<%= host %>" data-chatroom="<%= chatroomId %>" data-userid="<%= locals.userId %>" data-username="<%= locals.userName %>" data-userimage="<%= locals.userImage %>">
 <head>
 <title><%= title %>｜シャベリハウス</title>
 <meta charset="UTF-8">
@@ -76,7 +76,7 @@
         <% chats.forEach(function(chat) { %>
           <article class="chat-content" id="chat-content-<%= chat.id %>">
           <% if (chat.user_id == locals.userId) { %>
-              <div class="thread_article_thumb fltr"><img src="<%= chat.userImage %>" width="40" height="40"></div>
+              <div class="thread_article_thumb fltr"><img src="<%= chat.userimage %>" width="40" height="40"></div>
               <div class="thread_article_box_arrowr"></div>
               <div class="thread_article_box magr22 fltr">
                 <div class="thread_article_box_wrapp">
@@ -87,7 +87,7 @@
                 </div>
               </div>
           <% } else { %>
-              <div class="thread_article_thumb fltl"><img src="<%= chat.userImage %>" width="40" height="40"></div>
+              <div class="thread_article_thumb fltl"><img src="<%= chat.userimage %>" width="40" height="40"></div>
               <div class="thread_article_box_arrowl"></div>
               <div class="thread_article_box magl22 fltl">
                 <div class="thread_article_box_wrapp">

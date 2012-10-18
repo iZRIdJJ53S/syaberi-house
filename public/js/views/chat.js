@@ -20,12 +20,13 @@
         var chatroomId = $('html').data('chatroom');
         var userId = $('html').data('userid');
         var userName = $('html').data('username');
+        var userImage = $('html').data('userimage');
 
         syaberi.socket.emit('message', {
           chatroomId: chatroomId,
           userId: userId,
           userName: userName,
-          userImage: 'dummy',
+          userImage: userImage,
           message: message
         });
 
@@ -97,7 +98,7 @@
       var userId = $('html').data('userid');
       var params = {
         chatId: data.chatId,
-        userImage: data.user_image,
+        userImage: data.userImage,
         userName: data.userName,
         time: data.time,
         message: data.message

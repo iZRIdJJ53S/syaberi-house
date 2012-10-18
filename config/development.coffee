@@ -9,3 +9,6 @@ module.exports =
     user: 'syaberi_house'
     password: '12345'
     database: 'syaberi_house'
+  twitter:
+    consumerKey: 'l0q1e0LElofACmRM1ezEg'
+    consumerSecret: 's0QLpzahToMVq4ToM0NeqGPDVO2pPTYjdkQBPBq0'

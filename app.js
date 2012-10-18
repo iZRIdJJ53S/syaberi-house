@@ -5,6 +5,7 @@ var io = require('socket.io').listen(server);
 var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 var flash = require('connect-flash');
 
 var config = require('config');
@@ -13,6 +14,7 @@ var chatroomController = require('./lib/controllers/chatroom');
 var chatController = require('./lib/controllers/chat');
 var userController = require('./lib/controllers/user');
 var socketIoController = require('./lib/controllers/socketIo');
+var uploadController = require('./lib/controllers/upload');
 
 app.configure(function() {
   app.set('port', config.server.port);
@@ -39,6 +41,14 @@ passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
 }, userController.authenticate));
+
+passport.use(new TwitterStrategy({
+    consumerKey: config.twitter.consumerKey,
+    consumerSecret: config.twitter.consumerSecret,
+    callbackURL: 'http://'+config.server.host+'/auth/twitter/callback'
+  },
+  userController.authenticateByTwitter
+));
 
 passport.serializeUser(userController.serializeUser);
 passport.deserializeUser(userController.deserializeUser);
@@ -69,7 +79,19 @@ app.post('/login',     passport.authenticate('local', {
                          failureRedirect: '/login',
                          failureFlash: true
                        }));
+
+app.get('/auth/twitter',
+  passport.authenticate('twitter'));
+app.get('/auth/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
 app.get ('/logout',    userController.logout);
+
+app.post('/upload', uploadController.upload);
+
 
 /************ /Routing ************/
 

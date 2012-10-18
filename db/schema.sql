@@ -99,19 +99,18 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `provider` varchar(255),
   `oauth_id` varchar(255),
-  `oauth_secret_id` varchar(255),
-  `oauth_service` varchar(128),
-  `oauth_service_id` varchar(50) DEFAULT NULL,
+  `token` varchar(255),
+  `token_secret` varchar(255),
   `image` varchar(255),
   `description` text,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `email` varchar(255),
   `delete` boolean NOT NULL DEFAULT false COMMENT '削除フラグ',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `oauth_service_id` (`oauth_service_id`)
+  KEY `oauth_id` (`oauth_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='ユーザ';
 /*!40101 SET character_set_client = @saved_cs_client */;
 

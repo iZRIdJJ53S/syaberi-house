@@ -69,10 +69,10 @@ app.post('/chats',          chatController.create);
 //app.get ('/chats/:id',      chatController.show);
 app.del ('/chats/:id',      chatController.destroy);
 
-app.get ('/users/new', userController.new);
-app.post('/users',     userController.create);
-app.put ('/users/:id', userController.update);
-app.del ('/users/:id', userController.destroy);
+app.get ('/users/new', authenticated, userController.new);
+app.post('/users',     authenticated, userController.create);
+app.put ('/users/:id', authenticated, userController.update);
+app.del ('/users/:id', authenticated, userController.destroy);
 app.get ('/login',     userController.login);
 app.post('/login',     passport.authenticate('local', {
                          successRedirect: '/',
@@ -85,14 +85,23 @@ app.get('/auth/twitter',
 app.get('/auth/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect('/');
+    // メールアドレスが未登録の場合は入力画面へ
+    if (!req.user.email) {
+      res.redirect('/users/new');
+    }
+    else {
+      res.redirect('/');
+    }
   });
 
 app.get ('/logout',    userController.logout);
 
 app.post('/upload', uploadController.upload);
 
-
+function authenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/');
+}
 /************ /Routing ************/
 
 

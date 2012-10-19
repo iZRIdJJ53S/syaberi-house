@@ -5,7 +5,6 @@
     id:       null,
     userName: null,
     email:    null,
-    password: null,
     validation: {
       userName: [
         { required: true, msg: 'ニックネームを入力してください' },
@@ -15,11 +14,6 @@
         { required: true, msg: 'メールアドレスを入力してください' },
         { pattern: 'email', msg: 'メールアドレスの形式が不正です。' },
         { rangeLength: [3, 255], msg: 'メールアドレスは3文字以上255文字以下で入力してください' }
-      ],
-      password: [
-        { required: true, msg: 'パスワードを入力してください' },
-        { rangeLength: [6, 100], msg: 'パスワードは6文字以上100文字以下で入力してください。' },
-        { pattern: /^[a-zA-Z0-9]{6,100}$/, msg: 'パスワードは半角英数字を入力してください。' }
       ]
     },
     url: '/users'

@@ -14,7 +14,6 @@
       event.preventDefault();
       var userName = $.trim($('#userName').val());
       var email = $.trim($('#email').val());
-      var password = $.trim($('#password').val());
       var isTermsChecked = $('#terms_check').is(':checked');
 
       if (!isTermsChecked) {
@@ -23,18 +22,16 @@
       else {
         this.model.set({
           userName: userName,
-          email: email,
-          password: password
+          email: email
         });
 
         if (this.model.isValid()) {
           this.model.save({
             userName: userName,
-            email: email,
-            password: password
+            email: email
           }, {
             success: function() {
-              $('#full-form-tag').submit();
+              location.href = '/';
             },
             error: function(model, res) {
               alert(res.responseText);

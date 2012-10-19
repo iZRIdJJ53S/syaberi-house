@@ -1,5 +1,5 @@
 var express = require('express');
-var app = express();
+var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var path = require('path');
@@ -9,6 +9,7 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 var flash = require('connect-flash');
 
 var config = require('config');
+var middleware = require('./lib/middleware');
 var topController = require('./lib/controllers/top');
 var chatroomController = require('./lib/controllers/chatroom');
 var chatController = require('./lib/controllers/chat');
@@ -29,12 +30,17 @@ app.configure(function() {
   app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(middleware.sessionData);
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function() {
   app.use(express.errorHandler());
+});
+
+app.locals({
+  nl2br: function(str) { /** return str.replace(/\n/g, '<br/>') **/ return str }
 });
 
 passport.use(new LocalStrategy({
@@ -95,6 +101,8 @@ function authenticated(req, res, next) {
 }
 
 /************ /Routing ************/
+
+
 
 
 server.listen(app.get('port'), function() {

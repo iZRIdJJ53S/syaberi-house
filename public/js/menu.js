@@ -2,7 +2,15 @@
 
   var fukidashi_my = 0;
   $(function(){
+    $('#login_button_twetter').click(function(event) {
+      event.preventDefault();
+      $.cookie('returnUrl', location.href, {path: '/'});
+      location.href = $(this).attr('href');
+    });
+
     $('#header_right').live('click', function(){
+      $.cookie('returnUrl', location.href, {path: '/'});
+
       if($('#mypage_notification_wrapp').css('display') == 'none'){
         $('#mypage_notification_wrapp').slideDown('fast');
         ovarrayfunc();

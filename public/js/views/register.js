@@ -31,7 +31,8 @@
             email: email
           }, {
             success: function() {
-              location.href = '/';
+              var returnUrl = $.cookie('returnUrl');
+              location.href = returnUrl;
             },
             error: function(model, res) {
               alert(res.responseText);

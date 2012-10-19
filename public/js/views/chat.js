@@ -6,6 +6,7 @@
     events: {
       'click #submit_1':          'submit',
       'keydown #message1':        'keydown',
+      'click img.delete_cmt':     'destroy',
       'change #uploadings_input': 'upload',
       'change #message1':         'uploadOff'
     },
@@ -44,6 +45,29 @@
           this.submit(event);
           return false;
         }
+      }
+    },
+    destroy: function(event) {
+      if (window.confirm('本当に削除しますか？')) {
+        var target = $(event.target);
+        var chatId = target.attr('id');
+        chatId = parseInt(chatId.replace('del_cmt_', ''));
+
+        var chat = new syaberi.Chat({
+          id: chatId
+        });
+        chat.destroy({
+          success: function(model, res) {
+            $('#chat-content-'+chatId).animate({
+              height:'hide',
+              opacity:'hide'
+            },
+            "slow",
+            function() {
+              $('#chat-content-'+chatId).remove();
+            });
+          }
+        });
       }
     },
     upload: function() {

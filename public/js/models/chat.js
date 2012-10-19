@@ -8,7 +8,8 @@
     type:     null,
     body:     null,
     image:    null,
-    time:     null
+    time:     null,
+    url: '/chats'
   });
 
   syaberi.Chats = Backbone.Collection.extend({

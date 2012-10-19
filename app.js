@@ -90,7 +90,9 @@ app.get('/auth/twitter/callback',
       res.redirect('/users/new');
     }
     else {
-      res.redirect('/');
+      var returnUrl = req.cookies.returnUrl;
+      console.log(returnUrl);
+      res.redirect(returnUrl);
     }
   });
 

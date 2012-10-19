@@ -58,16 +58,15 @@ passport.deserializeUser(userController.deserializeUser);
 
 app.get ('/', topController.index);
 
-app.get ('/chatrooms/new',      chatroomController.new);
-app.post('/chatrooms',          chatroomController.create);
+app.get ('/chatrooms/new',      authenticated, chatroomController.new);
+app.post('/chatrooms',          authenticated, chatroomController.create);
 app.get ('/chatrooms/:id',      chatroomController.show);
-app.get ('/chatrooms/:id/edit', chatroomController.edit);
-app.put ('/chatrooms/:id',      chatroomController.update);
-app.del ('/chatrooms/:id',      chatroomController.destroy);
+app.get ('/chatrooms/:id/edit', authenticated, chatroomController.edit);
+app.put ('/chatrooms/:id',      authenticated, chatroomController.update);
+app.del ('/chatrooms/:id',      authenticated, chatroomController.destroy);
 
-app.post('/chats',          chatController.create);
-//app.get ('/chats/:id',      chatController.show);
-app.del ('/chats/:id',      chatController.destroy);
+app.post('/chats',     authenticated, chatController.create);
+app.del ('/chats/:id', authenticated, chatController.destroy);
 
 app.get ('/users/new', authenticated, userController.new);
 app.post('/users',     authenticated, userController.create);
@@ -80,21 +79,11 @@ app.post('/login',     passport.authenticate('local', {
                          failureFlash: true
                        }));
 
-app.get('/auth/twitter',
-  passport.authenticate('twitter'));
-app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: '/' }),
-  function(req, res) {
-    // メールアドレスが未登録の場合は入力画面へ
-    if (!req.user.email) {
-      res.redirect('/users/new');
-    }
-    else {
-      var returnUrl = req.cookies.returnUrl;
-      console.log(returnUrl);
-      res.redirect(returnUrl);
-    }
-  });
+app.get('/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/twitter/callback', passport.authenticate('twitter', {
+                                    failureRedirect: '/'
+                                  }),
+                                  userController.twitterCallback);
 
 app.get ('/logout',    userController.logout);
 
@@ -104,13 +93,13 @@ function authenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/');
 }
+
 /************ /Routing ************/
 
 
 server.listen(app.get('port'), function() {
   console.log('listening on port ' + app.get('port'));
 });
-
 
 io.configure(function() {
   io.set('authorization', function(handshake, callback) {
@@ -122,7 +111,6 @@ io.configure(function() {
     callback(null, true);
   });
 });
-
 
 process.on('uncaughtException', function(err) {
   console.log('uncaught exception: %s', err);

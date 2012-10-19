@@ -51,13 +51,13 @@
       if (window.confirm('本当に削除しますか？')) {
         var target = $(event.target);
         var chatId = target.attr('id');
-        chatId = parseInt(chatId.replace('del_cmt_', ''));
+        chatId = parseInt(chatId.replace('del_cmt_', ''), 10);
 
-        var chat = new syaberi.Chat({
-          id: chatId
-        });
-        chat.destroy({
-          success: function(model, res) {
+        $.ajax({
+          type: 'POST',
+          url: '/chats/'+chatId,
+          data: '_method=delete',
+          success: function(data) {
             $('#chat-content-'+chatId).animate({
               height:'hide',
               opacity:'hide'
@@ -76,11 +76,8 @@
         //ファイル名成型 hidden用
         if (res) {
           var seikeiOne = res;
-          console.log(seikeiOne);
           var seikeiTwo = seikeiOne.split('\": \"');
-          console.log(seikeiTwo);
           var seikeiThr = seikeiTwo[1].split('\"}</pre>');
-          console.log(seikeiThr);
 
           //ファイル名 textarea用
           var lclImgOne = $('input#uploadings_input').val().split('\\');

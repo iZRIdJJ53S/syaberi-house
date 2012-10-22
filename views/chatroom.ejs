@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
- <html lang="ja" data-host="http://<%= host %>" data-chatroom="<%= chatroomId %>" data-userid="<%= locals.userId %>" data-username="<%= locals.userName %>" data-userimage="<%= locals.userImage %>">
+ <html lang="ja" data-host="http://<%= host %>" data-chatroom="<%= chatroom.id %>" data-ownerid="<%= chatroom.ownerId %>" data-userid="<%= locals.userId %>" data-username="<%= locals.userName %>" data-userimage="<%= locals.userImage %>">
 <head>
-<title><%= title %>｜シャベリハウス</title>
+<title><%= chatroom.title %>｜シャベリハウス</title>
 <meta charset="UTF-8">
 <meta name="description" content="友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！">
 <meta name="keywords" content="シャベリハウス,チャット,趣味,興味,twitter,facebook,mixi">
@@ -38,8 +38,11 @@
   <div id="contents_wrapp_inside">
 <section id="thread">
 <div id="thread_wrapp">
-<h3 id="thread_h3">【<%= category %>】<%= title %></h3>
-<div class="thread_txt"><%= description %></div>
+<h3 id="thread_h3">
+<% if (chatroom.status == 0) { %>【募集中】<% } else { %>【開催中】<% }%>【<%= chatroom.category %>】<%= chatroom.title %>
+</h3>
+<div class="thread_txt"><%= chatroom.description %></div>
+<div class="thread_txt">ハウスオーナー: <%= chatroom.owner %></div>
 <div class="txtc magb13">
 </div>
 <div id="pullarea" style="display:none;">
@@ -49,7 +52,7 @@
 <div class="participant thread_friends clearfix bg_g" id="audienceview">
 </div>
 </div>
-<a href="#" id="pullpullpull"></a>
+<a href="javascript:void(0);" id="pullpullpull"></a>
 </div><!--/thread_wrapp-->
 </section>
     <section id="section_thread_left">
@@ -92,6 +95,9 @@
               <div class="thread_article_box_arrowl"></div>
               <div class="thread_article_box magl22 fltl">
                 <div class="thread_article_box_wrapp">
+                  <% if (isOwner) { %>
+                    <a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>">[チャット開始]</a>
+                  <% } %>
                   <h4><%= chat.username %></h4>
                   <div class="thread_article_date"><%= chat.time %></div>
                   <div class="thread_article_txt"><%- esc(chat.message) %></div>
@@ -105,8 +111,7 @@
     </section><!--/section_thread_right-->
 
 <!--投稿コメントエリア-->
-<% if (isAuth) { %>
-<section id="section_thread_bottom">
+<section id="section_thread_bottom" <% if (!isAuth || locals.alreadyDone) { %>style="display:none;"<% } %>>
   <div id="thread_comment_box">
     <h3 id="comment_h3">コメント</h3>
   <table id="comment_wrapp">
@@ -134,7 +139,6 @@
   </table><div id="scrl_top"><a href="javascript:void(0);" title="ページTOP">▲</a></div>
   </div>
 </section><!--/section_thread_bottom-->
-<% } %>
 
 </div><!--/#contents_wrapp_inside-->
 </div><!--/#contents_wrapp-->

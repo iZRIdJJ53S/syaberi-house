@@ -40,6 +40,7 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
+// テンプレート内で使用できる関数を設定
 app.locals({
   esc: function(str) { return utils.nl2br(utils.escHtml(str)) }
 });
@@ -65,12 +66,13 @@ passport.deserializeUser(userController.deserializeUser);
 
 app.get ('/', topController.index);
 
-app.get ('/chatrooms/new',      authenticated, chatroomController.new);
-app.post('/chatrooms',          authenticated, chatroomController.create);
-app.get ('/chatrooms/:id',      chatroomController.show);
-app.get ('/chatrooms/:id/edit', authenticated, chatroomController.edit);
-app.put ('/chatrooms/:id',      authenticated, chatroomController.update);
-app.del ('/chatrooms/:id',      authenticated, chatroomController.destroy);
+app.get ('/chatrooms/new',       authenticated, chatroomController.new);
+app.post('/chatrooms',           authenticated, chatroomController.create);
+app.get ('/chatrooms/:id',       chatroomController.show);
+app.get ('/chatrooms/:id/edit',  authenticated, chatroomController.edit);
+app.put ('/chatrooms/:id',       authenticated, chatroomController.update);
+app.del ('/chatrooms/:id',       authenticated, chatroomController.destroy);
+app.post('/chatrooms/:id/start', authenticated, chatroomController.start);
 
 app.post('/chats',     authenticated, chatController.create);
 app.del ('/chats/:id', authenticated, chatController.destroy);
@@ -102,8 +104,6 @@ function authenticated(req, res, next) {
 }
 
 /************ /Routing ************/
-
-
 
 
 server.listen(app.get('port'), function() {

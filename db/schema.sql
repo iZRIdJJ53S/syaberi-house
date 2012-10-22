@@ -48,9 +48,10 @@ CREATE TABLE `chatrooms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `user_id` int(11) NOT NULL COMMENT 'オーナーID',
+  `owner_id` int(11) NOT NULL COMMENT 'オーナーID',
+  `partner_id` int(11) COMMENT '参加者ID',
   `category_id` int(11) NOT NULL COMMENT 'カテゴリーID',
-  `status` int(11) NOT NULL COMMENT '現在の状態：まとめログ, チャット',
+  `status` int(11) NOT NULL COMMENT '現在の状態：受付中, チャット中',
   `image` varchar(255) COMMENT '画像',
   `count` int(11) NOT NULL DEFAULT 0 COMMENT '発言数',
   `public` boolean NOT NULL DEFAULT true COMMENT '公開フラグ',
@@ -59,7 +60,7 @@ CREATE TABLE `chatrooms` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `user_id_index` (`user_id`)
+  KEY `owner_id_index` (`owner_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='チャットルーム';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -79,6 +80,7 @@ CREATE TABLE `chats` (
   `ext_image_path` varchar(255) COMMENT '外部イメージパス',
   `ext_image_domain` varchar(255) COMMENT '外部イメージドメイン',
   `tweet_id` varchar(32),
+  `status` int(11) NOT NULL COMMENT '現在の状態：申込中, チャット開始中',
   `type` int(11) NOT NULL COMMENT '発言タイプ: コメント, スタンプ, 画像',
   `delete` boolean NOT NULL DEFAULT false COMMENT '削除フラグ',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',

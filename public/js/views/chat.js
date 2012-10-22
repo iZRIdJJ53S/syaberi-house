@@ -1,5 +1,8 @@
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
+  var CHAT_COMMENT = 1;
+  var CHAT_STAMP = 2;
+  var CHAT_IMAGE = 3;
 
   syaberi.ChatView = Backbone.View.extend({
     el: $('html'),
@@ -7,6 +10,7 @@
       'click #submit_1':          'submit',
       'keydown #message1':        'keydown',
       'click img.delete_cmt':     'destroy',
+      'click a.start_chat':       'startChat',
       'change #uploadings_input': 'upload',
       'change #message1':         'uploadOff'
     },
@@ -28,7 +32,8 @@
           userId: userId,
           userName: userName,
           userImage: userImage,
-          message: message
+          message: message,
+          type: CHAT_COMMENT
         });
 
         this.clearInputUserMessage();
@@ -51,6 +56,8 @@
       if (window.confirm('本当に削除しますか？')) {
         var target = $(event.target);
         var chatId = target.attr('id');
+        var userId = $('html').data('userid');
+        var ownerId = $('html').data('ownerid');
         chatId = parseInt(chatId.replace('del_cmt_', ''), 10);
 
         $.ajax({
@@ -58,6 +65,14 @@
           url: '/chats/'+chatId,
           data: '_method=delete',
           success: function(data) {
+            //申込者の投稿フォームを復活
+            if (ownerId != userId) {
+              $('#section_thread_bottom').animate({
+                height:'show',
+                opacity:'1.0'
+              }, "slow");
+            }
+
             $('#chat-content-'+chatId).animate({
               height:'hide',
               opacity:'hide'
@@ -69,6 +84,22 @@
           }
         });
       }
+    },
+    startChat: function(event) {
+        var target = $(event.target);
+        var partnerId = target.data('userid');
+        var chatroomId = $('html').data('chatroom');
+
+        if (window.confirm('このユーザとチャットを開始しますか？')) {
+          $.ajax({
+            type: 'POST',
+            url: '/chatrooms/'+chatroomId+'/start',
+            data: 'partner='+partnerId,
+            success: function(data) {
+              location.reload();
+            }
+          });
+        }
     },
     upload: function() {
       $('#uploadings_input').upload('/upload', function(res) {
@@ -117,12 +148,14 @@
     appendMessage: function(data) {
       var chatTemplate;
       var userId = $('html').data('userid');
+      var ownerId = $('html').data('ownerid');
       var params = {
         chatId: data.chatId,
         userImage: data.userImage,
         userName: data.userName,
         time: data.time,
-        message: data.message
+        message: data.message,
+        isOwner: userId == ownerId
       };
       if (userId == data.userId) {
         chatTemplate = syaberi.templates.chat.chatR(params);
@@ -132,6 +165,14 @@
       }
 
       $('#lines1').append(chatTemplate);
+
+      //申込者の投稿は1回のみ
+      if (ownerId != userId) {
+        $('#section_thread_bottom').animate({
+          height:'hide',
+          opacity:'hide'
+        }, "slow");
+      }
     },
     render: function() {
     },

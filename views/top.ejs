@@ -34,7 +34,7 @@
       <% chatrooms.forEach(function(chatroom) { %>
         <div style="" class="searchartile">
           <dl class="search_dl">
-              <dd class="search_dd_title"><a href="/chatrooms/<%= chatroom.id %>"><%= chatroom.title %></a></dd>
+              <dd class="search_dd_title"><a href="/chatrooms/<%= chatroom.id %>">【<%= chatroom.category %>】<%= chatroom.title %></a></dd>
               <dd class="search_dd_tag" id="search_dd_tag_<%= chatroom.id %>"></dd>
               <dd class="search_dd_txt"><%= chatroom.description %></dd>
           </dl>
@@ -42,7 +42,16 @@
             <ul id="dec-supporters-<%= chatroom.id %>">
             </ul>
 
-            <div class="joined_details" class="txtc"><span id="joined_detail_<%= chatroom.id %>"></span><span>人参加</span></div>
+            <div class="joined_details" class="txtc">
+              <span id="joined_detail_<%= chatroom.id %>"></span>
+              <span>
+                <% if (chatroom.status == 0) { %>
+                  募集中
+                <% } else { %>
+                  募集終了
+                <% }%>
+              </span>
+            </div>
             <%/*コメント for (var jj = 0; jj < dec_list[i].supporter_num; jj++) { %>
             <div class="joined_thumbs"><img src="<%= dec_list[i].user_image %>" width="40" height="40"></div>
             <% } コメント*/ %>

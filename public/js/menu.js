@@ -9,7 +9,6 @@
     });
 
     $('#header_right').live('click', function(event) {
-      event.preventDefault();
       $.cookie('returnUrl', location.href, {path: '/'});
 
       if ($('#mypage_notification_wrapp').css('display') == 'none') {

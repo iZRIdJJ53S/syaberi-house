@@ -10,6 +10,7 @@ var flash = require('connect-flash');
 
 var config = require('config');
 var middleware = require('./lib/middleware');
+var utils = require('./lib/utils');
 var topController = require('./lib/controllers/top');
 var chatroomController = require('./lib/controllers/chatroom');
 var chatController = require('./lib/controllers/chat');
@@ -40,7 +41,7 @@ app.configure('development', function() {
 });
 
 app.locals({
-  nl2br: function(str) { /** return str.replace(/\n/g, '<br/>') **/ return str }
+  esc: function(str) { return utils.nl2br(utils.escHtml(str)) }
 });
 
 passport.use(new LocalStrategy({

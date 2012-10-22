@@ -12,7 +12,7 @@
         '<div class="thread_article_box_wrapp">'+
           '<h4>{{userName}}</h4>'+
           '<div class="thread_article_date">{{time}}</div>'+
-          '<div class="thread_article_txt">{{message}}</div>'+
+          '<div class="thread_article_txt">{{{message}}}</div>'+
         '</div>'+
       '</div>'+
     '</article>'
@@ -27,7 +27,7 @@
           '<img src="/img/article_close.png" width="18" height="18" alt="閉じる" class="thread_article_date delete_cmt" id="del_cmt_{{chatId}}">'+
           '<h4>{{userName}}</h4>'+
           '<div class="thread_article_date">{{time}}</div>'+
-          '<div class="thread_article_txt">{{message}}</div>'+
+          '<div class="thread_article_txt">{{{message}}}</div>'+
         '</div>'+
       '</div>'+
     '</article>'

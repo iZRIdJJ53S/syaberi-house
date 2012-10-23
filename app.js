@@ -2,16 +2,14 @@ var express = require('express');
 var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+var st = require('st');
 var mysql = require('mysql');
 var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var flash = require('connect-flash');
-var cookieLib = require('cookie');
 var config = require('config');
-// var MemoryStore = express.session.MemoryStore
-// var sessionStore = new MemoryStore();
 var RedisStore = require('connect-redis')(express);
 var sessionStore = new RedisStore({
   host: config.redis.host,
@@ -19,6 +17,7 @@ var sessionStore = new RedisStore({
   db: 1,
   prefix: 'session:'
 });
+app.set('sessionStore', sessionStore);
 
 var middleware = require('./lib/middleware');
 var utils = require('./lib/utils');
@@ -40,10 +39,6 @@ app.configure(function() {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser(config.server.cookieSecret));
-  // app.use(express.session({
-    // secret: config.server.cookieSecret,
-    // store: sessionStore
-  // }));
   app.use(express.session({
     key: 'sess_id',
     cookie: { maxAge: config.server.cookieMaxAge },  // 1week
@@ -54,7 +49,10 @@ app.configure(function() {
   app.use(passport.session());
   app.use(middleware.sessionData);
   app.use(app.router);
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(st({
+    path: path.join(__dirname, 'public'),
+    url: '/'
+  }));
 });
 
 app.configure('development', function() {
@@ -94,7 +92,6 @@ var mySqlClient = mysql.createClient({
 app.set('mySqlClient', mySqlClient);
 
 /************ MySQL ************/
-
 
 
 /************ Routing ************/
@@ -152,23 +149,6 @@ io.configure(function() {
       var chatroom = io.of('/chatrooms/'+chatroomId);
       chatroom.on('connection', socketIoController.onConnection);
     }
-
-    // セッションを共有
-    if (handshake.headers.cookie) {
-      var cookie = handshake.headers.cookie;
-      var sessionId = cookieLib.parse(cookie)['sess_id'];
-      sessionId = sessionId.split(':')[1].split('.')[0];
-
-      sessionStore.get(sessionId, function(err, session) {
-        if (err) {
-          callback(err.message, false);
-        }
-        else {
-          handshake.session = session;
-        }
-      });
-    }
-
     callback(null, true);
   });
 });

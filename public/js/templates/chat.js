@@ -10,9 +10,9 @@
         '<div class="thread_article_box_arrowl"></div>'+
         '<div class="thread_article_box magl22 fltl">'+
         '<div class="thread_article_box_wrapp">'+
-          '{{#if isOwner}}'+
+          '{{#if isInvite}}{{#if isOwner}}'+
             '<a href="javascript:void(0);" class="start_chat" data-userid="{{userId}}">[チャット開始]</a>'+
-          '{{/if}}'+
+          '{{/if}}{{/if}}'+
           '<h4>{{userName}}</h4>'+
           '<div class="thread_article_date">{{time}}</div>'+
           '<div class="thread_article_txt">{{{message}}}</div>'+

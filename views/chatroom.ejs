@@ -2,6 +2,7 @@
 <html lang="ja"
   data-host="http://<%= host %>"
   data-chatroom="<%= chatroom.id %>"
+  data-status="<%= chatroom.status %>"
   data-ownerid="<%= chatroom.ownerId %>"
   <% if (isAuth) { %>
   data-userid="<%= userId %>"
@@ -104,7 +105,7 @@
               <div class="thread_article_box_arrowl"></div>
               <div class="thread_article_box magl22 fltl">
                 <div class="thread_article_box_wrapp">
-                  <% if (isOwner) { %>
+                  <% if (chatroom.status == 0 && isOwner) { %>
                     <a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>">[チャット開始]</a>
                   <% } %>
                   <h4><%= chat.username %></h4>
@@ -120,7 +121,7 @@
     </section><!--/section_thread_right-->
 
 <!--投稿コメントエリア-->
-<section id="section_thread_bottom" <% if (!isAuth || locals.alreadyDone) { %>style="display:none;"<% } %>>
+<section id="section_thread_bottom" <% if (chatroom.status == 0 && (!isAuth || locals.alreadyDone)) { %>style="display:none;"<% } %>>
   <div id="thread_comment_box">
     <h3 id="comment_h3">コメント</h3>
   <table id="comment_wrapp">

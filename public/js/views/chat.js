@@ -152,6 +152,7 @@
     },
     appendMessage: function(data) {
       var chatTemplate;
+      var status = $('html').data('status');
       var userId = $('html').data('userid');
       var ownerId = $('html').data('ownerid');
       var params = {
@@ -161,7 +162,8 @@
         userName: data.userName,
         time: data.time,
         message: data.message,
-        isOwner: userId == ownerId
+        isOwner: userId == ownerId,
+        isInvite: status == 0
       };
       if (userId == data.userId) {
         chatTemplate = syaberi.templates.chat.chatR(params);
@@ -172,8 +174,8 @@
 
       $('#lines1').append(chatTemplate);
 
-      //申込者の投稿は1回のみ
-      if (ownerId != userId) {
+      //募集中は申込者の投稿は1回のみ
+      if (status == 0 && ownerId != userId) {
         $('#section_thread_bottom').animate({
           height:'hide',
           opacity:'hide'

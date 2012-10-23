@@ -2,6 +2,7 @@ var express = require('express');
 var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+var mysql = require('mysql');
 var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -27,7 +28,6 @@ var chatController = require('./lib/controllers/chat');
 var userController = require('./lib/controllers/user');
 var socketIoController = require('./lib/controllers/socketIo');
 var uploadController = require('./lib/controllers/upload');
-
 
 
 
@@ -61,7 +61,7 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
-// テンプレート内で使用できる関数を設定
+// テンプレート内で使用する関数を設定
 app.locals({
   esc: function(str) { return utils.nl2br(utils.escHtml(str)) }
 });
@@ -81,6 +81,20 @@ passport.use(new TwitterStrategy({
 
 passport.serializeUser(userController.serializeUser);
 passport.deserializeUser(userController.deserializeUser);
+
+
+/************ MySQL ************/
+
+var mySqlClient = mysql.createClient({
+  host: config.mysql.host,
+  user: config.mysql.user,
+  password: config.mysql.password,
+  database: config.mysql.database
+});
+app.set('mySqlClient', mySqlClient);
+
+/************ MySQL ************/
+
 
 
 /************ Routing ************/

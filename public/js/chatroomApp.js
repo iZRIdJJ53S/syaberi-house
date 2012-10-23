@@ -15,7 +15,12 @@
     });
 
     syaberi.socket.on('message', function(data) {
-      chatView.appendMessage(data);
+      if (data.mode === 'create') {
+        chatView.appendMessage(data);
+      }
+      else if (data.mode === 'destroy') {
+        chatView.destroyMessage(data);
+      }
     });
 
     syaberi.socket.on('disconnect', function(client) {

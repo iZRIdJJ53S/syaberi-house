@@ -28,6 +28,7 @@
         var userImage = $('html').data('userimage');
 
         syaberi.socket.emit('message', {
+          mode: 'create',
           chatroomId: chatroomId,
           userId: userId,
           userName: userName,
@@ -56,50 +57,55 @@
       if (window.confirm('本当に削除しますか？')) {
         var target = $(event.target);
         var chatId = target.attr('id');
-        var userId = $('html').data('userid');
-        var ownerId = $('html').data('ownerid');
+        var chatroomId = $('html').data('chatroom');
         chatId = parseInt(chatId.replace('del_cmt_', ''), 10);
+        var userId = $('html').data('userid');
 
-        $.ajax({
-          type: 'POST',
-          url: '/chats/'+chatId,
-          data: '_method=delete',
-          success: function(data) {
-            //申込者の投稿フォームを復活
-            if (ownerId != userId) {
-              $('#section_thread_bottom').animate({
-                height:'show',
-                opacity:'1.0'
-              }, "slow");
-            }
-
-            $('#chat-content-'+chatId).animate({
-              height:'hide',
-              opacity:'hide'
-            },
-            "slow",
-            function() {
-              $('#chat-content-'+chatId).remove();
-            });
-          }
+        syaberi.socket.emit('message', {
+          mode: 'destroy',
+          chatroomId: chatroomId,
+          chatId: chatId,
+          userId: userId
         });
       }
     },
-    startChat: function(event) {
-        var target = $(event.target);
-        var partnerId = target.data('userid');
-        var chatroomId = $('html').data('chatroom');
+    destroyMessage: function(data) {
+      var chatId = data.chatId;
+      var userId = $('html').data('userid');
+      var ownerId = $('html').data('ownerid');
 
-        if (window.confirm('このユーザとチャットを開始しますか？')) {
-          $.ajax({
-            type: 'POST',
-            url: '/chatrooms/'+chatroomId+'/start',
-            data: 'partner='+partnerId,
-            success: function(data) {
-              location.reload();
-            }
-          });
-        }
+      //申込者の投稿フォームを復活
+      if (userId && ownerId != userId) {
+        $('#section_thread_bottom').animate({
+          height:'show',
+          opacity:'1.0'
+        }, "slow");
+      }
+
+      $('#chat-content-'+chatId).animate({
+        height:'hide',
+        opacity:'hide'
+      },
+      "slow",
+      function() {
+        $('#chat-content-'+chatId).remove();
+      });
+    },
+    startChat: function(event) {
+      var target = $(event.target);
+      var partnerId = target.data('userid');
+      var chatroomId = $('html').data('chatroom');
+
+      if (window.confirm('このユーザとチャットを開始しますか？')) {
+        $.ajax({
+          type: 'POST',
+          url: '/chatrooms/'+chatroomId+'/start',
+          data: 'partner='+partnerId,
+          success: function(data) {
+            location.reload();
+          }
+        });
+      }
     },
     upload: function() {
       $('#uploadings_input').upload('/upload', function(res) {

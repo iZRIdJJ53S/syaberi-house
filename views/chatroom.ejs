@@ -1,5 +1,14 @@
 <!DOCTYPE HTML>
- <html lang="ja" data-host="http://<%= host %>" data-chatroom="<%= chatroom.id %>" data-ownerid="<%= chatroom.ownerId %>" data-userid="<%= locals.userId %>" data-username="<%= locals.userName %>" data-userimage="<%= locals.userImage %>">
+<html lang="ja"
+  data-host="http://<%= host %>"
+  data-chatroom="<%= chatroom.id %>"
+  data-ownerid="<%= chatroom.ownerId %>"
+  <% if (isAuth) { %>
+  data-userid="<%= userId %>"
+  data-username="<%= userName %>"
+  data-userimage="<%= userImage %>"
+  <% } %>
+>
 <head>
 <title><%= chatroom.title %>｜シャベリハウス</title>
 <meta charset="UTF-8">

@@ -58,12 +58,14 @@
         var target = $(event.target);
         var chatId = target.attr('id');
         var chatroomId = $('html').data('chatroom');
+        var userId = $('html').data('userid');
         chatId = parseInt(chatId.replace('del_cmt_', ''), 10);
 
         syaberi.socket.emit('message', {
           mode: 'destroy',
           chatroomId: chatroomId,
-          chatId: chatId
+          chatId: chatId,
+          userId: userId
         });
       }
     },

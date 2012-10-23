@@ -9,6 +9,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var flash = require('connect-flash');
+var cookieLib = require('cookie');
 var config = require('config');
 var RedisStore = require('connect-redis')(express);
 var sessionStore = new RedisStore({
@@ -17,7 +18,6 @@ var sessionStore = new RedisStore({
   db: 1,
   prefix: 'session:'
 });
-app.set('sessionStore', sessionStore);
 
 var middleware = require('./lib/middleware');
 var utils = require('./lib/utils');
@@ -149,6 +149,23 @@ io.configure(function() {
       var chatroom = io.of('/chatrooms/'+chatroomId);
       chatroom.on('connection', socketIoController.onConnection);
     }
+
+    // ExpressとSocket.io間でセッションを共有
+    if (handshake.headers.cookie) {
+      var cookie = handshake.headers.cookie;
+      var sessionId = cookieLib.parse(cookie)['sess_id'];
+      sessionId = sessionId.split(':')[1].split('.')[0];
+
+      sessionStore.get(sessionId, function(err, session) {
+        if (err) {
+          callback(err.message, false);
+        }
+        else {
+          handshake.session = session;
+        }
+      });
+    }
+
     callback(null, true);
   });
 });

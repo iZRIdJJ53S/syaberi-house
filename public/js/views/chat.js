@@ -93,7 +93,6 @@
       var target = $(event.target);
       var partnerId = target.data('userid');
       var chatroomId = $('html').data('chatroom');
-      alert(partnerId);
 
       if (window.confirm('このユーザとチャットを開始しますか？')) {
         $.ajax({

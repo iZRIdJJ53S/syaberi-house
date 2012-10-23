@@ -88,7 +88,7 @@
       <div id="lines1" class="chat">
         <% chats.forEach(function(chat) { %>
           <article class="chat-content" id="chat-content-<%= chat.id %>">
-          <% if (chat.user_id == locals.userId) { %>
+          <% if (isAuth && chat.user_id == userId) { %>
               <div class="thread_article_thumb fltr"><img src="<%= chat.userimage %>" width="40" height="40"></div>
               <div class="thread_article_box_arrowr"></div>
               <div class="thread_article_box magr22 fltr">

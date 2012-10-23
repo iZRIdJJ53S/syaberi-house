@@ -11,7 +11,7 @@
         '<div class="thread_article_box magl22 fltl">'+
         '<div class="thread_article_box_wrapp">'+
           '{{#if isOwner}}'+
-            '<a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>">[チャット開始]</a>'+
+            '<a href="javascript:void(0);" class="start_chat" data-userid="{{userId}}">[チャット開始]</a>'+
           '{{/if}}'+
           '<h4>{{userName}}</h4>'+
           '<div class="thread_article_date">{{time}}</div>'+

@@ -7,8 +7,18 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var flash = require('connect-flash');
-
+var cookieLib = require('cookie');
 var config = require('config');
+// var MemoryStore = express.session.MemoryStore
+// var sessionStore = new MemoryStore();
+var RedisStore = require('connect-redis')(express);
+var sessionStore = new RedisStore({
+  host: config.redis.host,
+  port: config.redis.port,
+  db: 1,
+  prefix: 'session:'
+});
+
 var middleware = require('./lib/middleware');
 var utils = require('./lib/utils');
 var topController = require('./lib/controllers/top');
@@ -17,6 +27,9 @@ var chatController = require('./lib/controllers/chat');
 var userController = require('./lib/controllers/user');
 var socketIoController = require('./lib/controllers/socketIo');
 var uploadController = require('./lib/controllers/upload');
+
+
+
 
 app.configure(function() {
   app.set('port', config.server.port);
@@ -27,7 +40,15 @@ app.configure(function() {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser(config.server.cookieSecret));
-  app.use(express.session());
+  // app.use(express.session({
+    // secret: config.server.cookieSecret,
+    // store: sessionStore
+  // }));
+  app.use(express.session({
+    key: 'sess_id',
+    cookie: { maxAge: config.server.cookieMaxAge },  // 1week
+    store: sessionStore
+  }));
   app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
@@ -117,6 +138,23 @@ io.configure(function() {
       var chatroom = io.of('/chatrooms/'+chatroomId);
       chatroom.on('connection', socketIoController.onConnection);
     }
+
+    // セッションを共有
+    if (handshake.headers.cookie) {
+      var cookie = handshake.headers.cookie;
+      var sessionId = cookieLib.parse(cookie)['sess_id'];
+      sessionId = sessionId.split(':')[1].split('.')[0];
+
+      sessionStore.get(sessionId, function(err, session) {
+        if (err) {
+          callback(err.message, false);
+        }
+        else {
+          handshake.session = session;
+        }
+      });
+    }
+
     callback(null, true);
   });
 });

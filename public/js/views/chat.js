@@ -59,13 +59,11 @@
         var chatId = target.attr('id');
         var chatroomId = $('html').data('chatroom');
         chatId = parseInt(chatId.replace('del_cmt_', ''), 10);
-        var userId = $('html').data('userid');
 
         syaberi.socket.emit('message', {
           mode: 'destroy',
           chatroomId: chatroomId,
-          chatId: chatId,
-          userId: userId
+          chatId: chatId
         });
       }
     },
@@ -95,6 +93,7 @@
       var target = $(event.target);
       var partnerId = target.data('userid');
       var chatroomId = $('html').data('chatroom');
+      alert(partnerId);
 
       if (window.confirm('このユーザとチャットを開始しますか？')) {
         $.ajax({
@@ -158,6 +157,7 @@
       var params = {
         chatId: data.chatId,
         userImage: data.userImage,
+        userId: data.userId,
         userName: data.userName,
         time: data.time,
         message: data.message,

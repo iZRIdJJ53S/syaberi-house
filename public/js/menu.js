@@ -2,12 +2,15 @@
 
   var fukidashi_my = 0;
   $(function() {
+    // twitter-login がクリックされたら
+    // returnUrl をSETして認証ページへリダイレクト
     $('#login_button_twetter').click(function(event) {
       event.preventDefault();
       $.cookie('returnUrl', location.href, {path: '/'});
       location.href = $(this).attr('href');
     });
 
+    // menu のスライドダウン
     $('#header_right').live('click', function(event) {
       $.cookie('returnUrl', location.href, {path: '/'});
 

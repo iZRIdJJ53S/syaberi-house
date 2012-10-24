@@ -2,7 +2,9 @@
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
   syaberi.TopView = Backbone.View.extend({
+    // <html> エレメント配下をすべて管理する
     el: $('html'),
+    // イベントの定義
     events: {
       'click #new_chatroom':   'submit'
     },

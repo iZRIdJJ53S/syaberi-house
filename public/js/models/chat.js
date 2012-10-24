@@ -12,6 +12,7 @@
     url: '/chats'
   });
 
+  // model の集合体？
   syaberi.Chats = Backbone.Collection.extend({
     model: syaberi.Chat,
     url: '/chats'

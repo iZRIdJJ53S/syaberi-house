@@ -2,6 +2,7 @@
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
   syaberi.util = {
+    // 時間の表記修正系
     changeEasyTimeStamp: function(time_str) {
       if (!time_str) {return false;}
       var d = new Date(time_str);

@@ -2,12 +2,14 @@ var express = require('express');
 var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var st = require('st');
+var st = require('st'); // 静的ファイルを配信/キャッシュモジュール
 var mysql = require('mysql');
-var path = require('path');
-var passport = require('passport');
+var path = require('path'); // dirname, basename とかのutil
+var passport = require('passport');  // authentication
 var LocalStrategy = require('passport-local').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
+// 複数ページにまたがる場合のエラーメッセージ等の一時的保管
+// 出力したら消えてくれる
 var flash = require('connect-flash');
 var cookieLib = require('cookie');
 var config = require('config');
@@ -19,8 +21,8 @@ var sessionStore = new RedisStore({
   prefix: 'session:'
 });
 
-var middleware = require('./lib/middleware');
-var utils = require('./lib/utils');
+var middleware = require('./lib/middleware'); // sessionData
+var utils = require('./lib/utils'); // original util
 var topController = require('./lib/controllers/top');
 var chatroomController = require('./lib/controllers/chatroom');
 var chatController = require('./lib/controllers/chat');
@@ -36,7 +38,12 @@ app.configure(function() {
   app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger('dev'));
+  // 以下で設定するmethodOverrideは、Connectが提供している機能
+  // hidden属性のinputタグを用いてPostメソッドの取り扱いを便利にする
+  // この操作のため、<input type="hidden" name="_method" />は予約される
+  // bodyParserを有効化（下記methodOverrideのために必要）
   app.use(express.bodyParser());
+  // methodOverrideを有効化
   app.use(express.methodOverride());
   app.use(express.cookieParser(config.server.cookieSecret));
   app.use(express.session({
@@ -48,27 +55,45 @@ app.configure(function() {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(middleware.sessionData);
+  // app.routerを設定すると、通信の実行までに必要なマッピング処理を省略できる
+  // ルーティングの機能を提供する。これはExpressでの拡張
   app.use(app.router);
+  // 静的ファイルの配信設定
   app.use(st({
     path: path.join(__dirname, 'public'),
     url: '/'
   }));
 });
 
+// developmentというモードでサーバを起動すると有効になる設定を作成
 app.configure('development', function() {
+  // 以下のexpress.errorHandlerはConnectの実装そのもの。
+  // 詳しくは -> http://www.senchalabs.org/connect/errorHandler.html
+  app.use(express.errorHandler());
+
+  // 例外はDumpして、StackTraceも出す
+  //app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+
+// productionというモードでサーバを起動すると有効になる設定を作成
+app.configure('production', function(){
   app.use(express.errorHandler());
 });
+
+
 
 // テンプレート内で使用する関数を設定
 app.locals({
   esc: function(str) { return utils.nl2br(utils.escHtml(str)) }
 });
 
+// ログイン認証 ごく普通のID/PASS
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
 }, userController.authenticate));
 
+// ログイン認証 Twitter-OAuth
 passport.use(new TwitterStrategy({
     consumerKey: config.twitter.consumerKey,
     consumerSecret: config.twitter.consumerSecret,
@@ -147,6 +172,7 @@ io.configure(function() {
     var chatroomId = handshake.query.id;
     if (!io.namespaces.hasOwnProperty('/chatrooms/'+chatroomId)) {
       var chatroom = io.of('/chatrooms/'+chatroomId);
+      // ioConnect の確定
       chatroom.on('connection', socketIoController.onConnection);
     }
 
@@ -170,6 +196,7 @@ io.configure(function() {
   });
 });
 
+// プログラム全体での例外処理
 process.on('uncaughtException', function(err) {
   console.log('uncaught exception: %s', err);
   process.exit(1);

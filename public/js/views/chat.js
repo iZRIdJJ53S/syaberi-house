@@ -69,28 +69,6 @@
         });
       }
     },
-    destroyMessage: function(data) {
-      var chatId = data.chatId;
-      var userId = $('html').data('userid');
-      var ownerId = $('html').data('ownerid');
-
-      //申込者の投稿フォームを復活
-      if (userId && ownerId != userId) {
-        $('#section_thread_bottom').animate({
-          height:'show',
-          opacity:'1.0'
-        }, "slow");
-      }
-
-      $('#chat-content-'+chatId).animate({
-        height:'hide',
-        opacity:'hide'
-      },
-      "slow",
-      function() {
-        $('#chat-content-'+chatId).remove();
-      });
-    },
     startChat: function(event) {
       var target = $(event.target);
       var partnerId = target.data('userid');
@@ -164,8 +142,9 @@
         time: data.time,
         message: data.message,
         isOwner: userId == ownerId,
-        isInvite: status == 0
+        isInvite: status === 0
       };
+      //発言者のフキダシは向きを変える
       if (userId == data.userId) {
         chatTemplate = syaberi.templates.chat.chatR(params);
       }
@@ -176,12 +155,34 @@
       $('#lines1').append(chatTemplate);
 
       //募集中は申込者の投稿は1回のみ
-      if (status == 0 && ownerId != userId) {
+      if (status === 0 && ownerId != userId) {
         $('#section_thread_bottom').animate({
           height:'hide',
           opacity:'hide'
         }, "slow");
       }
+    },
+    destroyMessage: function(data) {
+      var chatId = data.chatId;
+      var userId = $('html').data('userid');
+      var ownerId = $('html').data('ownerid');
+
+      //申込者の投稿フォームを復活
+      if (userId && ownerId != userId && data.userId == userId) {
+        $('#section_thread_bottom').animate({
+          height:'show',
+          opacity:'1.0'
+        }, "slow");
+      }
+
+      $('#chat-content-'+chatId).animate({
+        height:'hide',
+        opacity:'hide'
+      },
+      "slow",
+      function() {
+        $('#chat-content-'+chatId).remove();
+      });
     },
     render: function() {
     },

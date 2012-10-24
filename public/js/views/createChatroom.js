@@ -16,13 +16,16 @@
       var title = $.trim($('#title').val());
       var description = $.trim($('#description').val());
 
+      // model にデータset
       this.model.set({
         categoryId: categoryId,
         title: title,
         description: description
       });
 
+      // データのvalidate
       if (this.model.isValid()) {
+        // OKならばsave (サーバーへPOST)
         this.model.save({
           categoryId: categoryId,
           title: title,
@@ -38,8 +41,10 @@
         });
       }
 
+      // validate 失敗
       this.model.bind('validated:invalid', function(model, errors) {
         for (key in errors) {
+          // エラー出力
           $('#error_'+key).text(errors[key]);
         }
       });

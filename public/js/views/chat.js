@@ -145,7 +145,8 @@
         time: data.time,
         message: data.message,
         isOwner: userId === ownerId,
-        isInvite: status !== 2
+        isInvite: status !== 2,
+        isUrlOpen: isUrlOpen
       };
       //発言者のフキダシは向きを変える
       if (userId === data.userId) {

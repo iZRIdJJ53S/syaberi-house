@@ -129,7 +129,11 @@
     </section><!--/section_thread_right-->
 
 <!--投稿コメントエリア-->
-<section id="section_thread_bottom" <% if (chatroom.status !== 2 && !isUrlOpen && (!isAuth || locals.alreadyDone)) { %>style="display:none;"<% } %>>
+<section id="section_thread_bottom"
+  <% if ((!isMember && isUrlOpen) ||
+        (chatroom.status !== 2 && !isUrlOpen && (!isAuth || locals.alreadyDone))) { %>
+    style="display:none;"
+  <% } %>>
   <div id="thread_comment_box">
     <h3 id="comment_h3">コメント</h3>
   <table id="comment_wrapp">

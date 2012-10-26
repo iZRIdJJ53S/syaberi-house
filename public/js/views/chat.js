@@ -26,6 +26,7 @@
         var userId = $('html').data('userid');
         var userName = $('html').data('username');
         var userImage = $('html').data('userimage');
+        var isUrlOpen = $('html').data('urlopen');
 
         syaberi.socket.emit('message', {
           mode: 'create',
@@ -34,7 +35,8 @@
           userName: userName,
           userImage: userImage,
           message: message,
-          type: CHAT_COMMENT
+          type: CHAT_COMMENT,
+          isUrlOpen: isUrlOpen
         });
 
         this.clearInputUserMessage();
@@ -47,7 +49,7 @@
         // new line
       }
       else {
-        if (event.keyCode == 13) {
+        if (event.keyCode === 13) {
           this.submit(event);
           return false;
         }
@@ -71,16 +73,16 @@
     },
     startChat: function(event) {
       var target = $(event.target);
-      var partnerId = target.data('userid');
+      var memberId = target.data('userid');
       var chatroomId = $('html').data('chatroom');
 
       if (window.confirm('このユーザとチャットを開始しますか？')) {
         $.ajax({
           type: 'POST',
           url: '/chatrooms/'+chatroomId+'/start',
-          data: 'partner='+partnerId,
+          data: 'member='+memberId,
           success: function(data) {
-            location.reload();
+            location.href = '/chatrooms/'+chatroomId+'/open';
           }
         });
       }
@@ -124,7 +126,7 @@
     uploadOff: function() {
       //添付とコメントを同時に投稿できぬようテキストエリアをdisable化を解除
       $('#message1').removeAttr('disabled');
-      if (this.uploadCancelFlg == 1) {
+      if (this.uploadCancelFlg === 1) {
         $('input#uploadings_input').val('');
         this.uploadCancelFlg = 0;
       }
@@ -132,6 +134,7 @@
     appendMessage: function(data) {
       var chatTemplate;
       var status = $('html').data('status');
+      var isUrlOpen = $('html').data('urlopen');
       var userId = $('html').data('userid');
       var ownerId = $('html').data('ownerid');
       var params = {
@@ -141,11 +144,11 @@
         userName: data.userName,
         time: data.time,
         message: data.message,
-        isOwner: userId == ownerId,
-        isInvite: status === 0
+        isOwner: userId === ownerId,
+        isInvite: status !== 2
       };
       //発言者のフキダシは向きを変える
-      if (userId == data.userId) {
+      if (userId === data.userId) {
         chatTemplate = syaberi.templates.chat.chatR(params);
       }
       else {
@@ -155,7 +158,7 @@
       $('#lines1').append(chatTemplate);
 
       //募集中は申込者の投稿は1回のみ
-      if (status === 0 && ownerId != userId) {
+      if (!isUrlOpen && ownerId != userId) {
         $('#section_thread_bottom').animate({
           height:'hide',
           opacity:'hide'
@@ -168,7 +171,7 @@
       var ownerId = $('html').data('ownerid');
 
       //申込者の投稿フォームを復活
-      if (userId && ownerId != userId && data.userId == userId) {
+      if (userId && ownerId != userId && data.userId === userId) {
         $('#section_thread_bottom').animate({
           height:'show',
           opacity:'1.0'

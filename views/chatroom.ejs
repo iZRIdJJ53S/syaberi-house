@@ -4,6 +4,7 @@
   data-chatroom="<%= chatroom.id %>"
   data-status="<%= chatroom.status %>"
   data-ownerid="<%= chatroom.ownerId %>"
+  data-urlopen="<%= isUrlOpen %>"
   <% if (isAuth) { %>
   data-userid="<%= userId %>"
   data-username="<%= userName %>"
@@ -49,10 +50,17 @@
 <section id="thread">
 <div id="thread_wrapp">
 <h3 id="thread_h3">
-<% if (chatroom.status == 0) { %>【募集中】<% } else { %>【開催中】<% }%>【<%= chatroom.category %>】<%= chatroom.title %>
+【<%= chatroom.category %>】<%= chatroom.title %>
 </h3>
 <div class="thread_txt"><%= chatroom.description %></div>
 <div class="thread_txt">ハウスオーナー: <%= chatroom.owner %></div>
+<div class="thread_txt">
+  <% if (chatroom.status == 0) { %>
+    【募集中】
+  <% } else { %>
+    <a href="/chatrooms/<%= chatroom.id %>/open">【開催中】</a>
+  <% }%>
+</div>
 <div class="txtc magb13">
 </div>
 <div id="pullarea" style="display:none;">
@@ -105,7 +113,7 @@
               <div class="thread_article_box_arrowl"></div>
               <div class="thread_article_box magl22 fltl">
                 <div class="thread_article_box_wrapp">
-                  <% if (chatroom.status == 0 && isOwner) { %>
+                  <% if (chatroom.status !== 2 && !isUrlOpen && isOwner) { %>
                     <a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>">[チャット開始]</a>
                   <% } %>
                   <h4><%= chat.username %></h4>
@@ -121,7 +129,7 @@
     </section><!--/section_thread_right-->
 
 <!--投稿コメントエリア-->
-<section id="section_thread_bottom" <% if (chatroom.status == 0 && (!isAuth || locals.alreadyDone)) { %>style="display:none;"<% } %>>
+<section id="section_thread_bottom" <% if (chatroom.status !== 2 && !isUrlOpen && (!isAuth || locals.alreadyDone)) { %>style="display:none;"<% } %>>
   <div id="thread_comment_box">
     <h3 id="comment_h3">コメント</h3>
   <table id="comment_wrapp">

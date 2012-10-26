@@ -126,6 +126,7 @@ app.get ('/', topController.index);
 app.get ('/chatrooms/new',       authenticated, chatroomController.new);
 app.post('/chatrooms',           authenticated, chatroomController.create);
 app.get ('/chatrooms/:id',       chatroomController.show);
+app.get ('/chatrooms/:id/open',  authenticated, chatroomController.show);
 app.get ('/chatrooms/:id/edit',  authenticated, chatroomController.edit);
 app.put ('/chatrooms/:id',       authenticated, chatroomController.update);
 app.del ('/chatrooms/:id',       authenticated, chatroomController.destroy);

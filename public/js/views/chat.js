@@ -158,7 +158,7 @@
       $('#lines1').append(chatTemplate);
 
       //募集中は申込者の投稿は1回のみ
-      if (!isUrlOpen && ownerId != userId) {
+      if (!isUrlOpen && data.userId === userId && ownerId != userId) {
         $('#section_thread_bottom').animate({
           height:'hide',
           opacity:'hide'

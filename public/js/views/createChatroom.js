@@ -15,12 +15,14 @@
       var categoryId = $.trim($('#categoryId').val());
       var title = $.trim($('#title').val());
       var description = $.trim($('#description').val());
+      var publicYN = $('input[name="publicYN"]:checked').val();
 
       // model にデータset
       this.model.set({
         categoryId: categoryId,
         title: title,
-        description: description
+        description: description,
+        publicYN: publicYN
       });
 
       // データのvalidate
@@ -29,7 +31,8 @@
         this.model.save({
           categoryId: categoryId,
           title: title,
-          description: description
+          description: description,
+          publicYN: publicYN
         }, {
           success: function(model, res) {
             var chatroomId = res.chatroomId;

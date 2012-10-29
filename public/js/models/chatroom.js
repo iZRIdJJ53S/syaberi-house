@@ -29,7 +29,12 @@
 
   syaberi.Chatrooms = Backbone.Collection.extend({
     model: syaberi.Chatroom,
-    url: '/chatrooms'
+    url: '/chatrooms',
+    nextPage: 2,
+    parse: function(response) {
+      this.nextPage = response.nextPage;
+      return response.chatrooms;
+    }
   });
 
 

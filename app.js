@@ -123,6 +123,7 @@ app.set('mySqlClient', mySqlClient);
 
 app.get ('/', topController.index);
 
+app.get ('/chatrooms',           chatroomController.index);
 app.get ('/chatrooms/new',       authenticated, chatroomController.new);
 app.post('/chatrooms',           authenticated, chatroomController.create);
 app.get ('/chatrooms/:id',       chatroomController.show);

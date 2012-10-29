@@ -11,7 +11,7 @@
         '<div class="thread_article_box magl22 fltl">'+
         '<div class="thread_article_box_wrapp">'+
           '{{#if isInvite}}{{#unless isUrlOpen}}{{#if isOwner}}'+
-            '<a href="javascript:void(0);" class="start_chat" data-userid="{{userId}}">[チャット開始]</a>'+
+            '<a href="javascript:void(0);" class="start_chat" data-userid="{{userId}}">[招待]</a>'+
           '{{/if}}{{/unless}}{{/if}}'+
           '<h4>{{userName}}</h4>'+
           '<div class="thread_article_date">{{time}}</div>'+

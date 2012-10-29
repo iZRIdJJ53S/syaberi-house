@@ -74,6 +74,7 @@
 </div><!--/thread_wrapp-->
 </section>
     <section id="section_thread_left">
+      <% if (isUrlOpen) { %>
       <article>
         <div class="thread_article_box_left fltl">
           <div class="thread_article_box_wrapp_left">
@@ -91,6 +92,7 @@
           </div>
         </div>
       </article>
+      <% } %>
     </section><!--/section_thread_left-->
 
     <section id="section_thread_right">
@@ -114,7 +116,7 @@
               <div class="thread_article_box magl22 fltl">
                 <div class="thread_article_box_wrapp">
                   <% if (chatroom.status !== 2 && !isUrlOpen && isOwner) { %>
-                    <a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>">[チャット開始]</a>
+                    <a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>">[招待]</a>
                   <% } %>
                   <h4><%= chat.username %></h4>
                   <div class="thread_article_date"><%= chat.time %></div>

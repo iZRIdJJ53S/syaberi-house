@@ -14,9 +14,11 @@
 <script src="/js/lib/underscore.js"></script>
 <script src="/js/lib/backbone.js"></script>
 <script src="/js/lib/backbone-validation.js"></script>
+<script src="/js/lib/handlebars-1.0.rc.1.js"></script>
 <script src="/js/menu.js"></script>
 <script src="/js/util.js"></script>
-<script src="/js/models/chat.js"></script>
+<script src="/js/templates/chatroom.js"></script>
+<script src="/js/models/chatroom.js"></script>
 <script src="/js/views/top.js"></script>
 <script src="/js/topApp.js"></script>
 </head>
@@ -34,7 +36,9 @@
       <% chatrooms.forEach(function(chatroom) { %>
         <div style="" class="searchartile">
           <dl class="search_dl">
-              <dd class="search_dd_title"><a href="/chatrooms/<%= chatroom.id %>">【<%= chatroom.category %>】<%= chatroom.title %></a></dd>
+              <dd class="search_dd_title">
+                <a href="/chatrooms/<%= chatroom.id %>">【<%= chatroom.category %>】<%= chatroom.title %></a>
+              </dd>
               <dd class="search_dd_tag" id="search_dd_tag_<%= chatroom.id %>"></dd>
               <dd class="search_dd_txt"><%= chatroom.description %></dd>
           </dl>
@@ -60,9 +64,9 @@
       <% }) %>
     </section>
 
-    <section id="roadmore">
-      <div id="view-more-loader-search" style="text-align:center;display:none; height:51px;"><img src="/img/loader.gif" /></div>
-        <div id="view-more-events-search" class="magb15" ><a href="javascript:void(0);"><img src="/img/common/show_morecontents_b2.gif"></a></div>
+    <section id="loadmore">
+      <div id="view-more-loader" style="text-align:center;display:none; height:51px;"><img src="/img/loader.gif" /></div>
+        <div id="view-more-events" class="magb15" ><a href="javascript:void(0);"><img src="/img/common/show_morecontents_b2.gif"></a></div>
 
       <div id="view-more-no-entry" style="text-align:center;display:none;">該当するコミュニティーは見つかりませんでした。<br></div>
     </section>

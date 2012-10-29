@@ -26,6 +26,7 @@ var utils = require('./lib/utils'); // original util
 var topController = require('./lib/controllers/top');
 var chatroomController = require('./lib/controllers/chatroom');
 var chatController = require('./lib/controllers/chat');
+var mypageController = require('./lib/controllers/mypage');
 var userController = require('./lib/controllers/user');
 var socketIoController = require('./lib/controllers/socketIo');
 var uploadController = require('./lib/controllers/upload');
@@ -135,6 +136,8 @@ app.post('/chatrooms/:id/start', authenticated, chatroomController.start);
 
 app.post('/chats',     authenticated, chatController.create);
 app.del ('/chats/:id', authenticated, chatController.destroy);
+
+app.get ('/mypage', authenticated, mypageController.index);
 
 app.get ('/users/new', authenticated, userController.new);
 app.post('/users',     authenticated, userController.create);

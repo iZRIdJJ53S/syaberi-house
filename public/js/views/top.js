@@ -6,15 +6,10 @@
     el: $('html'),
     // イベントの定義
     events: {
-      'click #new_chatroom':   'submit',
       'click #view-more-events': 'getMore'
     },
     initialize: function() {
-      this.model = new syaberi.Chatroom;
       this.collection = new syaberi.Chatrooms;
-    },
-    submit: function(event) {
-      //event.preventDefault();
     },
     getMore: function(event) {
       $('#view-more-events').hide();

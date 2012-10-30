@@ -6,28 +6,52 @@
     el: $('html'),
     // イベントの定義
     events: {
-      'click #new_chatroom':   'submit',
+      'click #ownerChatrooms':   'getOwnerChatrooms',
+      'click #entryChatrooms':   'getEntryChatrooms',
+      'click #joinChatrooms':    'getJoinChatrooms',
       'click #view-more-events': 'getMore'
     },
     initialize: function() {
-      this.model = new syaberi.Chatroom;
       this.collection = new syaberi.Chatrooms;
+      this.mode = 'owner';
     },
-    submit: function(event) {
-      //event.preventDefault();
+    getOwnerChatrooms: function(event) {
+      this.init_list();
+      $('#ownerChatrooms').addClass('on');
+      this.mode = 'owner';
+      this.getChatrooms(1);
+    },
+    getEntryChatrooms: function(event) {
+      this.init_list();
+      $('#entryChatrooms').addClass('on');
+      this.mode = 'entry';
+      this.getChatrooms(1);
+    },
+    getJoinChatrooms: function(event) {
+      this.init_list();
+      $('#joinChatrooms').addClass('on');
+      this.mode = 'join';
+      this.getChatrooms(1);
     },
     getMore: function(event) {
+      var page = this.collection.nextPage;
+      this.getChatrooms(page);
+    },
+    getChatrooms: function(page) {
       $('#view-more-events').hide();
       $('#view-more-loader').show();
 
       this.collection.fetch({
-        data: { page: this.collection.nextPage },
+        data: {
+          mode: this.mode,
+          page: page
+        },
         success: function(model, response) {
           var chatrooms = response.chatrooms;
           if (chatrooms) {
             $.each(response.chatrooms, function(key, chatroom) {
-              var template = syaberi.templates.chatroom.list(chatroom);
-              $('#section_searchcommu').append(template);
+              var template = syaberi.templates.mypage.list(chatroom);
+              $('#article_area').append(template);
             });
           }
           $('#view-more-loader').hide();
@@ -38,7 +62,12 @@
       });
     },
     render: function() {
-    }
+      this.getOwnerChatrooms();
+    },
+    init_list: function() {
+      $('article', '#hakunetsu_area').removeClass('on');
+      return $('#article_area').empty();
+    },
   });
 
 }).call(this);

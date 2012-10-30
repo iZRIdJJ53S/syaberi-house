@@ -45,6 +45,9 @@ section#section_left{
     padding:10px 0px 10px 0px;
     border-bottom:solid 1px #c2c2c2;
   }
+    article.on{
+      background: #f0f0f0;
+    }
     article.community_room a{
       color:#333;
     }

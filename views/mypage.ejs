@@ -18,7 +18,7 @@
 <script src="/js/lib/handlebars-1.0.rc.1.js"></script>
 <script src="/js/menu.js"></script>
 <script src="/js/util.js"></script>
-<script src="/js/templates/chatroom.js"></script>
+<script src="/js/templates/mypage.js"></script>
 <script src="/js/models/chatroom.js"></script>
 <script src="/js/views/mypage.js"></script>
 <script src="/js/mypageApp.js"></script>
@@ -33,32 +33,21 @@
   <div id="contents_wrapp_inside">
   <section id="section_left">
     <div id="left_column">
-      <div id="make_community"><a href="/create-dec"><img src="/img/common/make_community.jpg" width="195" height="72" alt="コミュニティを作る"></a></div>
+      <div id="make_community"><a href="/chatrooms/new"><img src="/img/common/make_community.jpg" width="195" height="72" alt="コミュニティを作る"></a></div>
       <!--div id="community_list" class="clearfix"-->
-        <h3 id="community_list_2" class="bdtp">作成したハウス</h3>
+        <!-- h3 id="community_list_2" class="bdtp">作成したハウス</h3-->
       <!--/div-->
 <!--左カラム　コミュニティリスト　白熱中！-->
       <div id="hakunetsu_area" class="shownot">
-
-  <% ownerChatrooms.forEach(function(chatroom) { %>
-
-    <article class="community_room">
-      <a href="/chatrooms/<%= chatroom.id %>"><h4><%= chatroom.title %></h4></a>
-      <table class="table_s">
-        <tr>
-        <td>
-          <ul class="article_ul">
-          <% for ( var j in user_dec_list) { %>
-            <% if ( chatroom.id == user_dec_list[j].sup_dec_id) { %><li><a href="#"><img src="<%=user_dec_list[j].image%>"></a></li><% } %>
-          <% } %>
-          </ul>
-        </td>
-        <!-- td class="join"><%= chatroom.supporter_num %><span>人<br>参加</span></td -->
-        </tr>
-      </table>
-    </article>
-    <!--article class="community_room bg_g"-->
-  <% }) %>
+        <article id="ownerChatrooms" class="community_room">
+          <h4><a href="javascript:void(0)">作成したハウス</a></h4>
+        </article>
+        <article id="entryChatrooms" class="community_room">
+          <h4><a href="javascript:void(0)">申請中のハウス</a></h4>
+        </article>
+        <article id="joinChatrooms" class="community_room">
+          <h4><a href="javascript:void(0)">参加中のハウス</a></h4>
+        </article>
       </div><!--/hakunetsu-->
 
 <!--/左カラム　コミュニティリスト　白熱中！-->
@@ -68,33 +57,9 @@
     <div id="center_column">
 <!--///////////////////////////-->
 <div id="article_area">
-  <% joinChatrooms.forEach(function(chatroom) { %>
-    <article class="timeline">
-      <div class="smatc">
-
-        <div class="topthumb_b"><a href="/chatrooms/<%= chatroom.id %>/open"><img src="/data/<%= chatroom.id %>/images/thumb_m.jpg" onerror='this.src="/img/common/nowprinting_m.jpg"' class="dec_thumb_m"></a></div>
-        <h3><a href="/chatrooms/<%= chatroom.id %>/open"><%= chatroom.title %></a></h3>
-        <p><%= chatroom.description %></p>
-        <table class="table_b">
-          <tr>
-            <td>
-            <ul class="article_ul_b" id="dec-supporters-<%= chatroom.id %>"></ul>
-            </td>
-            <!--td class="join_b">
-              <%= chatroom.supporter_num %><span>人<br>参加</span>
-            </td-->
-          </tr>
-        </table>
-        <div class="to_detailb padt5 txtc">
-        <a href="/chatrooms/<%= chatroom.id %>/open">
-          <img src="/img/top_to_detail_b.gif" alt="詳細">
-        </a>
-      </div>
-    </article>
-  <% }) %>
 </div><!--/article_area-->
     <article class="timeline txtc">
-      <div id="roadmore_border">
+      <div id="loadmore_border">
         <div id="view-more-loader" style="text-align:center;display:none; height:30px;"><img src="/img/loader.gif" /></div>
         <a href="javascript:void(0);" id="view-more-events">
           <img src="/img/common/show_morecontents.jpg" alt="SHOW MORE CONTENTS">

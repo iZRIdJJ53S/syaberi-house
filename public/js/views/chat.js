@@ -10,7 +10,7 @@
       'click #submit_1':          'submit',
       'keydown #message1':        'keydown',
       'click img.delete_cmt':     'destroy',
-      'click a.start_chat':       'startChat',
+      'click a.start_chat':       'invite',
       'change #uploadings_input': 'upload',
       'change #message1':         'uploadOff'
     },
@@ -58,10 +58,9 @@
     destroy: function(event) {
       if (window.confirm('本当に削除しますか？')) {
         var target = $(event.target);
-        var chatId = target.attr('id');
+        var chatId = target.data('chatid');
         var chatroomId = $('html').data('chatroom');
         var userId = $('html').data('userid');
-        chatId = parseInt(chatId.replace('del_cmt_', ''), 10);
 
         syaberi.socket.emit('message', {
           mode: 'destroy',
@@ -71,16 +70,17 @@
         });
       }
     },
-    startChat: function(event) {
+    invite: function(event) {
       var target = $(event.target);
       var memberId = target.data('userid');
+      var chatId = target.data('chatid');
       var chatroomId = $('html').data('chatroom');
 
       if (window.confirm('このユーザとチャットを開始しますか？')) {
         $.ajax({
           type: 'POST',
-          url: '/chatrooms/'+chatroomId+'/start',
-          data: 'member='+memberId,
+          url: '/chatrooms/'+chatroomId+'/invite',
+          data: 'member='+memberId+'&chat='+chatId,
           success: function(data) {
             location.href = '/chatrooms/'+chatroomId+'/open';
           }

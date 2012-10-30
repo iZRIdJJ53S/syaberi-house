@@ -104,7 +104,7 @@
               <div class="thread_article_box_arrowr"></div>
               <div class="thread_article_box magr22 fltr">
                 <div class="thread_article_box_wrapp">
-                  <img src="/img/article_close.png" width="18" height="18" alt="閉じる" class="thread_article_date delete_cmt" id="del_cmt_<%= chat.id %>">
+                  <img src="/img/article_close.png" width="18" height="18" alt="閉じる" class="thread_article_date delete_cmt" data-chatid="<%= chat.id %>">
                   <h4><%= chat.username %></h4>
                   <div class="thread_article_date"><%= chat.time %></div>
                   <div class="thread_article_txt"><%- esc(chat.message) %></div>
@@ -116,7 +116,11 @@
               <div class="thread_article_box magl22 fltl">
                 <div class="thread_article_box_wrapp">
                   <% if (chatroom.status !== 2 && !isUrlOpen && isOwner) { %>
-                    <a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>">[招待]</a>
+                    <% if (chat.invited == 0) { %>
+                    <a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>" data-chatid="<%= chat.id %>">[招待]</a>
+                    <% } else { %>
+                      [招待済]
+                    <% }%>
                   <% } %>
                   <h4><%= chat.username %></h4>
                   <div class="thread_article_date"><%= chat.time %></div>

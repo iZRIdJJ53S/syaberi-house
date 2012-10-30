@@ -11,7 +11,7 @@
         '<div class="thread_article_box magl22 fltl">'+
         '<div class="thread_article_box_wrapp">'+
           '{{#if isInvite}}{{#unless isUrlOpen}}{{#if isOwner}}'+
-            '<a href="javascript:void(0);" class="start_chat" data-userid="{{userId}}">[招待]</a>'+
+            '<a href="javascript:void(0);" class="start_chat" data-userid="{{userId}}" data-chatid="{{chatId}}">[招待]</a>'+
           '{{/if}}{{/unless}}{{/if}}'+
           '<h4>{{userName}}</h4>'+
           '<div class="thread_article_date">{{time}}</div>'+
@@ -27,7 +27,7 @@
         '<div class="thread_article_box_arrowr"></div>'+
         '<div class="thread_article_box magr22 fltr">'+
         '<div class="thread_article_box_wrapp">'+
-          '<img src="/img/article_close.png" width="18" height="18" alt="閉じる" class="thread_article_date delete_cmt" id="del_cmt_{{chatId}}">'+
+          '<img src="/img/article_close.png" width="18" height="18" alt="閉じる" class="thread_article_date delete_cmt" data-chatid="{{chatId}}">'+
           '<h4>{{userName}}</h4>'+
           '<div class="thread_article_date">{{time}}</div>'+
           '<div class="thread_article_txt">{{{message}}}</div>'+

@@ -132,7 +132,7 @@ app.get ('/chatrooms/:id/open',  authenticated, chatroomController.show);
 app.get ('/chatrooms/:id/edit',  authenticated, chatroomController.edit);
 app.put ('/chatrooms/:id',       authenticated, chatroomController.update);
 app.del ('/chatrooms/:id',       authenticated, chatroomController.destroy);
-app.post('/chatrooms/:id/start', authenticated, chatroomController.start);
+app.post('/chatrooms/:id/invite', authenticated, chatroomController.invite);
 
 app.post('/chats',     authenticated, chatController.create);
 app.del ('/chats/:id', authenticated, chatController.destroy);

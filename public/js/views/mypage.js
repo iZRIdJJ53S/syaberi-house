@@ -19,25 +19,27 @@
       this.init_list();
       $('#ownerChatrooms').addClass('on');
       this.mode = 'owner';
-      this.getChatrooms(1);
+      this.getChatrooms();
     },
     getEntryChatrooms: function(event) {
       this.init_list();
       $('#entryChatrooms').addClass('on');
       this.mode = 'entry';
-      this.getChatrooms(1);
+      this.getChatrooms();
     },
     getJoinChatrooms: function(event) {
       this.init_list();
       $('#joinChatrooms').addClass('on');
       this.mode = 'join';
-      this.getChatrooms(1);
+      this.getChatrooms();
     },
     getMore: function(event) {
       var page = this.collection.nextPage;
       this.getChatrooms(page);
     },
     getChatrooms: function(page) {
+      var self = this;
+      page = page || 1;
       $('#view-more-events').hide();
       $('#view-more-loader').show();
 
@@ -50,7 +52,10 @@
           var chatrooms = response.chatrooms;
           if (chatrooms) {
             $.each(response.chatrooms, function(key, chatroom) {
-              var template = syaberi.templates.mypage.list(chatroom);
+              var template = syaberi.templates.mypage.list({
+                chatroom: chatroom,
+                isUrlOpen: self.mode === 'entry' ? false : true
+              });
               $('#article_area').append(template);
             });
           }

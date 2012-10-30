@@ -81,6 +81,7 @@ CREATE TABLE `chats` (
   `tweet_id` varchar(32),
   `status` int(11) NOT NULL COMMENT '現在の状態：申込中, チャット開始中',
   `type` int(11) NOT NULL COMMENT '発言タイプ: コメント, スタンプ, 画像',
+  `invited` boolean NOT NULL DEFAULT false COMMENT '招待フラグ: 申し込みが受け入れられた: true, まだ: false',
   `delete` boolean NOT NULL DEFAULT false COMMENT '削除フラグ',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

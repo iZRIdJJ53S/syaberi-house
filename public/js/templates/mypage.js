@@ -21,7 +21,7 @@
             '<ul class="article_ul_b" id="dec-supporters-{{chatroom.id}}"></ul>'+
             '</td>'+
             '<td class="join_b">'+
-              '{{chatroom.supporter_num}}<span>人<br>参加</span>'+
+              '{{chatroom.member}}<span>人<br>参加</span>'+
             '</td>'+
           '</tr>'+
         '</table>'+

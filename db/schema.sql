@@ -52,6 +52,7 @@ CREATE TABLE `chatrooms` (
   `category_id` int(11) NOT NULL COMMENT 'カテゴリーID',
   `status` int(11) NOT NULL COMMENT '現在の状態：受付中, チャット中',
   `image` varchar(255) COMMENT '画像',
+  `member` int(11) NOT NULL DEFAULT 0 COMMENT '参加人数',
   `count` int(11) NOT NULL DEFAULT 0 COMMENT '発言数',
   `public` boolean NOT NULL DEFAULT true COMMENT '公開フラグ',
   `password` varchar(128) COMMENT 'パスワード',

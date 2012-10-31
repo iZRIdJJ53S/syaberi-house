@@ -13,6 +13,7 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 var flash = require('connect-flash');
 var cookieLib = require('cookie');
 var config = require('config');
+// セッションをRedisに保持
 var RedisStore = require('connect-redis')(express);
 var sessionStore = new RedisStore({
   host: config.redis.host,
@@ -20,6 +21,13 @@ var sessionStore = new RedisStore({
   db: 1,
   prefix: 'session:'
 });
+// マルチプロセス/サーバー間でSocket.IOのセッションをRedisを使って共有する
+var redis = require('socket.io/node_modules/redis');
+var SocketIoRedisStore = require('socket.io/lib/stores/redis');
+var ioPub = redis.createClient(config.redis.port, config.redis.host);
+var ioSub = redis.createClient(config.redis.port, config.redis.host);
+var ioStore = redis.createClient(config.redis.port, config.redis.host);
+
 
 var middleware = require('./lib/middleware'); // sessionData
 var utils = require('./lib/utils'); // original util
@@ -172,7 +180,20 @@ server.listen(app.get('port'), function() {
   console.log('listening on port ' + app.get('port'));
 });
 
+
+/************ Socket.IO ************/
+
 io.configure(function() {
+  io.enable('browser client minification');
+  io.enable('browser client etag');
+  io.enable('browser client gzip');
+  io.set('log level', 1);
+  io.set('store', new SocketIoRedisStore({
+    redisPub: ioPub,
+    redisSub: ioSub,
+    redisClient: ioStore
+  }));
+
   io.set('authorization', function(handshake, callback) {
     var chatroomId = handshake.query.id;
     if (!io.namespaces.hasOwnProperty('/chatrooms/'+chatroomId)) {
@@ -200,6 +221,10 @@ io.configure(function() {
     callback(null, true);
   });
 });
+
+/************ /Socket.IO ************/
+
+
 
 // プログラム全体での例外処理
 process.on('uncaughtException', function(err) {

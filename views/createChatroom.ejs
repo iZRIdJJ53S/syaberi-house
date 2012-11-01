@@ -10,6 +10,10 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <link rel="stylesheet" href="/css/common.css" />
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
+<% if (isProduction) { %>
+<script src="/js/dist/common.min.js"></script>
+<script src="/js/dist/createChatroom.min.js"></script>
+<% } else { %>
 <script src="/js/lib/jquery-1.8.2.js"></script>
 <script src="/js/lib/jquery.cookie.js"></script>
 <script src="/js/lib/underscore.js"></script>
@@ -20,6 +24,7 @@
 <script src="/js/models/chatroom.js"></script>
 <script src="/js/views/createChatroom.js"></script>
 <script src="/js/createChatroomApp.js"></script>
+<% } %>
 </head>
 <body>
 <div id="wrapper">

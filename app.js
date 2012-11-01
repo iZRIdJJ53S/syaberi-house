@@ -75,6 +75,7 @@ app.configure(function() {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(middleware.sessionData);
+  app.use(middleware.envData);
   // 静的ファイルの配信設定
   // ※404ページを表示させることができないのでstモジュールの利用一時停止
   // app.use(st({
@@ -83,6 +84,7 @@ app.configure(function() {
   // }));
   // app.routerを設定すると、通信の実行までに必要なマッピング処理を省略できる
   // ルーティングの機能を提供する。これはExpressでの拡張
+  app.use(express.compress());
   app.use(express.static(__dirname + '/public'));
   app.use(app.router);
   app.use(middleware.notFound);

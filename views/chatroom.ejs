@@ -24,13 +24,17 @@
   .house_bg { background: url('<%= house_image %>'); }
 </style>
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
+<script src="/socket.io/socket.io.js"></script>
+<% if (isProduction) { %>
+<script src="/js/dist/common.min.js"></script>
+<script src="/js/dist/chatroom.min.js"></script>
+<% } else { %>
 <script src="/js/lib/jquery-1.8.2.js"></script>
 <script src="/js/lib/jquery.cookie.js"></script>
 <script src="/js/lib/underscore.js"></script>
 <script src="/js/lib/backbone.js"></script>
 <script src="/js/lib/backbone-validation.js"></script>
 <script src="/js/lib/handlebars-1.0.rc.1.js"></script>
-<script src="/socket.io/socket.io.js"></script>
 <script src="/js/upload.js"></script>
 <script src="/js/menu.js"></script>
 <script src="/js/util.js"></script>
@@ -38,6 +42,7 @@
 <script src="/js/models/chat.js"></script>
 <script src="/js/views/chat.js"></script>
 <script src="/js/chatroomApp.js"></script>
+<% } %>
 </head>
 <body>
 <div id="wrapper">

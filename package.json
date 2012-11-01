@@ -22,6 +22,7 @@
     "cookie": "0.0.4",
     "st": "0.0.10",
     "log4js": "0.5.4",
-    "stack-trace": "0.06"
+    "stack-trace": "*",
+    "grunt": "0.3.17"
   }
 }

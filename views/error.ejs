@@ -17,8 +17,10 @@
   <div id="contents_wrapp_inside">
   <% include header %>
   <h1><%= title %></h1>
-  <% if (err.path) { %>
+  <% if (err.type === 'notFound') { %>
   ページが見つかりません: <%= err.path %>
+  <% } else if (err.type === 'unauthorized') { %>
+  ログインをしてください。
   <% } else { %>
   システムエラーが起きました。
   <% } %>

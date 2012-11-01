@@ -193,9 +193,14 @@ app.get('*', function (req, res, next) {
   return next(new utils.NotFound(req.url));
 });
 
+//ログインチェック
 function authenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/');
+  res.render('error', {
+    status: 401,
+    title: '401 Unauthorized',
+    err: {type: 'unauthorized'}
+  });
 }
 
 /************ /Routing ************/

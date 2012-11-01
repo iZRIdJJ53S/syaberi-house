@@ -13,6 +13,7 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 var flash = require('connect-flash');
 var cookieLib = require('cookie');
 var config = require('config');
+var log4js  = require('log4js');
 // セッションをRedisに保持
 var RedisStore = require('connect-redis')(express);
 var sessionStore = new RedisStore({
@@ -39,6 +40,15 @@ var userController = require('./lib/controllers/user');
 var socketIoController = require('./lib/controllers/socketIo');
 var uploadController = require('./lib/controllers/upload');
 
+
+/************ ロギング設定 ************/
+
+var rotateSize = 2000000;
+log4js.addAppender(require('log4js/lib/appenders/file').appender('logs/app.log'), '[sys]', rotateSize);
+var logger = log4js.getLogger('[sys]');
+app.set('logger', logger);
+
+/************ /ロギング設定 ************/
 
 
 app.configure(function() {
@@ -79,16 +89,22 @@ app.configure('development', function() {
   // 以下のexpress.errorHandlerはConnectの実装そのもの。
   // 詳しくは -> http://www.senchalabs.org/connect/errorHandler.html
   app.use(express.errorHandler());
-
   // 例外はDumpして、StackTraceも出す
   //app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  logger.setLevel('TRACE');
+});
+
+// testというモードでサーバを起動すると有効になる設定を作成
+app.configure('production', function(){
+  app.use(express.errorHandler());
+  logger.setLevel('TRACE');
 });
 
 // productionというモードでサーバを起動すると有効になる設定を作成
 app.configure('production', function(){
   app.use(express.errorHandler());
+  logger.setLevel('WARN');
 });
-
 
 
 // テンプレート内で使用する関数を設定
@@ -224,10 +240,8 @@ io.configure(function() {
 
 /************ /Socket.IO ************/
 
-
-
 // プログラム全体での例外処理
 process.on('uncaughtException', function(err) {
-  console.log('uncaught exception: %s', err);
+  logger.error('uncaught exception: %s', err);
   process.exit(1);
 });

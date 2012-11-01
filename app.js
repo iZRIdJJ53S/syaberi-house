@@ -14,6 +14,7 @@ var flash = require('connect-flash');
 var cookieLib = require('cookie');
 var config = require('config');
 var log4js  = require('log4js');
+var stackTrace = require('stack-trace');
 // セッションをRedisに保持
 var RedisStore = require('connect-redis')(express);
 var sessionStore = new RedisStore({
@@ -74,21 +75,25 @@ app.configure(function() {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(middleware.sessionData);
+  // 静的ファイルの配信設定
+  // ※404ページを表示させることができないのでstモジュールの利用一時停止
+  // app.use(st({
+    // path: path.join(__dirname, 'public'),
+    // url: '/'
+  // }));
   // app.routerを設定すると、通信の実行までに必要なマッピング処理を省略できる
   // ルーティングの機能を提供する。これはExpressでの拡張
+  app.use(express.static(__dirname + '/public'));
   app.use(app.router);
-  // 静的ファイルの配信設定
-  app.use(st({
-    path: path.join(__dirname, 'public'),
-    url: '/'
-  }));
+  app.use(middleware.notFound);
+  app.use(middleware.error);
 });
+
 
 // developmentというモードでサーバを起動すると有効になる設定を作成
 app.configure('development', function() {
   // 以下のexpress.errorHandlerはConnectの実装そのもの。
   // 詳しくは -> http://www.senchalabs.org/connect/errorHandler.html
-  app.use(express.errorHandler());
   // 例外はDumpして、StackTraceも出す
   //app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   logger.setLevel('TRACE');
@@ -96,13 +101,11 @@ app.configure('development', function() {
 
 // testというモードでサーバを起動すると有効になる設定を作成
 app.configure('production', function(){
-  app.use(express.errorHandler());
   logger.setLevel('TRACE');
 });
 
 // productionというモードでサーバを起動すると有効になる設定を作成
 app.configure('production', function(){
-  app.use(express.errorHandler());
   logger.setLevel('WARN');
 });
 
@@ -184,6 +187,10 @@ app.get ('/logout',    userController.logout);
 
 app.post('/upload', uploadController.upload);
 
+app.get('*', function (req, res, next) {
+  return next(new utils.NotFound(req.url));
+});
+
 function authenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/');
@@ -242,6 +249,7 @@ io.configure(function() {
 
 // プログラム全体での例外処理
 process.on('uncaughtException', function(err) {
-  logger.error('uncaught exception: %s', err);
-  process.exit(1);
+  var trace = stackTrace.parse(err);
+  logger.error("uncaught exception: %s\n%s%", err, JSON.stringify(trace));
+  //process.exit(1);
 });

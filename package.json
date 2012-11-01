@@ -21,6 +21,7 @@
     "formidable": "1.0.11",
     "cookie": "0.0.4",
     "st": "0.0.10",
-    "log4js": "0.5.4"
+    "log4js": "0.5.4",
+    "stack-trace": "0.06"
   }
 }

@@ -55,6 +55,7 @@
 <% include header %>
 
     <div id="mainview">
+        <!--
         <div class="sbtn">
             <ul>
                 <li class="sbtn-tw">
@@ -66,6 +67,7 @@
                 </li>
             </ul>
         </div>
+        -->
     </div>
 
     <div id="content">
@@ -92,13 +94,38 @@
                         <div class="room-member-icon" id="audienceview">
                             <a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a>
                         </div>
-                        <div>いま部屋にいるひと : <span id="peaple"></span>人</div>
+                        <!--div>いま部屋にいるひと : <span id="peaple"></span>人</div-->
                     </div>
                 </div>
             </div><!-- room -->
+<<<<<<< HEAD
 
             <div class="message">
 
+=======
+            
+            <div class="room-menu">
+                <ul>
+                    <li class="active">おしゃべり</li>
+                    <a href="/chatrooms/<%= chatroom.id %>"><li>参加申請</li></a>
+                </ul>
+            </div>
+            
+            <div class="message">
+                
+                <div class="message-help-inbox">
+                    <div class="help-icon">
+                        <img class="icon_m" src="/img/chara.png">
+                    </div>
+                    <div class="help-titlebox">
+                        <p class="help-title">こんにちは！シャベリハウスシステムです。<br>この画面では、参加者どうしで、自由におしゃべりできます。<br>どんどん投稿して、おしゃべりを楽しみましょー！</p>
+                        <!--img class="help-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
+                        <div class="help-username">by.シャベリハウスシステム</div>
+                    </div>
+                </div>
+                <hr>
+                
+>>>>>>> おしゃべり、ラウンジ、マイページのデザイン実装
                 <div id="lines1">
                 <% chats.forEach(function(chat) { %>
                     <section id="chat-content-<%= chat.id %>">

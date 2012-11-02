@@ -60,18 +60,18 @@
     
         <div class="left-content">
         
-            <a href="/chatrooms/new" id="new_chatroom">（＋）新しい部屋をつくる</a>
+            <a href="/chatrooms/new" id="new_chatroom"><input type="button" class="button_g full_width" value="新しい部屋をつくる"></a>
             
             <% chatrooms.forEach(function(chatroom) { %>
             <div class="room">
                 <div class="room-inbox">
                     <div class="room-icon">
-                        <img class="icon_m" src="https://si0.twimg.com/profile_images/2624755802/43wqi7cb1o1lq5lzqmvo_reasonably_small.jpeg">
+                        <img class="icon_m" src="<%= chatroom.ownerimage %>">
                     </div>
                     <div class="room-titlebox">
                         <h2 class="room-title"><a href="/chatrooms/<%= chatroom.id %>"><%= chatroom.title %></a></h2>
                         <div class="cat-icon"><a href="#"><%= chatroom.category %></a></div>
-                        <div class="room-username"><a href="#">by.ちきん</a></div>
+                        <div class="room-username"><a href="#">by.<%= chatroom.owner %></a></div>
                     </div>
                     <div class="room-button">
                         <a href="/chatrooms/<%= chatroom.id %>">

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<title>マイページ｜シャベリハウス</title>
+<meta charset="UTF-8">
+<meta name="description" content="友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！">
+<meta name="keywords" content="シャベリハウス,チャット,趣味,興味,twitter,facebook,mixi">
+<link rel="shortcut icon" href="http://syaberi-house.com/images/favicon.ico" />
+<link rel="stylesheet" href="/css/html5reset-1.6.1.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" href="/css/common.css" />
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
+<% if (isProduction) { %>
+<script src="/js/dist/common.min.js"></script>
+<script src="/js/dist/mypage.min.js"></script>
+<% } else { %>
+<script src="/js/lib/jquery-1.8.2.js"></script>
+<script src="/js/lib/jquery.cookie.js"></script>
+<script src="/js/lib/underscore.js"></script>
+<script src="/js/lib/backbone.js"></script>
+<script src="/js/lib/backbone-validation.js"></script>
+<script src="/js/lib/handlebars-1.0.rc.1.js"></script>
+<script src="/js/menu.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/templates/mypage.js"></script>
+<script src="/js/models/chatroom.js"></script>
+<script src="/js/views/mypage.js"></script>
+<script src="/js/mypageApp.js"></script>
+<% } %>
+</head>
+<body>
+<div id="wrapper">
+
+<% include header %>
+
+
+<div id="contents_wrapp">
+  <div id="contents_wrapp_inside">
+  <section id="section_left">
+    <div id="left_column">
+      <div id="make_community"><a href="/chatrooms/new"><img src="/img/common/make_community.jpg" width="195" height="72" alt="コミュニティを作る"></a></div>
+      <!--div id="community_list" class="clearfix"-->
+        <!-- h3 id="community_list_2" class="bdtp">作成したハウス</h3-->
+      <!--/div-->
+<!--左カラム　コミュニティリスト　白熱中！-->
+      <div id="hakunetsu_area" class="shownot">
+        <article id="ownerChatrooms" class="community_room">
+          <h4><a href="javascript:void(0)">作成したハウス</a></h4>
+        </article>
+        <article id="entryChatrooms" class="community_room">
+          <h4><a href="javascript:void(0)">申請中のハウス</a></h4>
+        </article>
+        <article id="joinChatrooms" class="community_room">
+          <h4><a href="javascript:void(0)">参加中のハウス</a></h4>
+        </article>
+      </div><!--/hakunetsu-->
+
+<!--/左カラム　コミュニティリスト　白熱中！-->
+    </div><!--/contents_wrapp_inside-->
+  </section>
+  <section id="section_center">
+    <div id="center_column">
+<!--///////////////////////////-->
+<div id="article_area">
+</div><!--/article_area-->
+    <article class="timeline txtc">
+      <div id="loadmore_border">
+        <div id="view-more-loader" style="text-align:center;display:none; height:30px;"><img src="/img/loader.gif" /></div>
+        <a href="javascript:void(0);" id="view-more-events">
+          <img src="/img/common/show_morecontents.jpg" alt="SHOW MORE CONTENTS">
+        </a>
+      </div>
+    </article>
+<!--///////////////////////////-->
+    </div><!--/center_column-->
+  </section>
+  <section id="section_right">
+    <div class="right_column">
+      <h3 id="community_recommend">オススメのコミュニティ</h3>
+      <article class="community_room">
+        <div class="mypage_osusume_tumb"><a href="/dec/1"><img src="/images/01.jpg" onerror='this.src="/img/common/nowprinting_osusume.jpg"' class="dec_thumb_s"></a></div>
+        <h4><a href="/dec/1">ようこそ！シャベリハウスへ</a></h4>
+        <p>シャベリハウス初心者のひとが集まるチャット部屋です。</p>
+      </article>
+      <article class="community_room bg_g">
+        <div class="mypage_osusume_tumb"><a href="/dec/7"><img src="/data/7/images/thumb_l.jpg" onerror='this.src="/img/common/nowprinting_osusume.jpg"' class="dec_thumb_s"></a></div>
+        <h4><a href="/dec/7">うまい棒</a></h4>
+        <p>うまい棒 たこ焼き？ いいえ、 めんたいこ。</p>
+      </article>
+    </div><!--/.right_column-->
+    <% if ( fr_sup_list != "" ) { %>
+    <div class="right_column magt20">
+      <h3 id="community_joined">友達の参加しているコミュニティ</h3>
+      <% for (var kk in fr_sup_list) { %>
+      <article class="community_room">
+        <table class="friends_joind">
+          <tr>
+          <td><img src="<%= fr_sup_list[kk].user_image %>" width="40" height="40"></td>
+          <td><%= fr_sup_list[kk].user_name %></td>
+          </tr>
+        </table>
+        <div class="mypage_friend_tumb"><a href="/dec/<%= fr_sup_list[kk].id %>"><img src="/data/<%= fr_sup_list[kk].id %>/images/thumb_s.jpg" onerror='this.src="/img/common/nowprinting_osusume.jpg"' class="dec_thumb_s"></a></div>
+        <h4><a href="/dec/<%= fr_sup_list[kk].id %>"><%= fr_sup_list[kk].title %></a></h4>
+      </article>
+      <% } %>
+    </div><!--/.right_column-->
+    <% } %>
+  </section>
+  </div><!--/#contents_wrapp_inside-->
+</div><!--/#contents_wrapp-->
+
+<% include footer %>
+</div><!--/#wrapper-->
+</body>
+</html>

@@ -98,7 +98,7 @@ app.configure('development', function() {
   // 詳しくは -> http://www.senchalabs.org/connect/errorHandler.html
   // 例外はDumpして、StackTraceも出す
   //app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-  logger.setLevel('TRACE');
+  logger.setLevel('ERROR');
 });
 
 // testというモードでサーバを起動すると有効になる設定を作成
@@ -166,10 +166,11 @@ app.post('/chatrooms/:id/invite', authenticated, chatroomController.invite);
 app.post('/chats',     authenticated, chatController.create);
 app.del ('/chats/:id', authenticated, chatController.destroy);
 
-app.get ('/mypage', authenticated, mypageController.index);
+app.get ('/mypage', authenticated, mypageController.show);
 
 app.get ('/users/new', authenticated, userController.new);
 app.post('/users',     authenticated, userController.create);
+app.get ('/users/:id', mypageController.show);
 app.put ('/users/:id', authenticated, userController.update);
 app.del ('/users/:id', authenticated, userController.destroy);
 app.get ('/login',     userController.login);

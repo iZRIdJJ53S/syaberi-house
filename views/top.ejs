@@ -57,21 +57,23 @@
     </div>
 
     <div id="content">
-    
+
         <div class="left-content">
-        
+
             <a href="/chatrooms/new" id="new_chatroom"><input type="button" class="button_g full_width" value="新しい部屋をつくる"></a>
-            
+
             <% chatrooms.forEach(function(chatroom) { %>
             <div class="room">
                 <div class="room-inbox">
                     <div class="room-icon">
-                        <img class="icon_m" src="<%= chatroom.ownerimage %>">
+                        <a href="<%= chatroom.ownerpage %>">
+                          <img class="icon_m" src="<%= chatroom.ownerimage %>">
+                        </a>
                     </div>
                     <div class="room-titlebox">
                         <h2 class="room-title"><a href="/chatrooms/<%= chatroom.id %>"><%= chatroom.title %></a></h2>
                         <div class="cat-icon"><a href="#"><%= chatroom.category %></a></div>
-                        <div class="room-username"><a href="#">by.<%= chatroom.owner %></a></div>
+                        <div class="room-username"><a href="<%= chatroom.ownerpage %>">by.<%= chatroom.owner %></a></div>
                     </div>
                     <div class="room-button">
                         <a href="/chatrooms/<%= chatroom.id %>">
@@ -92,7 +94,7 @@
                 </div>
             </div>
             <% }) %>
-            
+
             <div class="room">
                 <div class="room-inbox">
                     <div class="room-icon">
@@ -114,7 +116,7 @@
                     <div class="ask-icon"><img class="icon_m" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></div>
                 </div>
             </div>
-            
+
             <div class="room">
                 <div class="room-inbox">
                     <div class="room-icon">
@@ -137,7 +139,7 @@
                     <div class="ask-icon"><img class="icon_m" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></div>
                 </div>
             </div>
-            
+
             <div class="room">
                 <div class="room-inbox">
                     <div class="room-icon">
@@ -160,17 +162,17 @@
                     <div class="ask-icon"><img class="icon_m" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></div>
                 </div>
             </div>
-            
+
             <section id="loadmore">
                 <div id="view-more-loader"><input type="button" class="button_yg full_width" value="ロード中"></div>
                 <div id="view-more-events"><a href="javascript:void(0);"><input type="button" class="button_yg full_width" value="もっと見る"></a></div>
                 <div id="view-more-no-entry"><!--ロードするものがありません--></div>
             </section>
-            
+
         </div>
-        
+
         <div class="right-content">
-            
+
             <div class="cboard">
                 <div class="cboard-titlebox">
                     <div class="cboard-icon">Q</div>
@@ -215,9 +217,9 @@
                     </ul>
                 </div>
             </div>
-            
+
         </div>
-        
+
     </div>
 
 <% include footer %>

@@ -69,17 +69,19 @@
     </div>
 
     <div id="content">
-    
+
         <div class="left-content">
-        
+
             <div class="room">
                 <div class="room-inbox">
                     <div class="room-icon">
-                        <img class="icon_m" src="<%= chatroom.ownerimage %>">
+                        <a href="<%= chatroom.ownerpage %>">
+                          <img class="icon_m" src="<%= chatroom.ownerimage %>">
+                        </a>
                     </div>
                     <div class="room-titlebox">
                         <h2 class="room-title"><%= chatroom.title %></h2>
-                        <div class="room-username"><a href="#">by.<%= chatroom.owner %></a></div>
+                        <div class="room-username"><a href="<%= chatroom.ownerpage %>">by.<%= chatroom.owner %></a></div>
                     </div>
                 </div>
                 <div class="room-option">
@@ -94,9 +96,9 @@
                     </div>
                 </div>
             </div><!-- room -->
-            
+
             <div class="message">
-            
+
                 <div id="lines1">
                 <% chats.forEach(function(chat) { %>
                     <section id="chat-content-<%= chat.id %>">
@@ -125,7 +127,7 @@
                             <p class="member-title"><%- esc(chat.message) %></p>
                             <!--img class="member-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
                             <div class="member-username"><a href="#">by.<%= chat.username %></a></div>
-                            <div class="member-date"><%= chat.time %> [2] 
+                            <div class="member-date"><%= chat.time %> [2]
                             <% if (isAuth && chat.user_id == userId) { %>
                             <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="<%= chat.id %>">
                             <% } %>
@@ -146,7 +148,7 @@
                     </section>
                 <% }) %>
                 </div><!-- lines1 -->
-                
+
                 <div class="message-add-inbox"
                 <% if ((!isMember && isUrlOpen) ||
                       (chatroom.status !== 2 && !isUrlOpen && (!isAuth || locals.alreadyDone))) { %>
@@ -171,13 +173,13 @@
                     </div>
                     <div id="scrl_top"><a href="javascript:void(0);" title="ページTOP">▲</a></div>
                 </div>
-                
+
             </div><!-- message -->
 
         </div><!-- left-content -->
-        
+
         <div class="right-content">
-            
+
             <div class="cboard">
                 <div class="cboard-titlebox">
                     <div class="cboard-icon">Q</div>
@@ -222,7 +224,7 @@
                     </ul>
                 </div>
             </div>
-            
+
         </div><!-- right-content -->
 
     </div><!-- content -->

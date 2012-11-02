@@ -5,38 +5,41 @@
   syaberi.templates.chat = {};
 
   syaberi.templates.chat.chatL = Handlebars.compile(
-    '<article class="chat-content" id="chat-content-{{chatId}}">'+
-      '<div class="thread_article_thumb fltl"><img src="{{userImage}}" width="40" height="40"></div>'+
-        '<div class="thread_article_box_arrowl"></div>'+
-        '<div class="thread_article_box magl22 fltl">'+
-        '<div class="thread_article_box_wrapp">'+
-          '{{#if isInvite}}{{#unless isUrlOpen}}{{#if isOwner}}'+
-            '<a href="javascript:void(0);" class="start_chat" data-userid="{{userId}}" data-chatid="{{chatId}}">[招待]</a>'+
-          '{{/if}}{{/unless}}{{/if}}'+
-          '<h4>{{userName}}</h4>'+
-          '<div class="thread_article_date">{{time}}</div>'+
-          '<div class="thread_article_txt">{{{message}}}</div>'+
+    '<div class="message-owner-inbox" id="chat-content-{{chatId}}">'+
+        '<div class="owner-icon">'+
+            '<img class="icon_m" src="{{userImage}}">'+
         '</div>'+
-      '</div>'+
-    '</article>'
+        '<div class="owner-titlebox">'+
+            '<p class="owner-title">{{{message}}}</p>'+
+            '<div class="owner-username"><a href="#">by.{{userName}}</a></div>'+
+            '<div class="owner-date">{{time}} [1]'+
+            '{{#if isHis}}'+
+            '<img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="{{chatId}}">'+
+            '{{/if}}'+
+            '</div>'+
+        '</div>'+
+    '</div>'
   );
 
   syaberi.templates.chat.chatR = Handlebars.compile(
-    '<article class="chat-content" id="chat-content-{{chatId}}">'+
-      '<div class="thread_article_thumb fltr"><img src="{{userImage}}" width="40" height="40"></div>'+
-        '<div class="thread_article_box_arrowr"></div>'+
-        '<div class="thread_article_box magr22 fltr">'+
-        '<div class="thread_article_box_wrapp">'+
-          '<img src="/img/article_close.png" width="18" height="18" alt="閉じる" class="thread_article_date delete_cmt" data-chatid="{{chatId}}">'+
-          '<h4>{{userName}}</h4>'+
-          '<div class="thread_article_date">{{time}}</div>'+
-          '<div class="thread_article_txt">{{{message}}}</div>'+
+    '<div class="message-member-inbox" id="chat-content-{{chatId}}">'+
+        '<div class="member-icon">'+
+            '<img class="icon_m" src="{{userImage}}">'+
         '</div>'+
-      '</div>'+
-    '</article>'
+        '<div class="member-titlebox">'+
+            '<p class="member-title">{{{message}}}</p>'+
+            '<div class="member-username"><a href="#">by.{{userName}}</a></div>'+
+            '<div class="member-date">{{time}} [2]'+
+            '{{#if isHis}}'+
+            '<img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="{{chatId}}">'+
+            '{{/if}}'+
+            '</div>'+
+            '{{#if isInvite}}{{#unless isUrlOpen}}{{#if isOwner}}'+
+            '<a href="javascript:void(0);" class="start_chat" data-userid="{{userId}}" data-chatid="{{chatId}}">[招待]</a>'+
+            '{{/if}}{{/unless}}{{/if}}'+
+        '</div>'+
+    '</div>'
   );
-
-
 
 }).call(this);
 
@@ -210,15 +213,16 @@
         time: data.time,
         message: data.message,
         isOwner: userId === ownerId,
+        isHis: userId === data.userId, //本人の書き込みを表すフラグ
         isInvite: status !== 2,
         isUrlOpen: isUrlOpen
       };
-      //発言者のフキダシは向きを変える
-      if (userId === data.userId) {
-        chatTemplate = syaberi.templates.chat.chatR(params);
+      //オーナーのフキダシは向きを変える
+      if (ownerId === data.userId) {
+        chatTemplate = syaberi.templates.chat.chatL(params);
       }
       else {
-        chatTemplate = syaberi.templates.chat.chatL(params);
+        chatTemplate = syaberi.templates.chat.chatR(params);
       }
 
       $('#lines1').append(chatTemplate);

@@ -145,15 +145,16 @@
         time: data.time,
         message: data.message,
         isOwner: userId === ownerId,
+        isHis: userId === data.userId, //本人の書き込みを表すフラグ
         isInvite: status !== 2,
         isUrlOpen: isUrlOpen
       };
-      //発言者のフキダシは向きを変える
-      if (userId === data.userId) {
-        chatTemplate = syaberi.templates.chat.chatR(params);
+      //オーナーのフキダシは向きを変える
+      if (ownerId === data.userId) {
+        chatTemplate = syaberi.templates.chat.chatL(params);
       }
       else {
-        chatTemplate = syaberi.templates.chat.chatL(params);
+        chatTemplate = syaberi.templates.chat.chatR(params);
       }
 
       $('#lines1').append(chatTemplate);

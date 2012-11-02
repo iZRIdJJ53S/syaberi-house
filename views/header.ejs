@@ -1,3 +1,17 @@
+<script>
+<!--
+$(function() {
+	$(".pulldown").click(function(e) {
+		e.stopPropagation();
+		$("#head_menu_list").show();
+	});
+	$(document).click(function() {
+		$("#head_menu_list").hide();
+	});
+});
+-->
+</script>
+
 <div id="head">
     <header><a href="/"><img src="/img/logo.png" alt="シャベリハウス"></a></header>
     <nav>
@@ -13,11 +27,11 @@
         <div class="icon"><a href="#"><img class="icon_s" id="header_mypage_thumb_img" src="<%= locals.userImage %>"></a></div>
         <div class="name"><a href="#"><%= locals.userName %></a></div>
         <div class="pulldown"><a href="#">▼</a></div>
-        <div id="mypage_notification_wrapp">
-          <a href="/mypage" class="mypage_nortification_txt"><div>マイページ</div></a>
-          <a href="/chatrooms/new" class="mypage_nortification_txt"><div>チャットルームを作る</div></a>
-          <a href="/logout" class="mypage_nortification_txt"><div>ログアウト</div></a>
-        </div>
+    </div>
+    <div id="head_menu_list">
+        <a href="/mypage" class="mypage_nortification_txt">マイページ</a> | 
+        <a href="/chatrooms/new" class="mypage_nortification_txt">チャットルームを作る</a> | 
+        <a href="/logout" class="mypage_nortification_txt">ログアウト</a>
     </div>
 
     <% }else{ %>

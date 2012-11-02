@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <html>
 <head>
 <meta charset='utf-8' />
@@ -61,7 +60,7 @@
                         <% if (chatroom.status == 0) { %>
                           <input type="button" class="button_g" value="話す">
                         <% } else { %>
-                          <input type="button" class="button_g" value="シャベリ中">
+                          <input type="button" class="button_yg" value="話す">
                         <% }%>
                         </a>
                     </div>
@@ -143,8 +142,12 @@
                     <div class="ask-icon"><img class="icon_m" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></div>
                 </div>
             </div>
-        
-            <input type="button" class="button_yg full_width" value="もっと見る">
+            
+            <section id="loadmore">
+                <div id="view-more-loader"><input type="button" class="button_yg full_width" value="ロード中"></div>
+                <div id="view-more-events"><a href="javascript:void(0);"><input type="button" class="button_yg full_width" value="もっと見る"></a></div>
+                <div id="view-more-no-entry"><!--ロードするものがありません--></div>
+            </section>
             
         </div>
         
@@ -199,54 +202,9 @@
         
     </div>
 
-<div id="contents_wrapp">
-  <div id="contents_wrapp_inside">
-    <section id="section_searchcommu">
-      
-
-      <% chatrooms.forEach(function(chatroom) { %>
-        <div style="" class="searchartile">
-          <dl class="search_dl">
-              <dd class="search_dd_title">
-                <a href="/chatrooms/<%= chatroom.id %>">【<%= chatroom.category %>】<%= chatroom.title %></a>
-              </dd>
-              <dd class="search_dd_tag" id="search_dd_tag_<%= chatroom.id %>"></dd>
-              <dd class="search_dd_txt"><%= chatroom.description %></dd>
-          </dl>
-          <div class="joinedthumbs_wrapp clearfix">
-            <ul id="dec-supporters-<%= chatroom.id %>">
-            </ul>
-
-            <div class="joined_details" class="txtc">
-              <span id="joined_detail_<%= chatroom.id %>"></span>
-              <span>
-                <% if (chatroom.status == 0) { %>
-                  募集中
-                <% } else { %>
-                  開始中
-                <% }%>
-              </span>
-            </div>
-            <%/*コメント for (var jj = 0; jj < dec_list[i].supporter_num; jj++) { %>
-            <div class="joined_thumbs"><img src="<%= dec_list[i].user_image %>" width="40" height="40"></div>
-            <% } コメント*/ %>
-          </div><!--/joinedthumbs_wrapp-->
-        </div>
-      <% }) %>
-    </section>
-
-    <section id="loadmore">
-      <div id="view-more-loader" style="text-align:center;display:none; height:51px;"><img src="/img/loader.gif" /></div>
-        <div id="view-more-events" class="magb15" ><a href="javascript:void(0);"><img src="/img/common/show_morecontents_b2.gif"></a></div>
-
-      <div id="view-more-no-entry" style="text-align:center;display:none;">該当するコミュニティーは見つかりませんでした。<br></div>
-    </section>
-
-  </div><!--/#contents_wrapp_inside-->
-</div><!--/#contents_wrapp-->
-
 <% include footer %>
 
-</div><!--/#wrapper-->
+</div>
+
 </body>
 </html>

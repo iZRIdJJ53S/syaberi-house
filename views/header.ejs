@@ -6,64 +6,21 @@
             <li><a href="#" >体験や経験を投稿する</a></li>
         </ul>
     </nav>
-    <div id="login">
-        <input type="button" class="button_b" value="twitterでログイン">
-        <div class="login-notes">※twitterログイン後にオリジナルのニックネームを設定できます。</div>
-    </div>
-    <!--
-    <div id="menu">
-        <div class="icon"><a href="#"><img class="icon_s" src="https://si0.twimg.com/profile_images/2624755802/43wqi7cb1o1lq5lzqmvo_reasonably_small.jpeg"></a></div>
-        <div class="name"><a href="#">ちきん</a></div>
-        <div class="pulldown"><a href="#">▼</a></div>
-    </div>
-    -->
-</div>
-
-<header>
-  <div id="header_wrapp">
-    <div id="header_left">
-      <h1><a href="/"><img src="/img/common/logo.png" width="186" height="59" alt="SYABERI HOUSE"></a></h1>
-    </div><!--/header_left-->
-    <div id="header_center">
-      <table id="header_center_table">
-        <tr>
-          <td>
-            <a href="javascript:void(0);" id="fukidashi" style="display:none;"></a>
-            <div id="fukidashi_notification_wrapp"></div><!--/fukidashi_notification_wrapp-->
-          </td>
-          <td>
-            <!--
-            <form id="serch_box" method="get" action="/search">
-              <input type="text" id="input_area" value="コミュニティを探す" name="search_str" onfocus="if(this.value=='コミュニティを探す'){this.value='';}" onblur="if(this.value==''){this.value='コミュニティを探す';}" />
-              <input type="image" name="submit" src="/img/common/searchbox_submit_s.gif" id="serch_submit" />
-            </form>
-            <div id="tag_word">
-              <a href="javascript:void(0);"><img src="/img/common/tag.png" width="71" height="26" alt="TAG" id="header_tag"></a>
-              <a href="/search?search_str=速報">速報</a>
-              <a href="/search?search_str=画像">画像</a>
-              <a href="/search?search_str=教えて">教えて</a>
-              <a href="/search?search_str=猫">猫</a>
-              <a href="/search?search_str=グルメ">グルメ</a>
-              <a href="/search?search_str=旅行">旅行</a>
-            </div>
-            -->
-            <!-- div id="tag_notification_wrapp">
-              <div class="pad10 fontb bg_g">注目タグ</div>
-              <div class="tag_nortification_txt bdtp">■□□□□□□□□□■□□□□□□□□□■□□□□■□□□□□□■□□□□□□□■□□□■□□□□□■□□□□□□□□□□</div>
-              <div class="tag_nortification_txt bdtp">■□□□□□□□□□■□□□□□□□■□□□■□□□□□■□□□□□□□□□□■□□□□□□□■□□□■□□□□□■□□□□□□</div>
-              <div class="tag_nortification_txt bdtp">■□□□□□□□□□■□□□■□□□□□□□□□■□□□□■□□□□□□□■□□□■□□□□□■□□□□□□□□□□□□</div>
-            </div --><!--/tag_notification_wrapp-->
-          </td>
-          <td>
-          </td>
-        </tr>
-      </table>
-    </div><!--/header_center-->
-
-
+    
     <%if (isAuth) { %>
-
-
+    
+    <div id="menu">
+        <div class="icon"><a href="#"><img class="icon_s" id="header_mypage_thumb_img" src="<%= locals.userImage %>"></a></div>
+        <div class="name"><a href="#"><%= locals.userName %></a></div>
+        <div class="pulldown"><a href="#">▼</a></div>
+        <div id="mypage_notification_wrapp">
+          <a href="/mypage" class="mypage_nortification_txt"><div>マイページ</div></a>
+          <a href="/chatrooms/new" class="mypage_nortification_txt"><div>チャットルームを作る</div></a>
+          <a href="/logout" class="mypage_nortification_txt"><div>ログアウト</div></a>
+        </div>
+    </div>
+    
+    <!--
       <div id="header_right">
 
         <table id="header_right_table">
@@ -77,31 +34,17 @@
           <a href="/mypage" class="mypage_nortification_txt"><div>マイページ</div></a>
           <a href="/chatrooms/new" class="mypage_nortification_txt"><div>チャットルームを作る</div></a>
           <a href="/logout" class="mypage_nortification_txt"><div>ログアウト</div></a>
-        </div><!--/mypage_notification_wrapp-->
+        </div>
+    -->
 
       </div>
     <% }else{ %>
-
-      <div id="header_register">
-        <ul>
-        <!--
-          <li><a href="javascript:void(0);" id="login_button_facebook"><img src="/img/header_login_facebook.gif" width="80" height="26" alt="facebookログイン"></a></li>
-        -->
-          <li><a href="/auth/twitter" id="login_button_twetter"><img src="/img/header_login_twetter.gif" width="80" height="26" alt="twetterログイン"></a></li>
-        <!--
-          <li><a href="/auth/mixi" id="login_button_mixi"><img src="/img/header_login_mixi.gif" width="80" height="26" alt="mixiログイン"></a></li>
-        -->
-        </ul>
-        <!--
-        <ul>
-          <li><a href="/users/new">ユーザ登録</a></li>
-          <li><a href="/login">ログイン</a></li>
-        </ul>
-        -->
-      </div>
+        
+    <div id="login">
+        <input type="button" class="button_b" id="login_button_twetter" value="twitterでログイン">
+        <div class="login-notes">※twitterログイン後にオリジナルのニックネームを設定できます。</div>
+    </div>
 
     <% } %>
-
-    <div id="fb-root"></div>
-  </div>
-</header>
+    
+</div>

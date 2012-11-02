@@ -12,211 +12,223 @@
   <% } %>
 >
 <head>
-<title><%= chatroom.title %>｜シャベリハウス</title>
-<meta charset="UTF-8">
-<meta name="description" content="友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！">
-<meta name="keywords" content="シャベリハウス,チャット,趣味,興味,twitter,facebook,mixi">
-<link rel="shortcut icon" href="http://syaberi-house.com/img/favicon.ico" />
-<link rel="stylesheet" href="/css/html5reset-1.6.1.css" />
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" href="/css/common.css" />
-<style type="text/css">
-  .house_bg { background: url('<%= house_image %>'); }
-</style>
-<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
-<script src="/socket.io/socket.io.js"></script>
-<% if (isProduction) { %>
-<script src="/js/dist/common.min.js"></script>
-<script src="/js/dist/chatroom.min.js"></script>
-<% } else { %>
-<script src="/js/lib/jquery-1.8.2.js"></script>
-<script src="/js/lib/jquery.cookie.js"></script>
-<script src="/js/lib/underscore.js"></script>
-<script src="/js/lib/backbone.js"></script>
-<script src="/js/lib/backbone-validation.js"></script>
-<script src="/js/lib/handlebars-1.0.rc.1.js"></script>
-<script src="/js/upload.js"></script>
-<script src="/js/menu.js"></script>
-<script src="/js/util.js"></script>
-<script src="/js/templates/chat.js"></script>
-<script src="/js/models/chat.js"></script>
-<script src="/js/views/chat.js"></script>
-<script src="/js/chatroomApp.js"></script>
-<% } %>
+<meta charset='utf-8' />
+    <title><%= chatroom.title %>｜シャベリハウス</title>
+    <meta name="description" content="詳しい人と話せる新感覚のQ&Aサイト">
+    <meta name="keywords" content="シャベリハウス,話す,詳しい人,Q&A,解決,悩み,問題">
+    <link charset='utf-8' href='/css/reset.css' rel='stylesheet' type='text/css' />
+    <link charset='utf-8' href='/css/style.css' rel='stylesheet' type='text/css' />
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
+    <script src="/socket.io/socket.io.js"></script>
+    <% if (isProduction) { %>
+    <script src="/js/dist/common.min.js"></script>
+    <script src="/js/dist/chatroom.min.js"></script>
+    <% } else { %>
+    <script src="/js/lib/jquery-1.8.2.js"></script>
+    <script src="/js/lib/jquery.cookie.js"></script>
+    <script src="/js/lib/underscore.js"></script>
+    <script src="/js/lib/backbone.js"></script>
+    <script src="/js/lib/backbone-validation.js"></script>
+    <script src="/js/lib/handlebars-1.0.rc.1.js"></script>
+    <script src="/js/upload.js"></script>
+    <script src="/js/menu.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/templates/chat.js"></script>
+    <script src="/js/models/chat.js"></script>
+    <script src="/js/views/chat.js"></script>
+    <script src="/js/chatroomApp.js"></script>
+    <% } %>
 </head>
+
 <body>
-<div id="wrapper">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=152355228231572";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div id="wrap">
 
 <% include header %>
 
-
-<div id="contents_wrapp" <% if ( dec_image ) { %>style="background-image:url('<%= dec_image %>');"<% } %>>
-  <div id="contents_wrapp_inside">
-<section id="thread">
-<div id="thread_wrapp">
-<h3 id="thread_h3">
-【<%= chatroom.category %>】<%= chatroom.title %>
-</h3>
-<div class="thread_txt"><%= chatroom.description %></div>
-<div class="thread_txt">ハウスオーナー: <%= chatroom.owner %></div>
-<div class="thread_txt">
-  <% if (chatroom.status == 0) { %>
-    【募集中】
-  <% } else { %>
-    <a href="/chatrooms/<%= chatroom.id %>/open">【開催中】</a>
-  <% }%>
-</div>
-<div class="txtc magb13">
-</div>
-<div id="pullarea" style="display:none;">
-<div class="txtl bg_g padt10 clearfix">
-<p class="fontb fltl padl10">今チャットルームにいる人</p><p class="fltr padr10 text16 fontb"><span id="peaple"></span>人</p>
-</div>
-<div class="participant thread_friends clearfix bg_g" id="audienceview">
-</div>
-</div>
-<a href="javascript:void(0);" id="pullpullpull"></a>
-</div><!--/thread_wrapp-->
-</section>
-    <section id="section_thread_left">
-      <% if (isUrlOpen) { %>
-      <article>
-        <div class="thread_article_box_left fltl">
-          <div class="thread_article_box_wrapp_left">
-            <div class="thread_article_txt">
-
-              <div class="main-view"><!-- main-view -->
-                <div id="disparea">
-                  <div id="view_frame" class="view">
-                    <img src="/img/hint0.png" style="width:400px;">
-                  </div>
-                </div>
-              </div><!-- /main-view -->
-
-            </div>
-          </div>
+    <div id="mainview">
+        <div class="sbtn">
+            <ul>
+                <li class="sbtn-tw">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja">ツイート</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </li>
+                <li class="sbtn-fb">
+                    <div class="fb-like" data-href="http://syaberi-house.com" data-send="true" data-width="450" data-show-faces="true"></div>
+                </li>
+            </ul>
         </div>
-      </article>
-      <% } %>
-    </section><!--/section_thread_left-->
+    </div>
 
-    <section id="section_thread_right">
-      <div id="lines1" class="chat">
-        <% chats.forEach(function(chat) { %>
-          <article class="chat-content" id="chat-content-<%= chat.id %>">
-          <% if (isAuth && chat.user_id == userId) { %>
-              <div class="thread_article_thumb fltr"><img src="<%= chat.userimage %>" width="40" height="40"></div>
-              <div class="thread_article_box_arrowr"></div>
-              <div class="thread_article_box magr22 fltr">
-                <div class="thread_article_box_wrapp">
-                  <img src="/img/article_close.png" width="18" height="18" alt="閉じる" class="thread_article_date delete_cmt" data-chatid="<%= chat.id %>">
-                  <h4><%= chat.username %></h4>
-                  <div class="thread_article_date"><%= chat.time %></div>
-                  <div class="thread_article_txt"><%- esc(chat.message) %></div>
+    <div id="content">
+    
+        <div class="left-content">
+        
+            <div class="room">
+                <div class="room-inbox">
+                    <div class="room-icon">
+                        <img class="icon_m" src="<%= chatroom.ownerimage %>">
+                    </div>
+                    <div class="room-titlebox">
+                        <h2 class="room-title"><%= chatroom.title %></h2>
+                        <div class="room-username"><a href="#">by.<%= chatroom.owner %></a></div>
+                    </div>
                 </div>
-              </div>
-          <% } else { %>
-              <div class="thread_article_thumb fltl"><img src="<%= chat.userimage %>" width="40" height="40"></div>
-              <div class="thread_article_box_arrowl"></div>
-              <div class="thread_article_box magl22 fltl">
-                <div class="thread_article_box_wrapp">
-                  <% if (chatroom.status !== 2 && !isUrlOpen && isOwner) { %>
-                    <% if (chat.invited == 0) { %>
-                    <a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>" data-chatid="<%= chat.id %>">[招待]</a>
-                    <% } else { %>
-                      [招待済]
-                    <% }%>
-                  <% } %>
-                  <h4><%= chat.username %></h4>
-                  <div class="thread_article_date"><%= chat.time %></div>
-                  <div class="thread_article_txt"><%- esc(chat.message) %></div>
+                <div class="room-option">
+                    <div class="room-date">作成日 <%= chatroom.date %></div>
+                    <div class="room-member">
+                        <div class="room-member-open">全体に公開</div>
+                        <div class="room-member-title">参加者</div>
+                        <div class="room-member-icon" id="audienceview">
+                            <a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a>
+                        </div>
+                        <div>いま部屋にいるひと : <span id="peaple"></span>人</div>
+                    </div>
                 </div>
-              </div>
-          <% } %>
-          </article>
-        <% }) %>
+            </div><!-- room -->
+            
+            <div class="message">
+            
+                <div id="lines1">
+                <% chats.forEach(function(chat) { %>
+                    <section id="chat-content-<%= chat.id %>">
+                    <% if (chatroom.ownerId == chat.user_id) { //ownerの投稿 %>
+                    <div class="message-owner-inbox">
+                        <div class="owner-icon">
+                            <img class="icon_m" src="<%= chat.userimage %>">
+                        </div>
+                        <div class="owner-titlebox">
+                            <p class="owner-title"><%- esc(chat.message) %></p>
+                            <!--img class="owner-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
+                            <div class="owner-username"><a href="#">by.<%= chat.username %></a></div>
+                            <div class="owner-date"><%= chat.time %> [1]
+                            <% if (isAuth && chat.user_id == userId) { %>
+                            <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="<%= chat.id %>">
+                            <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }else{ //memberの投稿%>
+                    <div class="message-member-inbox">
+                        <div class="member-icon">
+                            <img class="icon_m" src="<%= chat.userimage %>">
+                        </div>
+                        <div class="member-titlebox">
+                            <p class="member-title"><%- esc(chat.message) %></p>
+                            <!--img class="member-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
+                            <div class="member-username"><a href="#">by.<%= chat.username %></a></div>
+                            <div class="member-date"><%= chat.time %> [2] 
+                            <% if (isAuth && chat.user_id == userId) { %>
+                            <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="<%= chat.id %>">
+                            <% } %>
+                            </div>
+                            <% if (isAuth && chat.user_id == userId) { //ownerでログイン%>
+                            <% } else { %>
+                                <% if (chatroom.status !== 2 && !isUrlOpen && isOwner) { %>
+                                <% if (chat.invited == 0) { %>
+                                <a href="javascript:void(0);" class="start_chat" data-userid="<%= chat.user_id %>" data-chatid="<%= chat.id %>">[招待]</a>
+                                <% } else { %>
+                                  [招待済]
+                                <% }%>
+                              <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                    <% } %>
+                    </section>
+                <% }) %>
+                </div><!-- lines1 -->
+                
+                <div class="message-add-inbox"
+                <% if ((!isMember && isUrlOpen) ||
+                      (chatroom.status !== 2 && !isUrlOpen && (!isAuth || locals.alreadyDone))) { %>
+                          style="display:none;"
+                <% } %>>
+                    <div class="add-icon">
+                        <img class="icon_m" src="<%= locals.userImage %>">
+                    </div>
+                    <div class="add-titlebox">
+                        <textarea type="text" value="" id="message1" style="overflow:hidden; resize:none; word-wrap:normal;" cols="60" wrap="off"></textarea>
+                        <a href="javascript:void(0)" id="emoji_butt"><input type="button" class="button_stamp" value="^^"></a>
+                        <input type="button" class="button_plus" value="+">
+                        <div id="uploadings">
+                            <input type="file" id="uploadings_input" name="dec_image2" value="">
+                            <input type="hidden" id="realUpfile" value="">
+                        </div>
+                    </div>
+                    <div class="add-button">
+                        <label for="submit_1">
+                            <input type="button" class="button_g" id="submit_1" value="投稿">
+                        </label>
+                    </div>
+                    <div id="scrl_top"><a href="javascript:void(0);" title="ページTOP">▲</a></div>
+                </div>
+                
+            </div><!-- message -->
 
-      </div>
-    </section><!--/section_thread_right-->
+        </div><!-- left-content -->
+        
+        <div class="right-content">
+            
+            <div class="cboard">
+                <div class="cboard-titlebox">
+                    <div class="cboard-icon">Q</div>
+                    <div class="cboard-title">詳しいひと募集板</div>
+                </div>
+                <div class="cboard-entry">
+                    <ul>
+                        <li>
+                           <input type="button" class="button_yg full_width" value="投稿する">
+                        </li>
+                        <li>
+                            <div class="cboard-entry-title">飲食店経営者のひといませんか？</div>
+                            <div class="cboard-entry-userbox">
+                                <div class="cboard-entry-username">ビーフ</div>
+                                <div class="cboard-entry-icon"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cboard-entry-title">主婦歴長いひとと話したいです。</div>
+                            <div class="cboard-entry-userbox">
+                                <div class="cboard-entry-username">ビーフ</div>
+                                <div class="cboard-entry-icon"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cboard-entry-title">毎日の献立に困らないこつを教えて欲しい・・・。</div>
+                            <div class="cboard-entry-userbox">
+                                <div class="cboard-entry-username">ビーフ</div>
+                                <div class="cboard-entry-icon"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cboard-entry-title">最近ハワイに行ったひと居ませんか？</div>
+                            <div class="cboard-entry-userbox">
+                                <div class="cboard-entry-username">ビーフ</div>
+                                <div class="cboard-entry-icon"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></div>
+                            </div>
+                        </li>
+                        <li>
+                           <input type="button" class="button_yg full_width" value="もっと見る">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div><!-- right-content -->
 
-<!--投稿コメントエリア-->
-<section id="section_thread_bottom"
-  <% if ((!isMember && isUrlOpen) ||
-        (chatroom.status !== 2 && !isUrlOpen && (!isAuth || locals.alreadyDone))) { %>
-    style="display:none;"
-  <% } %>>
-  <div id="thread_comment_box">
-    <h3 id="comment_h3">コメント</h3>
-  <table id="comment_wrapp">
-  <tr>
-  <td colspan="6">
-  <div id="comment_wrapp_inputarea"><textarea type="text" value="" id="message1" style="overflow:hidden; resize:none; word-wrap:normal;" cols="60" wrap="off"></textarea></div>
-  </td>
-  </tr>
-  <tr>
-  <td width="77"><a href="javascript:void(0)" id="emoji_butt"><img src="/img/room_pull.gif" width="67" height="30"></a></td>
-  <!--td width="90"><a href="#"><img src="/img/room_attach.gif" width="67" height="30"></a></td-->
-  <td width="90" style="vertical-align:top;">
-  <div id="uploadings">
-  <input type="file" id="uploadings_input" name="dec_image2" value="">
-  <input type="hidden" id="realUpfile" value="">
-  </div>
-  </td>
-  <td>
-  <label for="submit_1">
-  <input type="image" src="/img/room_toukou.gif" class="fltr" id="submit_1">
-  </label>
-  </div>
-  </td>
-  </tr>
-  </table><div id="scrl_top"><a href="javascript:void(0);" title="ページTOP">▲</a></div>
-  </div>
-</section><!--/section_thread_bottom-->
-
-</div><!--/#contents_wrapp_inside-->
-</div><!--/#contents_wrapp-->
-
-
-<div class="main-img">
-
-<div class="ticket-wrapper" style="width:969px;">
-<div class="left" style="display:none;">
-  <h1 style="font-size:26px;padding:20px;"></h1>
-</div>
-<div class="header-icon" id="users_view"></div>
-</div>
-
-<!-- OLD STYLE -->
-
-<div id="content-wrapper">
-
-<div class="container"><!-- container -->
-<div class="content"><!-- content -->
-
-<div class="content-header"><!-- content-header -->
-  </div><!-- /content-header -->
-  <div style="clear:both;"></div>
-
-  <div class="content-body"><!-- content-body -->
-    <div class="main-chat"><!-- main-chat -->
-      <div class="title"></div>
-      <div class="input"><!-- input -->
-      </div><!-- /input -->
-
-    </div><!-- /main-chat -->
-  </div><!-- /content-body -->
-  <div style="clear:both;"></div>
-
-</div>
-</div>
-
-</div>
-
-<!-- /OLD STYLE -->
-<input type="hidden" id="onetime_token" name="onetime_token" value="<%= onetime_token %>">
+    </div><!-- content -->
 
 <% include footer %>
-</div><!--/#wrapper-->
+</div>
 
 </body>
 </html>

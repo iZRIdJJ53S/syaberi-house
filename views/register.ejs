@@ -40,11 +40,26 @@
       <table id="makecommunity_table">
         <tr>
           <th>ニックネーム<br><span style="color:#FF1881">※必須</span></th>
-          <td><div class="input_makecommunity_name_area"><input type="text" name="userName" id="userName" value="<%= userName %>"></div><span id="error_userName" class="error"></span></td>
+          <td>
+            <div class="input_makecommunity_name_area"><input type="text" name="userName" id="userName" value="<%= userName %>"></div>
+            <span id="error_userName" class="error"></span>
+          </td>
         </tr>
         <tr>
           <th>メールアドレス<br><span style="color:#FF1881">※必須</span></th>
-          <td><div class="input_makecommunity_name_area"><input type="text" name="email" id="email" value=""></div><span id="error_email" class="error"></span></td>
+          <td>
+            <div class="input_makecommunity_name_area"><input type="text" name="email" id="email" value=""></div>
+            <span id="error_email" class="error"></span>
+          </td>
+        </tr>
+        <tr>
+          <th>紹介文</th>
+          <td>
+            <div class="input_makecommunity_name_area">
+              <textarea name="description" id="description" cols="80" rows="8"></textarea>
+            </div>
+            <span id="error_description" class="error"></span>
+          </td>
         </tr>
       </table>
       <div id="makecommunity_detail">

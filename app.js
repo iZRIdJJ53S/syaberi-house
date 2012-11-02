@@ -157,7 +157,7 @@ app.get ('/chatrooms',           chatroomController.index);
 app.get ('/chatrooms/new',       authenticated, chatroomController.new);
 app.post('/chatrooms',           authenticated, chatroomController.create);
 app.get ('/chatrooms/:id',       chatroomController.show);
-app.get ('/chatrooms/:id/open',  authenticated, chatroomController.show);
+app.get ('/chatrooms/:id/open',  chatroomController.show);
 app.get ('/chatrooms/:id/edit',  authenticated, chatroomController.edit);
 app.put ('/chatrooms/:id',       authenticated, chatroomController.update);
 app.del ('/chatrooms/:id',       authenticated, chatroomController.destroy);
@@ -217,7 +217,7 @@ io.configure(function() {
   io.enable('browser client minification');
   io.enable('browser client etag');
   io.enable('browser client gzip');
-  io.set('log level', 1);
+//  io.set('log level', 1);
   io.set('store', new SocketIoRedisStore({
     redisPub: ioPub,
     redisSub: ioSub,

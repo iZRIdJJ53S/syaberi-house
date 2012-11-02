@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html lang="ja">
+<html lang="ja"
+  data-profileid="<%= profile.id %>"
+>
 <head>
 <meta charset='utf-8' />
     <title>マイページ｜シャベリハウス</title>
@@ -69,12 +71,14 @@
                         <article id="ownerChatrooms" class="community_room">
                             <a href="javascript:void(0)"><li class="active">作成した部屋</li></a>
                         </article>
+                        <% if (isMine) { %>
                         <article id="entryChatrooms" class="community_room">
                             <a href="javascript:void(0)"><li>申請中の部屋</li></a>
                         </article>
                         <article id="joinChatrooms" class="community_room">
                             <a href="javascript:void(0)"><li>参加中の部屋</li></a>
                         </article>
+                        <% } %>
                     </ul>
                 </div>
 

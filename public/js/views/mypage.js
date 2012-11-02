@@ -40,11 +40,14 @@
     getChatrooms: function(page) {
       var self = this;
       page = page || 1;
+      var profileId = $('html').data('profileid');
+
       $('#view-more-events').hide();
       $('#view-more-loader').show();
 
       this.collection.fetch({
         data: {
+          profileId: profileId,
           mode: this.mode,
           page: page
         },

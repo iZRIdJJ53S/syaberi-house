@@ -47,25 +47,25 @@
                 </ul>
             </div>
         </div>
-        
+
         <div id="content">
-        
+
             <div class="left-content">
-                
+
                 <div class="profile">
                     <div class="profile-inbox">
                         <div class="profile-icon">
-                            <img class="icon_l" src="<%= locals.userImage %>">
+                            <img class="icon_l" src="<%= profile.image %>">
                         </div>
                         <div class="profile-username">
-                            <h1><%= locals.userName %>のプロフィール</h1>
+                            <h1><%= profile.name %>のプロフィール</h1>
                         </div>
                     </div>
                     <div class="profile-option">
-                        <p><%= locals.userProfile %></p>
+                        <p><%= profile.description %></p>
                     </div>
                 </div>
-                
+
                 <div class="mypage-menu">
                     <ul>
                         <article id="ownerChatrooms" class="community_room">
@@ -79,13 +79,13 @@
                         </article>
                     </ul>
                 </div>
-                
+
                 <div id="article_area"></div><!-- article_area -->
-                
+
             </div><!-- left-content -->
-            
+
             <div class="right-content">
-                
+
                 <div class="cboard">
                     <div class="cboard-titlebox">
                         <div class="cboard-icon">Q</div>
@@ -130,9 +130,9 @@
                         </ul>
                     </div>
                 </div>
-                
+
             </div><!-- right-content -->
-            
+
         </div><!-- content -->
 
 <% include footer %>

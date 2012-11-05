@@ -15,6 +15,7 @@ var cookieLib = require('cookie');
 var config = require('config');
 var log4js  = require('log4js');
 var stackTrace = require('stack-trace');
+var emailjs  = require('emailjs/email');
 // セッションをRedisに保持
 var RedisStore = require('connect-redis')(express);
 var sessionStore = new RedisStore({
@@ -147,6 +148,17 @@ var mySqlClient = mysql.createClient({
 app.set('mySqlClient', mySqlClient);
 
 /************ MySQL ************/
+
+/************ Mail Server ************/
+var mailServer  = emailjs.server.connect({
+   host: config.mail.host,
+   ssl: true,
+   user: config.mail.user,
+   password: config.mail.password,
+});
+app.set('mailServer', mailServer);
+/************ /Mail Server ************/
+
 
 
 /************ Routing ************/

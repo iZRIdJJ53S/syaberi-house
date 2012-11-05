@@ -16,3 +16,10 @@ module.exports =
   twitter:
     consumerKey: 'l0q1e0LElofACmRM1ezEg'
     consumerSecret: 's0QLpzahToMVq4ToM0NeqGPDVO2pPTYjdkQBPBq0'
+  mail:
+    host: 'smtp.gmail.com'
+    user: 'syaberihouse'
+    password: 'syaberihouse0110'
+    from: 'syaberi-house <syaberihouse@gmail.com>'
+    subject:
+      welcome: 'SYABERI-HOUSEへようこそ！'

@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="ja"
   data-profileid="<%= profile.id %>"
+  data-profilename="<%= profile.name %>"
+  data-profileemail="<%= profile.email %>"
+  data-profiledescription="<%= profile.description %>"
 >
 <head>
 <meta charset='utf-8' />
@@ -23,6 +26,7 @@
     <script src="/js/menu.js"></script>
     <script src="/js/util.js"></script>
     <script src="/js/templates/mypage.js"></script>
+    <script src="/js/models/user.js"></script>
     <script src="/js/models/chatroom.js"></script>
     <script src="/js/views/mypage.js"></script>
     <script src="/js/mypageApp.js"></script>
@@ -68,15 +72,18 @@
 
                 <div class="mypage-menu">
                     <ul>
-                        <article id="ownerChatrooms" class="community_room">
+                        <article id="owner-chatrooms" class="community_room">
                             <a href="javascript:void(0)"><li class="active">作成した部屋</li></a>
                         </article>
                         <% if (isMine) { %>
-                        <article id="entryChatrooms" class="community_room">
+                        <article id="entry-chatrooms" class="community_room">
                             <a href="javascript:void(0)"><li>申請中の部屋</li></a>
                         </article>
-                        <article id="joinChatrooms" class="community_room">
+                        <article id="join-chatrooms" class="community_room">
                             <a href="javascript:void(0)"><li>参加中の部屋</li></a>
+                        </article>
+                        <article id="edit-profile" class="community_room">
+                            <a href="javascript:void(0)"><li>プロフィール設定</li></a>
                         </article>
                         <% } %>
                     </ul>

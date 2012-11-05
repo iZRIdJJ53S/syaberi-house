@@ -4,14 +4,17 @@
 
   syaberi.templates.mypage = {};
 
+  //チャットルーム一覧
   syaberi.templates.mypage.list = Handlebars.compile(
     '<article class="timeline">'+
       '<div class="smatc">'+
         '<div class="topthumb_b">'+
+        /**
           '<a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
             '<img src="/data/{{chatroom.id}}/images/thumb_m.jpg"'+
               'onerror=\'this.src="/img/common/nowprinting_m.jpg"\' class="dec_thumb_m">'+
           '</a>'+
+          **/
         '</div>'+
         '<h3><a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h3>'+
         '<p>{{chatroom.description}}</p>'+
@@ -32,6 +35,73 @@
       '</div>'+
     '</article>'
   );
+
+  //プロフィール編集
+  syaberi.templates.mypage.profile = Handlebars.compile(
+    '<form action="" method="">'+
+      '<table id="makecommunity_table">'+
+        '<tr>'+
+          '<th>ニックネーム<br><span style="color:#FF1881">※必須</span></th>'+
+          '<td>'+
+            '<div class="input_makecommunity_name_area"><input type="text" name="userName" id="userName" value="{{{userName}}}"></div>'+
+            '<span id="error_userName" class="error"></span>'+
+          '</td>'+
+        '</tr>'+
+        '<tr>'+
+          '<th>メールアドレス<br><span style="color:#FF1881">※必須</span></th>'+
+          '<td>'+
+            '<div class="input_makecommunity_name_area"><input type="text" name="email" id="email" value="{{email}}"></div>'+
+            '<span id="error_email" class="error"></span>'+
+          '</td>'+
+        '</tr>'+
+        '<tr>'+
+          '<th>紹介文</th>'+
+          '<td>'+
+            '<div class="input_makecommunity_name_area">'+
+              '<textarea name="description" id="description" cols="80" rows="8">{{{description}}}</textarea>'+
+            '</div>'+
+            '<span id="error_description" class="error"></span>'+
+          '</td>'+
+        '</tr>'+
+      '</table>'+
+      '<div class="txtc magt20 magb200">'+
+        '<input type="image" src="/img/makecommunity_submit.png" width="396" height="73" alt="送信" id="submit_1">'+
+      '</div>'+
+    '</form>'
+  );
+
+}).call(this);
+
+(function() {
+  var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
+
+  syaberi.User = Backbone.Model.extend({
+    id:          null,
+    userName:    null,
+    email:       null,
+    description: null,
+    validation: {
+      userName: [
+        { required: true, msg: 'ニックネームを入力してください' },
+        { rangeLength: [1, 255], msg: 'ニックネームは255文字以下で入力してください' }
+      ],
+      email: [
+        { required: true, msg: 'メールアドレスを入力してください' },
+        { pattern: 'email', msg: 'メールアドレスの形式が不正です。' },
+        { rangeLength: [3, 255], msg: 'メールアドレスは3文字以上255文字以下で入力してください' }
+      ],
+      description: [
+        { rangeLength: [1, 10000], msg: '紹介文は10000文字以下で入力してください' }
+      ],
+
+    },
+    url: '/users'
+  });
+
+  syaberi.Users = Backbone.Collection.extend({
+    model: syaberi.User,
+    url: '/users'
+  });
 
 
 }).call(this);
@@ -86,14 +156,18 @@
     el: $('html'),
     // イベントの定義
     events: {
-      'click #ownerChatrooms':   'getOwnerChatrooms',
-      'click #entryChatrooms':   'getEntryChatrooms',
-      'click #joinChatrooms':    'getJoinChatrooms',
+      'click #owner-chatrooms':   'getOwnerChatrooms',
+      'click #entry-chatrooms':   'getEntryChatrooms',
+      'click #join-chatrooms':    'getJoinChatrooms',
+      'click #edit-profile':      'showProfile',
+      'click #submit_1':          'editProfile',
       'click #view-more-events': 'getMore'
     },
     initialize: function() {
+      this.model = new syaberi.User;
       this.collection = new syaberi.Chatrooms;
       this.mode = 'owner';
+      Backbone.Validation.bind(this);
     },
     getOwnerChatrooms: function(event) {
       this.init_list();
@@ -149,6 +223,56 @@
         }
       });
     },
+    showProfile: function(event) {
+      var userName = $('html').data('profilename');
+      var email = $('html').data('profileemail');
+      var description = $('html').data('profiledescription');
+
+      this.init_list();
+      var template = syaberi.templates.mypage.profile({
+        userName: userName,
+        email: email,
+        description: description
+      });
+      $('#article_area').append(template);
+    },
+    editProfile: function(event) {
+      event.preventDefault();
+      var userId = $('html').data('profileid');
+      var userName = $.trim($('#userName').val());
+      var email = $.trim($('#email').val());
+      var description = $.trim($('#description').val());
+
+      this.model.set({
+        userId: userId,
+        userName: userName,
+        email: email,
+        description: description,
+        isUpdate: true
+      });
+
+      if (this.model.isValid()) {
+        this.model.save({
+          userId: userId,
+          userName: userName,
+          email: email,
+          description: description
+        }, {
+          success: function() {
+            location.href = '/mypage';
+          },
+          error: function(model, res) {
+            alert(res.responseText);
+          }
+        });
+      }
+      this.model.bind('validated:invalid', function(model, errors) {
+        for (key in errors) {
+          $('#error_'+key).text(errors[key]);
+        }
+      });
+    },
+
     render: function() {
       this.getOwnerChatrooms();
     },

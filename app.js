@@ -183,7 +183,6 @@ app.get ('/mypage', authenticated, mypageController.show);
 app.get ('/users/new', authenticated, userController.new);
 app.post('/users',     authenticated, userController.create);
 app.get ('/users/:id', mypageController.show);
-app.put ('/users/:id', authenticated, userController.update);
 app.del ('/users/:id', authenticated, userController.destroy);
 app.get ('/login',     userController.login);
 app.post('/login',     passport.authenticate('local', {

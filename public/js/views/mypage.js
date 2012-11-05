@@ -6,14 +6,18 @@
     el: $('html'),
     // イベントの定義
     events: {
-      'click #ownerChatrooms':   'getOwnerChatrooms',
-      'click #entryChatrooms':   'getEntryChatrooms',
-      'click #joinChatrooms':    'getJoinChatrooms',
+      'click #owner-chatrooms':   'getOwnerChatrooms',
+      'click #entry-chatrooms':   'getEntryChatrooms',
+      'click #join-chatrooms':    'getJoinChatrooms',
+      'click #edit-profile':      'showProfile',
+      'click #submit_1':          'editProfile',
       'click #view-more-events': 'getMore'
     },
     initialize: function() {
+      this.model = new syaberi.User;
       this.collection = new syaberi.Chatrooms;
       this.mode = 'owner';
+      Backbone.Validation.bind(this);
     },
     getOwnerChatrooms: function(event) {
       this.init_list();
@@ -69,6 +73,56 @@
         }
       });
     },
+    showProfile: function(event) {
+      var userName = $('html').data('profilename');
+      var email = $('html').data('profileemail');
+      var description = $('html').data('profiledescription');
+
+      this.init_list();
+      var template = syaberi.templates.mypage.profile({
+        userName: userName,
+        email: email,
+        description: description
+      });
+      $('#article_area').append(template);
+    },
+    editProfile: function(event) {
+      event.preventDefault();
+      var userId = $('html').data('profileid');
+      var userName = $.trim($('#userName').val());
+      var email = $.trim($('#email').val());
+      var description = $.trim($('#description').val());
+
+      this.model.set({
+        userId: userId,
+        userName: userName,
+        email: email,
+        description: description,
+        isUpdate: true
+      });
+
+      if (this.model.isValid()) {
+        this.model.save({
+          userId: userId,
+          userName: userName,
+          email: email,
+          description: description
+        }, {
+          success: function() {
+            location.href = '/mypage';
+          },
+          error: function(model, res) {
+            alert(res.responseText);
+          }
+        });
+      }
+      this.model.bind('validated:invalid', function(model, errors) {
+        for (key in errors) {
+          $('#error_'+key).text(errors[key]);
+        }
+      });
+    },
+
     render: function() {
       this.getOwnerChatrooms();
     },

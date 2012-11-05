@@ -53,6 +53,7 @@ module.exports = function(grunt) {
       mypage: {
         src: [
           'public/js/templates/mypage.js',
+          'public/js/models/user.js',
           'public/js/models/chatroom.js',
           'public/js/views/mypage.js',
           'public/js/mypageApp.js'

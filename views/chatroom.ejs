@@ -172,7 +172,8 @@
                 </div><!-- lines1 -->
 
                 <div class="message-add-inbox"
-                <% if ((!isMember && isUrlOpen) ||
+                <% if (!isAuth ||
+                      (!isMember && isUrlOpen) ||
                       (chatroom.status !== 2 && !isUrlOpen && (!isAuth || locals.alreadyDone))) { %>
                           style="display:none;"
                 <% } %>>

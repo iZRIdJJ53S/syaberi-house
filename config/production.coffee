@@ -1,6 +1,6 @@
 module.exports =
   server:
-    host: "ec2-54-248-153-207.ap-northeast-1.compute.amazonaws.com:3000"
+    host: "websocket.syaberi-house.com"
     port: 3000
     cookieSecret: 'xZQWzsaY8fZWFnVltP1Y'
     cookieMaxAge: 1000 * 60 * 60 * 24 * 7 #1week

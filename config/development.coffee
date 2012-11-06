@@ -10,6 +10,11 @@ module.exports =
     user: 'syaberi_house'
     password: '12345'
     database: 'syaberi_house'
+  mysql_lb:
+    host: '127.0.0.1'
+    user: 'syaberi_house'
+    password: '12345'
+    database: 'syaberi_house'
   redis:
     host: '127.0.0.1'
     port: '6379'

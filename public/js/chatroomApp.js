@@ -2,7 +2,14 @@
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
   var host = $('html').data('host');
   var chatroomId = $('html').data('chatroom');
-  var url = host+'/chatrooms/'+chatroomId+'?id='+chatroomId;
+  var isUrlOpen = $('html').data('urlopen');
+  var url;
+  if (isUrlOpen) {
+    url = host+'/chatrooms/'+chatroomId+'/open?id='+chatroomId+'&urlopen='+isUrlOpen;
+  }
+  else {
+    url = host+'/chatrooms/'+chatroomId+'?id='+chatroomId;
+  }
   syaberi.socket = io.connect(url);
 
   $(function() {

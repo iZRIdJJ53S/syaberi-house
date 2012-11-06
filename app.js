@@ -239,8 +239,17 @@ io.configure(function() {
 
   io.set('authorization', function(handshake, callback) {
     var chatroomId = handshake.query.id;
-    if (!io.namespaces.hasOwnProperty('/chatrooms/'+chatroomId)) {
-      var chatroom = io.of('/chatrooms/'+chatroomId);
+    var isUrlOpen = handshake.query.urlopen;
+    var namespace;
+    if (isUrlOpen) {
+      namespace = '/chatrooms/'+chatroomId+'/open';
+    }
+    else {
+      namespace = '/chatrooms/'+chatroomId;
+    }
+
+    if (!io.namespaces.hasOwnProperty(namespace)) {
+      var chatroom = io.of(namespace);
       // ioConnect の確定
       chatroom.on('connection', socketIoController.onConnection);
     }

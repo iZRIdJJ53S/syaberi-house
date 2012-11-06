@@ -34,9 +34,9 @@
     </div>
 
     <div id="content">
-    
+
         <div class="left-content">
-        
+
             <form id="full-form-tag" name="full-form-tag" method="post" enctype="multipart/form-data">
             <div id="contents_wrapp">
               <div id="contents_wrapp_inside">
@@ -63,6 +63,8 @@
                     <th>説明<br><span style="color:#FF1881">※必須</span></th>
                       <td><div id="input_makecommunity_name_textarea" ><textarea id="description" name="description"></textarea></div><span id="error_description" class="error"></span></td>
                     </tr>
+                    <input type="hidden" value="1" name="publicYN" id="publicYN" />
+                    <!--
                     <tr>
                       <th>公開設定<br><span style="color:#FF1881">※必須</span></th>
                       <td>
@@ -70,6 +72,7 @@
                       <input type="radio" value="0" name="publicYN" id="public_0"/><label for="public_0">非公開</label>
                       <br><span id="error_public" class="error"></span></td>
                     </tr>
+                    -->
                     <tr>
                       <th>管理人</th>
                       <td><%= userName %></td>
@@ -83,12 +86,12 @@
               </div><!--/#contents_wrapp_inside-->
             </div><!--/#contents_wrapp-->
             </form>
-        
+
         </div>
-        
+
         <div class="right-content">
         </div>
-        
+
     </div><!-- content -->
 
 <form id="full-form-tag" name="full-form-tag" method="post" enctype="multipart/form-data">
@@ -117,6 +120,8 @@
         <th>説明<br><span style="color:#FF1881">※必須</span></th>
           <td><div id="input_makecommunity_name_textarea" ><textarea id="description" name="description"></textarea></div><span id="error_description" class="error"></span></td>
         </tr>
+        <input type="hidden" value="1" name="publicYN" id="publicYN" />
+        <!--
         <tr>
           <th>公開設定<br><span style="color:#FF1881">※必須</span></th>
           <td>
@@ -124,6 +129,7 @@
           <input type="radio" value="0" name="publicYN" id="public_0"/><label for="public_0">非公開</label>
           <br><span id="error_public" class="error"></span></td>
         </tr>
+        -->
         <tr>
           <th>管理人</th>
           <td><%= userName %></td>

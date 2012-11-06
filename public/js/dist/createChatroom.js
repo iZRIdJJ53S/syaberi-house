@@ -57,7 +57,8 @@
       var categoryId = $.trim($('#categoryId').val());
       var title = $.trim($('#title').val());
       var description = $.trim($('#description').val());
-      var publicYN = $('input[name="publicYN"]:checked').val();
+      var publicYN = $('#publicYN').val();
+      //var publicYN = $('input[name="publicYN"]:checked').val();
 
       // model にデータset
       this.model.set({

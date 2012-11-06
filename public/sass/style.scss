@@ -152,8 +152,9 @@ a{
  *
  */
 
-$BODY_WIDTH: 990px;
-$CONTENT_LEFT_WIDTH: $BODY_WIDTH/100*70;
+$BODY_WIDTH: 800px;
+$CONTENT_LEFT_WIDTH: $BODY_WIDTH;//右ナビ無しの対応
+//$CONTENT_LEFT_WIDTH: $BODY_WIDTH/100*70;
 $CONTENT_RIGHT_WIDTH: $BODY_WIDTH/100*28;
 body {
     //@include gradient-top-darken(#fff);
@@ -165,7 +166,6 @@ body {
     height: 100%;
     //background: #fff;
     //@include gradient-top-lighten(#fff);
-    padding: 0 20px 20px;
     //@include border-bottom-radius(6px);
     //@include box-shadow(rgba(0, 0, 0, .15) 0 0 2px);
 }
@@ -226,7 +226,7 @@ body {
     
     padding: 10px 0;
     margin-bottom: 10px;
-    @include line-bottom(.1,1);
+    border-bottom: 3px #96c045 solid;
     @include clearfix;
 }
 #head_menu_list{
@@ -391,7 +391,10 @@ body {
  */
 .message {
     padding: 20px;
+    border: 1px #96c045 solid;
     .message-help-inbox {
+        border-bottom: 3px #96c045 solid;
+        margin-bottom: 10px;
         .help-icon{
             float: left;
         }
@@ -477,7 +480,7 @@ body {
         clear:both;
     }
     .message-add-inbox {
-        @include line-top(.1,1);
+        border-top: 3px #96c045 solid;
         padding: 15px;
         .add-icon{
             float: left;

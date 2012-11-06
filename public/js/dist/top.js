@@ -47,7 +47,8 @@
 
   syaberi.Chatroom = Backbone.Model.extend({
     id:          null,
-    title:       null,
+    title1:      null,
+    title2:      null,
     description: null,
     categoryId:  null,
     userId:      null,
@@ -56,13 +57,15 @@
       categoryId: [
         { required: true, msg: 'カテゴリを選択してください' }
       ],
-      title: [
-        { required: true, msg: 'チャットルーム名を入力してください' },
-        { rangeLength: [5, 100], msg: 'チャットルーム名は5文字以上100文字以下で入力してください' }
+      title1: [
+        { required: true, msg: '部屋名を入力してください' },
+        { rangeLength: [0, 100], msg: '部屋名は100文字以下で入力してください' }
+      ],
+      title2: [
+        { required: true, msg: '部屋名を入力してください' },
+        { rangeLength: [0, 100], msg: '部屋名は100文字以下で入力してください' }
       ],
       description: [
-        { required: true, msg: '説明を入力してください' },
-        { rangeLength: [3, 10000], msg: '説明は3文字以上10000文字以下で入力してください' }
       ],
       publicYN: [
         { required: true, msg: '公開設定を選択してください' }

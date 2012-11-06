@@ -81,8 +81,8 @@
  *
  */
 
-$TEXT_LL: 36px;
-$TEXT_L: 24px;
+$TEXT_LL: 24px;
+$TEXT_L: 16px;
 $TEXT_M: 12px;
 $TEXT_S: 10px;
 $TEXT_SS: 8px;
@@ -102,6 +102,7 @@ a{
 }
 
 form{
+    font-size: $TEXT_L;
     table{
         padding: 10px;
     }
@@ -141,6 +142,9 @@ form{
  * button
  *
  */
+.button_menu {
+    @include sassy-button("flat", 3px, 10px, #96c045);
+}
 .button_yg {
     @include sassy-button("flat", 6px, 18px, #96c045);
 }
@@ -224,15 +228,11 @@ body {
             padding-top: 10px;
         }
         .pulldown{
-            width: 20px;
+            width: 50px;
             float: left;
             padding: 6px;
             margin-top: 4px;
             text-align: center;
-            border: 1px #fff solid;
-        }
-        .pulldown:hover{
-            border: 1px #333 solid;
         }
     };
     
@@ -243,6 +243,19 @@ body {
 }
 #head_menu_list{
     display: none;
+    float: left;
+    margin: 29px 16px 0;
+    position: fixed;
+    z-index: 900;
+    ul{
+        padding: 4px;
+        background: #fff;
+        border: 3px #96c045 solid;
+        list-style: none;
+        li{
+            padding: 6px;
+        }
+    }
 }
 #mainview{
     padding-top: 100px;
@@ -544,7 +557,7 @@ body {
         list-style: none;
     }
     ul li{
-        width: 100px;
+        width: 20%;
         padding: 10px;
         float: left;
     }

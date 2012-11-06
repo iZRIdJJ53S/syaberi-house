@@ -24,6 +24,7 @@
     "log4js": "0.5.4",
     "stack-trace": "*",
     "grunt": "0.3.17",
-    "emailjs": "0.3.3"
+    "emailjs": "0.3.3",
+    "validator": "0.4.13"
   }
 }

@@ -18,7 +18,7 @@
                 '<div class="room-username"><a href="{{ownerpage}}">by.{{owner}}</a></div>'+
             '</div>'+
             '<div class="room-button">'+
-                '<a href="/chatrooms/{{id}}">'+
+                '<a href="/chatrooms/{{id}}/open">'+
                 '{{#if isStatusInvite}}'+
                   '<input type="button" class="button_g" value="話す">'+
                 '{{else}}'+

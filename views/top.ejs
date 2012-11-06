@@ -76,7 +76,7 @@
                         <div class="room-username"><a href="<%= chatroom.ownerpage %>">by.<%= chatroom.owner %></a></div>
                     </div>
                     <div class="room-button">
-                        <a href="/chatrooms/<%= chatroom.id %>">
+                        <a href="/chatrooms/<%= chatroom.id %>/open">
                         <% if (chatroom.status == 0) { %>
                           <input type="button" class="button_g" value="話す">
                         <% } else { %>
@@ -88,7 +88,7 @@
                 <% if (chatroom.latest) { %>
                 <div class="ask">
                     <div class="ask-titlebox">
-                        <div class="ask-title" ><a href="/chatrooms/<%= chatroom.id %>/open"><%- esc(chatroom.latest.message) %></a></div>
+                        <div class="ask-title" ><a href="/chatrooms/<%= chatroom.id %>/open"><%- chatroom.latest.message %></a></div>
                         <div class="ask-username"><a href="/users/<%= chatroom.latest.userId %>">by.<%= chatroom.latest.username %></a></div>
                     </div>
                     <div class="ask-icon"><a href="/users/<%= chatroom.latest.userId %>"><img class="icon_m" src="<%= chatroom.latest.userimage %>"></a></div>

@@ -168,7 +168,9 @@ app.get ('/', topController.index);
 app.get ('/chatrooms',           chatroomController.index);
 app.get ('/chatrooms/new',       authenticated, chatroomController.new);
 app.post('/chatrooms',           authenticated, chatroomController.create);
-app.get ('/chatrooms/:id',       chatroomController.show);
+//参加申請は一時コメントアウト
+//app.get ('/chatrooms/:id',       chatroomController.show);
+app.get ('/chatrooms/:id',       function(req, res) { res.redirect(req.path+'/open') });
 app.get ('/chatrooms/:id/open',  chatroomController.show);
 app.get ('/chatrooms/:id/edit',  authenticated, chatroomController.edit);
 app.put ('/chatrooms/:id',       authenticated, chatroomController.update);

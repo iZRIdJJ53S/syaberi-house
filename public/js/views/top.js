@@ -21,14 +21,9 @@
           var chatrooms = response.chatrooms;
           if (chatrooms) {
             $.each(response.chatrooms, function(key, chatroom) {
-              if (chatroom.status === 0) {
-                chatroom.status = '募集中';
-              }
-              else {
-                chatroom.status = '開始中';
-              }
+              chatroom.isStatusInvite = chatroom.status == 0;
               var template = syaberi.templates.chatroom.list(chatroom);
-              $('#section_searchcommu').append(template);
+              $('.left-content', '#content').append(template);
             });
           }
           $('#view-more-loader').hide();

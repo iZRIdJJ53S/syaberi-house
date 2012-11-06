@@ -98,8 +98,10 @@
             <% }) %>
 
             <section id="loadmore">
-                <div id="view-more-loader"><input type="button" class="button_yg full_width" value="ロード中"></div>
+                <div id="view-more-loader" style="display:none;"><input type="button" class="button_yg full_width" value="ロード中"></div>
+                <% if (nextPage > 1) { %>
                 <div id="view-more-events"><a href="javascript:void(0);"><input type="button" class="button_yg full_width" value="もっと見る"></a></div>
+                <% } %>
                 <div id="view-more-no-entry"><!--ロードするものがありません--></div>
             </section>
 

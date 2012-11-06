@@ -153,10 +153,10 @@ form{
     @include sassy-button("glass", 6px, 18px, #4ba3cc);
 }
 .button_stamp {
-    @include sassy-button("matte", 10px, 10px, #96c045);
+    @include sassy-button("matte", 10px, 10px, #6ea700);
 }
 .button_plus {
-    @include sassy-button("matte", 10px, 10px, #96c045);
+    @include sassy-button("matte", 10px, 10px, #6ea700);
 }
 
 /*
@@ -492,6 +492,7 @@ body {
         clear:both;
     }
     .message-add-inbox {
+        @include gradient-top-lighten(#96c045);
         border-top: 3px #96c045 solid;
         padding: 15px;
         .add-icon{

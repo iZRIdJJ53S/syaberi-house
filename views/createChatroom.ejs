@@ -57,7 +57,7 @@
                     </tr>
                     <tr>
                       <th>部屋名<br><span style="color:#FF1881">※必須</span></th>
-                      <td><div class="input_makecommunity_name_area"><input type="text" name="title" id="title" value=""></div><span id="error_title" class="error"></span>けど、質問ある？</td>
+                      <td><div class="input_makecommunity_name_area"><input type="text" name="title" id="title" value="経験や体験は？">けど、<br>例）昨日、富士山登ってきた<br><input type="text" name="title" id="title" value="話題は？">について、話しませんか？<br>例）登山</div><span id="error_title" class="error"></span></td>
                     </tr>
                     <tr>
                     <th>説明<br><span style="color:#FF1881">※必須</span></th>
@@ -94,59 +94,6 @@
 
     </div><!-- content -->
 
-<<<<<<< HEAD
-<form id="full-form-tag" name="full-form-tag" method="post" enctype="multipart/form-data">
-<div id="contents_wrapp">
-  <div id="contents_wrapp_inside">
-    <section id="make_community">
-      <h3 id="makecommunity_h3">新し体験部屋を作成する</h3>
-      <form action="" method="">
-      <table id="makecommunity_table">
-        <tr>
-          <th>カテゴリ<br><span style="color:#FF1881">※必須</span></th>
-          <td>
-          <select id="categoryId" name="categoryId">
-            <option value="">選択してください</option>
-            <% categories.forEach(function(category) { %>
-            <option value="<%= category.id %>"><%= category.title %></option>
-            <% }) %>
-          </select>
-          <br><span id="error_categoryId" class="error"></span></td>
-        </tr>
-        <tr>
-          <th>体験<br><span style="color:#FF1881">※必須</span></th>
-          <td><div class="input_makecommunity_name_area"><input type="text" name="title" id="title" value=""></div><span id="error_title" class="error"></span>けど、質問ある？</td>
-        </tr>
-        <tr>
-        <th>説明<br><span style="color:#FF1881">※必須</span></th>
-          <td><div id="input_makecommunity_name_textarea" ><textarea id="description" name="description"></textarea></div><span id="error_description" class="error"></span></td>
-        </tr>
-        <input type="hidden" value="1" name="publicYN" id="publicYN" />
-        <!--
-        <tr>
-          <th>公開設定<br><span style="color:#FF1881">※必須</span></th>
-          <td>
-          <input type="radio" value="1" name="publicYN" id="public_1" checked="checked" /><label for="public_1">公開</label>
-          <input type="radio" value="0" name="publicYN" id="public_0"/><label for="public_0">非公開</label>
-          <br><span id="error_public" class="error"></span></td>
-        </tr>
-        -->
-        <tr>
-          <th>管理人</th>
-          <td><%= userName %></td>
-        </tr>
-      </table>
-    </section>
-      <div class="txtc magt20 magb200">
-        <input type="image" src="/img/makecommunity_submit.png" width="396" height="73" alt="送信" id="submit_1">
-      </div>
-    </section>
-  </div><!--/#contents_wrapp_inside-->
-</div><!--/#contents_wrapp-->
-</form>
-
-=======
->>>>>>> フォーム修正
 <% include footer %>
 
 </body>

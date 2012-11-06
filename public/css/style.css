@@ -245,18 +245,18 @@ form td {
   -o-border-radius: 10px;
   border-radius: 10px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF96C045', endColorstr='#FF5C7728');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #b6d37e), color-stop(70%, #96c045));
-  background: -webkit-linear-gradient(#b6d37e, #96c045 70%);
-  background: -moz-linear-gradient(#b6d37e, #96c045 70%);
-  background: -o-linear-gradient(#b6d37e, #96c045 70%);
-  background: linear-gradient(#b6d37e, #96c045 70%);
-  -webkit-box-shadow: #d7e7b7 0 1px 0 inset;
-  -moz-box-shadow: #d7e7b7 0 1px 0 inset;
-  box-shadow: #d7e7b7 0 1px 0 inset;
-  border: 1px solid #88b03c;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6EA700', endColorstr='#FF2B4100');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a0f300), color-stop(70%, #6ea700));
+  background: -webkit-linear-gradient(#a0f300, #6ea700 70%);
+  background: -moz-linear-gradient(#a0f300, #6ea700 70%);
+  background: -o-linear-gradient(#a0f300, #6ea700 70%);
+  background: linear-gradient(#a0f300, #6ea700 70%);
+  -webkit-box-shadow: #beff41 0 1px 0 inset;
+  -moz-box-shadow: #beff41 0 1px 0 inset;
+  box-shadow: #beff41 0 1px 0 inset;
+  border: 1px solid #5d8d00;
   color: white;
-  text-shadow: #759733 0 -1px 0;
+  text-shadow: #476c00 0 -1px 0;
 }
 /* line 15, ../../../../../.rvm/gems/ruby-1.9.2-p290/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .button_stamp:hover {
@@ -264,23 +264,23 @@ form td {
 }
 /* line 18, ../../../../../.rvm/gems/ruby-1.9.2-p290/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .button_stamp:hover {
-  background-color: #88b03c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(3%, #accd6b), color-stop(75%, #88b03c));
-  background: -webkit-linear-gradient(#accd6b 3%, #88b03c 75%);
-  background: -moz-linear-gradient(#accd6b 3%, #88b03c 75%);
-  background: -o-linear-gradient(#accd6b 3%, #88b03c 75%);
-  background: linear-gradient(#accd6b 3%, #88b03c 75%);
+  background-color: #5d8d00;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(3%, #90da00), color-stop(75%, #5d8d00));
+  background: -webkit-linear-gradient(#90da00 3%, #5d8d00 75%);
+  background: -moz-linear-gradient(#90da00 3%, #5d8d00 75%);
+  background: -o-linear-gradient(#90da00 3%, #5d8d00 75%);
+  background: linear-gradient(#90da00 3%, #5d8d00 75%);
 }
 /* line 21, ../../../../../.rvm/gems/ruby-1.9.2-p290/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .button_stamp:active {
-  -webkit-box-shadow: #7fa438 0 1px 2px inset;
-  -moz-box-shadow: #7fa438 0 1px 2px inset;
-  box-shadow: #7fa438 0 1px 2px inset;
+  -webkit-box-shadow: #537e00 0 1px 2px inset;
+  -moz-box-shadow: #537e00 0 1px 2px inset;
+  box-shadow: #537e00 0 1px 2px inset;
 }
 /* line 6, ../../../../../.rvm/gems/ruby-1.9.2-p290/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .button_stamp.disabled, .button_stamp[disabled] {
   opacity: 0.6;
-  background: #96c045;
+  background: #6ea700;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -304,18 +304,18 @@ form td {
   -o-border-radius: 10px;
   border-radius: 10px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF96C045', endColorstr='#FF5C7728');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #b6d37e), color-stop(70%, #96c045));
-  background: -webkit-linear-gradient(#b6d37e, #96c045 70%);
-  background: -moz-linear-gradient(#b6d37e, #96c045 70%);
-  background: -o-linear-gradient(#b6d37e, #96c045 70%);
-  background: linear-gradient(#b6d37e, #96c045 70%);
-  -webkit-box-shadow: #d7e7b7 0 1px 0 inset;
-  -moz-box-shadow: #d7e7b7 0 1px 0 inset;
-  box-shadow: #d7e7b7 0 1px 0 inset;
-  border: 1px solid #88b03c;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6EA700', endColorstr='#FF2B4100');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a0f300), color-stop(70%, #6ea700));
+  background: -webkit-linear-gradient(#a0f300, #6ea700 70%);
+  background: -moz-linear-gradient(#a0f300, #6ea700 70%);
+  background: -o-linear-gradient(#a0f300, #6ea700 70%);
+  background: linear-gradient(#a0f300, #6ea700 70%);
+  -webkit-box-shadow: #beff41 0 1px 0 inset;
+  -moz-box-shadow: #beff41 0 1px 0 inset;
+  box-shadow: #beff41 0 1px 0 inset;
+  border: 1px solid #5d8d00;
   color: white;
-  text-shadow: #759733 0 -1px 0;
+  text-shadow: #476c00 0 -1px 0;
 }
 /* line 15, ../../../../../.rvm/gems/ruby-1.9.2-p290/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .button_plus:hover {
@@ -323,23 +323,23 @@ form td {
 }
 /* line 18, ../../../../../.rvm/gems/ruby-1.9.2-p290/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .button_plus:hover {
-  background-color: #88b03c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(3%, #accd6b), color-stop(75%, #88b03c));
-  background: -webkit-linear-gradient(#accd6b 3%, #88b03c 75%);
-  background: -moz-linear-gradient(#accd6b 3%, #88b03c 75%);
-  background: -o-linear-gradient(#accd6b 3%, #88b03c 75%);
-  background: linear-gradient(#accd6b 3%, #88b03c 75%);
+  background-color: #5d8d00;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(3%, #90da00), color-stop(75%, #5d8d00));
+  background: -webkit-linear-gradient(#90da00 3%, #5d8d00 75%);
+  background: -moz-linear-gradient(#90da00 3%, #5d8d00 75%);
+  background: -o-linear-gradient(#90da00 3%, #5d8d00 75%);
+  background: linear-gradient(#90da00 3%, #5d8d00 75%);
 }
 /* line 21, ../../../../../.rvm/gems/ruby-1.9.2-p290/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .button_plus:active {
-  -webkit-box-shadow: #7fa438 0 1px 2px inset;
-  -moz-box-shadow: #7fa438 0 1px 2px inset;
-  box-shadow: #7fa438 0 1px 2px inset;
+  -webkit-box-shadow: #537e00 0 1px 2px inset;
+  -moz-box-shadow: #537e00 0 1px 2px inset;
+  box-shadow: #537e00 0 1px 2px inset;
 }
 /* line 6, ../../../../../.rvm/gems/ruby-1.9.2-p290/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .button_plus.disabled, .button_plus[disabled] {
   opacity: 0.6;
-  background: #96c045;
+  background: #6ea700;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -798,16 +798,24 @@ body {
 }
 /* line 494, ../sass/style.scss */
 .message .message-add-inbox {
+  background-color: #96c045;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFACCD6B', endColorstr='#FF96C045');
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #accd6b), color-stop(100%, #96c045));
+  background-image: -webkit-linear-gradient(#accd6b 0%, #96c045 100%);
+  background-image: -moz-linear-gradient(#accd6b 0%, #96c045 100%);
+  background-image: -o-linear-gradient(#accd6b 0%, #96c045 100%);
+  background-image: linear-gradient(#accd6b 0%, #96c045 100%);
   border-top: 3px #96c045 solid;
   padding: 15px;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 497, ../sass/style.scss */
+/* line 498, ../sass/style.scss */
 .message .message-add-inbox .add-icon {
   float: left;
 }
-/* line 500, ../sass/style.scss */
+/* line 501, ../sass/style.scss */
 .message .message-add-inbox .add-titlebox {
   float: left;
   width: 550px;
@@ -815,7 +823,7 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 504, ../sass/style.scss */
+/* line 505, ../sass/style.scss */
 .message .message-add-inbox .add-titlebox textarea {
   width: 550px;
   font-size: 12px;
@@ -825,7 +833,7 @@ body {
  * mypage profile
  *
  */
-/* line 521, ../sass/style.scss */
+/* line 522, ../sass/style.scss */
 .profile {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0 1px 0;
@@ -834,22 +842,22 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 522, ../sass/style.scss */
+/* line 523, ../sass/style.scss */
 .profile .profile-inbox {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 523, ../sass/style.scss */
+/* line 524, ../sass/style.scss */
 .profile .profile-inbox .profile-icon {
   float: left;
   margin-right: 10px;
 }
-/* line 527, ../sass/style.scss */
+/* line 528, ../sass/style.scss */
 .profile .profile-inbox .profile-username {
   font-size: 24px;
   padding-top: 36px;
 }
-/* line 533, ../sass/style.scss */
+/* line 534, ../sass/style.scss */
 .profile .profile-option {
   padding: 20px;
   font-size: 12px;
@@ -857,7 +865,7 @@ body {
   *zoom: 1;
 }
 
-/* line 541, ../sass/style.scss */
+/* line 542, ../sass/style.scss */
 .mypage-menu {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0 1px 0;
@@ -866,22 +874,22 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 542, ../sass/style.scss */
+/* line 543, ../sass/style.scss */
 .mypage-menu ul {
   list-style: none;
 }
-/* line 545, ../sass/style.scss */
+/* line 546, ../sass/style.scss */
 .mypage-menu ul li {
   width: 100px;
   padding: 10px;
   float: left;
 }
-/* line 550, ../sass/style.scss */
+/* line 551, ../sass/style.scss */
 .mypage-menu ul li:hover {
   color: #fff;
   background: #96c045;
 }
-/* line 554, ../sass/style.scss */
+/* line 555, ../sass/style.scss */
 .mypage-menu ul li.active {
   color: #fff;
   background: #96c045;
@@ -891,7 +899,7 @@ body {
  * cboard
  *
  */
-/* line 566, ../sass/style.scss */
+/* line 567, ../sass/style.scss */
 .cboard {
   margin-top: 20px;
   padding: 4px;
@@ -902,7 +910,7 @@ body {
   -o-border-radius: 6px;
   border-radius: 6px;
 }
-/* line 571, ../sass/style.scss */
+/* line 572, ../sass/style.scss */
 .cboard .cboard-titlebox {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: white 0 1px 0;
@@ -911,7 +919,7 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 572, ../sass/style.scss */
+/* line 573, ../sass/style.scss */
 .cboard .cboard-titlebox .cboard-icon {
   float: left;
   background: #6ea700;
@@ -929,15 +937,15 @@ body {
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 585, ../sass/style.scss */
+/* line 586, ../sass/style.scss */
 .cboard .cboard-titlebox .cboard-title {
   padding-top: 10px;
 }
-/* line 592, ../sass/style.scss */
+/* line 593, ../sass/style.scss */
 .cboard .cboard-entry ul {
   list-style: none;
 }
-/* line 595, ../sass/style.scss */
+/* line 596, ../sass/style.scss */
 .cboard .cboard-entry li {
   padding: 4px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -947,22 +955,22 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 597, ../sass/style.scss */
+/* line 598, ../sass/style.scss */
 .cboard .cboard-entry li .cboard-entry-title {
   padding-top: 10px;
 }
-/* line 600, ../sass/style.scss */
+/* line 601, ../sass/style.scss */
 .cboard .cboard-entry li .cboard-entry-userbox {
   float: right;
 }
-/* line 602, ../sass/style.scss */
+/* line 603, ../sass/style.scss */
 .cboard .cboard-entry li .cboard-entry-userbox .cboard-entry-username {
   float: left;
   padding-top: 6px;
   padding-right: 6px;
   font-size: smaller;
 }
-/* line 608, ../sass/style.scss */
+/* line 609, ../sass/style.scss */
 .cboard .cboard-entry li .cboard-entry-userbox .cboard-entry-icon {
   float: left;
 }

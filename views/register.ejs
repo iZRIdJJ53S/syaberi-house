@@ -31,6 +31,13 @@
 
 <% include header %>
 
+    <div id="mainview">
+    </div>
+
+    <div id="content">
+
+        <div class="left-content">
+
 <form id="full-form-tag" name="full-form-tag" method="post" action="/login" enctype="multipart/form-data">
 <div id="contents_wrapp">
   <div id="contents_wrapp_inside">
@@ -77,12 +84,15 @@
       </div>
     </section>
       <div class="txtc magt20 magb200">
-        <input type="image" src="/img/makecommunity_submit.png" width="396" height="73" alt="送信" id="submit_1">
+        <input type="button" class="button_g full_width" id="submit_1" value="送信">
       </div>
     </section>
   </div><!--/#contents_wrapp_inside-->
 </div><!--/#contents_wrapp-->
 </form>
+
+        </div>
+    </div>
 
 <% include footer %>
 

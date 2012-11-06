@@ -6,15 +6,28 @@
 
   //チャットルーム一覧
   syaberi.templates.mypage.list = Handlebars.compile(
-    '<article class="timeline">'+
+        '<div class="room">'+
+            '<div class="room-inbox">'+
+                '<div class="room-icon">'+
+                    '<a href="<%= chatroom.ownerpage %>">'+
+                      '<img class="icon_m" src="{オーナーアイコンURLが欲しい}">'+
+                    '</a>'+
+                '</div>'+
+                '<div class="room-titlebox">'+
+                    '<h2 class="room-title"><a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h2>'+
+                    '<div class="cat-icon"><a href="#">{カテゴリ名が欲しい}</a></div>'+
+                    '<div class="room-username"><a href="{オーナーページURLが欲しい}">by.{オーナー名が欲しい}</a></div>'+
+                '</div>'+
+                '<div class="room-button">'+
+                    '<a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
+                      '<input type="button" class="button_yg" value="話す">'+
+                    '</a>'+
+                '</div>'+
+            '</div>'+
+        '</div>'
+/*    '<article class="timeline">'+
       '<div class="smatc">'+
         '<div class="topthumb_b">'+
-        /**
-          '<a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
-            '<img src="/data/{{chatroom.id}}/images/thumb_m.jpg"'+
-              'onerror=\'this.src="/img/common/nowprinting_m.jpg"\' class="dec_thumb_m">'+
-          '</a>'+
-          **/
         '</div>'+
         '<h3><a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h3>'+
         '<p>{{chatroom.description}}</p>'+
@@ -33,7 +46,7 @@
           '<img src="/img/top_to_detail_b.gif" alt="詳細">'+
         '</a>'+
       '</div>'+
-    '</article>'
+    '</article>'*/
   );
 
   //プロフィール編集
@@ -65,7 +78,7 @@
         '</tr>'+
       '</table>'+
       '<div class="txtc magt20 magb200">'+
-        '<input type="image" src="/img/makecommunity_submit.png" width="396" height="73" alt="送信" id="submit_1">'+
+        '<input type="button" class="button_g full_width" id="submit_1" value="保存">'+
       '</div>'+
     '</form>'
   );

@@ -24,14 +24,17 @@ $(function() {
     <%if (isAuth) { %>
     
     <div id="menu">
-        <div class="icon"><a href="#"><img class="icon_s" id="header_mypage_thumb_img" src="<%= locals.userImage %>"></a></div>
-        <div class="name"><a href="#"><%= locals.userName %></a></div>
-        <div class="pulldown"><a href="#">▼</a></div>
-    </div>
-    <div id="head_menu_list">
-        <a href="/mypage" class="mypage_nortification_txt">マイページ</a> | 
-        <a href="/chatrooms/new" class="mypage_nortification_txt">チャットルームを作る</a> | 
-        <a href="/logout" class="mypage_nortification_txt">ログアウト</a>
+        <div class="icon"><a href="/mypage"><img class="icon_s" id="header_mypage_thumb_img" src="<%= locals.userImage %>"></a></div>
+        <div class="name"><a href="/mypage"><%= locals.userName %></a></div>
+        <div class="pulldown"><input type="button" class="button_menu" value="▼"></div>
+        <div id="head_menu_list">
+            <ul>
+            <a href="/mypage" class="mypage_nortification_txt"><li>マイページ</li></a>
+            <a href="/chatrooms/new" class="mypage_nortification_txt"><li>チャットルームを作る</li></a>
+            <a href="/logout" class="mypage_nortification_txt"><li>ログアウト</li></a>
+            </ul>
+        </div>
+
     </div>
 
     <% }else{ %>

@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path'); // dirname, basename とかのutil
-var config = require('config');
+var config = require('config');  // 設定ファイル
 var express = require('express');
 var app = module.exports = express();
 var httpServer = require('http').createServer(app);
@@ -17,9 +17,9 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 // 複数ページにまたがる場合のエラーメッセージ等の一時的保管
 // 出力したら消えてくれる
 var flash = require('connect-flash');
-var cookieLib = require('cookie');
-var log4js  = require('log4js');
-var stackTrace = require('stack-trace');
+var cookieLib = require('cookie'); // cookie 操作npmモジュール
+var log4js  = require('log4js'); // ログ出力モジュール
+var stackTrace = require('stack-trace'); // エラーobjectの追跡とか
 var emailjs  = require('emailjs/email');
 // セッションをRedisに保持
 var RedisStore = require('connect-redis')(express);
@@ -39,6 +39,8 @@ var ioStore = redis.createClient(config.redis.port, config.redis.host);
 
 var middleware = require('./lib/middleware'); // sessionData
 var utils = require('./lib/utils'); // original util
+
+/************ コントローラー ***********/
 var topController = require('./lib/controllers/top');
 var chatroomController = require('./lib/controllers/chatroom');
 var chatController = require('./lib/controllers/chat');
@@ -92,9 +94,9 @@ app.configure(function() {
   // app.routerを設定すると、通信の実行までに必要なマッピング処理を省略できる
   // ルーティングの機能を提供する。これはExpressでの拡張
   app.use(express.compress());
+  app.use(express.csrf());
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(app.router);
-  app.use(express.csrf());
   app.use(middleware.notFound);
   app.use(middleware.error);
 });
@@ -110,7 +112,7 @@ app.configure('development', function() {
 });
 
 // testというモードでサーバを起動すると有効になる設定を作成
-app.configure('production', function(){
+app.configure('test', function(){
   logger.setLevel('TRACE');
 });
 
@@ -154,7 +156,7 @@ var mySqlClient = mysql.createClient({
 });
 app.set('mySqlClient', mySqlClient);
 
-/************ MySQL ************/
+/************ /MySQL ************/
 
 /************ Mail Server ************/
 var mailServer  = emailjs.server.connect({

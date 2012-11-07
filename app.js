@@ -185,7 +185,7 @@ app.get ('/mypage',    csrf, authenticated, mypageController.show);
 
 app.get ('/users/new', csrf, authenticated, userController.new);
 app.post('/users',     authenticated, userController.create);
-app.get ('/users/:id', mypageController.show);
+app.get ('/users/:id', csrf, mypageController.show);
 app.del ('/users/:id', authenticated, userController.destroy);
 app.get ('/login',     userController.login);
 app.post('/login',     passport.authenticate('local', {

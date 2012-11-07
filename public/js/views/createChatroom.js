@@ -11,6 +11,7 @@
     initialize: function() {
       this.model = new syaberi.Chatroom;
       Backbone.Validation.bind(this);
+      this.token = $('#token').val(); //for CSRF
     },
     submit: function(event) {
       event.preventDefault();
@@ -44,7 +45,8 @@
           categoryId: categoryId,
           title: title,
           description: description,
-          publicYN: publicYN
+          publicYN: publicYN,
+          token: this.token
         }, {
           success: function(model, res) {
             var chatroomId = res.chatroomId;

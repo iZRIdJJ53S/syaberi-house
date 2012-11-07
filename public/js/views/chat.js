@@ -17,6 +17,7 @@
     initialize: function() {
       this.collection = new syaberi.Chats;
       this.uploadCancelFlg = 0;
+      this.token = $('#token').val(); //for CSRF
     },
     submit: function(event) {
       var message = $.trim($('#message1').val());
@@ -36,7 +37,8 @@
           userImage: userImage,
           message: message,
           type: CHAT_COMMENT,
-          isUrlOpen: isUrlOpen
+          isUrlOpen: isUrlOpen,
+          token: this.token
         });
 
         this.clearInputUserMessage();
@@ -66,7 +68,8 @@
           mode: 'destroy',
           chatroomId: chatroomId,
           chatId: chatId,
-          userId: userId
+          userId: userId,
+          token: this.token
         });
       }
     },

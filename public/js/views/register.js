@@ -8,6 +8,7 @@
     },
     initialize: function() {
       this.model = new syaberi.User;
+      this.token = $('#token').val(); //for CSRF
       Backbone.Validation.bind(this);
     },
     submit: function(event) {
@@ -31,7 +32,8 @@
           this.model.save({
             userName: userName,
             email: email,
-            description: description
+            description: description,
+            token: this.token
           }, {
             success: function() {
               var returnUrl = $.cookie('returnUrl');

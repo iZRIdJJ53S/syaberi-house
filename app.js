@@ -88,6 +88,7 @@ app.configure(function() {
   app.use(express.compress());
   app.use(express.static(__dirname + '/public'));
   app.use(app.router);
+  app.use(express.csrf());
   app.use(middleware.notFound);
   app.use(middleware.error);
 });
@@ -166,12 +167,12 @@ app.set('mailServer', mailServer);
 app.get ('/', topController.index);
 
 app.get ('/chatrooms',           chatroomController.index);
-app.get ('/chatrooms/new',       authenticated, chatroomController.new);
+app.get ('/chatrooms/new',       csrf, authenticated, chatroomController.new);
 app.post('/chatrooms',           authenticated, chatroomController.create);
 //参加申請は一時コメントアウト
 //app.get ('/chatrooms/:id',       chatroomController.show);
 app.get ('/chatrooms/:id',       function(req, res) { res.redirect(req.path+'/open') });
-app.get ('/chatrooms/:id/open',  chatroomController.show);
+app.get ('/chatrooms/:id/open',  csrf, chatroomController.show);
 app.get ('/chatrooms/:id/edit',  authenticated, chatroomController.edit);
 app.put ('/chatrooms/:id',       authenticated, chatroomController.update);
 app.del ('/chatrooms/:id',       authenticated, chatroomController.destroy);
@@ -180,9 +181,9 @@ app.post('/chatrooms/:id/invite', authenticated, chatroomController.invite);
 app.post('/chats',     authenticated, chatController.create);
 app.del ('/chats/:id', authenticated, chatController.destroy);
 
-app.get ('/mypage', authenticated, mypageController.show);
+app.get ('/mypage',    csrf, authenticated, mypageController.show);
 
-app.get ('/users/new', authenticated, userController.new);
+app.get ('/users/new', csrf, authenticated, userController.new);
 app.post('/users',     authenticated, userController.create);
 app.get ('/users/:id', mypageController.show);
 app.del ('/users/:id', authenticated, userController.destroy);
@@ -215,6 +216,12 @@ function authenticated(req, res, next) {
     title: '401 Unauthorized',
     err: {type: 'unauthorized'}
   });
+}
+
+//CSRF対策用トークンを設定
+function csrf(req, res, next) {
+  res.locals.token = req.session._csrf;
+  next();
 }
 
 /************ /Routing ************/

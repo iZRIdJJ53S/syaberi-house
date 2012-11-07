@@ -2,6 +2,10 @@ module.exports =
   server:
     host: "websocket.syaberi-house.com"
     port: 3000
+    ssl:
+      port: 4430
+      key: 'certs/dev.key'
+      cert: 'certs/dev.crt'
     cookieSecret: 'xZQWzsaY8fZWFnVltP1Y'
     cookieMaxAge: 1000 * 60 * 60 * 24 * 7 #1week
     hashSalt: 'l7UmWFjvQIoaX6kThcng'

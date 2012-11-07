@@ -150,8 +150,21 @@
         isOwner: userId === ownerId,
         isHis: userId === data.userId, //本人の書き込みを表すフラグ
         isInvite: status !== 2,
-        isUrlOpen: isUrlOpen
+        isUrlOpen: isUrlOpen,
+        extImageUrl: ''
       };
+
+      // urlの判断
+      if (syaberi.util.isUrl(data.message)) {
+        var tmp_url = syaberi.util.getUrl(data.message);
+
+        // 画像urlの判断
+        if (syaberi.util.isImageUrl(tmp_url)) {
+          // 画像urlで値を上書き
+          params.extImageUrl = tmp_url;
+        }
+      }
+
       //オーナーのフキダシは向きを変える
       if (ownerId === data.userId) {
         chatTemplate = syaberi.templates.chat.chatL(params);

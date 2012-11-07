@@ -11,6 +11,9 @@
         '</div>'+
         '<div class="owner-titlebox">'+
             '<p class="owner-title">{{{message}}}</p>'+
+            '{{#if extImageUrl}}'+
+            '<img src="{{extImageUrl}}" class="owner-img">'+
+            '{{/if}}'+
             '<div class="owner-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>'+
             '<div class="owner-date">{{time}} [1]'+
             '{{#if isHis}}'+
@@ -28,6 +31,9 @@
         '</div>'+
         '<div class="member-titlebox">'+
             '<p class="member-title">{{{message}}}</p>'+
+            '{{#if extImageUrl}}'+
+            '<img src="{{extImageUrl}}" class="member-img">'+
+            '{{/if}}'+
             '<div class="member-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>'+
             '<div class="member-date">{{time}} [2]'+
             '{{#if isHis}}'+

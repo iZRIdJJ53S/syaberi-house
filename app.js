@@ -95,6 +95,7 @@ app.configure(function() {
   // ルーティングの機能を提供する。これはExpressでの拡張
   app.use(express.compress());
   app.use(express.csrf());
+  app.use(express.csrf()); // この位置じゃないと動かない？順番要注意
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(app.router);
   app.use(middleware.notFound);

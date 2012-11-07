@@ -28,6 +28,42 @@
       var newdate = year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second+"Z";
 
       return newdate;
+    },
+    // URLかどうかの判定
+    isUrl: function(text) {
+      if (text.length == 0) {
+        return false;
+      }
+      text.match(/(http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=:;_]*)?)/);
+
+      if (RegExp.$1 != null && RegExp.$1.length > 0) {
+        return true;
+      }
+      return false;
+    },
+    // URLの取得
+    getUrl: function(text) {
+      if (text.length == 0) {
+        return false;
+      }
+      text.match(/(http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=:;_]*)?)/);
+
+      if (RegExp.$1 != null && RegExp.$1.length > 0) {
+        return RegExp.$1;
+      }
+      return false;
+    },
+    // 画像URLの判定
+    isImageUrl: function(url) {
+      if (url.length == 0) {
+        return false;
+      }
+      url.match(/(\.(jpg|jpeg|gif|png)$)/i);
+
+      if (RegExp.$1 != null && RegExp.$1.length > 0) {
+        return true;
+      }
+      return false;
     }
   };
 

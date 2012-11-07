@@ -11,10 +11,10 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 // 複数ページにまたがる場合のエラーメッセージ等の一時的保管
 // 出力したら消えてくれる
 var flash = require('connect-flash');
-var cookieLib = require('cookie');
-var config = require('config');
-var log4js  = require('log4js');
-var stackTrace = require('stack-trace');
+var cookieLib = require('cookie'); // cookie 操作npmモジュール
+var config = require('config');  // 設定ファイル
+var log4js  = require('log4js'); // ログ出力モジュール
+var stackTrace = require('stack-trace'); // エラーobjectの追跡とか
 var emailjs  = require('emailjs/email');
 // セッションをRedisに保持
 var RedisStore = require('connect-redis')(express);
@@ -34,6 +34,8 @@ var ioStore = redis.createClient(config.redis.port, config.redis.host);
 
 var middleware = require('./lib/middleware'); // sessionData
 var utils = require('./lib/utils'); // original util
+
+/************ コントローラー ***********/
 var topController = require('./lib/controllers/top');
 var chatroomController = require('./lib/controllers/chatroom');
 var chatController = require('./lib/controllers/chat');
@@ -104,7 +106,7 @@ app.configure('development', function() {
 });
 
 // testというモードでサーバを起動すると有効になる設定を作成
-app.configure('production', function(){
+app.configure('test', function(){
   logger.setLevel('TRACE');
 });
 
@@ -148,7 +150,7 @@ var mySqlClient = mysql.createClient({
 });
 app.set('mySqlClient', mySqlClient);
 
-/************ MySQL ************/
+/************ /MySQL ************/
 
 /************ Mail Server ************/
 var mailServer  = emailjs.server.connect({

@@ -7,11 +7,11 @@
   syaberi.templates.chat.chatL = Handlebars.compile(
     '<div class="message-owner-inbox" id="chat-content-{{chatId}}">'+
         '<div class="owner-icon">'+
-            '<img class="icon_m" src="{{userImage}}">'+
+            '<a href="/users/{{userId}}"><img class="icon_m" src="{{userImage}}"></a>'+
         '</div>'+
         '<div class="owner-titlebox">'+
             '<p class="owner-title">{{{message}}}</p>'+
-            '<div class="owner-username"><a href="#">by.{{userName}}</a></div>'+
+            '<div class="owner-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>'+
             '<div class="owner-date">{{time}} [1]'+
             '{{#if isHis}}'+
             '<img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="{{chatId}}">'+
@@ -24,11 +24,11 @@
   syaberi.templates.chat.chatR = Handlebars.compile(
     '<div class="message-member-inbox" id="chat-content-{{chatId}}">'+
         '<div class="member-icon">'+
-            '<img class="icon_m" src="{{userImage}}">'+
+            '<a href="/users/{{userId}}"><img class="icon_m" src="{{userImage}}"></a>'+
         '</div>'+
         '<div class="member-titlebox">'+
             '<p class="member-title">{{{message}}}</p>'+
-            '<div class="member-username"><a href="#">by.{{userName}}</a></div>'+
+            '<div class="member-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>'+
             '<div class="member-date">{{time}} [2]'+
             '{{#if isHis}}'+
             '<img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="{{chatId}}">'+

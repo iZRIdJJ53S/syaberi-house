@@ -127,12 +127,12 @@
                     <% if (chatroom.ownerId == chat.user_id) { //ownerの投稿 %>
                     <div class="message-owner-inbox">
                         <div class="owner-icon">
-                            <img class="icon_m" src="<%= chat.userimage %>">
+                            <a href="<%= chat.userpage %>"><img class="icon_m" src="<%= chat.userimage %>"></a>
                         </div>
                         <div class="owner-titlebox">
                             <p class="owner-title"><%- esc(chat.message) %></p>
                             <!--img class="owner-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
-                            <div class="owner-username"><a href="#">by.<%= chat.username %></a></div>
+                            <div class="owner-username"><a href="<%= chat.userpage %>">by.<%= chat.username %></a></div>
                             <div class="owner-date"><%= chat.time %> [1]
                             <% if (isAuth && chat.user_id == userId) { %>
                             <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="<%= chat.id %>">
@@ -143,12 +143,12 @@
                     <% }else{ //memberの投稿%>
                     <div class="message-member-inbox">
                         <div class="member-icon">
-                            <img class="icon_m" src="<%= chat.userimage %>">
+                            <a href="<%= chat.userpage %>"><img class="icon_m" src="<%= chat.userimage %>"></a>
                         </div>
                         <div class="member-titlebox">
                             <p class="member-title"><%- esc(chat.message) %></p>
                             <!--img class="member-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
-                            <div class="member-username"><a href="#">by.<%= chat.username %></a></div>
+                            <div class="member-username"><a href="<%= chat.userpage %>">by.<%= chat.username %></a></div>
                             <div class="member-date"><%= chat.time %> [2]
                             <% if (isAuth && chat.user_id == userId) { %>
                             <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="<%= chat.id %>">

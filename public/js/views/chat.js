@@ -151,7 +151,8 @@
         isHis: userId === data.userId, //本人の書き込みを表すフラグ
         isInvite: status !== 2,
         isUrlOpen: isUrlOpen,
-        extImageUrl: ''
+        extImageUrl: '',
+        youtubeVid: ''
       };
 
       // urlの判断
@@ -163,6 +164,14 @@
           // 画像urlで値を上書き
           params.extImageUrl = tmp_url;
         }
+        // Youtube の判断
+        else if (syaberi.util.isYoutube(tmp_url)) {
+          var youtube_vid = syaberi.util.getYoutubeVid(tmp_url);
+          if (youtube_vid) {
+            params.youtubeVid = youtube_vid;
+          }
+        }
+
       }
 
       //オーナーのフキダシは向きを変える

@@ -58,9 +58,8 @@
       if (url.length == 0) {
         return false;
       }
-      url.match(/(\.(jpg|jpeg|gif|png)$)/i);
 
-      if (RegExp.$1 != null && RegExp.$1.length > 0) {
+      if (url.match(/\.(jpg|jpeg|gif|png)$/i)) {
         return true;
       }
       return false;

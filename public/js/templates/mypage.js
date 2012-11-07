@@ -6,47 +6,25 @@
 
   //チャットルーム一覧
   syaberi.templates.mypage.list = Handlebars.compile(
-        '<div class="room">'+
-            '<div class="room-inbox">'+
-                '<div class="room-icon">'+
-                    '<a href="<%= chatroom.ownerpage %>">'+
-                      '<img class="icon_m" src="{オーナーアイコンURLが欲しい}">'+
-                    '</a>'+
-                '</div>'+
-                '<div class="room-titlebox">'+
-                    '<h2 class="room-title"><a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h2>'+
-                    '<div class="cat-icon"><a href="#">{カテゴリ名が欲しい}</a></div>'+
-                    '<div class="room-username"><a href="{オーナーページURLが欲しい}">by.{オーナー名が欲しい}</a></div>'+
-                '</div>'+
-                '<div class="room-button">'+
-                    '<a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
-                      '<input type="button" class="button_yg" value="話す">'+
-                    '</a>'+
-                '</div>'+
+    '<div class="room">'+
+        '<div class="room-inbox">'+
+            '<div class="room-icon">'+
+                '<a href="http://{{host}}{{chatroom.ownerpage}}">'+
+                  '<img class="icon_m" src="{{chatroom.ownerimage}}">'+
+                '</a>'+
             '</div>'+
-        '</div>'
-/*    '<article class="timeline">'+
-      '<div class="smatc">'+
-        '<div class="topthumb_b">'+
+            '<div class="room-titlebox">'+
+                '<h2 class="room-title"><a href="http://{{host}}/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h2>'+
+                '<div class="cat-icon"><a href="#">{{chatroom.category}}</a></div>'+
+                '<div class="room-username"><a href="http://{{host}}{{chatroom.ownerpage}}">by.{{chatroom.owner}}</a></div>'+
+            '</div>'+
+            '<div class="room-button">'+
+                '<a href="http://{{host}}/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
+                  '<input type="button" class="button_yg" value="話す">'+
+                '</a>'+
+            '</div>'+
         '</div>'+
-        '<h3><a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h3>'+
-        '<p>{{chatroom.description}}</p>'+
-        '<table class="table_b">'+
-          '<tr>'+
-            '<td>'+
-            '<ul class="article_ul_b" id="dec-supporters-{{chatroom.id}}"></ul>'+
-            '</td>'+
-            '<td class="join_b">'+
-              '{{chatroom.member}}<span>人<br>参加</span>'+
-            '</td>'+
-          '</tr>'+
-        '</table>'+
-        '<div class="to_detailb padt5 txtc">'+
-        '<a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
-          '<img src="/img/top_to_detail_b.gif" alt="詳細">'+
-        '</a>'+
-      '</div>'+
-    '</article>'*/
+    '</div>'
   );
 
   //プロフィール編集

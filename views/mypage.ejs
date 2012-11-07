@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="ja"
+  data-host="<%= config.server.host %>"
   data-profileid="<%= profile.id %>"
   data-profilename="<%= profile.name %>"
   data-profileemail="<%= profile.email %>"
@@ -73,20 +74,21 @@
                 <div class="mypage-menu">
                     <ul>
                         <article id="owner-chatrooms" class="community_room">
-                            <a href="javascript:void(0)"><li class="active">作成した部屋</li></a>
+                          <li class="active"><a href="javascript:void(0)">作成した部屋</a></li>
                         </article>
                         <% if (isMine) { %>
                         <article id="join-chatrooms" class="community_room">
-                            <a href="javascript:void(0)"><li>参加中の部屋</li></a>
+                          <li><a href="javascript:void(0)">参加中の部屋</a></li>
                         </article>
                         <article id="edit-profile" class="community_room">
-                            <a href="javascript:void(0)"><li>プロフィール設定</li></a>
+                          <li><a href="javascript:void(0)">プロフィール設定</a></li>
                         </article>
                         <% } %>
                     </ul>
                 </div>
 
                 <div id="article_area"></div><!-- article_area -->
+                <div id="view-more-events"><a href="javascript:void(0);"><input type="button" class="button_yg full_width" value="もっと見る"></a></div>
 
             </div><!-- left-content -->
 

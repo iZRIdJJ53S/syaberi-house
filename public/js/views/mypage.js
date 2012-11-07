@@ -22,19 +22,19 @@
     },
     getOwnerChatrooms: function(event) {
       this.init_list();
-      $('#ownerChatrooms').addClass('on');
+      $('li', '#owner-chatrooms').addClass('active');
       this.mode = 'owner';
       this.getChatrooms();
     },
     getEntryChatrooms: function(event) {
       this.init_list();
-      $('#entryChatrooms').addClass('on');
+      $('li', '#entry-chatrooms').addClass('active');
       this.mode = 'entry';
       this.getChatrooms();
     },
     getJoinChatrooms: function(event) {
       this.init_list();
-      $('#joinChatrooms').addClass('on');
+      $('li', '#join-chatrooms').addClass('active');
       this.mode = 'join';
       this.getChatrooms();
     },
@@ -61,6 +61,7 @@
           if (chatrooms) {
             $.each(response.chatrooms, function(key, chatroom) {
               var template = syaberi.templates.mypage.list({
+                host: $('html').data('host'),
                 chatroom: chatroom,
                 isUrlOpen: self.mode === 'entry' ? false : true
               });
@@ -80,6 +81,8 @@
       var description = $('html').data('profiledescription');
 
       this.init_list();
+      $('li', '#edit-profile').addClass('active');
+
       var template = syaberi.templates.mypage.profile({
         userName: userName,
         email: email,
@@ -129,9 +132,11 @@
       this.getOwnerChatrooms();
     },
     init_list: function() {
-      $('article', '#hakunetsu_area').removeClass('on');
+      $('li', '#owner-chatrooms').removeClass('active');
+      $('li', '#join-chatrooms').removeClass('active');
+      $('li', '#edit-profile').removeClass('active');
       return $('#article_area').empty();
-    },
+    }
   });
 
 }).call(this);

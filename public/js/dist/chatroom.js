@@ -7,11 +7,14 @@
   syaberi.templates.chat.chatL = Handlebars.compile(
     '<div class="message-owner-inbox" id="chat-content-{{chatId}}">'+
         '<div class="owner-icon">'+
-            '<img class="icon_m" src="{{userImage}}">'+
+            '<a href="/users/{{userId}}"><img class="icon_m" src="{{userImage}}"></a>'+
         '</div>'+
         '<div class="owner-titlebox">'+
             '<p class="owner-title">{{{message}}}</p>'+
-            '<div class="owner-username"><a href="#">by.{{userName}}</a></div>'+
+            '{{#if extImageUrl}}'+
+            '<img src="{{extImageUrl}}" class="owner-img">'+
+            '{{/if}}'+
+            '<div class="owner-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>'+
             '<div class="owner-date">{{time}} [1]'+
             '{{#if isHis}}'+
             '<img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="{{chatId}}">'+
@@ -24,11 +27,14 @@
   syaberi.templates.chat.chatR = Handlebars.compile(
     '<div class="message-member-inbox" id="chat-content-{{chatId}}">'+
         '<div class="member-icon">'+
-            '<img class="icon_m" src="{{userImage}}">'+
+            '<a href="/users/{{userId}}"><img class="icon_m" src="{{userImage}}"></a>'+
         '</div>'+
         '<div class="member-titlebox">'+
             '<p class="member-title">{{{message}}}</p>'+
-            '<div class="member-username"><a href="#">by.{{userName}}</a></div>'+
+            '{{#if extImageUrl}}'+
+            '<img src="{{extImageUrl}}" class="member-img">'+
+            '{{/if}}'+
+            '<div class="member-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>'+
             '<div class="member-date">{{time}} [2]'+
             '{{#if isHis}}'+
             '<img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="{{chatId}}">'+
@@ -85,6 +91,7 @@
     initialize: function() {
       this.collection = new syaberi.Chats;
       this.uploadCancelFlg = 0;
+      this.token = $('#token').val(); //for CSRF
     },
     submit: function(event) {
       var message = $.trim($('#message1').val());
@@ -104,7 +111,8 @@
           userImage: userImage,
           message: message,
           type: CHAT_COMMENT,
-          isUrlOpen: isUrlOpen
+          isUrlOpen: isUrlOpen,
+          token: this.token
         });
 
         this.clearInputUserMessage();
@@ -134,7 +142,8 @@
           mode: 'destroy',
           chatroomId: chatroomId,
           chatId: chatId,
-          userId: userId
+          userId: userId,
+          token: this.token
         });
       }
     },
@@ -215,8 +224,21 @@
         isOwner: userId === ownerId,
         isHis: userId === data.userId, //本人の書き込みを表すフラグ
         isInvite: status !== 2,
-        isUrlOpen: isUrlOpen
+        isUrlOpen: isUrlOpen,
+        extImageUrl: ''
       };
+
+      // urlの判断
+      if (syaberi.util.isUrl(data.message)) {
+        var tmp_url = syaberi.util.getUrl(data.message);
+
+        // 画像urlの判断
+        if (syaberi.util.isImageUrl(tmp_url)) {
+          // 画像urlで値を上書き
+          params.extImageUrl = tmp_url;
+        }
+      }
+
       //オーナーのフキダシは向きを変える
       if (ownerId === data.userId) {
         chatTemplate = syaberi.templates.chat.chatL(params);

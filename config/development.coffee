@@ -2,6 +2,10 @@ module.exports =
   server:
     host: "127.0.0.1:3000"
     port: 3000
+    ssl:
+      port: 4430
+      key: 'certs/dev.key'
+      cert: 'certs/dev.crt'
     cookieSecret: 'xZQWzsaY8fZWFnVltP1Y'
     cookieMaxAge: 1000 * 60 * 60 * 24 * 7 #1week
     hashSalt: 'l7UmWFjvQIoaX6kThcng'

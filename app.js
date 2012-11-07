@@ -1,10 +1,16 @@
+var fs = require('fs');
+var path = require('path'); // dirname, basename とかのutil
+var config = require('config');  // 設定ファイル
 var express = require('express');
 var app = module.exports = express();
-var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
+var httpServer = require('http').createServer(app);
+var httpsServer = require('https').createServer({
+    key: fs.readFileSync(path.join(__dirname, config.server.ssl.key)),
+    cert: fs.readFileSync(path.join(__dirname, config.server.ssl.cert))
+  }, app);
+var io = require('socket.io').listen(httpServer);
 var st = require('st'); // 静的ファイルを配信/キャッシュモジュール
 var mysql = require('mysql');
-var path = require('path'); // dirname, basename とかのutil
 var passport = require('passport');  // authentication
 var LocalStrategy = require('passport-local').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
@@ -12,7 +18,6 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 // 出力したら消えてくれる
 var flash = require('connect-flash');
 var cookieLib = require('cookie'); // cookie 操作npmモジュール
-var config = require('config');  // 設定ファイル
 var log4js  = require('log4js'); // ログ出力モジュール
 var stackTrace = require('stack-trace'); // エラーobjectの追跡とか
 var emailjs  = require('emailjs/email');
@@ -56,7 +61,6 @@ app.set('logger', logger);
 
 
 app.configure(function() {
-  app.set('port', config.server.port);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(express.favicon());
@@ -77,8 +81,10 @@ app.configure(function() {
   app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(middleware.ssl);
   app.use(middleware.sessionData);
   app.use(middleware.envData);
+  app.use(middleware.configData);
   // 静的ファイルの配信設定
   // ※404ページを表示させることができないのでstモジュールの利用一時停止
   // app.use(st({
@@ -88,8 +94,9 @@ app.configure(function() {
   // app.routerを設定すると、通信の実行までに必要なマッピング処理を省略できる
   // ルーティングの機能を提供する。これはExpressでの拡張
   app.use(express.compress());
+  app.use(express.csrf());
   app.use(express.csrf()); // この位置じゃないと動かない？順番要注意
-  app.use(express.static(__dirname + '/public'));
+  app.use(express.static(path.join(__dirname, 'public')));
   app.use(app.router);
   app.use(middleware.notFound);
   app.use(middleware.error);
@@ -229,10 +236,19 @@ function csrf(req, res, next) {
 /************ /Routing ************/
 
 
-server.listen(app.get('port'), function() {
-  console.log('listening on port ' + app.get('port'));
+/************ サーバ起動 ************/
+
+httpServer.listen(config.server.port, function() {
+  console.log('listening on port ' + config.server.port);
   console.log('host: ' + config.server.host);
 });
+
+httpsServer.listen(config.server.ssl.port, function() {
+  console.log('listening on port ' + config.server.ssl.port);
+  console.log('host: ' + config.server.host);
+});
+
+/************ /サーバ起動 ************/
 
 
 /************ Socket.IO ************/

@@ -6,34 +6,25 @@
 
   //チャットルーム一覧
   syaberi.templates.mypage.list = Handlebars.compile(
-    '<article class="timeline">'+
-      '<div class="smatc">'+
-        '<div class="topthumb_b">'+
-        /**
-          '<a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
-            '<img src="/data/{{chatroom.id}}/images/thumb_m.jpg"'+
-              'onerror=\'this.src="/img/common/nowprinting_m.jpg"\' class="dec_thumb_m">'+
-          '</a>'+
-          **/
+    '<div class="room">'+
+        '<div class="room-inbox">'+
+            '<div class="room-icon">'+
+                '<a href="http://{{host}}{{chatroom.ownerpage}}">'+
+                  '<img class="icon_m" src="{{chatroom.ownerimage}}">'+
+                '</a>'+
+            '</div>'+
+            '<div class="room-titlebox">'+
+                '<h2 class="room-title"><a href="http://{{host}}/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h2>'+
+                '<div class="cat-icon"><a href="#">{{chatroom.category}}</a></div>'+
+                '<div class="room-username"><a href="http://{{host}}{{chatroom.ownerpage}}">by.{{chatroom.owner}}</a></div>'+
+            '</div>'+
+            '<div class="room-button">'+
+                '<a href="http://{{host}}/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
+                  '<input type="button" class="button_yg" value="話す">'+
+                '</a>'+
+            '</div>'+
         '</div>'+
-        '<h3><a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h3>'+
-        '<p>{{chatroom.description}}</p>'+
-        '<table class="table_b">'+
-          '<tr>'+
-            '<td>'+
-            '<ul class="article_ul_b" id="dec-supporters-{{chatroom.id}}"></ul>'+
-            '</td>'+
-            '<td class="join_b">'+
-              '{{chatroom.member}}<span>人<br>参加</span>'+
-            '</td>'+
-          '</tr>'+
-        '</table>'+
-        '<div class="to_detailb padt5 txtc">'+
-        '<a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
-          '<img src="/img/top_to_detail_b.gif" alt="詳細">'+
-        '</a>'+
-      '</div>'+
-    '</article>'
+    '</div>'
   );
 
   //プロフィール編集
@@ -65,7 +56,7 @@
         '</tr>'+
       '</table>'+
       '<div class="txtc magt20 magb200">'+
-        '<input type="image" src="/img/makecommunity_submit.png" width="396" height="73" alt="送信" id="submit_1">'+
+        '<input type="button" class="button_g full_width" id="submit_1" value="保存">'+
       '</div>'+
     '</form>'
   );
@@ -169,23 +160,24 @@
       this.model = new syaberi.User;
       this.collection = new syaberi.Chatrooms;
       this.mode = 'owner';
+      this.token = $('#token').val(); //for CSRF
       Backbone.Validation.bind(this);
     },
     getOwnerChatrooms: function(event) {
       this.init_list();
-      $('#ownerChatrooms').addClass('on');
+      $('li', '#owner-chatrooms').addClass('active');
       this.mode = 'owner';
       this.getChatrooms();
     },
     getEntryChatrooms: function(event) {
       this.init_list();
-      $('#entryChatrooms').addClass('on');
+      $('li', '#entry-chatrooms').addClass('active');
       this.mode = 'entry';
       this.getChatrooms();
     },
     getJoinChatrooms: function(event) {
       this.init_list();
-      $('#joinChatrooms').addClass('on');
+      $('li', '#join-chatrooms').addClass('active');
       this.mode = 'join';
       this.getChatrooms();
     },
@@ -212,6 +204,7 @@
           if (chatrooms) {
             $.each(response.chatrooms, function(key, chatroom) {
               var template = syaberi.templates.mypage.list({
+                host: $('html').data('host'),
                 chatroom: chatroom,
                 isUrlOpen: self.mode === 'entry' ? false : true
               });
@@ -231,6 +224,8 @@
       var description = $('html').data('profiledescription');
 
       this.init_list();
+      $('li', '#edit-profile').addClass('active');
+
       var template = syaberi.templates.mypage.profile({
         userName: userName,
         email: email,
@@ -258,7 +253,8 @@
           userId: userId,
           userName: userName,
           email: email,
-          description: description
+          description: description,
+          token: this.token
         }, {
           success: function() {
             location.href = '/mypage';
@@ -279,9 +275,11 @@
       this.getOwnerChatrooms();
     },
     init_list: function() {
-      $('article', '#hakunetsu_area').removeClass('on');
+      $('li', '#owner-chatrooms').removeClass('active');
+      $('li', '#join-chatrooms').removeClass('active');
+      $('li', '#edit-profile').removeClass('active');
       return $('#article_area').empty();
-    },
+    }
   });
 
 }).call(this);

@@ -13,21 +13,25 @@
 </head>
 <body>
 <div id="wrapper">
-<div id="contents_wrapp">
-  <div id="contents_wrapp_inside">
-  <% include header %>
-  <h1><%= title %></h1>
-  <% if (err.type === 'notFound') { %>
-  ページが見つかりません: <%= err.path %>
-  <% } else if (err.type === 'unauthorized') { %>
-  ログインをしてください。
-  <% } else { %>
-  システムエラーが起きました。
-  <% } %>
-  <p><a href="/">トップページへもどる</a></p>
-  </div>
+<% include header %>
+    <div id="mainview">
+    </div>
+    <div id="content">
+        <div class="left-content">
+          <h1><%= title %></h1>
+          <% if (err.type === 'notFound') { %>
+          ページが見つかりません: <%= err.path %>
+          <% } else if (err.type === 'unauthorized') { %>
+          ログインをしてください。
+          <% } else { %>
+          システムエラーが起きました。
+          <% } %>
+          <p><a href="/">トップページへもどる</a></p>
+        </div>
+        <div class="right-content">
+        </div>
+    </div>
 </div>
-
 <% include footer %>
 
 </body>

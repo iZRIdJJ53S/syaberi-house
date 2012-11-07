@@ -87,6 +87,12 @@ $TEXT_M: 12px;
 $TEXT_S: 10px;
 $TEXT_SS: 8px;
 
+$BODY_WIDTH: 800px;
+$CONTENT_LEFT_WIDTH: $BODY_WIDTH;//右ナビ無しの対応
+//$CONTENT_LEFT_WIDTH: $BODY_WIDTH/100*70;
+$CONTENT_RIGHT_WIDTH: $BODY_WIDTH/100*28;
+
+
 /*
  * common
  *
@@ -97,10 +103,6 @@ a{
 .full_width {
     width: 100%;
 }
-.nodecoration {
-    
-}
-
 form{
     font-size: $TEXT_L;
     table{
@@ -167,11 +169,6 @@ form{
  * main
  *
  */
-
-$BODY_WIDTH: 800px;
-$CONTENT_LEFT_WIDTH: $BODY_WIDTH;//右ナビ無しの対応
-//$CONTENT_LEFT_WIDTH: $BODY_WIDTH/100*70;
-$CONTENT_RIGHT_WIDTH: $BODY_WIDTH/100*28;
 body {
     //@include gradient-top-darken(#fff);
     //background-image: url('../img/shattered.png');
@@ -186,11 +183,8 @@ body {
     //@include box-shadow(rgba(0, 0, 0, .15) 0 0 2px);
 }
 #head {
-    
-    position:fixed;
     width: $BODY_WIDTH;
     background-color: #fff;
-    
     header {
         float: left;
     };
@@ -235,7 +229,6 @@ body {
             text-align: center;
         }
     };
-    
     padding: 10px 0;
     margin-bottom: 10px;
     border-bottom: 3px #96c045 solid;
@@ -244,9 +237,10 @@ body {
 #head_menu_list{
     display: none;
     float: left;
-    margin: 29px 16px 0;
+    margin: 29px 55px 0;
     position: fixed;
     z-index: 900;
+    font-size: $TEXT_M;
     ul{
         padding: 4px;
         background: #fff;
@@ -255,10 +249,13 @@ body {
         li{
             padding: 6px;
         }
+        li:hover{
+            color: #fff;
+            background: #96c045;
+        }
     }
 }
 #mainview{
-    padding-top: 100px;
     .sbtn{
         float: right;
         ul {
@@ -273,7 +270,7 @@ body {
 }
 #content {
     width: $BODY_WIDTH;
-    margin-bottom:40px;
+    margin-bottom:10px;
     .left-content{
         float: left;
         width: $CONTENT_LEFT_WIDTH;
@@ -285,19 +282,112 @@ body {
     @include clearfix;
 }
 #foot {
-
-    min-height: 100px;
-    padding: 40px;
-
-    @include gradient-top-darken(#fff);
-    @include line-top(.1,1);
+    min-height: 20px;
+    padding: 25px 20px;
+    //@include gradient-top-darken(#fff);
+    //@include line-top(.1,1);
     @include clearfix;
+}
+#page-top {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	font-size: 77%;
+}
+#page-top a {
+	background: #96c065;
+	text-decoration: none;
+	color: #fff;
+	width: 100px;
+	padding: 30px 0;
+	text-align: center;
+	display: block;
+	border-radius: 5px;
+}
+#page-top a:hover {
+	text-decoration: none;
+	background: #96c045;
 }
 
 /*
  * room & ask list
  *
  */
+.chatroombox {
+    width: $BODY_WIDTH;
+    background:#fff;
+    //border-bottom: 2px #efefef solid;
+    border-bottom: 1px #96c045 solid;
+    .room-inbox {
+        .room-icon{
+            float: left;
+        }
+        .room-titlebox{
+            float: left;
+            width: $CONTENT_LEFT_WIDTH - (100+80);
+            padding: 10px 10px 10px;
+            .room-title{
+                margin-bottom: 4px;
+            }
+            .cat-icon {
+                @include cat-icon;
+                @include border-radius(3px);
+            }
+            .room-username{
+                font-size: smaller;
+                margin-bottom: 4px;
+            }
+            .room-date{
+                font-size: $TEXT_S;
+            }
+            @include clearfix;
+        }
+        .room-button{
+            float: right;
+        }
+        @include clearfix;
+    }
+    .room-option{
+        float: left;
+        .room-member{
+            .room-member-open{
+                float: left;
+                font-size: $TEXT_S;
+                text-align: center;
+                padding-top: 6px;
+                margin-right: 4px;
+                width: 60px;
+                height: 19px;
+                color: #fff;
+                background: #ff0000;
+                @include box-emboss(.15, .05, .1);
+            }
+            .room-member-title{
+                float: left;
+                font-size: $TEXT_S;
+                text-align: center;
+                padding-top: 6px;
+                width: 60px;
+                height: 19px;
+                @include box-emboss(.15, .05, .1);
+            }
+            .room-member-icon{
+                img{
+                    padding-left: 4px;
+                }
+            }
+        }
+    }
+}
+.nav {
+}
+.fixed {
+    padding-top: 10px;
+    position: fixed;
+//	top: 0;
+//	left: 0;
+//	width: 100%;
+}
 .room,.ask {
     padding: 20px 0;
 }
@@ -327,40 +417,6 @@ body {
             float: right;
         }
         @include clearfix;
-    }
-    .room-option{
-        .room-date{
-            font-size: $TEXT_S;
-            margin-bottom: 10px;
-        }
-        .room-member{
-            .room-member-open{
-                float: left;
-                font-size: $TEXT_S;
-                text-align: center;
-                padding-top: 6px;
-                margin-right: 4px;
-                width: 60px;
-                height: 19px;
-                color: #fff;
-                background: #ff0000;
-                @include box-emboss(.15, .05, .1);
-            }
-            .room-member-title{
-                float: left;
-                font-size: $TEXT_S;
-                text-align: center;
-                padding-top: 6px;
-                width: 60px;
-                height: 19px;
-                @include box-emboss(.15, .05, .1);
-            }
-            .room-member-icon{
-                img{
-                    padding-left: 4px;
-                }
-            }
-        }
     }
     @include line-bottom(.1,1);
     @include clearfix;
@@ -416,9 +472,11 @@ body {
  */
 .message {
     padding: 20px;
-    border: 1px #96c045 solid;
+    border-left: 1px #96c045 solid;
+    border-right: 1px #96c045 solid;
+    border-bottom: 1px #96c045 solid;
     .message-help-inbox {
-        border-bottom: 3px #96c045 solid;
+        border-bottom: 3px #96c045 dotted;
         margin-bottom: 10px;
         .help-icon{
             float: left;
@@ -557,7 +615,7 @@ body {
         list-style: none;
     }
     ul li{
-        width: 20%;
+        width: $BODY_WIDTH / 3 - 20;
         padding: 10px;
         float: left;
     }

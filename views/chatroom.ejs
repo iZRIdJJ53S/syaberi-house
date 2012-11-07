@@ -73,8 +73,38 @@
     <div id="content">
 
         <div class="left-content">
-
-            <div class="room">
+            
+            <script>
+            $(function() {
+                var nav = $('.nav');
+                //表示位置
+                var navTop = nav.offset().top+200;
+                //ナビゲーションの高さ（シャドウの分だけ足してます）
+                var navHeight = nav.height()+10;
+                var showFlag = false;
+                nav.css('top', -navHeight+'px');
+                //ナビゲーションの位置まできたら表示
+                $(window).scroll(function () {
+                    var winTop = $(this).scrollTop();
+                    if (winTop >= navTop) {
+                        if (showFlag == false) {
+                            showFlag = true;
+                            nav
+                                .addClass('fixed')
+                                .stop().animate({'top' : '0px'}, 200);
+                        }
+                    } else if (winTop <= navTop) {
+                        if (showFlag) {
+                            showFlag = false;
+                            nav.stop().animate({'top' : -navHeight+'px'}, 200, function(){
+                                nav.removeClass('fixed');
+                            });
+                        }
+                    }
+                });
+            });</script>
+            
+            <div class="chatroombox nav">
                 <div class="room-inbox">
                     <div class="room-icon">
                         <a href="<%= chatroom.ownerpage %>">
@@ -83,21 +113,21 @@
                     </div>
                     <div class="room-titlebox">
                         <h2 class="room-title"><%= chatroom.title %></h2>
+                        <div class="cat-icon"><a href="#"><%= chatroom.category %></a></div>
                         <div class="room-username"><a href="<%= chatroom.ownerpage %>">by.<%= chatroom.owner %></a></div>
+                        <div class="room-date">作成日 <%= chatroom.date %></div>
                     </div>
-                </div>
-                <div class="room-option">
-                    <div class="room-date">作成日 <%= chatroom.date %></div>
-                    <div class="room-member">
-                        <div class="room-member-open">全体に公開</div>
-                        <div class="room-member-title">参加者</div>
-                        <div class="room-member-icon" id="audienceview">
-                            <a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a>
+                    <!--div class="room-option">
+                        <div class="room-member">
+                            <div class="room-member-open">全体に公開</div>
+                            <div class="room-member-title">参加者</div>
+                            <div class="room-member-icon">
+                                <a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a><a href="#"><img class="icon_ss" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png"></a>
+                            </div>
                         </div>
-                        <!--div>いま部屋にいるひと : <span id="peaple"></span>人</div-->
-                    </div>
+                    </div-->
                 </div>
-            </div><!-- room -->
+            </div><!-- chatroom -->
 
             <!--
             <div class="room-menu">

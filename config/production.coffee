@@ -1,9 +1,9 @@
-module.exports =
+moduleexports =
   server:
     host: "websocket.syaberi-house.com"
     port: 3000
     ssl:
-      port: 4430
+      port: 443
       key: 'certs/dev.key'
       cert: 'certs/dev.crt'
     cookieSecret: 'xZQWzsaY8fZWFnVltP1Y'

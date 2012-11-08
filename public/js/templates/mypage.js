@@ -9,17 +9,17 @@
     '<div class="room">'+
         '<div class="room-inbox">'+
             '<div class="room-icon">'+
-                '<a href="http://{{host}}{{chatroom.ownerpage}}">'+
+                '<a href="{{chatroom.ownerpage}}">'+
                   '<img class="icon_m" src="{{chatroom.ownerimage}}">'+
                 '</a>'+
             '</div>'+
             '<div class="room-titlebox">'+
-                '<h2 class="room-title"><a href="http://{{host}}/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h2>'+
+                '<h2 class="room-title"><a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h2>'+
                 '<div class="cat-icon"><a href="#">{{chatroom.category}}</a></div>'+
-                '<div class="room-username"><a href="http://{{host}}{{chatroom.ownerpage}}">by.{{chatroom.owner}}</a></div>'+
+                '<div class="room-username"><a href="{{chatroom.ownerpage}}">by.{{chatroom.owner}}</a></div>'+
             '</div>'+
             '<div class="room-button">'+
-                '<a href="http://{{host}}/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
+                '<a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
                   '<input type="button" class="button_yg" value="話す">'+
                 '</a>'+
             '</div>'+

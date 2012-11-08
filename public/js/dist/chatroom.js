@@ -14,6 +14,11 @@
             '{{#if extImageUrl}}'+
             '<img src="{{extImageUrl}}" class="owner-img">'+
             '{{/if}}'+
+            '{{#if youtubeVid}}'+
+            '<iframe width="500" height="300" src="'+
+            'http://www.youtube.com/embed/{{youtubeVid}}"'+
+            ' frameborder="0" allowfullscreen></iframe>'+
+            '{{/if}}'+
             '<div class="owner-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>'+
             '<div class="owner-date">{{time}} [1]'+
             '{{#if isHis}}'+
@@ -33,6 +38,11 @@
             '<p class="member-title">{{{message}}}</p>'+
             '{{#if extImageUrl}}'+
             '<img src="{{extImageUrl}}" class="member-img">'+
+            '{{/if}}'+
+            '{{#if youtubeVid}}'+
+            '<iframe width="500" height="300" src="'+
+            'http://www.youtube.com/embed/{{youtubeVid}}"'+
+            ' frameborder="0" allowfullscreen></iframe>'+
             '{{/if}}'+
             '<div class="member-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>'+
             '<div class="member-date">{{time}} [2]'+
@@ -225,7 +235,8 @@
         isHis: userId === data.userId, //本人の書き込みを表すフラグ
         isInvite: status !== 2,
         isUrlOpen: isUrlOpen,
-        extImageUrl: ''
+        extImageUrl: '',
+        youtubeVid: ''
       };
 
       // urlの判断
@@ -237,6 +248,14 @@
           // 画像urlで値を上書き
           params.extImageUrl = tmp_url;
         }
+        // Youtube の判断
+        else if (syaberi.util.isYoutube(tmp_url)) {
+          var youtube_vid = syaberi.util.getYoutubeVid(tmp_url);
+          if (youtube_vid) {
+            params.youtubeVid = youtube_vid;
+          }
+        }
+
       }
 
       //オーナーのフキダシは向きを変える

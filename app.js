@@ -8,7 +8,7 @@ var httpsServer = require('https').createServer({
     key: fs.readFileSync(path.join(__dirname, config.server.ssl.key)),
     cert: fs.readFileSync(path.join(__dirname, config.server.ssl.cert))
   }, app);
-var io = require('socket.io').listen(httpServer);
+var io = require('socket.io').listen(httpsServer);
 var st = require('st'); // 静的ファイルを配信/キャッシュモジュール
 var mysql = require('mysql');
 var passport = require('passport');  // authentication
@@ -75,7 +75,10 @@ app.configure(function() {
   app.use(express.cookieParser(config.server.cookieSecret));
   app.use(express.session({
     key: 'sess_id',
-    cookie: { maxAge: config.server.cookieMaxAge },  // 1week
+    cookie: {
+      maxAge: config.server.cookieMaxAge,   // 1week
+      secure: true
+    },
     store: sessionStore
   }));
   app.use(flash());
@@ -137,7 +140,7 @@ passport.use(new LocalStrategy({
 passport.use(new TwitterStrategy({
     consumerKey: config.twitter.consumerKey,
     consumerSecret: config.twitter.consumerSecret,
-    callbackURL: 'http://'+config.server.host+'/auth/twitter/callback'
+    callbackURL: 'https://'+config.server.host+'/auth/twitter/callback'
   },
   userController.authenticateByTwitter
 ));

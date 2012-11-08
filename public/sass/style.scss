@@ -97,6 +97,9 @@ $CONTENT_RIGHT_WIDTH: $BODY_WIDTH/100*28;
  * common
  *
  */
+body{
+    line-height: 120%;
+}
 a{
     text-decoration: none;
 }
@@ -104,15 +107,62 @@ a{
     width: 100%;
 }
 form{
-    font-size: $TEXT_L;
+    font-size: $TEXT_M;
     table{
         padding: 10px;
     }
     tr{
-        border-bottom: 1px #dfdfdf solid;
+    }
+    th{
+        padding: 10px;
+        vertical-align: top;
     }
     td{
-        padding: 20px;
+        padding: 10px;
+    }
+    caption{
+        padding: 50px;
+        text-align: center;
+        font-size: $TEXT_L;
+        font-weight: bold;
+        color: #6ea700;
+    }
+    .label{
+        padding-right: 20px;
+        text-align: right;
+        width: 20%;
+        .necessity{
+            padding-top: 3px;
+            font-size: $TEXT_SS;
+            color: #ff1881;
+        }
+    }
+    .data{
+        border-left: 1px #dfdfdf solid;
+        .text-box{
+            font-size: $TEXT_L;
+            width: 350px;
+            height: 25px;
+        }
+        .textarea-box{
+            width: 600px;
+            height: 120px;
+        }
+        .ex{
+            margin: 15px;
+            font-size: $TEXT_SS;
+            color: #333;
+        }
+        .error{
+            font-size: $TEXT_SS;
+            font-weight: bold;
+            color: #ff1881;
+            padding: 5px;
+        }
+    }
+    .submit{
+        margin: 50px;
+        text-align: center;
     }
 }
 

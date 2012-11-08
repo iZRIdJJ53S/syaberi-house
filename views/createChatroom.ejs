@@ -36,62 +36,53 @@
     <div id="content">
 
         <div class="left-content">
-
+            
             <form id="full-form-tag" name="full-form-tag" method="post" enctype="multipart/form-data">
-            <div id="contents_wrapp">
-              <div id="contents_wrapp_inside">
-                <section id="make_community">
-                  <h3 id="makecommunity_h3">新しい部屋をつくる</h3>
-                  <form action="" method="">
-                  <table id="makecommunity_table">
+                <table>
+                    <caption>(っ´∀｀)っ)) 新しい部屋をつくる</caption>
                     <tr>
-                      <th>カテゴリ<br><span style="color:#FF1881">※必須</span></th>
-                      <td>
-                      <select id="categoryId" name="categoryId">
-                        <option value="">選択してください</option>
-                        <% categories.forEach(function(category) { %>
-                        <option value="<%= category.id %>"><%= category.title %></option>
-                        <% }) %>
-                      </select>
-                      <br><span id="error_categoryId" class="error"></span></td>
+                        <th class="label">話題のカテゴリ:<div class="necessity">※必須</div></th>
+                        <td class="data">
+                            <select id="categoryId" name="categoryId">
+                                <option value="">選択してください</option>
+                                <% categories.forEach(function(category) { %>
+                                <option value="<%= category.id %>"><%= category.title %></option>
+                                <% }) %>
+                            </select>
+                            <div id="error_categoryId" class="error"></div>
+                        </td>
                     </tr>
                     <tr>
-                      <th>部屋名<br><span style="color:#FF1881">※必須</span></th>
-                      <td><div class="input_makecommunity_name_area"><input type="text" name="title" id="title1" class="title" value="経験や体験は？" style="color: #999;">けど、<br>例）昨日、富士山登ってきた<br><input type="text" name="title" id="title2" class="title" value="話題は？" style="color: #999;">について、話しませんか？<br>例）登山</div><span id="error_title" class="error"></span></td>
+                        <th class="label">部屋の名前:<div class="necessity">※必須</div></th>
+                        <td class="data">
+                            <div class="input_makecommunity_name_area">
+                                <input type="text" name="title" id="title1" class="title text-box" value="経験や体験、オーナーの自己紹介など" style="color: #999;">けど、
+                                <div class="ex">例）昨日、富士山登ってきた</div>
+                                <input type="text" name="title" id="title2" class="title text-box" value="会話のテーマ" style="color: #999;">について、話しませんか？
+                                <div class="ex">例）山登り</div>
+                            </div>
+                            <div id="error_title" class="error"></div>
+                        </td>
                     </tr>
                     <tr>
-                    <th>説明</th>
-                      <td><div id="input_makecommunity_name_textarea" ><textarea id="description" name="description"></textarea></div><span id="error_description" class="error"></span></td>
+                        <th class="label">部屋の説明:</th>
+                        <td class="data">
+                            <textarea id="description" class="textarea-box" name="description"></textarea>
+                            <div id="error_description" class="error"></div>
+                        </td>
                     </tr>
                     <input type="hidden" value="1" name="publicYN" id="publicYN" />
-                    <!--
                     <tr>
-                      <th>公開設定<br><span style="color:#FF1881">※必須</span></th>
-                      <td>
-                      <input type="radio" value="1" name="publicYN" id="public_1" checked="checked" /><label for="public_1">公開</label>
-                      <input type="radio" value="0" name="publicYN" id="public_0"/><label for="public_0">非公開</label>
-                      <br><span id="error_public" class="error"></span></td>
+                      <th class="label">オーナー:</th>
+                      <td class="data"><%= userName %></td>
                     </tr>
-                    -->
-                    <tr>
-                      <th>オーナー</th>
-                      <td><%= userName %></td>
-                    </tr>
-                  </table>
-                </section>
-                  <div class="txtc magt20 magb200">
-                    <input type="button" class="button_g full_width" id="submit_1" value="送信">
-                  </div>
-                </section>
-              </div><!--/#contents_wrapp_inside-->
-            </div><!--/#contents_wrapp-->
+                </table>
+                <div class="submit">
+                    <input type="button" class="button_g" id="submit_1" value="新しい部屋をつくる">
+                </div>
             </form>
 
-        </div>
-
-        <div class="right-content">
-        </div>
-
+        </div><!-- left-content -->
     </div><!-- content -->
 
 <% include footer %>

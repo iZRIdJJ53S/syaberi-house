@@ -1,31 +1,30 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 <head>
-<title>ユーザ登録｜シャベリハウス</title>
-<meta charset="UTF-8">
-<meta name="description" content="友人やちょっとした知り合い、共通の仲間と家(コミュニティ)を作り、楽しくシャベリあおう！">
-<meta name="keywords" content="シャベリハウス,チャット,趣味,興味,twitter,facebook,mixi">
-<link rel="shortcut icon" href="http://syaberi-house.com/images/favicon.ico" />
-<link rel="stylesheet" href="/css/html5reset-1.6.1.css" />
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" href="/css/common.css" />
-<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
-<% if (isProduction) { %>
-<script src="/js/dist/common.min.js"></script>
-<script src="/js/dist/register.min.js"></script>
-<% } else { %>
-<script src="/js/lib/jquery-1.8.2.js"></script>
-<script src="/js/lib/jquery.cookie.js"></script>
-<script src="/js/lib/underscore.js"></script>
-<script src="/js/lib/backbone.js"></script>
-<script src="/js/lib/backbone-validation.js"></script>
-<script src="/js/menu.js"></script>
-<script src="/js/util.js"></script>
-<script src="/js/models/user.js"></script>
-<script src="/js/views/register.js"></script>
-<script src="/js/registerApp.js"></script>
-<% } %>
+<meta charset='utf-8' />
+    <title>新規登録｜シャベリハウス</title>
+    <meta name="description" content="詳しい人と話せる新感覚のQ&Aサイト">
+    <meta name="keywords" content="シャベリハウス,話す,詳しい人,Q&A,解決,悩み,問題">
+    <link charset='utf-8' href='/css/reset.css' rel='stylesheet' type='text/css' />
+    <link charset='utf-8' href='/css/style.css' rel='stylesheet' type='text/css' />
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
+    <% if (isProduction) { %>
+    <script src="/js/dist/common.min.js"></script>
+    <script src="/js/dist/register.min.js"></script>
+    <% } else { %>
+    <script src="/js/lib/jquery-1.8.2.js"></script>
+    <script src="/js/lib/jquery.cookie.js"></script>
+    <script src="/js/lib/underscore.js"></script>
+    <script src="/js/lib/backbone.js"></script>
+    <script src="/js/lib/backbone-validation.js"></script>
+    <script src="/js/menu.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/models/user.js"></script>
+    <script src="/js/views/register.js"></script>
+    <script src="/js/registerApp.js"></script>
+    <% } %>
 </head>
+
 <body>
 <div id="wrapper">
 
@@ -38,61 +37,47 @@
 
         <div class="left-content">
 
-<form id="full-form-tag" name="full-form-tag" method="post" action="/login" enctype="multipart/form-data">
-<div id="contents_wrapp">
-  <div id="contents_wrapp_inside">
-    <section id="make_community">
-      <h3 id="makecommunity_h3">ユーザ登録</h3>
-      <form action="" method="">
-      <table id="makecommunity_table">
-        <tr>
-          <th>ニックネーム<br><span style="color:#FF1881">※必須</span></th>
-          <td>
-            <div class="input_makecommunity_name_area"><input type="text" name="userName" id="userName" value="<%= userName %>"></div>
-            <span id="error_userName" class="error"></span>
-          </td>
-        </tr>
-        <tr>
-          <th>メールアドレス<br><span style="color:#FF1881">※必須</span></th>
-          <td>
-            <div class="input_makecommunity_name_area"><input type="text" name="email" id="email" value=""></div>
-            <span id="error_email" class="error"></span>
-          </td>
-        </tr>
-        <tr>
-          <th>紹介文</th>
-          <td>
-            <div class="input_makecommunity_name_area">
-              <textarea name="description" id="description" cols="80" rows="8"></textarea>
-            </div>
-            <span id="error_description" class="error"></span>
-          </td>
-        </tr>
-      </table>
-      <div id="makecommunity_detail">
-
-      <div id="terms" style="margin:30px;">
-
-      <div style="overflow:auto;height:150px;border:1px #ccc solid; padding:10px; background-color:#fff; text-align:left;">
-      <% include terms %>
-      </div>
-      <div style="text-align:center;padding-top:20px;">
-            <input type="checkbox" name="terms_check" id="terms_check" style="line-height:18px;height:24px;font-size:18px;"><span style="margin-left:10px;"><label for="terms_check">本サービスの利用規約に同意します(必須)</label></span>
-            <br/><span class="error_terms_check_requ"></span>
-      </div>
-      </div>
-      </div>
-    </section>
-      <div class="txtc magt20 magb200">
-        <input type="button" class="button_g full_width" id="submit_1" value="送信">
-      </div>
-    </section>
-  </div><!--/#contents_wrapp_inside-->
-</div><!--/#contents_wrapp-->
-</form>
-
-        </div>
-    </div>
+            <form method="post" action="/login" enctype="multipart/form-data">
+                <table>
+                    <caption>ヾ(〃^∇^)ﾉ 新規登録</caption>
+                    <tr>
+                        <th class="label">ニックネーム:<div class="necessity">※必須</div></th>
+                        <td class="data">
+                            <input type="text" name="userName" id="userName" class="text-box" value="<%= userName %>">
+                            <div id="error_userName" class="error"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">メールアドレス:<div class="necessity">※必須</div></th>
+                        <td class="data">
+                            <input type="text" name="email" id="email" class="text-box" value="">
+                            <div id="error_email" class="error"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">プロフィール:</th>
+                        <td class="data">
+                            <textarea name="description" id="description" class="textarea-box"></textarea>
+                            <div id="error_description" class="error"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">利用規約への同意:<div class="necessity">※必須</div></th>
+                        <td class="data">
+                            <div style="overflow:auto;height:150px;border:1px #ccc solid; padding:10px; background-color:#fff; text-align:left;">
+                                <% include terms %>
+                            </div>
+                            <input type="checkbox" name="terms_check" id="terms_check" style="line-height:18px;height:24px;font-size:18px;"><span style="margin-left:10px;"><label for="terms_check">本サービスの利用規約に同意します</label></span><br/><span class="error_terms_check_requ"></span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="submit">
+                    <input type="button" class="button_g" id="submit_1" value="新規登録する">
+                </div>
+            </form>
+            
+        </div><!-- left-content -->
+    </div><!-- content -->
 
 <% include footer %>
 <input type="hidden" name="token" id="token" value="<%= token %>">

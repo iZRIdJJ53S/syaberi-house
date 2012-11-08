@@ -94,10 +94,9 @@ app.configure(function() {
   // app.routerを設定すると、通信の実行までに必要なマッピング処理を省略できる
   // ルーティングの機能を提供する。これはExpressでの拡張
   app.use(express.compress());
-  app.use(express.csrf());
-  app.use(express.csrf()); // この位置じゃないと動かない？順番要注意
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(app.router);
+  app.use(express.csrf()); // この位置じゃないと動かない？順番要注意
   app.use(middleware.notFound);
   app.use(middleware.error);
 });
@@ -212,6 +211,9 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', {
 app.get ('/logout',    userController.logout);
 
 app.post('/upload', uploadController.upload);
+
+app.get('/terms', function(req, res) { res.render('terms', {}); });
+
 
 app.get('*', function (req, res, next) {
   return next(new utils.NotFound(req.url));

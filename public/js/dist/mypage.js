@@ -6,57 +6,68 @@
 
   //チャットルーム一覧
   syaberi.templates.mypage.list = Handlebars.compile(
-    '<div class="room">'+
-        '<div class="room-inbox">'+
-            '<div class="room-icon">'+
-                '<a href="{{chatroom.ownerpage}}">'+
-                  '<img class="icon_m" src="{{chatroom.ownerimage}}">'+
-                '</a>'+
-            '</div>'+
-            '<div class="room-titlebox">'+
-                '<h2 class="room-title"><a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h2>'+
-                '<div class="cat-icon"><a href="#">{{chatroom.category}}</a></div>'+
-                '<div class="room-username"><a href="{{chatroom.ownerpage}}">by.{{chatroom.owner}}</a></div>'+
-            '</div>'+
-            '<div class="room-button">'+
-                '<a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">'+
-                  '<input type="button" class="button_yg" value="話す">'+
-                '</a>'+
-            '</div>'+
-        '</div>'+
-    '</div>'
+    '<div class="room">\
+        <div class="room-inbox">\
+            <div class="room-icon">\
+                {{#if chatroom.isOwnerInactive}}\
+                    <img class="icon_m" src="/img/chara.png">\
+                {{else}}\
+                    <a href="{{chatroom.ownerpage}}"><img class="icon_m" src="{{chatroom.ownerimage}}"></a>\
+                {{/if}}\
+            </div>\
+            <div class="room-titlebox">\
+                <h2 class="room-title"><a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">{{chatroom.title}}</a></h2>\
+                <div class="cat-icon"><a href="#">{{chatroom.category}}</a></div>\
+                <div class="room-username">\
+                    {{#if chatroom.isOwnerInactive}}\
+                        by.退会済み\
+                    {{else}}\
+                        <a href="{{chatroom.ownerpage}}">by.{{chatroom.owner}}</a>\
+                    {{/if}}\
+                </div>\
+            </div>\
+            <div class="room-button">\
+                <a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">\
+                  <input type="button" class="button_yg" value="話す">\
+                </a>\
+            </div>\
+        </div>\
+    </div>'
   );
 
   //プロフィール編集
   syaberi.templates.mypage.profile = Handlebars.compile(
-            '<form method="" action="" style="padding-top:20px;">'+
-                '<table>'+
-                    '<tr>'+
-                        '<th class="label">ニックネーム:<div class="necessity">※必須</div></th>'+
-                        '<td class="data">'+
-                            '<input type="text" name="userName" id="userName" class="text-box" value="{{{userName}}}">'+
-                            '<div id="error_userName" class="error"></div>'+
-                        '</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<th class="label">メールアドレス:<div class="necessity">※必須</div></th>'+
-                        '<td class="data">'+
-                            '<input type="text" name="email" id="email" class="text-box" value="{{{email}}}">'+
-                            '<div id="error_email" class="error"></div>'+
-                        '</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<th class="label">プロフィール:</th>'+
-                        '<td class="data">'+
-                            '<textarea name="description" id="description" class="textarea-box">{{{description}}}</textarea>'+
-                            '<div id="error_description" class="error"></div>'+
-                        '</td>'+
-                    '</tr>'+
-                '</table>'+
-                '<div class="submit">'+
-                    '<input type="button" class="button_g" id="submit_1" value="保存">'+
-                '</div>'+
-            '</form>'
+      '<form method="" action="" style="padding-top:20px;">\
+          <table>\
+              <tr>\
+                  <th class="label">ニックネーム:<div class="necessity">※必須</div></th>\
+                  <td class="data">\
+                      <input type="text" name="userName" id="userName" class="text-box" value="{{{userName}}}">\
+                      <div id="error_userName" class="error"></div>\
+                  </td>\
+              </tr>\
+              <tr>\
+                  <th class="label">メールアドレス:<div class="necessity">※必須</div></th>\
+                  <td class="data">\
+                      <input type="text" name="email" id="email" class="text-box" value="{{{email}}}">\
+                      <div id="error_email" class="error"></div>\
+                  </td>\
+              </tr>\
+              <tr>\
+                  <th class="label">プロフィール:</th>\
+                  <td class="data">\
+                      <textarea name="description" id="description" class="textarea-box">{{{description}}}</textarea>\
+                      <div id="error_description" class="error"></div>\
+                  </td>\
+              </tr>\
+          </table>\
+          <div class="submit">\
+              <input type="button" class="button_g" id="submit_1" value="保存">\
+          </div>\
+          <div class="deactivate" style="margin-left:330px;">\
+            <a href="/confirm_deactivation">シャベリハウスを退会する</a>\
+          </div>\
+      </form>'
   );
 
 }).call(this);
@@ -222,6 +233,8 @@
       var description = $('html').data('profiledescription');
 
       this.init_list();
+      $('#view-more-events').hide();
+
       $('li', '#edit-profile').addClass('active');
 
       var template = syaberi.templates.mypage.profile({

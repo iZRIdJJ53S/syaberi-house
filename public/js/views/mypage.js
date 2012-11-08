@@ -81,6 +81,8 @@
       var description = $('html').data('profiledescription');
 
       this.init_list();
+      $('#view-more-events').hide();
+
       $('li', '#edit-profile').addClass('active');
 
       var template = syaberi.templates.mypage.profile({

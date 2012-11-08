@@ -68,14 +68,22 @@
             <div class="room">
                 <div class="room-inbox">
                     <div class="room-icon">
-                        <a href="<%= chatroom.ownerpage %>">
-                          <img class="icon_m" src="<%= chatroom.ownerimage %>">
-                        </a>
+                        <% if (chatroom.isOwnerInactive) { %>
+                            <img class="icon_m" src="/img/chara.png">
+                        <% } else { %>
+                            <a href="<%= chatroom.ownerpage %>"><img class="icon_m" src="<%= chatroom.ownerimage %>"></a>
+                        <% } %>
                     </div>
                     <div class="room-titlebox">
                         <h2 class="room-title"><a href="/chatrooms/<%= chatroom.id %>/open"><%= chatroom.title %></a></h2>
                         <div class="cat-icon"><a href="#"><%= chatroom.category %></a></div>
-                        <div class="room-username"><a href="<%= chatroom.ownerpage %>">by.<%= chatroom.owner %></a></div>
+                        <div class="room-username">
+                            <% if (chatroom.isOwnerInactive) { %>
+                                by.退会済み
+                            <% } else { %>
+                                <a href="<%= chatroom.ownerpage %>">by.<%= chatroom.owner %></a>
+                            <% } %>
+                        </div>
                     </div>
                     <div class="room-button">
                         <a href="/chatrooms/<%= chatroom.id %>/open">
@@ -91,9 +99,21 @@
                 <div class="ask">
                     <div class="ask-titlebox">
                         <div class="ask-title" ><a href="/chatrooms/<%= chatroom.id %>/open"><%- chatroom.latest.message %></a></div>
-                        <div class="ask-username"><a href="/users/<%= chatroom.latest.userId %>">by.<%= chatroom.latest.username %></a></div>
+                        <div class="ask-username">
+                            <% if (chatroom.latest.isInactive) { %>
+                              by.退会済み
+                            <% } else { %>
+                              <a href="/users/<%= chatroom.latest.userId %>">by.<%= chatroom.latest.username %></a>
+                            <% } %>
+                        </div>
                     </div>
-                    <div class="ask-icon"><a href="/users/<%= chatroom.latest.userId %>"><img class="icon_m" src="<%= chatroom.latest.userimage %>"></a></div>
+                    <div class="ask-icon">
+                        <% if (chatroom.latest.isInactive) { %>
+                            <img class="icon_m" src="/img/chara.png">
+                        <% } else { %>
+                            <a href="/users/<%= chatroom.latest.userId %>"><img class="icon_m" src="<%= chatroom.latest.userimage %>"></a>
+                        <% } %>
+                    </div>
                 </div>
                 <% } %>
             </div>

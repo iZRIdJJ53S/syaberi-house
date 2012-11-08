@@ -107,14 +107,22 @@
             <div class="chatroombox nav">
                 <div class="room-inbox">
                     <div class="room-icon">
-                        <a href="<%= chatroom.ownerpage %>">
-                          <img class="icon_m" src="<%= chatroom.ownerimage %>">
-                        </a>
+                        <% if (chatroom.isOwnerInactive) { %>
+                            <img class="icon_m" src="/img/chara.png">
+                        <% } else { %>
+                            <a href="<%= chatroom.ownerpage %>"><img class="icon_m" src="<%= chatroom.ownerimage %>"></a>
+                        <% } %>
                     </div>
                     <div class="room-titlebox">
                         <h2 class="room-title"><%= chatroom.title %></h2>
                         <div class="cat-icon"><a href="#"><%= chatroom.category %></a></div>
-                        <div class="room-username"><a href="<%= chatroom.ownerpage %>">by.<%= chatroom.owner %></a></div>
+                        <div class="room-username">
+                            <% if (chatroom.isOwnerInactive) { %>
+                                by.退会済み
+                            <% } else { %>
+                                <a href="<%= chatroom.ownerpage %>">by.<%= chatroom.owner %></a>
+                            <% } %>
+                        </div>
                         <div class="room-date">作成日 <%= chatroom.date %></div>
                     </div>
                     <!--div class="room-option">
@@ -157,12 +165,22 @@
                     <% if (chatroom.ownerId == chat.user_id) { //ownerの投稿 %>
                     <div class="message-owner-inbox">
                         <div class="owner-icon">
-                            <a href="<%= chat.userpage %>"><img class="icon_m" src="<%= chat.userimage %>"></a>
+                            <% if (chat.isInactive) { %>
+                                <img class="icon_m" src="/img/chara.png">
+                            <% } else { %>
+                                <a href="<%= chat.userpage %>"><img class="icon_m" src="<%= chat.userimage %>"></a>
+                            <% } %>
                         </div>
                         <div class="owner-titlebox">
                             <p class="owner-title"><%- esc(chat.message) %></p>
                             <!--img class="owner-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
-                            <div class="owner-username"><a href="<%= chat.userpage %>">by.<%= chat.username %></a></div>
+                            <div class="owner-username">
+                                <% if (chat.isInactive) { %>
+                                    by.退会済み
+                                <% } else { %>
+                                    <a href="<%= chat.userpage %>">by.<%= chat.username %></a>
+                                <% } %>
+                            </div>
                             <div class="owner-date"><%= chat.time %> [1]
                             <% if (isAuth && chat.user_id == userId) { %>
                             <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="<%= chat.id %>">
@@ -173,12 +191,22 @@
                     <% }else{ //memberの投稿%>
                     <div class="message-member-inbox">
                         <div class="member-icon">
-                            <a href="<%= chat.userpage %>"><img class="icon_m" src="<%= chat.userimage %>"></a>
+                            <% if (chat.isInactive) { %>
+                                <img class="icon_m" src="/img/chara.png">
+                            <% } else { %>
+                                <a href="<%= chat.userpage %>"><img class="icon_m" src="<%= chat.userimage %>"></a>
+                            <% } %>
                         </div>
                         <div class="member-titlebox">
                             <p class="member-title"><%- esc(chat.message) %></p>
                             <!--img class="member-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
-                            <div class="member-username"><a href="<%= chat.userpage %>">by.<%= chat.username %></a></div>
+                            <div class="member-username">
+                                <% if (chat.isInactive) { %>
+                                    by.退会済み
+                                <% } else { %>
+                                    <a href="<%= chat.userpage %>">by.<%= chat.username %></a>
+                                <% } %>
+                            </div>
                             <div class="member-date"><%= chat.time %> [2]
                             <% if (isAuth && chat.user_id == userId) { %>
                             <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="<%= chat.id %>">

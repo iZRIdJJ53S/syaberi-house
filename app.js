@@ -197,14 +197,16 @@ app.get ('/mypage',    csrf, authenticated, mypageController.show);
 app.get ('/users/new', csrf, authenticated, userController.new);
 app.post('/users',     authenticated, userController.create);
 app.get ('/users/:id', csrf, mypageController.show);
-app.del ('/users/:id', authenticated, userController.destroy);
+
+app.get ('/confirm_deactivation', csrf, authenticated, mypageController.confirmDeactivation);
+app.post ('/deactivation', authenticated, mypageController.deactivation);
+
 app.get ('/login',     userController.login);
 app.post('/login',     passport.authenticate('local', {
                          successRedirect: '/',
                          failureRedirect: '/login',
                          failureFlash: true
                        }));
-
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', {
                                     failureRedirect: '/'

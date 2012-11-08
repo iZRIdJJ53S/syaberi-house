@@ -67,6 +67,13 @@ module.exports = function(grunt) {
           'public/js/registerApp.js'
         ],
         dest: 'public/js/dist/register.js'
+      },
+      deactivation: {
+        src: [
+          'public/js/views/deactivation.js',
+          'public/js/deactivationApp.js'
+        ],
+        dest: 'public/js/dist/register.js'
       }
     },
     min: {
@@ -97,6 +104,10 @@ module.exports = function(grunt) {
       register: {
         src: 'public/js/dist/register.js',
         dest: 'public/js/dist/register.min.js'
+      },
+      deactivation: {
+        src: 'public/js/dist/deactivation.js',
+        dest: 'public/js/dist/deactivation.min.js'
       }
     }
   });

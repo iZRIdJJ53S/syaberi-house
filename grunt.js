@@ -73,7 +73,14 @@ module.exports = function(grunt) {
           'public/js/views/deactivation.js',
           'public/js/deactivationApp.js'
         ],
-        dest: 'public/js/dist/register.js'
+        dest: 'public/js/dist/deactivation.js'
+      },
+      deleteChatroom: {
+        src: [
+          'public/js/views/deleteChatroom.js',
+          'public/js/deleteChatroomApp.js'
+        ],
+        dest: 'public/js/dist/deleteChatroom.js'
       }
     },
     min: {
@@ -108,6 +115,10 @@ module.exports = function(grunt) {
       deactivation: {
         src: 'public/js/dist/deactivation.js',
         dest: 'public/js/dist/deactivation.min.js'
+      },
+      deleteChatroom: {
+        src: 'public/js/dist/deleteChatroom.js',
+        dest: 'public/js/dist/deleteChatroom.min.js'
       }
     }
   });

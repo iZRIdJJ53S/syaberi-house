@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="ja"
+  data-chatroom="<%= chatroom.id %>"
+>
+<head>
+<meta charset='utf-8' />
+    <title>部屋を削除する｜シャベリハウス</title>
+    <meta name="description" content="詳しい人と話せる新感覚のQ&Aサイト">
+    <meta name="keywords" content="シャベリハウス,話す,詳しい人,Q&A,解決,悩み,問題">
+    <link charset='utf-8' href='/css/reset.css' rel='stylesheet' type='text/css' />
+    <link charset='utf-8' href='/css/style.css' rel='stylesheet' type='text/css' />
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
+    <% if (isProduction) { %>
+    <script src="/js/dist/common.min.js"></script>
+    <script src="/js/dist/deleteChatroom.min.js"></script>
+    <% } else { %>
+    <script src="/js/lib/jquery-1.8.2.js"></script>
+    <script src="/js/lib/jquery.cookie.js"></script>
+    <script src="/js/lib/underscore.js"></script>
+    <script src="/js/lib/backbone.js"></script>
+    <script src="/js/lib/backbone-validation.js"></script>
+    <script src="/js/menu.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/views/deleteChatroom.js"></script>
+    <script src="/js/deleteChatroomApp.js"></script>
+    <% } %>
+</head>
+<body>
+
+<div id="wrap">
+
+<% include header %>
+
+    <div id="mainview">
+    </div>
+
+    <div id="content">
+
+        <div class="left-content">
+
+            <form id="full-form-tag" name="full-form-tag" method="post" enctype="multipart/form-data">
+                <table>
+                    <caption>部屋を削除する</caption>
+                    <tr>
+                        <th class="label">話題のカテゴリ:</th>
+                        <td class="data">
+                          <%= chatroom.category %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">部屋の名前:</th>
+                        <td class="data">
+                            <div class="input_makecommunity_name_area">
+                              <%= chatroom.title %>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="label">部屋の説明:</th>
+                        <td class="data">
+                            <%- esc(chatroom.description) %>
+                        </td>
+                    </tr>
+                    <input type="hidden" value="1" name="publicYN" id="publicYN" />
+                    <tr>
+                      <th class="label">オーナー:</th>
+                      <td class="data"><%= userName %></td>
+                    </tr>
+                </table>
+                <div class="submit">
+                    <input type="button" class="button_g" id="cancel" value="キャンセル">
+                    <input type="button" class="button_g" id="submit_1" value="部屋を削除する">
+                </div>
+            </form>
+
+        </div><!-- left-content -->
+    </div><!-- content -->
+
+<% include footer %>
+<input type="hidden" name="token" id="token" value="<%= token %>">
+</body>
+</html>

@@ -101,6 +101,7 @@ app.configure(function() {
   app.use(app.router);
   app.use(express.csrf()); // この位置じゃないと動かない？順番要注意
   app.use(middleware.notFound);
+  app.use(middleware.unauthorized);
   app.use(middleware.error);
 });
 
@@ -183,10 +184,12 @@ app.post('/chatrooms',           authenticated, chatroomController.create);
 //参加申請は一時コメントアウト
 //app.get ('/chatrooms/:id',       chatroomController.show);
 app.get ('/chatrooms/:id',       function(req, res) { res.redirect(req.path+'/open') });
-app.get ('/chatrooms/:id/open',  csrf, chatroomController.show);
-app.get ('/chatrooms/:id/edit',  authenticated, chatroomController.edit);
-app.put ('/chatrooms/:id',       authenticated, chatroomController.update);
-app.del ('/chatrooms/:id',       authenticated, chatroomController.destroy);
+app.get ('/chatrooms/:id/open',   csrf, chatroomController.show);
+app.get ('/chatrooms/:id/edit',   authenticated, chatroomController.edit);
+app.get ('/chatrooms/:id/confirm_delete', csrf, authenticated, chatroomController.confirm_delete);
+app.post('/chatrooms/:id/delete', authenticated, chatroomController.delete);
+app.put ('/chatrooms/:id',        authenticated, chatroomController.update);
+app.del ('/chatrooms/:id',        authenticated, chatroomController.destroy);
 app.post('/chatrooms/:id/invite', authenticated, chatroomController.invite);
 
 app.post('/chats',     authenticated, chatController.create);
@@ -219,19 +222,19 @@ app.post('/upload', uploadController.upload);
 
 app.get('/terms', function(req, res) { res.render('terms', {}); });
 
-
 app.get('*', function (req, res, next) {
   return next(new utils.NotFound(req.url));
 });
 
+
 //ログインチェック
 function authenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.render('error', {
-    status: 401,
-    title: '401 Unauthorized',
-    err: {type: 'unauthorized'}
-  });
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  else {
+    return next(new utils.Unauthorized(req.url));
+  }
 }
 
 //CSRF対策用トークンを設定

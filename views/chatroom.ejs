@@ -124,6 +124,9 @@
                             <% } %>
                         </div>
                         <div class="room-date">作成日 <%= chatroom.date %></div>
+                        <% if (isOwner) { %>
+                        <div class="room-delete" style="margin-left:500px;"><a href="/chatrooms/<%= chatroom.id %>/confirm_delete">この部屋を削除</a></div>
+                        <% } %>
                     </div>
                     <!--div class="room-option">
                         <div class="room-member">

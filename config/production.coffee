@@ -1,4 +1,4 @@
-moduleexports =
+module.exports =
   server:
     host: "websocket.syaberi-house.com"
     port: 3000

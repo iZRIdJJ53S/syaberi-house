@@ -3,7 +3,7 @@ module.exports =
     host: "websocket.syaberi-house.com"
     port: 3000
     ssl:
-      port: 443
+      port: 4430
       key: 'certs/2012-syaberi-private.key'
       cert: 'certs/ca.cer'
     cookieSecret: 'xZQWzsaY8fZWFnVltP1Y'

@@ -1,3 +1,5 @@
 *.swp
 *~
 logs/app.log
+certs/2012-syaberi-private.key
+certs/ca.cer

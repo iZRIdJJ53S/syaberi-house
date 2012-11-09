@@ -32,3 +32,5 @@ module.exports =
     from: 'syaberi-house <syaberihouse@gmail.com>'
     subject:
       welcome: 'SYABERI-HOUSEへようこそ！'
+      deactivation: 'SYABERI-HOUSEのご退会'  # 退会時
+      profile: 'SYABERI-HOUSEのプロフィールが変更されました'  # プロフィール変更時

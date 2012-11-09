@@ -31,4 +31,6 @@ module.exports =
     password: 'syaberihouse0110'
     from: 'syaberi-house <syaberihouse@gmail.com>'
     subject:
-      welcome: 'SYABERI-HOUSEへようこそ！'
+      welcome: 'SYABERI-HOUSEへようこそ！'   # 入会時
+      deactivation: 'SYABERI-HOUSEのご退会'  # 退会時
+      profile: 'SYABERI-HOUSEのプロフィールが変更されました'  # プロフィール変更時

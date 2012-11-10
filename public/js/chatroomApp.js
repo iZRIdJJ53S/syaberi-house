@@ -48,5 +48,5 @@
     if (!connected) {
       window.location.reload();
     }
-  }, 3000);
+  }, 2500);
 }).call(this);

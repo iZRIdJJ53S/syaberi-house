@@ -112,7 +112,7 @@ app.configure('development', function() {
   // 詳しくは -> http://www.senchalabs.org/connect/errorHandler.html
   // 例外はDumpして、StackTraceも出す
   //app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-  logger.setLevel('ERROR');
+  logger.setLevel('INFO');
 });
 
 // testというモードでサーバを起動すると有効になる設定を作成
@@ -267,7 +267,14 @@ io.configure(function() {
   io.enable('browser client minification');
   io.enable('browser client etag');
   io.enable('browser client gzip');
-//  io.set('log level', 1);
+  io.set('log level', 1);
+  io.set('transports', [
+      'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+  ]);
   io.set('store', new SocketIoRedisStore({
     redisPub: ioPub,
     redisSub: ioSub,

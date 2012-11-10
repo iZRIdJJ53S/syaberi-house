@@ -9,6 +9,7 @@ module.exports =
     cookieSecret: 'xZQWzsaY8fZWFnVltP1Y'
     cookieMaxAge: 1000 * 60 * 60 * 24 * 7 #1week
     hashSalt: 'l7UmWFjvQIoaX6kThcng'
+    workerNum: 2 #クラスターで起動するワーカー数
   mysql:
     host: '127.0.0.1'
     user: 'syaberi_house'

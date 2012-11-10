@@ -361,5 +361,5 @@
     if (!connected) {
       window.location.reload();
     }
-  }, 2500);
+  }, 2200);
 }).call(this);

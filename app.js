@@ -282,6 +282,8 @@ io.configure(function() {
   }));
 
   io.set('authorization', function(handshake, callback) {
+    logger.info('##socket.io authorization');
+
     var chatroomId = handshake.query.id;
     var isUrlOpen = handshake.query.urlopen;
     var namespace;

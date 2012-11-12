@@ -17,10 +17,10 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 // 複数ページにまたがる場合のエラーメッセージ等の一時的保管
 // 出力したら消えてくれる
 var flash = require('connect-flash');
-var cookieLib = require('cookie'); // cookie 操作npmモジュール
 var log4js  = require('log4js'); // ログ出力モジュール
 var stackTrace = require('stack-trace'); // エラーobjectの追跡とか
 var emailjs  = require('emailjs/email');
+var cookieLib = require('cookie'); // cookie 操作npmモジュール
 // セッションをRedisに保持
 var RedisStore = require('connect-redis')(express);
 var sessionStore = new RedisStore({
@@ -29,6 +29,7 @@ var sessionStore = new RedisStore({
   db: 1,
   prefix: 'session:'
 });
+app.set('sessionStore', sessionStore);
 // マルチプロセス/サーバー間でSocket.IOのセッションをRedisを使って共有する
 var redis = require('socket.io/node_modules/redis');
 var SocketIoRedisStore = require('socket.io/lib/stores/redis');
@@ -280,45 +281,53 @@ io.configure(function() {
     redisSub: ioSub,
     redisClient: ioStore
   }));
+  io.sockets.on('connection', socketIoController.onConnection);
+  io.sockets.on('disconnect', socketIoController.onDisconnect);
 
-  io.set('authorization', function(handshake, callback) {
-    logger.info('##socket.io authorization');
+  /**************
+  RedisStoreを使っているときにauthorizationの中でconnectionを設定しようとすると、断続的に接続できない現象が起きている。
+  そのため、認証フェーズでconnectionの設定やネームスペースの作成、セッションの共有を行うのを取り止めることにする(本来はここでやるべき)。
+  ***************/
 
-    var chatroomId = handshake.query.id;
-    var isUrlOpen = handshake.query.urlopen;
-    var namespace;
-    if (isUrlOpen) {
-      namespace = '/chatrooms/'+chatroomId+'/open';
-    }
-    else {
-      namespace = '/chatrooms/'+chatroomId;
-    }
+  // io.set('authorization', function(handshake, callback) {
+    // logger.info('##socket.io authorization');
 
-    if (!io.namespaces.hasOwnProperty(namespace)) {
-      var chatroom = io.of(namespace);
-      // ioConnect の確定
-      chatroom.on('connection', socketIoController.onConnection);
-    }
+    // var chatroomId = handshake.query.id;
+    // var isUrlOpen = handshake.query.urlopen;
+    // var namespace;
+    // if (isUrlOpen) {
+      // namespace = '/chatrooms/'+chatroomId+'/open';
+    // }
+    // else {
+      // namespace = '/chatrooms/'+chatroomId;
+    // }
 
-    // ExpressとSocket.io間でセッションを共有
-    if (handshake.headers.cookie) {
-      var cookie = handshake.headers.cookie;
-      var sessionId = cookieLib.parse(cookie)['sess_id'];
-      sessionId = sessionId.split(':')[1].split('.')[0];
+    // if (!io.namespaces.hasOwnProperty(namespace)) {
+      // var chatroom = io.of(namespace);
+      // // ioConnect の確定
+      // chatroom.on('connection', socketIoController.onConnection);
+    // }
 
-      sessionStore.get(sessionId, function(err, session) {
-        if (err) {
-          callback(err.message, false);
-        }
-        else {
-          handshake.session = session;
-        }
-      });
-    }
+    // // ExpressとSocket.io間でセッションを共有
+    // if (handshake.headers.cookie) {
+      // var cookie = handshake.headers.cookie;
+      // var sessionId = cookieLib.parse(cookie)['sess_id'];
+      // sessionId = sessionId.split(':')[1].split('.')[0];
 
-    callback(null, true);
-  });
+      // sessionStore.get(sessionId, function(err, session) {
+        // if (err) {
+          // callback(err.message, false);
+        // }
+        // else {
+          // handshake.session = session;
+        // }
+      // });
+    // }
+
+    // callback(null, true);
+  // });
 });
+app.set('io', io);
 
 /************ /Socket.IO ************/
 

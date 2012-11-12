@@ -7,10 +7,10 @@
   var connected = false;
 
   if (isUrlOpen) {
-    url = host+'/chatrooms/'+chatroomId+'/open?id='+chatroomId+'&urlopen='+isUrlOpen;
+    url = host+'?id='+chatroomId+'&urlopen='+isUrlOpen;
   }
   else {
-    url = host+'/chatrooms/'+chatroomId+'?id='+chatroomId;
+    url = host+'?id='+chatroomId;
   }
 
   syaberi.socket = io.connect(url, {

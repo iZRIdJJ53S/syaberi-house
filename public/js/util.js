@@ -85,7 +85,7 @@
         return false;
       }
       var youtube_vid = url.match(/[&\?]v=([\d\w-]+)/);
-      if (youtube_vid[1]) {
+      if (youtube_vid && youtube_vid[1]) {
         return youtube_vid[1];
       }
       return false;

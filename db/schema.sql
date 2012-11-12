@@ -121,6 +121,9 @@ CREATE TABLE `users` (
 -- Table structure for table `user_chatroom_relation`
 --
 
+-- 部屋とユーザーの関連を管理するテーブル
+-- 参加申請機能が無くなった為、現在は未使用
+
 DROP TABLE IF EXISTS `user_chatroom_relation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

@@ -1,3 +1,10 @@
+/******************************************************************
+ * ユーザー登録を扱うBackbone.jsのViewクラス
+ * ユーザー登録画面のロジックを記述
+ * Twitter認証後に呼び出される
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
@@ -11,6 +18,7 @@
       this._csrf = $('#_csrf').val(); //for CSRF
       Backbone.Validation.bind(this);
     },
+    //ユーザー登録実行処理
     submit: function(event) {
       event.preventDefault();
       var userName = $.trim($('#userName').val());

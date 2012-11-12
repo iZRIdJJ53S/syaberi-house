@@ -1,3 +1,8 @@
+/******************************************************************
+ * チャット情報を扱うBackbone.jsのViewクラス
+ * 部屋詳細画面のロジックを記述
+ ******************************************************************/
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
   var CHAT_COMMENT = 1;
@@ -19,6 +24,7 @@
       this.uploadCancelFlg = 0;
       this._csrf = $('#_csrf').val(); //for CSRF
     },
+    //チャット投稿処理
     submit: function(event) {
       var message = $.trim($('#message1').val());
 
@@ -45,6 +51,7 @@
         return false;
       }
     },
+    //チャット入力フィールドのキーボード入力を監視
     keydown: function(event) {
       //shiftKey だったら改行
       if (event.shiftKey === true) {
@@ -57,6 +64,7 @@
         }
       }
     },
+    //チャット削除処理
     destroy: function(event) {
       if (window.confirm('本当に削除しますか？')) {
         var target = $(event.target);
@@ -73,6 +81,8 @@
         });
       }
     },
+    //参加申請を承認する処理
+    //(参加申請機能が無くなった為現在は未使用)
     invite: function(event) {
       var target = $(event.target);
       var memberId = target.data('userid');
@@ -90,6 +100,8 @@
         });
       }
     },
+    //ファイルアップロード処理
+    //(未実装の為現在は未使用)
     upload: function() {
       $('#uploadings_input').upload('/upload', function(res) {
 
@@ -126,6 +138,8 @@
         }
       }, 'html');
     },
+    //ファイルアップロード処理
+    //(未実装の為現在は未使用)
     uploadOff: function() {
       //添付とコメントを同時に投稿できぬようテキストエリアをdisable化を解除
       $('#message1').removeAttr('disabled');
@@ -134,6 +148,7 @@
         this.uploadCancelFlg = 0;
       }
     },
+    //チャット投稿後に呼ばれるチャット表示処理
     appendMessage: function(data) {
       var chatTemplate;
       var status = $('html').data('status');
@@ -192,6 +207,7 @@
         }, "slow");
       }
     },
+    //チャット削除後に呼ばれるチャット削除表示処理
     destroyMessage: function(data) {
       var chatId = data.chatId;
       var userId = $('html').data('userid');
@@ -216,6 +232,7 @@
     },
     render: function() {
     },
+    //チャット投稿後にチャット入力フィールドを空にする処理
     clearInputUserMessage: function() {
       $('#message1').val('').focus();
 

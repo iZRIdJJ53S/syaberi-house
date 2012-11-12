@@ -1,3 +1,9 @@
+/******************************************************************
+ * マイページ情報を扱うBackbone.jsのViewクラス
+ * マイページ画面のロジックを記述
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
@@ -20,28 +26,34 @@
       this._csrf = $('#_csrf').val(); //for CSRF
       Backbone.Validation.bind(this);
     },
+    //作成した部屋一覧の取得処理
     getOwnerChatrooms: function(event) {
       this.init_list();
       $('li', '#owner-chatrooms').addClass('active');
       this.mode = 'owner';
       this.getChatrooms();
     },
+    //申請中の部屋一覧の取得処理
+    //(参加申請機能が無くなった為現在は未使用)
     getEntryChatrooms: function(event) {
       this.init_list();
       $('li', '#entry-chatrooms').addClass('active');
       this.mode = 'entry';
       this.getChatrooms();
     },
+    //参加中の部屋一覧の取得処理
     getJoinChatrooms: function(event) {
       this.init_list();
       $('li', '#join-chatrooms').addClass('active');
       this.mode = 'join';
       this.getChatrooms();
     },
+    //「もっと見る」の実行処理
     getMore: function(event) {
       var page = this.collection.nextPage;
       this.getChatrooms(page);
     },
+    //部屋一覧を取得する共通処理
     getChatrooms: function(page) {
       var self = this;
       page = page || 1;
@@ -75,6 +87,7 @@
         }
       });
     },
+    //プロフィール設定を表示
     showProfile: function(event) {
       var userName = $('html').data('profilename');
       var email = $('html').data('profileemail');
@@ -92,6 +105,7 @@
       });
       $('#article_area').append(template);
     },
+    //プロフィール更新処理を実行
     editProfile: function(event) {
       event.preventDefault();
       var userId = $('html').data('profileid');
@@ -133,6 +147,8 @@
     render: function() {
       this.getOwnerChatrooms();
     },
+    //部屋一覧を初期化
+    //部屋一覧を取得時に事前に実行
     init_list: function() {
       $('li', '#owner-chatrooms').removeClass('active');
       $('li', '#join-chatrooms').removeClass('active');

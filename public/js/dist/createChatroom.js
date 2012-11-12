@@ -1,3 +1,8 @@
+/******************************************************************
+ * 部屋情報を扱うBackbone.jsのModel/Collectionクラス
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
@@ -43,6 +48,12 @@
 
 }).call(this);
 
+/******************************************************************
+ * 部屋情報を扱うBackbone.jsのViewクラス
+ * 部屋作成画面のロジックを記述
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
@@ -58,6 +69,7 @@
       Backbone.Validation.bind(this);
       this._csrf = $('#_csrf').val(); //for CSRF
     },
+    //部屋作成の実行処理
     submit: function(event) {
       event.preventDefault();
       var self = this;
@@ -118,19 +130,23 @@
         self._setSearchText($('#title2'));
       });
     },
+    //タイトル入力フィールドのテキスト表示処理
     clearSearchText: function(event) {
       var target = $(event.target);
       this._clearSearchText(target);
     },
+    //タイトル入力フィールドのテキスト表示処理
     _clearSearchText: function(target) {
       if (target.val() === target.prop('defaultValue')) {
         target.css('color', '#000').val('');
       }
     },
+    //タイトル入力フィールドのテキスト表示処理
     setSearchText: function(event) {
       var target = $(event.target);
       this._setSearchText(target);
     },
+    //タイトル入力フィールドのテキスト表示処理
     _setSearchText: function(target) {
       if($.trim(target.val()) === "") {
         target.css('color', '#999')
@@ -142,6 +158,11 @@
   });
 
 }).call(this);
+
+/******************************************************************
+ * 部屋作成画面の起点となるスクリプト
+ ******************************************************************/
+
 
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};

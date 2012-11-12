@@ -1,3 +1,10 @@
+/******************************************************************
+ * ログイン情報を扱うBackbone.jsのViewクラス
+ * ログイン画面のロジックを記述
+ * (オリジナルアカウント管理が無くなった為現在は未使用)
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
@@ -10,6 +17,7 @@
       this.model = new syaberi.Login;
       Backbone.Validation.bind(this);
     },
+    //ログイン認証処理を実行
     submit: function(event) {
       event.preventDefault();
       var email = $.trim($('#email').val());

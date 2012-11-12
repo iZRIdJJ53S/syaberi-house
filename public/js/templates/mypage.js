@@ -1,10 +1,16 @@
+/******************************************************************
+ * マイページ関連のHTMLテンプレートを動的に生成するスクリプト
+ * Handlebarsライブラリを使用
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
   syaberi.templates = this.syaberi.templates != null ? this.syaberi.templates : this.syaberi.templates = {};
 
   syaberi.templates.mypage = {};
 
-  //チャットルーム一覧
+  //作成した部屋/参加中の部屋一覧のテンプレート
   syaberi.templates.mypage.list = Handlebars.compile(
     '<div class="room">\
         <div class="room-inbox">\
@@ -35,7 +41,7 @@
     </div>'
   );
 
-  //プロフィール編集
+  //プロフィール設定のテンプレート
   syaberi.templates.mypage.profile = Handlebars.compile(
       '<form method="" action="" style="padding-top:20px;">\
           <table>\

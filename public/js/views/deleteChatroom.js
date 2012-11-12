@@ -1,3 +1,9 @@
+/*******************************************
+ * 部屋の削除を扱うBackbone.jsのViewクラス
+ * 部屋削除画面のロジックを記述
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
@@ -10,6 +16,7 @@
     initialize: function() {
       this._csrf = $('#_csrf').val(); //for CSRF
     },
+    //部屋の削除処理を実行
     submit: function(event) {
       event.preventDefault();
       var self = this;
@@ -24,6 +31,7 @@
         }
       });
     },
+    //キャンセル処理を実行
     cancel: function(event) {
       event.preventDefault();
       var chatroomId = $('html').data('chatroom');

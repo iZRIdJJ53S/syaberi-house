@@ -1,3 +1,9 @@
+/******************************************************************
+ * トップページ情報を扱うBackbone.jsのViewクラス
+ * トップページ画面のロジックを記述
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 
@@ -11,6 +17,7 @@
     initialize: function() {
       this.collection = new syaberi.Chatrooms;
     },
+    //部屋一覧の「もっと見る」をクリック時の処理
     getMore: function(event) {
       $('#view-more-events').hide();
       $('#view-more-loader').show();

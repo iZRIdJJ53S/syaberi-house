@@ -1,9 +1,16 @@
+/******************************************************************
+ * チャット関連のHTMLテンプレートを動的に生成するスクリプト
+ * Handlebarsライブラリを使用
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
   syaberi.templates = this.syaberi.templates != null ? this.syaberi.templates : this.syaberi.templates = {};
 
   syaberi.templates.chat = {};
 
+  //オーナーの発言を表示するテンプレート
   syaberi.templates.chat.chatL = Handlebars.compile(
     '<div class="message-owner-inbox" id="chat-content-{{chatId}}">\
         <div class="owner-icon">\
@@ -29,6 +36,7 @@
     </div>'
   );
 
+  //オーナー以外のユーザーの発言を表示するテンプレート
   syaberi.templates.chat.chatR = Handlebars.compile(
     '<div class="message-member-inbox" id="chat-content-{{chatId}}">\
         <div class="member-icon">\

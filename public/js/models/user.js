@@ -1,3 +1,8 @@
+/******************************************************************
+ * ユーザー情報を扱うBackbone.jsのModel/Collectionクラス
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
 

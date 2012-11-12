@@ -1,9 +1,16 @@
+/******************************************************************
+ * 部屋関連のHTMLテンプレートを動的に生成するスクリプト
+ * Handlebarsライブラリを使用
+ ******************************************************************/
+
+
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
   syaberi.templates = this.syaberi.templates != null ? this.syaberi.templates : this.syaberi.templates = {};
 
   syaberi.templates.chatroom = {};
 
+  //トップページの「もっと見る」をクリックした時に追記される部屋一覧のテンプレート
   syaberi.templates.chatroom.list = Handlebars.compile(
     '<div class="room">\
         <div class="room-inbox">\

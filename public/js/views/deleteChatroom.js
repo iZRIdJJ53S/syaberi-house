@@ -8,7 +8,7 @@
       'click #cancel':   'cancel'
     },
     initialize: function() {
-      this.token = $('#token').val(); //for CSRF
+      this._csrf = $('#_csrf').val(); //for CSRF
     },
     submit: function(event) {
       event.preventDefault();
@@ -18,7 +18,7 @@
       $.ajax({
         type: 'POST',
         url: '/chatrooms/'+chatroomId+'/delete',
-        data: 'token='+this.token,
+        data: '_csrf='+this._csrf,
         success: function(data) {
           location.href = '/';
         }

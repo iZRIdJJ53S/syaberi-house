@@ -101,7 +101,7 @@
     initialize: function() {
       this.collection = new syaberi.Chats;
       this.uploadCancelFlg = 0;
-      this.token = $('#token').val(); //for CSRF
+      this._csrf = $('#_csrf').val(); //for CSRF
     },
     submit: function(event) {
       var message = $.trim($('#message1').val());
@@ -122,7 +122,7 @@
           message: message,
           type: CHAT_COMMENT,
           isUrlOpen: isUrlOpen,
-          token: this.token
+          _csrf: this._csrf
         });
 
         this.clearInputUserMessage();
@@ -153,7 +153,7 @@
           chatroomId: chatroomId,
           chatId: chatId,
           userId: userId,
-          token: this.token
+          _csrf: this._csrf
         });
       }
     },

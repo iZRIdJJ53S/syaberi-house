@@ -77,7 +77,7 @@ app.configure(function() {
   app.use(express.session({
     key: 'sess_id',
     cookie: {
-      maxAge: config.server.cookieMaxAge,   // 1week
+      maxAge: config.server.cookieMaxAge,
       secure: true
     },
     store: sessionStore
@@ -85,22 +85,22 @@ app.configure(function() {
   app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
+  // SSL通信を強制
   app.use(middleware.ssl);
+  // セッションデータをejsからアクセスできるように設定
   app.use(middleware.sessionData);
+  // 環境変数をejsからアクセスできるように設定
   app.use(middleware.envData);
+  // 設定ファイルをejsからアクセスできるように設定
   app.use(middleware.configData);
+  app.use(express.compress());
+  app.use(express.csrf()); // この位置じゃないと動かない？順番要注意
   // 静的ファイルの配信設定
-  // ※404ページを表示させることができないのでstモジュールの利用一時停止
-  // app.use(st({
-    // path: path.join(__dirname, 'public'),
-    // url: '/'
-  // }));
+  app.use(express.static(path.join(__dirname, 'public')));
   // app.routerを設定すると、通信の実行までに必要なマッピング処理を省略できる
   // ルーティングの機能を提供する。これはExpressでの拡張
-  app.use(express.compress());
-  app.use(express.static(path.join(__dirname, 'public')));
   app.use(app.router);
-  app.use(express.csrf()); // この位置じゃないと動かない？順番要注意
+  // エラー処理をハンドリングするミドルウェア
   app.use(middleware.notFound);
   app.use(middleware.unauthorized);
   app.use(middleware.error);
@@ -240,7 +240,7 @@ function authenticated(req, res, next) {
 
 //CSRF対策用トークンを設定
 function csrf(req, res, next) {
-  res.locals.token = req.session._csrf;
+  res.locals._csrf = req.session._csrf;
   next();
 }
 

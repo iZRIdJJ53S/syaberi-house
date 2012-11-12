@@ -169,7 +169,7 @@
       this.model = new syaberi.User;
       this.collection = new syaberi.Chatrooms;
       this.mode = 'owner';
-      this.token = $('#token').val(); //for CSRF
+      this._csrf = $('#_csrf').val(); //for CSRF
       Backbone.Validation.bind(this);
     },
     getOwnerChatrooms: function(event) {
@@ -265,7 +265,7 @@
           userName: userName,
           email: email,
           description: description,
-          token: this.token
+          _csrf: this._csrf
         }, {
           success: function() {
             location.href = '/mypage';

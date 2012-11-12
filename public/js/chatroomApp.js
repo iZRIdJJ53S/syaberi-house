@@ -43,10 +43,4 @@
       }
     });
   });
-
-  setInterval(function() {
-    if (!connected) {
-      window.location.reload();
-    }
-  }, 2200);
 }).call(this);

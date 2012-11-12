@@ -1,7 +1,16 @@
+/******************************************************************
+ * JavaScriptファイルを結合・圧縮するツール"Grunt"の設定ファイル。
+ * production環境では個別のファイルを読み込むのではなく、
+ * Gruntを使って結合・圧縮したファイルが読み込まれる。
+ * (common.min.js, top.min.jsなど)
+ *
+ * usage: $ ./node_modules/grunt/bin/grunt
+ ******************************************************************/
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    //jsファイルを画面ごとに結合
+    //jsファイルを結合する
     concat: {
       common: {
         src: [
@@ -83,6 +92,7 @@ module.exports = function(grunt) {
         dest: 'public/js/dist/deleteChatroom.js'
       }
     },
+    //jsファイルを縮小化する
     min: {
       common: {
         src: 'public/js/dist/common.js',

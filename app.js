@@ -1,3 +1,11 @@
+/******************************************************************
+ * syaberi-houseアプリケーションの起点となる起動スクリプト。
+ * 開発環境やCPUのコア数が1個の場合はapp.jsを実行する。
+ * ※複数のCPUのコアを活用する場合はapp.jsを直接使用せずcluster.jsを実行する。
+ *
+ * usage: $ node app.js
+ ******************************************************************/
+
 var fs = require('fs');
 var path = require('path'); // dirname, basename とかのutil
 var config = require('config');  // 設定ファイル

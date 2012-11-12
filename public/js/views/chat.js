@@ -197,7 +197,7 @@
       var userId = $('html').data('userid');
       var ownerId = $('html').data('ownerid');
 
-      //申込者の投稿フォームを復活
+      //申込者の投稿フォームを復活(参加申請機能で使用)
       if (userId && ownerId != userId && data.userId === userId) {
         $('#section_thread_bottom').animate({
           height:'show',

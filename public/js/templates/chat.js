@@ -23,7 +23,7 @@
             {{/if}}\
             {{#if youtubeVid}}\
             <iframe width="500" height="300" src="\
-            http://www.youtube.com/embed/{{youtubeVid}}"\
+            //www.youtube.com/embed/{{youtubeVid}}"\
              frameborder="0" allowfullscreen></iframe>\
             {{/if}}\
             <div class="owner-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>\
@@ -49,7 +49,7 @@
             {{/if}}\
             {{#if youtubeVid}}\
             <iframe width="500" height="300" src="\
-            http://www.youtube.com/embed/{{youtubeVid}}"\
+            //www.youtube.com/embed/{{youtubeVid}}"\
              frameborder="0" allowfullscreen></iframe>\
             {{/if}}\
             <div class="member-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>\

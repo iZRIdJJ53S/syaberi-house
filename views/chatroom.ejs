@@ -176,7 +176,12 @@
                         </div>
                         <div class="owner-titlebox">
                             <p class="owner-title"><%- esc(chat.message) %></p>
-                            <!--img class="owner-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
+                            <% if (chat.extImageUrl) { // 外部画像URLがあれば %>
+                                <img src="<%= chat.extImageUrl %>" class="owner-img">
+                            <% } %>
+                            <% if (chat.youtubeVid) { // Youtube %>
+                                <iframe width="500" height="300" src="//www.youtube.com/embed/<%= chat.youtubeVid %>" frameborder="0" allowfullscreen></iframe>
+                            <% } %>
                             <div class="owner-username">
                                 <% if (chat.isInactive) { %>
                                     by.退会済み
@@ -202,7 +207,12 @@
                         </div>
                         <div class="member-titlebox">
                             <p class="member-title"><%- esc(chat.message) %></p>
-                            <!--img class="member-img" src="http://www1.u-netsurf.ne.jp/~tukinowa/gallery/picture/fuji-gennsou.jpg"-->
+                            <% if (chat.extImageUrl) { // 外部画像URLがあれば %>
+                                <img src="<%= chat.extImageUrl %>" class="member-img">
+                            <% } %>
+                            <% if (chat.youtubeVid) { // Youtube %>
+                                <iframe width="500" height="300" src="//www.youtube.com/embed/<%= chat.youtubeVid %>" frameborder="0" allowfullscreen></iframe>
+                            <% } %>
                             <div class="member-username">
                                 <% if (chat.isInactive) { %>
                                     by.退会済み

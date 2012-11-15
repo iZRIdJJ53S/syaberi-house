@@ -22,9 +22,7 @@
             <img src="{{extImageUrl}}" class="owner-img">\
             {{/if}}\
             {{#if youtubeVid}}\
-            <iframe width="500" height="300" src="\
-            //www.youtube.com/embed/{{youtubeVid}}"\
-             frameborder="0" allowfullscreen></iframe>\
+            <iframe width="500" height="300" src="//www.youtube.com/embed/{{youtubeVid}}" frameborder="0" allowfullscreen></iframe>\
             {{/if}}\
             <div class="owner-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>\
             <div class="owner-date">{{time}} [1]\
@@ -48,9 +46,7 @@
             <img src="{{extImageUrl}}" class="member-img">\
             {{/if}}\
             {{#if youtubeVid}}\
-            <iframe width="500" height="300" src="\
-            //www.youtube.com/embed/{{youtubeVid}}"\
-             frameborder="0" allowfullscreen></iframe>\
+            <iframe width="500" height="300" src="//www.youtube.com/embed/{{youtubeVid}}" frameborder="0" allowfullscreen></iframe>\
             {{/if}}\
             <div class="member-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>\
             <div class="member-date">{{time}} [2]\

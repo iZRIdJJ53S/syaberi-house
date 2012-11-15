@@ -48,21 +48,21 @@
               <tr>\
                   <th class="label">ニックネーム:<div class="necessity">※必須</div></th>\
                   <td class="data">\
-                      <input type="text" name="userName" id="userName" class="text-box" value="{{{userName}}}">\
+                      <input type="text" name="userName" id="userName" class="text-box" value="{{userName}}">\
                       <div id="error_userName" class="error"></div>\
                   </td>\
               </tr>\
               <tr>\
                   <th class="label">メールアドレス:<div class="necessity">※必須</div></th>\
                   <td class="data">\
-                      <input type="text" name="email" id="email" class="text-box" value="{{{email}}}">\
+                      <input type="text" name="email" id="email" class="text-box" value="{{email}}">\
                       <div id="error_email" class="error"></div>\
                   </td>\
               </tr>\
               <tr>\
                   <th class="label">プロフィール:</th>\
                   <td class="data">\
-                      <textarea name="description" id="description" class="textarea-box">{{{description}}}</textarea>\
+                      <textarea name="description" id="description" class="textarea-box">{{description}}</textarea>\
                       <div id="error_description" class="error"></div>\
                   </td>\
               </tr>\

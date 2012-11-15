@@ -47,7 +47,7 @@
         {{#if latest}}\
         <div class="ask">\
             <div class="ask-titlebox">\
-                <div class="ask-title" ><a href="/chatrooms/{{id}}/open">{{{latest.message}}}</a></div>\
+                <div class="ask-title" ><a href="/chatrooms/{{id}}/open">{{latest.message}}</a></div>\
                 <div class="ask-username">\
                     {{#if latest.isInactive}}\
                         by.退会済み\

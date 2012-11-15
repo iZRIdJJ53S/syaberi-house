@@ -1,15 +1,13 @@
 <!DOCTYPE HTML>
-<% if (isMine) { %>
 <html lang="ja"
   data-host="<%= config.server.host %>"
   data-profileid="<%= profile.id %>"
   data-profilename="<%= profile.name %>"
+<% if (isMine) { %>
   data-profileemail="<%= profile.email %>"
+<% } %>
   data-profiledescription="<%= profile.description %>"
 >
-<% } else { %>
-<html lang="ja">
-<% } %>
 <head>
 <meta charset='utf-8' />
     <title>マイページ｜シャベリハウス</title>

@@ -249,7 +249,11 @@
                           style="display:none;"
                 <% } %>>
                     <div class="add-icon">
+                    <% if (locals.userImage) { %>
                         <img class="icon_m" src="<%= locals.userImage %>">
+                    <% } else { %>
+                        <img class="icon_m" src="/img/chara.png">
+                    <% } %>
                     </div>
                     <div class="add-titlebox">
                         <textarea type="text" value="" id="message1" style="overflow:hidden; resize:none; word-wrap:normal;" cols="60" wrap="off"></textarea>

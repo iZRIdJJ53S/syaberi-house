@@ -22,10 +22,10 @@
             <img src="{{extImageUrl}}" class="owner-img">\
             {{/if}}\
             {{#if youtubeVid}}\
-            <iframe width="500" height="300" src="//www.youtube.com/embed/{{youtubeVid}}" frameborder="0" allowfullscreen></iframe>\
+            <iframe class="owner-youtube" src="//www.youtube.com/embed/{{youtubeVid}}" frameborder="0" allowfullscreen></iframe>\
             {{/if}}\
             <div class="owner-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>\
-            <div class="owner-date">{{time}} [1]\
+            <div class="owner-date">{{time}} [主]\
             {{#if isHis}}\
             <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="{{chatId}}">\
             {{/if}}\
@@ -46,10 +46,10 @@
             <img src="{{extImageUrl}}" class="member-img">\
             {{/if}}\
             {{#if youtubeVid}}\
-            <iframe width="500" height="300" src="//www.youtube.com/embed/{{youtubeVid}}" frameborder="0" allowfullscreen></iframe>\
+            <iframe class="member-youtube" src="//www.youtube.com/embed/{{youtubeVid}}" frameborder="0" allowfullscreen></iframe>\
             {{/if}}\
             <div class="member-username"><a href="/users/{{userId}}">by.{{userName}}</a></div>\
-            <div class="member-date">{{time}} [2]\
+            <div class="member-date">{{time}} [参]\
             {{#if isHis}}\
             <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="{{chatId}}">\
             {{/if}}\

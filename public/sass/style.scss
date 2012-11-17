@@ -81,18 +81,6 @@
  *
  */
 
-$TEXT_LL: 24px;
-$TEXT_L: 16px;
-$TEXT_M: 12px;
-$TEXT_S: 10px;
-$TEXT_SS: 8px;
-
-$BODY_WIDTH: 800px;
-$CONTENT_LEFT_WIDTH: $BODY_WIDTH;//右ナビ無しの対応
-//$CONTENT_LEFT_WIDTH: $BODY_WIDTH/100*70;
-$CONTENT_RIGHT_WIDTH: $BODY_WIDTH/100*28;
-
-
 /*
  * common
  *
@@ -110,6 +98,7 @@ form{
     font-size: $TEXT_M;
     table{
         padding: 10px;
+        width: 100%;
     }
     tr{
     }
@@ -141,11 +130,11 @@ form{
         border-left: 1px #dfdfdf solid;
         .text-box{
             font-size: $TEXT_L;
-            width: 350px;
+            width: 70%;
             height: 25px;
         }
         .textarea-box{
-            width: 600px;
+            width: 90%;
             height: 120px;
         }
         .ex{
@@ -162,6 +151,9 @@ form{
     }
     .submit{
         margin: 50px;
+        text-align: center;
+    }
+    .deactivate{
         text-align: center;
     }
 }
@@ -204,6 +196,9 @@ form{
     @include sassy-button("flat", 6px, 18px, #6ea700);
     //@include sassy-button("shiny", 5px, 19px, #4ba3cc);
     //@include sassy-button-style("push", #4ba3cc);
+}
+.button_gr {
+    @include sassy-button("flat", 6px, 18px, #999999);
 }
 .button_b {
     @include sassy-button("glass", 6px, 18px, #4ba3cc);
@@ -252,14 +247,15 @@ body {
     };
     #login {
         float: right;
-        padding-top: 4px;
         text-align: right;
+        padding-top: 4px;
         .login-notes{
             font-size: 10px;
         }
     }
     #menu {
         float: right;
+        text-align: right;
         padding-top: 24px;
         .icon{
             width: 50px;
@@ -279,7 +275,6 @@ body {
             text-align: center;
         }
     };
-    padding: 10px 0;
     margin-bottom: 10px;
     border-bottom: 3px #96c045 solid;
     @include clearfix;
@@ -288,7 +283,7 @@ body {
     display: none;
     float: left;
     margin: 29px 55px 0;
-    position: fixed;
+    position: absolute;
     z-index: 900;
     font-size: $TEXT_M;
     ul{
@@ -348,8 +343,6 @@ body {
 	background: #96c065;
 	text-decoration: none;
 	color: #fff;
-	width: 100px;
-	padding: 30px 0;
 	text-align: center;
 	display: block;
 	border-radius: 5px;
@@ -395,6 +388,9 @@ body {
         .room-button{
             float: right;
         }
+        .room-delete{
+            float: right;
+        }
         @include clearfix;
     }
     .room-option{
@@ -428,15 +424,6 @@ body {
             }
         }
     }
-}
-.nav {
-}
-.fixed {
-    padding-top: 10px;
-    position: fixed;
-//	top: 0;
-//	left: 0;
-//	width: 100%;
 }
 .room,.ask {
     padding: 20px 0;
@@ -555,62 +542,69 @@ body {
         }
         @include clearfix;
     }
-    .message-owner-inbox {
-        .owner-icon{
-            float: left;
+    .message-inbox{
+        @include clearfix;
+        .message-owner-inbox {
+            .owner-icon{
+                float: left;
+            }
+            .owner-titlebox{
+                float: left;
+                width: $CONTENT_LEFT_WIDTH - 120;
+                padding: 10px 10px 10px;
+                .owner-title{
+                    font-size: $TEXT_M;
+                    word-wrap: break-word;
+                    margin-bottom: 4px;
+                }
+                img.owner-img{
+                    padding: 10px;
+                }
+                .owner-youtube{
+                    padding: 10px;
+                }
+                .owner-username{
+                    font-size: $TEXT_S;
+                    margin-bottom: 4px;
+                }
+                .owner-date{
+                    font-size: $TEXT_SS;
+                }
+                @include clearfix;
+            }
+            clear:both;
         }
-        .owner-titlebox{
-            float: left;
-            width: $CONTENT_LEFT_WIDTH - 120;
-            padding: 10px 10px 10px;
-            .owner-title{
-                font-size: $TEXT_M;
-                word-wrap: break-word;
-                margin-bottom: 4px;
-            }
-            img.owner-img{
-                max-width: 400px;
-                padding: 10px;
-            }
-            .owner-username{
-                font-size: $TEXT_S;
-                margin-bottom: 4px;
-            }
-            .owner-date{
-                font-size: $TEXT_SS;
-            }
-            @include clearfix;
-        }
-        clear:both;
-    }
-    .message-member-inbox {
-        float: right;
-        text-align: right;
-        .member-icon{
+        .message-member-inbox {
             float: right;
+            text-align: right;
+            .member-icon{
+                float: right;
+            }
+            .member-titlebox{
+                float: left;
+                width: $CONTENT_LEFT_WIDTH - 120;
+                padding: 10px 10px 10px;
+                .member-title{
+                    font-size: $TEXT_M;
+                    margin-bottom: 4px;
+                }
+                img.member-img{
+                    padding: 10px;
+                }
+                .member-youtube{
+                    padding: 10px;
+                }
+                .member-username{
+                    font-size: $TEXT_S;
+                    margin-bottom: 4px;
+                }
+                .member-date{
+                    font-size: $TEXT_SS;
+                }
+                @include clearfix;
+            }
+            clear:both;
         }
-        .member-titlebox{
-            float: left;
-            width: $CONTENT_LEFT_WIDTH - 120;
-            padding: 10px 10px 10px;
-            .member-title{
-                font-size: $TEXT_M;
-                margin-bottom: 4px;
-            }
-            img.member-img{
-                max-width: 400px;
-                padding: 10px;
-            }
-            .member-username{
-                font-size: $TEXT_S;
-                margin-bottom: 4px;
-            }
-            .member-date{
-                font-size: $TEXT_SS;
-            }
-            @include clearfix;
-        }
-        clear:both;
     }
     .message-add-inbox {
         @include gradient-top-lighten(#96c045);
@@ -665,8 +659,10 @@ body {
         list-style: none;
     }
     ul li{
-        width: $BODY_WIDTH / 3 - 20;
-        padding: 10px;
+        width: 33%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: center;
         float: left;
     }
     ul li:hover{
@@ -679,6 +675,21 @@ body {
     }
     @include line-bottom(.2, .3);
     @include clearfix;
+}
+
+/*
+ * terms
+ *
+ */
+.terms{
+    h1{
+        font-size: $TEXT_LL;
+        padding: 20px;
+    }
+    p{
+        padding: 20px;
+        line-height: $TEXT_M * 2;
+    }
 }
 
 /*

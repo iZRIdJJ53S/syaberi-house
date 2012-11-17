@@ -70,7 +70,7 @@
           <div class="submit">\
               <input type="button" class="button_g" id="submit_1" value="保存">\
           </div>\
-          <div class="deactivate" style="margin-left:330px;">\
+          <div class="deactivate">\
             <a href="/confirm_deactivation">シャベリハウスを退会する</a>\
           </div>\
       </form>'

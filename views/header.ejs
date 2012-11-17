@@ -13,37 +13,62 @@ $(function() {
 </script>
 
 <div id="head">
-    <header><a href="/"><img src="/img/logo.png" alt="シャベリハウス"></a></header>
-    <nav>
-        <ul>
-            <li><a href="/" >部屋を見つける</a></li>
-            <li><a href="/chatrooms/new" >部屋を作る</a></li>
-        </ul>
-    </nav>
 
-    <%if (isAuth) { %>
-
-    <div id="menu">
-        <div class="icon"><a href="/mypage"><img class="icon_s" id="header_mypage_thumb_img" src="<%= locals.userImage %>"></a></div>
-        <div class="name"><a href="/mypage"><%= locals.userName %></a></div>
-        <div class="pulldown"><input type="button" class="button_menu" value="▼"></div>
-        <div id="head_menu_list">
+    <!- pc -->
+    <section class="head_pc">
+        <header><a href="/"><img src="/img/logo.png" alt="シャベリハウス"></a></header>
+        <nav>
             <ul>
-            <a href="/mypage" class="mypage_nortification_txt"><li>マイページ</li></a>
-            <a href="/chatrooms/new" class="mypage_nortification_txt"><li>チャットルームを作る</li></a>
-            <a href="/logout" class="mypage_nortification_txt"><li>ログアウト</li></a>
+                <li><a href="/" >部屋を見つける</a></li>
+                <li><a href="/chatrooms/new" >部屋を作る</a></li>
+            </ul>
+        </nav>
+    
+        <%if (isAuth) { %>
+    
+        <div id="menu">
+            <div class="icon"><a href="/mypage"><img class="icon_s" id="header_mypage_thumb_img" src="<%= locals.userImage %>"></a></div>
+            <div class="name"><a href="/mypage"><%= locals.userName %></a></div>
+            <div class="pulldown"><input type="button" class="button_menu" value="▼"></div>
+            <div id="head_menu_list">
+                <ul>
+                <a href="/mypage" class="mypage_nortification_txt"><li>マイページ</li></a>
+                <a href="/chatrooms/new" class="mypage_nortification_txt"><li>チャットルームを作る</li></a>
+                <a href="/logout" class="mypage_nortification_txt"><li>ログアウト</li></a>
+                </ul>
+            </div>
+        </div>
+    
+        <% }else{ %>
+    
+        <div id="login">
+            <a href="/auth/twitter" id="login_button_twetter"><input type="button" class="button_b" value="twitterでログイン"></a>
+            <div class="login-notes">※twitterログイン後にオリジナルのニックネームを設定できます。</div>
+        </div>
+    
+        <% } %>
+    
+    </section>
+    
+    <!- sm -->
+    <section class="head_sm">
+        <div class="head_sm_menu">
+            <ul>
+                <a href="/" ><li class="head_sm_logo"></li></a>
+                <a href="/" ><li>部屋を見つける</li></a>
+                <a href="/chatrooms/new" ><li>部屋を作る</li></a>
             </ul>
         </div>
-
-    </div>
-
-    <% }else{ %>
-
-    <div id="login">
-        <a href="/auth/twitter" id="login_button_twetter"><input type="button" class="button_b" value="twitterでログイン"></a>
-        <div class="login-notes">※twitterログイン後にオリジナルのニックネームを設定できます。</div>
-    </div>
-
-    <% } %>
+        <div class="head_sm_login">
+            <%if (isAuth) { %>
+                <div class="head_sm_logedin">
+                    <a href="/mypage"><%= locals.userName %></a> / <a href="/logout" class="mypage_nortification_txt">ログアウト</a>
+                </div>
+            <% }else{ %>
+                    <a href="/auth/twitter" id="login_button_twetter"><input type="button" class="button_b" value="twitterでログイン"></a>
+                    <div class="login-notes">※twitterログイン後にオリジナルのニックネームを設定できます。</div>
+            <% } %>
+        </div>
+    </section>
 
 </div>

@@ -16,8 +16,10 @@
     <title><%= chatroom.title %>｜シャベリハウス</title>
     <meta name="description" content="詳しい人と話せる新感覚のQ&Aサイト">
     <meta name="keywords" content="シャベリハウス,話す,詳しい人,Q&A,解決,悩み,問題">
-    <link charset='utf-8' href='/css/reset.css' rel='stylesheet' type='text/css' />
-    <link charset='utf-8' href='/css/style.css' rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+    <link charset="utf-8" href="/css/reset.css" rel="stylesheet" type="text/css" />
+    <link media="screen and (max-width: 768px)" charset="utf-8" href="/css/style_sm.css" rel="stylesheet" type="text/css" />
+    <link media="screen and (min-width: 769px)" charset="utf-8" href="/css/style_pc.css" rel="stylesheet" type="text/css" />
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" charset="UTF-8"></script><![endif]-->
     <script src="/socket.io/socket.io.js"></script>
     <% if (isProduction) { %>
@@ -124,10 +126,12 @@
                             <% } %>
                         </div>
                         <div class="room-date">作成日 <%= chatroom.date %></div>
-                        <% if (isOwner) { %>
-                        <div class="room-delete" style="margin-left:500px;"><a href="/chatrooms/<%= chatroom.id %>/confirm_delete">この部屋を削除</a></div>
-                        <% } %>
                     </div>
+                    <% if (isOwner) { %>
+                    <div class="room-delete">
+                        <a href="/chatrooms/<%= chatroom.id %>/confirm_delete"><input type="button" class="button_gr" value="削除"></a>
+                    </div>
+                    <% } %>
                     <!--div class="room-option">
                         <div class="room-member">
                             <div class="room-member-open">全体に公開</div>
@@ -162,7 +166,7 @@
                     </div>
                 </div>
 
-                <div id="lines1">
+                <div id="lines1" class="message-inbox">
                 <% chats.forEach(function(chat) { %>
                     <section id="chat-content-<%= chat.id %>">
                     <% if (chatroom.ownerId == chat.user_id) { //ownerの投稿 %>
@@ -180,7 +184,7 @@
                                 <img src="<%= chat.extImageUrl %>" class="owner-img">
                             <% } %>
                             <% if (chat.youtubeVid) { // Youtube %>
-                                <iframe width="500" height="300" src="//www.youtube.com/embed/<%= chat.youtubeVid %>" frameborder="0" allowfullscreen></iframe>
+                                <iframe class="owner-youtube" src="//www.youtube.com/embed/<%= chat.youtubeVid %>" frameborder="0" allowfullscreen></iframe>
                             <% } %>
                             <div class="owner-username">
                                 <% if (chat.isInactive) { %>
@@ -189,7 +193,7 @@
                                     <a href="<%= chat.userpage %>">by.<%= chat.username %></a>
                                 <% } %>
                             </div>
-                            <div class="owner-date"><%= chat.time %> [1]
+                            <div class="owner-date"><%= chat.time %> [主]
                             <% if (isAuth && chat.user_id == userId) { %>
                             <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="<%= chat.id %>">
                             <% } %>
@@ -211,7 +215,7 @@
                                 <img src="<%= chat.extImageUrl %>" class="member-img">
                             <% } %>
                             <% if (chat.youtubeVid) { // Youtube %>
-                                <iframe width="500" height="300" src="//www.youtube.com/embed/<%= chat.youtubeVid %>" frameborder="0" allowfullscreen></iframe>
+                                <iframee class="member-youtube" src="//www.youtube.com/embed/<%= chat.youtubeVid %>" frameborder="0" allowfullscreen></iframe>
                             <% } %>
                             <div class="member-username">
                                 <% if (chat.isInactive) { %>
@@ -220,7 +224,7 @@
                                     <a href="<%= chat.userpage %>">by.<%= chat.username %></a>
                                 <% } %>
                             </div>
-                            <div class="member-date"><%= chat.time %> [2]
+                            <div class="member-date"><%= chat.time %> [参]
                             <% if (isAuth && chat.user_id == userId) { %>
                             <img src="/img/remove.gif" width="12" height="12" alt="閉じる" class="delete_cmt" data-chatid="<%= chat.id %>">
                             <% } %>
@@ -256,7 +260,7 @@
                     <% } %>
                     </div>
                     <div class="add-titlebox">
-                        <textarea type="text" value="" id="message1" style="overflow:hidden; resize:none; word-wrap:normal;" cols="60" wrap="off"></textarea>
+                        <textarea type="text" value="" id="message1" class="add-titlebox-textbox" style="overflow:hidden; resize:none; word-wrap:normal;" cols="60" wrap="off"></textarea>
                         <!--
                         <a href="javascript:void(0)" id="emoji_butt"><input type="button" class="button_stamp" value="^^"></a>
                         <input type="button" class="button_plus" value="+">

@@ -1,0 +1,89 @@
+$TEXT_LL: 24px;
+$TEXT_L: 16px;
+$TEXT_M: 12px;
+$TEXT_S: 10px;
+$TEXT_SS: 8px;
+
+$BODY_WIDTH: 100%;
+$CONTENT_LEFT_WIDTH: $BODY_WIDTH;//右ナビ無しの対応
+//$CONTENT_LEFT_WIDTH: $BODY_WIDTH/100*70;
+$CONTENT_RIGHT_WIDTH: $BODY_WIDTH/100*28;
+
+//----------------------------------------
+// sm over write
+//----------------------------------------
+// header.ejs
+.head_pc{
+    display: none;
+}
+.head_sm{
+    .head_sm_menu{
+        ul {
+            list-style: none;
+            li{
+                float: left;
+                width: 33%;
+                height: 48px;
+                padding-top: 25px;
+                text-align: center;
+            }
+            li.head_sm_logo{
+                background: url(/img/logo_sm.png) no-repeat center center;
+            }
+        }
+    }
+    .head_sm_login{
+        border-top: 10px #96c045 solid;
+        text-align: center;
+        .head_sm_logedin{
+            padding: 20px;
+        }
+        .login-notes{
+            font-size: $TEXT_SS;
+        }
+    }
+}
+// top.ejs
+.ask{
+    display: none;
+}
+// chatroom.ejs
+.message {
+    .message-inbox{
+        .message-owner-inbox {
+                img.owner-img{
+                    max-width: 300px
+                }
+                .owner-youtube{
+                    width: 300px;
+                    height: 230px;
+                }
+        }
+        .message-member-inbox {
+            .member-titlebox{
+                img.member-img{
+                    max-width: 300px;
+                }
+                .member-youtube{
+                    width: 300px;
+                    height: 230px;
+                }
+            }
+        }
+    }
+}
+.message-add-inbox{
+    .add-titlebox{
+        .add-titlebox-textbox{
+            width: 100%;
+        }
+    }
+}
+// common
+#page-top a {
+    width: 100px;
+	padding: 3px 0;
+}
+//----------------------------------------
+
+@import "./style.scss";

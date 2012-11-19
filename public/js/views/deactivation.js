@@ -21,14 +21,13 @@
       event.preventDefault();
       var self = this;
 
-      $.ajax({
-        type: 'POST',
-        url: '/deactivation',
-        data: '_csrf='+this._csrf,
-        success: function(data) {
+      $.post(
+        '/deactivation',
+        {'_csrf': this._csrf},
+        function(data) {
           location.href = '/';
         }
-      });
+      );
     },
     //キャンセル処理を実行
     cancel: function(event) {

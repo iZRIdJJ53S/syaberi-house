@@ -22,14 +22,13 @@
       var self = this;
       var chatroomId = $('html').data('chatroom');
 
-      $.ajax({
-        type: 'POST',
-        url: '/chatrooms/'+chatroomId+'/delete',
-        data: '_csrf='+this._csrf,
-        success: function(data) {
+      $.post(
+        '/chatrooms/'+chatroomId+'/delete',
+        {'_csrf': this._csrf},
+        function(data) {
           location.href = '/';
         }
-      });
+      );
     },
     //キャンセル処理を実行
     cancel: function(event) {

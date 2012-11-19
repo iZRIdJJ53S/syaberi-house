@@ -90,14 +90,13 @@
       var chatroomId = $('html').data('chatroom');
 
       if (window.confirm('このユーザとチャットを開始しますか？')) {
-        $.ajax({
-          type: 'POST',
-          url: '/chatrooms/'+chatroomId+'/invite',
-          data: 'member='+memberId+'&chat='+chatId,
-          success: function(data) {
+        $.post(
+          '/chatrooms/'+chatroomId+'/invite',
+          {member: memberId, chat: chatId},
+          function(data) {
             location.href = '/chatrooms/'+chatroomId+'/open';
           }
-        });
+        );
       }
     },
     //ファイルアップロード処理

@@ -130,7 +130,7 @@
                     </div>
                     <% if (isOwner) { %>
                     <div class="room-delete">
-                        <a href="/chatrooms/<%= chatroom.id %>/confirm_delete"><input type="button" class="button_gr" value="削除"></a>
+                        <input type="button" onclick="location.href='/chatrooms/<%= chatroom.id %>/confirm_delete'" class="button_gr" value="削除" style="cursor:pointer,">
                     </div>
                     <% } %>
                     <!--div class="room-option">

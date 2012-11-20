@@ -66,7 +66,7 @@
 
         <div class="left-content">
 
-            <a href="/chatrooms/new" id="new_chatroom"><input type="button" class="button_g full_width" value="新しい部屋をつくる"></a>
+            <input type="button" onclick="location.href='/chatrooms/new'" class="button_g full_width" value="新しい部屋をつくる" style="cursor:pointer,">
 
             <% chatrooms.forEach(function(chatroom) { %>
             <div class="room">
@@ -90,13 +90,7 @@
                         </div>
                     </div>
                     <div class="room-button">
-                        <a href="/chatrooms/<%= chatroom.id %>/open">
-                        <% if (chatroom.status == 0) { %>
-                          <input type="button" class="button_g" value="話す">
-                        <% } else { %>
-                          <input type="button" class="button_yg" value="話す">
-                        <% }%>
-                        </a>
+                        <input type="button" onclick="location.href='/chatrooms/<%= chatroom.id %>/open'" class="button_yg" value="話す" style="cursor:pointer,">
                     </div>
                 </div>
                 <% if (chatroom.latest) { %>

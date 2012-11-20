@@ -33,9 +33,7 @@
                 </div>\
             </div>\
             <div class="room-button">\
-                <a href="/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}">\
-                  <input type="button" class="button_yg" value="話す">\
-                </a>\
+                <input type="button" onclick="location.href=\'/chatrooms/{{chatroom.id}}{{#if isUrlOpen}}/open{{/if}}\'" class="button_yg" value="話す" style="cursor:pointer,">\
             </div>\
         </div>\
     </div>'

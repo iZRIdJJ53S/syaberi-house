@@ -1,6 +1,6 @@
 module.exports =
   server:
-    host: "websocket.syaberi-house.com"
+    host: "syaberi-house.com"
     port: 3000
     ssl:
       port: 4430

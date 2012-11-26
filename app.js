@@ -277,6 +277,9 @@ io.configure(function() {
   io.enable('browser client etag');
   io.enable('browser client gzip');
   io.set('log level', 1);
+  io.set('close timeout', 15);
+  io.set('heartbeat timeout', 20);
+  io.set('heartbeat interval', 10);
   io.set('transports', [
       'websocket'
     , 'flashsocket'

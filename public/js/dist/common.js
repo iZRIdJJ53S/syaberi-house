@@ -14665,6 +14665,8 @@ Handlebars.template = Handlebars.VM.template;
 
 (function() {
   var syaberi = this.syaberi != null ? this.syaberi : this.syaberi = {};
+  var url_exp = /(http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=:;_]*)?)/ig;
+
 
   syaberi.util = {
     // 時間の表記修正系
@@ -14699,7 +14701,7 @@ Handlebars.template = Handlebars.VM.template;
       if (text.length == 0) {
         return false;
       }
-      text.match(/(http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=:;_]*)?)/);
+      text.match(url_exp);
 
       if (RegExp.$1 != null && RegExp.$1.length > 0) {
         return true;
@@ -14711,12 +14713,20 @@ Handlebars.template = Handlebars.VM.template;
       if (text.length == 0) {
         return false;
       }
-      text.match(/(http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=:;_]*)?)/);
+      text.match(url_exp);
 
       if (RegExp.$1 != null && RegExp.$1.length > 0) {
         return RegExp.$1;
       }
       return false;
+    },
+    // URLの文字列をaタグへ置換
+    replaceUrlInText: function(text) {
+      if (text.length == 0) {
+        return false;
+      }
+      // url をaタグで囲う
+      return text.replace(url_exp, "<a href='$1' target='_blank'>$1</a>");
     },
     // 画像URLの判定
     isImageUrl: function(url) {

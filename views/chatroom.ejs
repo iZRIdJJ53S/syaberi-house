@@ -180,7 +180,7 @@
                             <% } %>
                         </div>
                         <div class="owner-titlebox">
-                            <p class="owner-title"><%- esc(chat.message) %></p>
+                            <p class="owner-title"><%- replaceUrlInText(esc(chat.message)) %></p>
                             <% if (chat.extImageUrl) { // 外部画像URLがあれば %>
                                 <img src="<%= chat.extImageUrl %>" class="owner-img">
                             <% } %>
@@ -211,7 +211,7 @@
                             <% } %>
                         </div>
                         <div class="member-titlebox">
-                            <p class="member-title"><%- esc(chat.message) %></p>
+                            <p class="member-title"><%- replaceUrlInText(esc(chat.message)) %></p>
                             <% if (chat.extImageUrl) { // 外部画像URLがあれば %>
                                 <img src="<%= chat.extImageUrl %>" class="member-img">
                             <% } %>

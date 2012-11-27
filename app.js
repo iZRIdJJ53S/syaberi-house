@@ -137,7 +137,8 @@ app.configure('production', function(){
 
 // テンプレート内で使用する関数を設定
 app.locals({
-  esc: function(str) { return utils.nl2br(utils.escHtml(str)) }
+  esc: function(str) { return utils.nl2br(utils.escHtml(str)) },
+  replaceUrlInText: function(text) { return utils.replaceUrlInText(text) }
 });
 
 // ログイン認証 ごく普通のID/PASS

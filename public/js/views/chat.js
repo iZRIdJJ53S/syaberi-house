@@ -186,6 +186,12 @@
           }
         }
 
+
+
+        // コメント中のurlをhrefに書き換える
+        if (tmp_url) {
+          params.message = syaberi.util.replaceUrlInText(data.message);
+        }
       }
 
       //オーナーのフキダシは向きを変える

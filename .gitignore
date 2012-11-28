@@ -3,3 +3,4 @@
 logs/app.log
 certs/2012-syaberi-private.key
 certs/ca.cer
+config/development.coffee

@@ -247,6 +247,11 @@
                 <% }) %>
                 </div><!-- lines1 -->
 
+                <% if (!isAuth){ %>
+                    <a href="/auth/twitter">
+                        <img src="/img/gotologin.png" width="100%" alt="ログインして、コメントを書き込もう！">
+                    </a>
+                <% } %>
                 <div class="message-add-inbox"
                 <% if (!isAuth ||
                       (!isMember && isUrlOpen) ||

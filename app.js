@@ -126,6 +126,8 @@ app.configure('development', function() {
 
 // testというモードでサーバを起動すると有効になる設定を作成
 app.configure('test', function(){
+  // 例外はDumpして、StackTraceも出す
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   logger.setLevel('TRACE');
 });
 

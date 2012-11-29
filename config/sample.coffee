@@ -23,6 +23,9 @@ module.exports =
   redis:
     host: 'redis server'
     port: 'redis port'
+  redis_pubsub:
+    host: 'redis pubsub server'
+    port: 'redis pubsub port'
   twitter:
     consumerKey: ''
     consumerSecret: ''

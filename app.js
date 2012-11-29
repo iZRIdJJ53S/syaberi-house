@@ -41,9 +41,9 @@ app.set('sessionStore', sessionStore);
 // マルチプロセス/サーバー間でSocket.IOのセッションをRedisを使って共有する
 var redis = require('socket.io/node_modules/redis');
 var SocketIoRedisStore = require('socket.io/lib/stores/redis');
-var ioPub = redis.createClient(config.redis.port, config.redis.host);
-var ioSub = redis.createClient(config.redis.port, config.redis.host);
-var ioStore = redis.createClient(config.redis.port, config.redis.host);
+var ioPub = redis.createClient(config.redis_pubsub.port, config.redis_pubsub.host);
+var ioSub = redis.createClient(config.redis_pubsub.port, config.redis_pubsub.host);
+var ioStore = redis.createClient(config.redis_pubsub.port, config.redis_pubsub.host);
 
 
 var middleware = require('./lib/middleware'); // sessionData

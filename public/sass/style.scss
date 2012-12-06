@@ -395,10 +395,11 @@ body {
             text-align: right;
             float: right;
             .room-member{
-                padding-top: 20px;
+                padding-top: 10px;
                 color: #772d1c;
                 text-align: center;
                 .member-text{
+                    font-size: $TEXT_M;
                     margin-bottom: 10px;
                 }
                 .member-total{

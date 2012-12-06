@@ -40,6 +40,7 @@
     chatView.render();
     Backbone.emulateHTTP = true;
 
+    // サーバー側から受信した場合 -> サーバー側 emit('message', data);
     syaberi.socket.on('message', function(data) {
       if (data.mode === 'create') {
         chatView.appendMessage(data);
@@ -48,5 +49,11 @@
         chatView.destroyMessage(data);
       }
     });
+
+    // サーバー側から受信した場合 -> サーバー側 emit('room_members', total);
+    syaberi.socket.on('room_members', function(total) {
+      chatView.updateRoomMember(total);
+    });
+
   });
 }).call(this);

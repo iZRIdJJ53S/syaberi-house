@@ -29,6 +29,10 @@
       var message = $.trim($('#message1').val());
 
       if (message && message !== '') {
+        // loading画像の読み込み
+        var loader_img = '<img id="ajax_loader_img" src="/img/ajax-loader.gif" />';
+        $('.message-add-inbox').append(loader_img);
+
         var chatroomId = $('html').data('chatroom');
         var userId = $('html').data('userid');
         var userName = $('html').data('username');
@@ -241,9 +245,14 @@
     clearInputUserMessage: function() {
       $('#message1').val('').focus();
 
+      $('#ajax_loader_img').remove();
       $('#html_image_preview').remove();
       $('#user_up_img').remove();
       $('#drop_message').show();
+    },
+    // 部屋に居る人数のupdate
+    updateRoomMember: function(total) {
+      $('#member-total').text(total);
     }
   });
 

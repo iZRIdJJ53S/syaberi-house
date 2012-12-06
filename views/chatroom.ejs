@@ -127,28 +127,18 @@
                             <% } %>
                         </div>
                         <div class="room-date">作成日 <%= chatroom.date %></div>
+                        <% if (isOwner) { %>
+                            <input type="button" onclick="location.href='/chatrooms/<%= chatroom.id %>/confirm_delete'" class="button_gr_mini" value="オーナー機能：部屋を削除する" style="cursor:pointer,">
+                        <% } %>
                     </div>
-                    <% if (isOwner) { %>
-                    <div class="room-delete">
-                        <input type="button" onclick="location.href='/chatrooms/<%= chatroom.id %>/confirm_delete'" class="button_gr" value="削除" style="cursor:pointer,">
-                    </div>
-                    <% } %>
-                    <div class="room-option">
+                    <div class="room-side">
                         <div class="room-member">
-                            <p>現在部屋に居る人数：<span id="member-total">1</span></p>
+                            <div class="member-text">いま部屋にいるのは</div>
+                            <div><span class="member-total" id="member-total">1</span>人</div>
                         </div>
                     </div>
                 </div>
             </div><!-- chatroom -->
-
-            <!--
-            <div class="room-menu">
-                <ul>
-                    <li class="active">おしゃべり</li>
-                    <a href="/chatrooms/<%= chatroom.id %>"><li>参加申請</li></a>
-                </ul>
-            </div>
-            -->
 
             <div class="message">
 

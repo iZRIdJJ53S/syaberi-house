@@ -200,6 +200,9 @@ form{
 .button_gr {
     @include sassy-button("flat", 6px, 18px, #999999);
 }
+.button_gr_mini {
+    @include sassy-button("flat", 2px, 3px, #999999);
+}
 .button_b {
     @include sassy-button("glass", 6px, 18px, #4ba3cc);
 }
@@ -367,7 +370,7 @@ body {
         }
         .room-titlebox{
             float: left;
-            width: $CONTENT_LEFT_WIDTH - (100+80);
+            width: $CONTENT_LEFT_WIDTH - (300+80);
             padding: 10px 10px 10px;
             .room-title{
                 margin-bottom: 4px;
@@ -388,8 +391,22 @@ body {
         .room-button{
             float: right;
         }
-        .room-delete{
+        .room-side{
+            text-align: right;
             float: right;
+            .room-member{
+                padding-top: 20px;
+                color: #772d1c;
+                text-align: center;
+                .member-text{
+                    margin-bottom: 10px;
+                }
+                .member-total{
+                    font-size: $TEXT_LL;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+            }
         }
         @include clearfix;
     }

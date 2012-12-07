@@ -122,6 +122,10 @@
       var message = $.trim($('#message1').val());
 
       if (message && message !== '') {
+        // loading画像の読み込み
+        var loader_img = '<img id="ajax_loader_img" src="/img/ajax-loader.gif" />';
+        $('.message-add-inbox').append(loader_img);
+
         var chatroomId = $('html').data('chatroom');
         var userId = $('html').data('userid');
         var userName = $('html').data('username');
@@ -334,9 +338,14 @@
     clearInputUserMessage: function() {
       $('#message1').val('').focus();
 
+      $('#ajax_loader_img').remove();
       $('#html_image_preview').remove();
       $('#user_up_img').remove();
       $('#drop_message').show();
+    },
+    // 部屋に居る人数のupdate
+    updateRoomMember: function(total) {
+      $('#member-total').text(total);
     }
   });
 
@@ -384,6 +393,7 @@
     chatView.render();
     Backbone.emulateHTTP = true;
 
+    // サーバー側から受信した場合 -> サーバー側 emit('message', data);
     syaberi.socket.on('message', function(data) {
       if (data.mode === 'create') {
         chatView.appendMessage(data);
@@ -392,5 +402,11 @@
         chatView.destroyMessage(data);
       }
     });
+
+    // サーバー側から受信した場合 -> サーバー側 emit('room_members', total);
+    syaberi.socket.on('room_members', function(total) {
+      chatView.updateRoomMember(total);
+    });
+
   });
 }).call(this);

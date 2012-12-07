@@ -698,42 +698,49 @@ body {
 
 /* line 306, ../sass/style.scss */
 #mainview {
+  margin-bottom: 10px;
+  padding: 0px;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 307, ../sass/style.scss */
+/* line 309, ../sass/style.scss */
+#mainview img {
+  border: 0px;
+  vertical-align: bottom;
+}
+/* line 313, ../sass/style.scss */
 #mainview .sbtn {
   float: right;
 }
-/* line 309, ../sass/style.scss */
+/* line 315, ../sass/style.scss */
 #mainview .sbtn ul {
   list-style: none;
 }
-/* line 312, ../sass/style.scss */
+/* line 318, ../sass/style.scss */
 #mainview .sbtn ul li {
   float: left;
   margin-right: 18px;
 }
 
-/* line 319, ../sass/style.scss */
+/* line 325, ../sass/style.scss */
 #content {
   width: 800px;
   margin-bottom: 10px;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 322, ../sass/style.scss */
+/* line 328, ../sass/style.scss */
 #content .left-content {
   float: left;
   width: 800px;
 }
-/* line 326, ../sass/style.scss */
+/* line 332, ../sass/style.scss */
 #content .right-content {
   float: right;
   width: 224px;
 }
 
-/* line 332, ../sass/style.scss */
+/* line 338, ../sass/style.scss */
 #foot {
   min-height: 20px;
   padding: 25px 20px;
@@ -741,7 +748,7 @@ body {
   *zoom: 1;
 }
 
-/* line 339, ../sass/style.scss */
+/* line 345, ../sass/style.scss */
 #page-top {
   position: fixed;
   bottom: 20px;
@@ -749,7 +756,7 @@ body {
   font-size: 77%;
 }
 
-/* line 345, ../sass/style.scss */
+/* line 351, ../sass/style.scss */
 #page-top a {
   background: #96c065;
   text-decoration: none;
@@ -759,7 +766,7 @@ body {
   border-radius: 5px;
 }
 
-/* line 353, ../sass/style.scss */
+/* line 359, ../sass/style.scss */
 #page-top a:hover {
   text-decoration: none;
   background: #96c045;
@@ -769,22 +776,22 @@ body {
  * room & ask list
  *
  */
-/* line 362, ../sass/style.scss */
+/* line 368, ../sass/style.scss */
 .chatroombox {
   width: 800px;
   background: #fff;
   border-bottom: 1px #96c045 solid;
 }
-/* line 367, ../sass/style.scss */
+/* line 373, ../sass/style.scss */
 .chatroombox .room-inbox {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 368, ../sass/style.scss */
+/* line 374, ../sass/style.scss */
 .chatroombox .room-inbox .room-icon {
   float: left;
 }
-/* line 371, ../sass/style.scss */
+/* line 377, ../sass/style.scss */
 .chatroombox .room-inbox .room-titlebox {
   float: left;
   width: 420px;
@@ -792,11 +799,11 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 375, ../sass/style.scss */
+/* line 381, ../sass/style.scss */
 .chatroombox .room-inbox .room-titlebox .room-title {
   margin-bottom: 4px;
 }
-/* line 378, ../sass/style.scss */
+/* line 384, ../sass/style.scss */
 .chatroombox .room-inbox .room-titlebox .cat-icon {
   float: left;
   background: #efefef;
@@ -814,46 +821,46 @@ body {
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 382, ../sass/style.scss */
+/* line 388, ../sass/style.scss */
 .chatroombox .room-inbox .room-titlebox .room-username {
   font-size: smaller;
   margin-bottom: 4px;
 }
-/* line 386, ../sass/style.scss */
+/* line 392, ../sass/style.scss */
 .chatroombox .room-inbox .room-titlebox .room-date {
   font-size: 10px;
 }
-/* line 391, ../sass/style.scss */
+/* line 397, ../sass/style.scss */
 .chatroombox .room-inbox .room-button {
   float: right;
 }
-/* line 394, ../sass/style.scss */
+/* line 400, ../sass/style.scss */
 .chatroombox .room-inbox .room-side {
   text-align: right;
   float: right;
 }
-/* line 397, ../sass/style.scss */
+/* line 403, ../sass/style.scss */
 .chatroombox .room-inbox .room-side .room-member {
   padding-top: 10px;
   color: #772d1c;
   text-align: center;
 }
-/* line 401, ../sass/style.scss */
+/* line 407, ../sass/style.scss */
 .chatroombox .room-inbox .room-side .room-member .member-text {
   font-size: 12px;
   margin-bottom: 10px;
 }
-/* line 405, ../sass/style.scss */
+/* line 411, ../sass/style.scss */
 .chatroombox .room-inbox .room-side .room-member .member-total {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
 }
-/* line 414, ../sass/style.scss */
+/* line 420, ../sass/style.scss */
 .chatroombox .room-option {
   float: left;
 }
-/* line 417, ../sass/style.scss */
+/* line 423, ../sass/style.scss */
 .chatroombox .room-option .room-member .room-member-open {
   float: left;
   font-size: 10px;
@@ -869,7 +876,7 @@ body {
   -moz-box-shadow: rgba(0, 0, 0, 0.05) -1px 1px 0, rgba(255, 255, 255, 0.1) -1px 1px 0 inset;
   box-shadow: rgba(0, 0, 0, 0.05) -1px 1px 0, rgba(255, 255, 255, 0.1) -1px 1px 0 inset;
 }
-/* line 429, ../sass/style.scss */
+/* line 435, ../sass/style.scss */
 .chatroombox .room-option .room-member .room-member-title {
   float: left;
   font-size: 10px;
@@ -882,17 +889,17 @@ body {
   -moz-box-shadow: rgba(0, 0, 0, 0.05) -1px 1px 0, rgba(255, 255, 255, 0.1) -1px 1px 0 inset;
   box-shadow: rgba(0, 0, 0, 0.05) -1px 1px 0, rgba(255, 255, 255, 0.1) -1px 1px 0 inset;
 }
-/* line 439, ../sass/style.scss */
+/* line 445, ../sass/style.scss */
 .chatroombox .room-option .room-member .room-member-icon img {
   padding-left: 4px;
 }
 
-/* line 446, ../sass/style.scss */
+/* line 452, ../sass/style.scss */
 .room, .ask {
   padding: 20px 0;
 }
 
-/* line 449, ../sass/style.scss */
+/* line 455, ../sass/style.scss */
 .room {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: white 0 1px 0;
@@ -901,16 +908,16 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 450, ../sass/style.scss */
+/* line 456, ../sass/style.scss */
 .room .room-inbox {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 451, ../sass/style.scss */
+/* line 457, ../sass/style.scss */
 .room .room-inbox .room-icon {
   float: left;
 }
-/* line 454, ../sass/style.scss */
+/* line 460, ../sass/style.scss */
 .room .room-inbox .room-titlebox {
   float: left;
   width: 620px;
@@ -918,11 +925,11 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 458, ../sass/style.scss */
+/* line 464, ../sass/style.scss */
 .room .room-inbox .room-titlebox .room-title {
   margin-bottom: 4px;
 }
-/* line 461, ../sass/style.scss */
+/* line 467, ../sass/style.scss */
 .room .room-inbox .room-titlebox .cat-icon {
   float: left;
   background: #efefef;
@@ -940,17 +947,17 @@ body {
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 465, ../sass/style.scss */
+/* line 471, ../sass/style.scss */
 .room .room-inbox .room-titlebox .room-username {
   font-size: smaller;
   margin-bottom: 4px;
 }
-/* line 471, ../sass/style.scss */
+/* line 477, ../sass/style.scss */
 .room .room-inbox .room-button {
   float: right;
 }
 
-/* line 479, ../sass/style.scss */
+/* line 485, ../sass/style.scss */
 .ask {
   padding: 10px;
   width: 700px;
@@ -969,28 +976,28 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 486, ../sass/style.scss */
+/* line 492, ../sass/style.scss */
 .ask .ask-titlebox {
   float: left;
   width: 620px;
   padding: 15px;
 }
-/* line 490, ../sass/style.scss */
+/* line 496, ../sass/style.scss */
 .ask .ask-titlebox .ask-username {
   font-size: smaller;
   padding-top: 10px;
 }
-/* line 495, ../sass/style.scss */
+/* line 501, ../sass/style.scss */
 .ask .ask-icon {
   float: right;
 }
 
-/* line 500, ../sass/style.scss */
+/* line 506, ../sass/style.scss */
 .ask:hover {
   background-color: #eee;
 }
 
-/* line 504, ../sass/style.scss */
+/* line 510, ../sass/style.scss */
 .room-menu {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0 1px 0;
@@ -999,22 +1006,22 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 505, ../sass/style.scss */
+/* line 511, ../sass/style.scss */
 .room-menu ul {
   list-style: none;
 }
-/* line 508, ../sass/style.scss */
+/* line 514, ../sass/style.scss */
 .room-menu ul li {
   width: 200px;
   padding: 10px;
   float: left;
 }
-/* line 513, ../sass/style.scss */
+/* line 519, ../sass/style.scss */
 .room-menu ul li:hover {
   color: #fff;
   background: #96c045;
 }
-/* line 517, ../sass/style.scss */
+/* line 523, ../sass/style.scss */
 .room-menu ul li.active {
   color: #fff;
   background: #96c045;
@@ -1024,25 +1031,25 @@ body {
  * message
  *
  */
-/* line 528, ../sass/style.scss */
+/* line 534, ../sass/style.scss */
 .message {
   padding: 20px;
   border-left: 1px #96c045 solid;
   border-right: 1px #96c045 solid;
   border-bottom: 1px #96c045 solid;
 }
-/* line 533, ../sass/style.scss */
+/* line 539, ../sass/style.scss */
 .message .message-help-inbox {
   border-bottom: 3px #96c045 dotted;
   margin-bottom: 10px;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 536, ../sass/style.scss */
+/* line 542, ../sass/style.scss */
 .message .message-help-inbox .help-icon {
   float: left;
 }
-/* line 539, ../sass/style.scss */
+/* line 545, ../sass/style.scss */
 .message .message-help-inbox .help-titlebox {
   float: left;
   width: 680px;
@@ -1050,40 +1057,40 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 543, ../sass/style.scss */
+/* line 549, ../sass/style.scss */
 .message .message-help-inbox .help-titlebox .help-title {
   font-size: 12px;
   word-wrap: break-word;
   margin-bottom: 4px;
 }
-/* line 548, ../sass/style.scss */
+/* line 554, ../sass/style.scss */
 .message .message-help-inbox .help-titlebox img.help-img {
   max-width: 400px;
   padding: 10px;
 }
-/* line 552, ../sass/style.scss */
+/* line 558, ../sass/style.scss */
 .message .message-help-inbox .help-titlebox .help-username {
   font-size: 10px;
   margin-bottom: 4px;
 }
-/* line 556, ../sass/style.scss */
+/* line 562, ../sass/style.scss */
 .message .message-help-inbox .help-titlebox .help-date {
   font-size: 8px;
 }
-/* line 563, ../sass/style.scss */
+/* line 569, ../sass/style.scss */
 .message .message-inbox {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 565, ../sass/style.scss */
+/* line 571, ../sass/style.scss */
 .message .message-inbox .message-owner-inbox {
   clear: both;
 }
-/* line 566, ../sass/style.scss */
+/* line 572, ../sass/style.scss */
 .message .message-inbox .message-owner-inbox .owner-icon {
   float: left;
 }
-/* line 569, ../sass/style.scss */
+/* line 575, ../sass/style.scss */
 .message .message-inbox .message-owner-inbox .owner-titlebox {
   float: left;
   width: 680px;
@@ -1091,40 +1098,40 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 573, ../sass/style.scss */
+/* line 579, ../sass/style.scss */
 .message .message-inbox .message-owner-inbox .owner-titlebox .owner-title {
   font-size: 12px;
   word-wrap: break-word;
   margin-bottom: 4px;
 }
-/* line 578, ../sass/style.scss */
+/* line 584, ../sass/style.scss */
 .message .message-inbox .message-owner-inbox .owner-titlebox img.owner-img {
   padding: 10px;
 }
-/* line 581, ../sass/style.scss */
+/* line 587, ../sass/style.scss */
 .message .message-inbox .message-owner-inbox .owner-titlebox .owner-youtube {
   padding: 10px;
 }
-/* line 584, ../sass/style.scss */
+/* line 590, ../sass/style.scss */
 .message .message-inbox .message-owner-inbox .owner-titlebox .owner-username {
   font-size: 10px;
   margin-bottom: 4px;
 }
-/* line 588, ../sass/style.scss */
+/* line 594, ../sass/style.scss */
 .message .message-inbox .message-owner-inbox .owner-titlebox .owner-date {
   font-size: 8px;
 }
-/* line 595, ../sass/style.scss */
+/* line 601, ../sass/style.scss */
 .message .message-inbox .message-member-inbox {
   float: right;
   text-align: right;
   clear: both;
 }
-/* line 598, ../sass/style.scss */
+/* line 604, ../sass/style.scss */
 .message .message-inbox .message-member-inbox .member-icon {
   float: right;
 }
-/* line 601, ../sass/style.scss */
+/* line 607, ../sass/style.scss */
 .message .message-inbox .message-member-inbox .member-titlebox {
   float: left;
   width: 680px;
@@ -1132,29 +1139,29 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 605, ../sass/style.scss */
+/* line 611, ../sass/style.scss */
 .message .message-inbox .message-member-inbox .member-titlebox .member-title {
   font-size: 12px;
   margin-bottom: 4px;
 }
-/* line 609, ../sass/style.scss */
+/* line 615, ../sass/style.scss */
 .message .message-inbox .message-member-inbox .member-titlebox img.member-img {
   padding: 10px;
 }
-/* line 612, ../sass/style.scss */
+/* line 618, ../sass/style.scss */
 .message .message-inbox .message-member-inbox .member-titlebox .member-youtube {
   padding: 10px;
 }
-/* line 615, ../sass/style.scss */
+/* line 621, ../sass/style.scss */
 .message .message-inbox .message-member-inbox .member-titlebox .member-username {
   font-size: 10px;
   margin-bottom: 4px;
 }
-/* line 619, ../sass/style.scss */
+/* line 625, ../sass/style.scss */
 .message .message-inbox .message-member-inbox .member-titlebox .member-date {
   font-size: 8px;
 }
-/* line 627, ../sass/style.scss */
+/* line 633, ../sass/style.scss */
 .message .message-add-inbox {
   background-color: #96c045;
   *zoom: 1;
@@ -1169,11 +1176,11 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 631, ../sass/style.scss */
+/* line 637, ../sass/style.scss */
 .message .message-add-inbox .add-icon {
   float: left;
 }
-/* line 634, ../sass/style.scss */
+/* line 640, ../sass/style.scss */
 .message .message-add-inbox .add-titlebox {
   float: left;
   width: 550px;
@@ -1181,7 +1188,7 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 638, ../sass/style.scss */
+/* line 644, ../sass/style.scss */
 .message .message-add-inbox .add-titlebox textarea {
   width: 550px;
   font-size: 12px;
@@ -1191,7 +1198,7 @@ body {
  * mypage profile
  *
  */
-/* line 655, ../sass/style.scss */
+/* line 661, ../sass/style.scss */
 .profile {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0 1px 0;
@@ -1200,22 +1207,22 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 656, ../sass/style.scss */
+/* line 662, ../sass/style.scss */
 .profile .profile-inbox {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 657, ../sass/style.scss */
+/* line 663, ../sass/style.scss */
 .profile .profile-inbox .profile-icon {
   float: left;
   margin-right: 10px;
 }
-/* line 661, ../sass/style.scss */
+/* line 667, ../sass/style.scss */
 .profile .profile-inbox .profile-username {
   font-size: 16px;
   padding-top: 36px;
 }
-/* line 667, ../sass/style.scss */
+/* line 673, ../sass/style.scss */
 .profile .profile-option {
   padding: 20px;
   font-size: 12px;
@@ -1223,7 +1230,7 @@ body {
   *zoom: 1;
 }
 
-/* line 675, ../sass/style.scss */
+/* line 681, ../sass/style.scss */
 .mypage-menu {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0 1px 0;
@@ -1232,11 +1239,11 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 676, ../sass/style.scss */
+/* line 682, ../sass/style.scss */
 .mypage-menu ul {
   list-style: none;
 }
-/* line 679, ../sass/style.scss */
+/* line 685, ../sass/style.scss */
 .mypage-menu ul li {
   width: 33%;
   padding-top: 5px;
@@ -1244,12 +1251,12 @@ body {
   text-align: center;
   float: left;
 }
-/* line 686, ../sass/style.scss */
+/* line 692, ../sass/style.scss */
 .mypage-menu ul li:hover {
   color: #fff;
   background: #96c045;
 }
-/* line 690, ../sass/style.scss */
+/* line 696, ../sass/style.scss */
 .mypage-menu ul li.active {
   color: #fff;
   background: #96c045;
@@ -1259,12 +1266,12 @@ body {
  * terms
  *
  */
-/* line 703, ../sass/style.scss */
+/* line 709, ../sass/style.scss */
 .terms h1 {
   font-size: 24px;
   padding: 20px;
 }
-/* line 707, ../sass/style.scss */
+/* line 713, ../sass/style.scss */
 .terms p {
   padding: 20px;
   line-height: 24px;
@@ -1274,7 +1281,7 @@ body {
  * cboard
  *
  */
-/* line 717, ../sass/style.scss */
+/* line 723, ../sass/style.scss */
 .cboard {
   margin-top: 20px;
   padding: 4px;
@@ -1285,7 +1292,7 @@ body {
   -o-border-radius: 6px;
   border-radius: 6px;
 }
-/* line 722, ../sass/style.scss */
+/* line 728, ../sass/style.scss */
 .cboard .cboard-titlebox {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: white 0 1px 0;
@@ -1294,7 +1301,7 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 723, ../sass/style.scss */
+/* line 729, ../sass/style.scss */
 .cboard .cboard-titlebox .cboard-icon {
   float: left;
   background: #6ea700;
@@ -1312,15 +1319,15 @@ body {
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 736, ../sass/style.scss */
+/* line 742, ../sass/style.scss */
 .cboard .cboard-titlebox .cboard-title {
   padding-top: 10px;
 }
-/* line 743, ../sass/style.scss */
+/* line 749, ../sass/style.scss */
 .cboard .cboard-entry ul {
   list-style: none;
 }
-/* line 746, ../sass/style.scss */
+/* line 752, ../sass/style.scss */
 .cboard .cboard-entry li {
   padding: 4px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -1330,22 +1337,22 @@ body {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 748, ../sass/style.scss */
+/* line 754, ../sass/style.scss */
 .cboard .cboard-entry li .cboard-entry-title {
   padding-top: 10px;
 }
-/* line 751, ../sass/style.scss */
+/* line 757, ../sass/style.scss */
 .cboard .cboard-entry li .cboard-entry-userbox {
   float: right;
 }
-/* line 753, ../sass/style.scss */
+/* line 759, ../sass/style.scss */
 .cboard .cboard-entry li .cboard-entry-userbox .cboard-entry-username {
   float: left;
   padding-top: 6px;
   padding-right: 6px;
   font-size: smaller;
 }
-/* line 759, ../sass/style.scss */
+/* line 765, ../sass/style.scss */
 .cboard .cboard-entry li .cboard-entry-userbox .cboard-entry-icon {
   float: left;
 }

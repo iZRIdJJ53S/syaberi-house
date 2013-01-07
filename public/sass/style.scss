@@ -282,6 +282,16 @@ body {
     border-bottom: 3px #96c045 solid;
     @include clearfix;
 }
+.head_info{
+    color: #ff0000;
+    text-align: center;
+    margin: 10px;
+    padding: 5px;
+    border: 2px #ff0000 solid;
+}
+.head_info a:link{
+    color: #ff0000;
+}
 #head_menu_list{
     display: none;
     float: left;

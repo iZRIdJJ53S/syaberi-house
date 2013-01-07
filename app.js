@@ -234,6 +234,8 @@ app.post('/upload', uploadController.upload);
 
 app.get('/terms', function(req, res) { res.render('terms', {}); });
 
+app.get('/info', function(req, res) { res.render('info', {}); });
+
 app.get('*', function (req, res, next) {
   return next(new utils.NotFound(req.url));
 });

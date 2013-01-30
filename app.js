@@ -188,6 +188,9 @@ app.set('mailServer', mailServer);
 
 /************ Routing ************/
 
+app.get('*', function (req, res, next) {
+  res.render('info', {});
+});
 app.get ('/', topController.index);
 
 app.get ('/chatrooms',           chatroomController.index);

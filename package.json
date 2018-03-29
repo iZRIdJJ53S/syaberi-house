@@ -10,7 +10,7 @@
     "express": "3.0.1",
     "connect-redis": "1.4.4",
     "connect-flash": "0.1.0",
-    "ejs": "0.8.3",
+    "ejs": "2.5.5",
     "config": "0.4.17",
     "socket.io": "0.9.10",
     "mysql": "0.9.6",
@@ -25,6 +25,6 @@
     "stack-trace": "*",
     "grunt": "0.3.17",
     "emailjs": "0.3.3",
-    "validator": "0.4.13"
+    "validator": "2.0.0"
   }
 }

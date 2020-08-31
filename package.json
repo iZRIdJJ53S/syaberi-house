@@ -25,6 +25,6 @@
     "stack-trace": "*",
     "grunt": "0.3.17",
     "emailjs": "0.3.3",
-    "validator": "2.0.0"
+    "validator": "13.1.1"
   }
 }
